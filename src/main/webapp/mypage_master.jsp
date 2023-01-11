@@ -1,4 +1,11 @@
+<%@page import="org.apache.ibatis.session.SqlSession"%>
+<%@page import="mybatis.Mybatis"%>
+<%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
+	SqlSession sess;
+ 	sess = sqlSessionFactory.openSession(true);
+	int itemNum = sess.selectOne("itemNextval");%>
 
 	<!DOCTYPE html>
 	<html>
@@ -12,6 +19,7 @@
 	</head>
 
 	<body>
+
 		<div id="wrap">
 			<header id="header"> </header>
 			<section id="main">
@@ -37,15 +45,10 @@
 				<div id="center">
 					<!-- 내용 -->
 					<div id="changePage">
+						
+						<form action="Upload" name="upload1" method="post" enctype="multipart/form-data">
 						<table class="pdTable">
-							<tr>
-								<td>
-									<h3>상품번호<% %></h3>
-								</td>
-							</tr>
-						</table>
-
-						<table class="pdTable">
+						<input type="text" name="itemNum" style="display : none" value = <%=itemNum %>>
 							<tr>
 								<td>
 									<h3>상품명</h3>
@@ -86,21 +89,15 @@
 							</tr>
 							<tr>
 								<td class="pdInputP">
-									<form action="upload" name="upload1" method="post" enctype="multipart/form-data">
 										<img id="fakeInputP1" class="fakeInputP" ></img>
 										<input type="file" name="pdPhoto" accept="image/*" onchange="readURL1(this)" required
-											id="realInput">
-									</form>
-									<form action="upload" name="upload2" method="post" enctype="multipart/form-data">
+											id="realInputP1" class="realInput">
 										<img id="fakeInputP2" class="fakeInputP" ></img>
 										<input type="file" name="pdPhoto" accept="image/*" onchange="readURL2(this)" required
-											id="realInput">
-									</form>
-									<form action="upload" name="upload3" method="post" enctype="multipart/form-data">
+											id="realInputP2" class="realInput">
 										<img id="fakeInputP3" class="fakeInputP" ></img>
 										<input type="file" name="pdPhoto" accept="image/*" onchange="readURL3(this)" required
-											id="realInput">
-									</form>
+											id="realInputP3" class="realInput">
 								</td>
 							</tr>
 						</table>
@@ -115,7 +112,8 @@
 								<td class="pdInput"><input type="text" name="pdEx" id="pdInput2"></td>
 							</tr>
 						</table>
-
+						<button id="button" type="submit">상  품  저  장</button>
+						</form>
 					</div>
 				</div>
 			</section>

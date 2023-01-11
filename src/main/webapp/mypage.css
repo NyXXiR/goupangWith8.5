@@ -62,6 +62,8 @@ h2 {
     rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 
+
+
 #insertPd {
   text-align: center;
 }
@@ -101,8 +103,8 @@ h2 {
   justify-content: center;
 }
 
-#realInputP {
-  
+.realInput {
+   display: none;
 }
 
 .fakeInputP {
@@ -112,4 +114,12 @@ h2 {
   background-color: rgb(225, 225, 225);
   cursor: pointer;
   display: inline-block;
+}
+
+
+#button{
+	width: 100px;
+	float: right;
+	margin-right : 50px;
+	margin-top : 70px;
 }

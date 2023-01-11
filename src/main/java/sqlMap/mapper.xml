@@ -29,12 +29,32 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 	</select>
 
 
+<<<<<<< Updated upstream
 	<select id="ItemNameBySeq" parameterType="int" resultType="string">
 		SELECT name FROM itemDB WHERE seq = #{seq}
 	</select>
 
+=======
+<<<<<<< HEAD
+	<select id="selectName" parameterType="int" resultType="string">
+		SELECT ITEMNAME FROM itemDB WHERE SEQ = #{seq}
+	</select>
+
+	<select id="selectByPrice" resultType="model.itemVO">
+		select * from itemDB order by price
+	</select>
+	
+	<select id="itemNextval" resultType="int">
+		SELECT  LAST_NUMBER FROM USER_SEQUENCES WHERE SEQUENCE_NAME = 'ITEM_SEQ'
+=======
+	<select id="ItemNameBySeq" parameterType="int" resultType="string">
+		SELECT name FROM itemDB WHERE seq = #{seq}
+	</select>
+
+>>>>>>> Stashed changes
 	<select id="ItemOrderByPrice" resultType="model.itemVO">
 select * from itemDB order by price
+>>>>>>> 302f4337d46e902b8451a909198eed1435c3565b
 	</select>
 
 <!--  soldItemDB 관련 구문 -->

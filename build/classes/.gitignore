@@ -1,4 +1,15 @@
 /sqlMap/
+<<<<<<< Updated upstream
 /DAO/
 /model/
 /service/
+=======
+<<<<<<< HEAD
+/com/
+/mybatis/
+=======
+/DAO/
+/model/
+/service/
+>>>>>>> 302f4337d46e902b8451a909198eed1435c3565b
+>>>>>>> Stashed changes

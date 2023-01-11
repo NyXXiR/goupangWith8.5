@@ -12,13 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import mybatis.Mybatis;
+
 /**
  * Servlet implementation class UploadServlet
  */
 @WebServlet("/Upload")
-@MultipartConfig(location = "C:\\JavaProgramming\\apache-tomcat-8.5.84\\temp")
+@MultipartConfig(location = "C:\\temp")
 public class UploadServlet extends HttpServlet {
 
+	
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -28,7 +35,7 @@ public class UploadServlet extends HttpServlet {
 
 		PrintWriter writer = resp.getWriter();
 		writer.println("<html><body>");
-
+		
 		String contentType = req.getContentType();
 		if (contentType != null
 				&& contentType.toLowerCase().startsWith("multipart/")) {
@@ -41,18 +48,23 @@ public class UploadServlet extends HttpServlet {
 
 	private void printPartInfo(HttpServletRequest req, PrintWriter writer)
 			throws IOException, ServletException {
+		
+		
+		int i = 1;
 		Collection<Part> parts = req.getParts();
 		for (Part part : parts) {
+			String itemNum = req.getParameter("itemNum");
 			writer.println("<br/> name = " + part.getName());
 			String contentType = part.getContentType();
 			writer.println("<br/> contentType = " + contentType);
 			if (part.getHeader("Content-Disposition").contains("filename=")) {
 				writer.println("<br/> size = " + part.getSize());
 				String fileName = part.getSubmittedFileName();
-				writer.println("<br/> filename = " + fileName);
+				writer.println("<br/> filename = " + itemNum+"("+i+")");
 				if (part.getSize() > 0) {
-					part.write("c:\\temp\\" + fileName);
+					part.write("C:\\goupangWith8.5\\src\\main\\webapp\\resources\\item\\" + itemNum+"("+i+").jpg");
 					part.delete();
+					i++;
 				}
 			} else {
 				String value = req.getParameter(part.getName());
@@ -60,6 +72,7 @@ public class UploadServlet extends HttpServlet {
 			}
 			writer.println("<hr/>");
 		}
+		i = 1;
 	}
 
 }
