@@ -19,7 +19,18 @@ buyer가 장바구니에 담아둔 항목과 바로구매에서 가져온 항목
 
 
 
-<%-- 제품 구매시 DB 처리하는 메소드--%>
+<%-- 제품 구매시 DB 처리하는 메소드
+
+제품 구매했을 때
+수량+ 제품정보를 forward 해서
+구매하시겠습니까? 
+예- > 해당 제품의 수량만큼의 quantity를 db에서 감소 처리함
+
+ㄴif 수량>잔여수량일 경우 품절 메시지 띄우고 rollback()처리
+rollback();
+soldItemDB에 수량만큼의 quantity를 추가
+ㄴif 제품id와 구매자 id가 동일한 행이 있을 경우 quantity 증가 처리
+--%>
 <%!
 
 public void buyAction(){
