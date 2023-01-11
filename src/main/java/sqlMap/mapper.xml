@@ -29,44 +29,30 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 	</select>
 
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
 	<select id="ItemNameBySeq" parameterType="int" resultType="string">
 		SELECT name FROM itemDB WHERE seq = #{seq}
 	</select>
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 	<select id="selectName" parameterType="int" resultType="string">
 		SELECT ITEMNAME FROM itemDB WHERE SEQ = #{seq}
 	</select>
-=======
->>>>>>> Stashed changes
 
 	<select id="selectByPrice" resultType="model.itemVO">
 		select * from itemDB order by price
 	</select>
-<<<<<<< Updated upstream
 	
 	<select id="itemNextval" resultType="int">
 		SELECT  LAST_NUMBER FROM USER_SEQUENCES WHERE SEQUENCE_NAME = 'ITEM_SEQ'
-=======
+	</select>
+	
 	<select id="ItemNameBySeq" parameterType="int" resultType="string">
 		SELECT name FROM itemDB WHERE seq = #{seq}
 	</select>
 
->>>>>>> Stashed changes
-=======
 
 
-=======
->>>>>>> Stashed changes
 	<select id="ItemOrderByPrice" resultType="model.itemVO">
-select * from itemDB order by price
->>>>>>> 302f4337d46e902b8451a909198eed1435c3565b
+		select * from itemDB order by price
 	</select>
 
 <!--  soldItemDB 관련 구문 -->
@@ -74,8 +60,7 @@ select * from itemDB order by price
 <!--  cartItemDB 관련 구문 -->
 
 <!--  buyerDB 관련 구문 -->
-<<<<<<< Updated upstream
-=======
+
 <insert id="signUpBuyer" parameterType="model.buyerVO">
 	insert into buyerDB values(buyer_seq.nextval, #{buyerId}, #{buyerPw} ,#{buyerName})
 </insert>
@@ -84,8 +69,6 @@ select * from itemDB order by price
 <select id="loginBuyer" parameterType="model.buyerVO" resultType="model.buyerVO">
 	select #{buyerId} from buyerDB where buyer_pw = #{buyerPw}
 </select>
-
->>>>>>> Stashed changes
 
 <insert id="1" parameterType="model.buyerVO">
 insert into buyerDB values{3개}
