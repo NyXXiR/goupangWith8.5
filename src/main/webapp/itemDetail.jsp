@@ -2,7 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-  <% itemVO vo =new itemVO(3,"아이패드",150000,0,"lgh0334","2023-01-09 16:25:39.000","전자기기");
+   <!--  session.setAttribute에 제품식별번호, 수량만 추가하자  -->
+  <% itemVO vo =new itemVO(3,"아이패드",150000,0,"lgh0334","2023-01-09 16:25:39.000",10,10);
   
   int discounted = vo.getPrice()/100*(100-vo.getDiscount());
   
