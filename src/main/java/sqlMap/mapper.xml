@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 네임스페이스 설정 -->
+<!-- 절대 SQL 구문 끝에 ;(세미콜론)을 넣지 마시오 -->
+<mapper namespace="Mapper">
+	<insert id="remove" parameterType="String">
+		delete from itemDB where name=#{id}
+	</insert>
+
+	<insert id="add" parameterType="model.itemVO">
+		insert into itemDB values(item_seq.nextval,
+		#{name},#{price},#{discount},#{seller_id}, sysdate,#{category})
+	</insert>
+
+
+	<select id="selectAll" resultType="model.itemVO">
+		select * from itemDB
+	</select>
+
+
+	<select id="selectName" parameterType="int" resultType="string">
+		SELECT name FROM itemDB WHERE seq = #{seq}
+	</select>
+
+	<select id="selectByPrice" resultType="model.itemVO">
+select * from itemDB order by price
+	</select>
+
+</mapper>
