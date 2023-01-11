@@ -1,70 +1,16 @@
 <%@ page import="model.itemVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<%
-itemVO vo = new itemVO(3, "아이패드", 150000, 0, "lgh0334", "2023-01-09 16:25:39.000", "전자기기");
-%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Goupang</title>
-<style>
-* {
-	box-sizing: border-box;
-	padding: 0px;
-	margin: 0px;
-}
-
-.flex-container {
-	width: 500px;
-	border-radius: 5px;
-	background: #d3d3d3;
-	margin: 0 auto;
-	display: flex;
-	justify-content: center;
-}
-
-.flex-container-large {
-	width: 900px;
-	border-radius: 5px;
-	background: #d3d3d3;
-	margin: 0 auto;
-	display: flex;
-	justify-content: space-evenly;
-}
-
-.flex-item {
-	width: 150px;
-	height: 150px;
-	color: #fff;
-	display: flex;
-	border-radius: 5px;
-	background: #708090;
-	justify-content: center;
-	object-fit: cover;
-	background-size: cover;
-}
-
-.b-example-divider {
-	height: 3rem;
-	background-color: rgba(0, 0, 0, .1);
-	border: solid rgba(0, 0, 0, .15);
-	border-width: 1px 0;
-	box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em
-		rgba(0, 0, 0, .15);
-}
-
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-}
-</style>
+<title>Insert title here</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+	crossorigin="anonymous">
 </head>
 <body>
 	<script>
@@ -94,99 +40,100 @@ itemVO vo = new itemVO(3, "아이패드", 150000, 0, "lgh0334", "2023-01-09 16:2
 			class="slide1" src="./resources/body/slide02.jpg"> <img
 			class="slide1" src="./resources/body/slide03.jpg">
 	</div>
-
-	<table>
-		<h1>컨테이너이름입력</h1>
+	<h1>컨테이너이름입력</h1>
 		<div class="flex-container">
-
-			<div class="flex-item">
-				<img alt="" src="./resources/item/3.jpg"
-					onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" />
-					<div id="itemDetail">
-						<div id="itemDetail-name" class=""><%=vo.getName()%></div>
-						<div id="itemDetail-price" class=""><%=vo.getPrice()%></div><br>
-						<div class="btns">
-	               		<input type="button" value="상세보기" class="btn1"/>
-	               		
-	               </div>
-
-				</div>
-				<div class="flex-item">
-					<img alt="" src="./resources/item/4.jpg"
-						onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" />
-						<div id="itemDetail">
-							<div id="itemDetail-name" class=""><%=vo.getName()%></div>
-							<div id="itemDetail-price" class=""><%=vo.getPrice()%></div><br>
-							<div class="btns">
-	               		<input type="button" value="상세보기" class="btn1"/>
-	               		
-	               </div>
-
-				</div>
-				<div class="flex-item">
-					<img alt="" src="./resources/item/5.jpg"
-						onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" />
-						<div id="itemDetail">
-							<div id="itemDetail-name" class=""><%=vo.getName()%></div>
-							<div id="itemDetail-price" class=""><%=vo.getPrice()%></div><br>
-							<div class="btns">
-	               		<input type="button" value="상세보기" class="btn1"/>
-	               		
-	               </div>
-				</div>
-			</div>
-	</table>
-
-
-
-	<table>
-		<h1>컨테이너이름입력</h1>
-
-		<div class="flex-container-large">
-			<div class="flex-item">
-				<img alt="" src="./resources/item/12.jpg"
-					onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" />
-			</div>
-			<div class="flex-item">
-				<img alt="" src="./resources/item/12.jpg"
-					onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" />
-			</div>
-			<div class="flex-item">
-				<img alt="" src="./resources/item/12.jpg"
-					onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" />
-			</div>
-			<div class="flex-item">
-				<img alt="" src="./resources/item/13.jpg"
-					onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" />
-			</div>
-			<div class="flex-item">
-				<img alt="" src="resources/item/14.jpg" onmouseenter="zoomIn(event)"
-					onmouseleave="zoomOut(event)" />
+	<div class="row">
+		<div class="col"></div>
+		<div class="card" style="width: 18rem;">
+			<img src="./resources/item/3.jpg" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">아이패드</h5>
+				<p class="card-text">아이패드</p>
+				<a href="#" class="btn btn-primary">Go somewhere</a>
 			</div>
 		</div>
-	</table>
 
-	</tr>
-	</table>
+		<div class="col"></div>
+		<div class="card" style="width: 18rem;">
+			<img src="./resources/item/3.jpg" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">아이패드</h5>
+				<p class="card-text">아이패드</p>
+				<a href="#" class="btn btn-primary">Go somewhere</a>
+			</div>
+		</div>
+
+		<div class="col"></div>
+		<div class="card" style="width: 18rem;">
+			<img src="./resources/item/3.jpg" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">Card title</h5>
+				<p class="card-text">Some quick example text to build on the
+					card title and make up the bulk of the card's content.</p>
+				<a href="#" class="btn btn-primary">Go somewhere</a>
+			</div>
+		</div>
+
+		<div class="col"></div>
+		<div class="card" style="width: 18rem;">
+			<img src="./resources/item/3.jpg" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">Card title</h5>
+				<p class="card-text">Some quick example text to build on the
+					card title and make up the bulk of the card's content.</p>
+				<a href="#" class="btn btn-primary">Go somewhere</a>
+			</div>
+		</div>
 	</div>
-	<script>
-		function zoomIn(event) {
-			event.target.style.transform = "scale(1.2)";
-			event.target.style.zIndex = 1;
-			event.target.style.transition = "all 0.5s";
-			event.target.style.opacity = 0.5;
-		}
+	<h1>컨테이너이름입력</h1>
+		<div class="flex-container">
+	<div class="row">
+		<div class="col"></div>
+		<div class="card" style="width: 18rem;">
+			<img src="./resources/item/3.jpg" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">아이패드</h5>
+				<p class="card-text">아이패드</p>
+				<a href="#" class="btn btn-primary">Go somewhere</a>
+			</div>
+		</div>
 
-		function zoomOut(event) {
-			event.target.style.transform = "scale(1)";
-			event.target.style.zIndex = 0;
-			event.target.style.transition = "all 0.5s";
-			event.target.style.opacity = 1;
-		}
-	</script>
+		<div class="col"></div>
+		<div class="card" style="width: 18rem;">
+			<img src="./resources/item/3.jpg" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">아이패드</h5>
+				<p class="card-text">아이패드</p>
+				<a href="#" class="btn btn-primary">Go somewhere</a>
+			</div>
+		</div>
 
-	<script src="/docs/5.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+		<div class="col"></div>
+		<div class="card" style="width: 18rem;">
+			<img src="./resources/item/3.jpg" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">Card title</h5>
+				<p class="card-text">Some quick example text to build on the
+					card title and make up the bulk of the card's content.</p>
+				<a href="#" class="btn btn-primary">Go somewhere</a>
+			</div>
+		</div>
+
+		<div class="col"></div>
+		<div class="card" style="width: 18rem;">
+			<img src="./resources/item/3.jpg" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">Card title</h5>
+				<p class="card-text">Some quick example text to build on the
+					card title and make up the bulk of the card's content.</p>
+				<a href="#" class="btn btn-primary">Go somewhere</a>
+			</div>
+		</div>
+	</div>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
 		crossorigin="anonymous"></script>
 </body>
 </html>
