@@ -9,10 +9,10 @@
 <body>
 
 <%
-session.invalidate();
+session.removeAttribute("LoginStatus");
+// 로그인 시 setAttribute 설정되었던 OK 상태를 삭제.
+response.sendRedirect("header.jsp");
+// 삭제 후 header.jsp로 복귀
 %>
-<script>
-window.location.href = 'header.jsp';
-</script>
 </body>
 </html>

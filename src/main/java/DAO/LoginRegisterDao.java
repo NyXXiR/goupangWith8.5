@@ -39,23 +39,6 @@ public class LoginRegisterDao {
 		return null;
 	}
 	
-	public int signUpBuyer(buyerVO buyer){
-		String sql = "insert into BUYERDB(BUYER_SEQ, buyer_id, buyer_pw, buyer_name)" +
-					"values (BUYER_SEQ.nextval,?,?,?)";
-		try {
-			PreparedStatement pstm = conn.prepareStatement(sql);
-			pstm.setString(1, buyer.getBuyerId());
-			pstm.setString(2, buyer.getBuyerPw());
-			pstm.setString(3, buyer.getBuyerName());
-			int res = pstm.executeUpdate();
-			pstm.close();
-			return res;
-		} catch(SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
-	
 	
 	public boolean FindByUserIDandUserPassword (String id1, String password) throws SQLException {
 		

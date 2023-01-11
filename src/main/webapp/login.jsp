@@ -19,7 +19,7 @@
  <div id="wrapper">
       <div class="logo-container">
         <div class="logo-box">
-          <img src="./resources/goupang.jpg" class="logo" alt="" />
+          <img src="./resources/header/goupang.jpg" class="logo" alt="" />
         </div>
         <div class="login-container">
             <h2>Login</h2>
@@ -27,11 +27,11 @@
             <form action="loginOK.jsp" method="POST">
               <div class="box">
                 <h4 class="id">ID</h4>
-                <input class="input1" name="userID" type="text" />
+                <input class="input1" name="userID" type="text" placeholder="ID" />
               </div>
               <div class="box">
                 <h4 class="password">password</h4>
-                <input class="input1" name="userPassword" type="password" />
+                <input class="input1" name="userPassword" type="password" placeholder="PW" />
               </div>
     
               <input id="input2" type="submit" value="Log in" />
@@ -39,6 +39,5 @@
           </div>
       </div>
     </div>
-    <!-- 로그인할 때 입력한 id/pw를 DB와 대조한 뒤 세션을 [로그인] 상태로 바꿔줘야 함-->
 </body>
 </html>

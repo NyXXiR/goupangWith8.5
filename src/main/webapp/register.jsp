@@ -16,16 +16,16 @@
         <form action="registerOK.jsp" method="post">
           <div class="box">
             <h4 class="id">ID</h4>
-            <input class="input1" name="userID" type="text" />
+            <input class="input1" name="userID" type="text" placeholder="ID"/>
           </div>
           <div class="box">
             <h4 class="name">Name</h4>
-            <input class="input1" name="userName" type="text" />
+            <input class="input1" name="userName" type="text" placeholder="Name"/>
           </div>
           <div class="box">
             <h4 class="password">password</h4>
 
-            <input class="input1" name="userPassword" type="password" />
+            <input class="input1" name="userPassword" type="password" placeholder="PW"/>
           </div>
 
           <input id="input2" type="submit" value="Sign Up" />
@@ -33,10 +33,11 @@
       </div>
       <div class="logo-container">
         <div class="logo-box">
-          <img src="./resources/goupang.jpg" class="logo" alt="" />
+          <img src="./resources/header/goupang.jpg" class="logo" alt="" />
         </div>
       </div>
     </div>
+<<<<<<< Updated upstream
     
     <%
     SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
@@ -57,5 +58,7 @@
     
     
     %>
+=======
+>>>>>>> Stashed changes
 </body>
 </html>

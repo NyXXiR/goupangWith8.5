@@ -15,6 +15,7 @@
 <body>
 제품 구매 페이지. itemDetail에서 넘어옴.
 제품정보와 수량 전달받아 입력.
+<<<<<<< Updated upstream
 buyer가 장바구니에 담아둔 항목과 바로구매에서 가져온 항목을 더해서 보여줘야 함
 
 
@@ -31,6 +32,11 @@ rollback();
 soldItemDB에 수량만큼의 quantity를 추가
 ㄴif 제품id와 구매자 id가 동일한 행이 있을 경우 quantity 증가 처리
 --%>
+=======
+
+
+<%-- 제품 구매시 DB 처리하는 메소드--%>
+>>>>>>> Stashed changes
 <%!
 
 public void buyAction(){

@@ -30,10 +30,23 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
 	<select id="ItemNameBySeq" parameterType="int" resultType="string">
 		SELECT name FROM itemDB WHERE seq = #{seq}
 	</select>
 
+<<<<<<< Updated upstream
+=======
+
+	<select id="selectByPrice" resultType="model.itemVO">
+		select * from itemDB order by price
+	</select>
+
+
+=======
+>>>>>>> Stashed changes
 	<select id="ItemOrderByPrice" resultType="model.itemVO">
 select * from itemDB order by price
 =======
@@ -55,6 +68,18 @@ select * from itemDB order by price
 <!--  cartItemDB 관련 구문 -->
 
 <!--  buyerDB 관련 구문 -->
+<<<<<<< Updated upstream
+=======
+<insert id="signUpBuyer" parameterType="model.buyerVO">
+	insert into buyerDB values(buyer_seq.nextval, #{buyerId}, #{buyerPw} ,#{buyerName})
+</insert>
+
+
+<select id="loginBuyer" parameterType="model.buyerVO" resultType="model.buyerVO">
+	select #{buyerId} from buyerDB where buyer_pw = #{buyerPw}
+</select>
+
+>>>>>>> Stashed changes
 
 <insert id="1" parameterType="model.buyerVO">
 insert into buyerDB values{3개}
