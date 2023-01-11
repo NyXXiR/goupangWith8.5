@@ -39,6 +39,22 @@
     </div>
     
     <%
+    SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
+    SqlSession session;
+    session = sqlSessionFactory.openSession(true);
+    
+    buyerVO vo = {a, b,c};
+    
+     int n = session.insert("1", vo);
+     if (n > 0) {
+     session.commit();
+     System.out.println("추가 성공");
+     } else {
+     session.rollback();
+     System.out.println("추가 실패");
+    
+     }
+    
     
     %>
 </body>

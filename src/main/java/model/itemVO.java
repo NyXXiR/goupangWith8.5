@@ -8,29 +8,32 @@ public class itemVO {
   private int discount;
   private String seller_id;
   private String date;
-  private String category;
+  private int category_num;
+  private int qty;
 
 
+
+  @Override
+  public String toString() {
+    return "itemVO [seq=" + seq + ", name=" + name + ", price=" + price + ", discount=" + discount
+        + ", seller_id=" + seller_id + ", date=" + date + ", category_num=" + category_num
+        + ", qty=" + qty + "]";
+  }
 
   public itemVO(int seq, String name, int price, int discount, String seller_id, String date,
-      String category) {
+      int category_num, int qty) {
+    super();
     this.seq = seq;
     this.name = name;
     this.price = price;
     this.discount = discount;
     this.seller_id = seller_id;
     this.date = date;
-    this.category = category;
-
+    this.category_num = category_num;
+    this.qty = qty;
   }
 
-  @Override
-  public String toString() {
-    return "itemVO [seq=" + seq + ", name=" + name + ", price=" + price + ", discount=" + discount
-        + ", seller_id=" + seller_id + ", date=" + date + ", category=" + category + "]";
-  }
-
-  public int getSeq() {
+  int getSeq() {
     return seq;
   }
 
@@ -78,11 +81,23 @@ public class itemVO {
     this.date = date;
   }
 
-  public String getCategory() {
-    return category;
+  public int getCategory_num() {
+    return category_num;
   }
 
-  public void setCategory(String category) {
-    this.category = category;
+  public void setCategory_num(int category_num) {
+    this.category_num = category_num;
   }
+
+  public int getQty() {
+    return qty;
+  }
+
+  public void setQty(int qty) {
+    this.qty = qty;
+  }
+
+
 }
+
+

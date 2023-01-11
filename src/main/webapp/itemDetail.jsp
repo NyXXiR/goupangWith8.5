@@ -75,7 +75,7 @@ display:flex;}
 	</figure>
 	<span id="itemDetail-text">
 	<div id="itemDetail">
-	<div id="itemDetail-category" class="text-medium"><!-- 대분류 입력 --><%= vo.getCategory() %></div>
+	<div id="itemDetail-category" class="text-medium"><!-- 대분류 입력 --><%= vo.getCategory_num() %></div>
 	<div id="itemDetail-name" class="text-large"><!-- 제품명 입력 --><%= vo.getName() %></div>
 	<div id="itemDetail-price" class="text-small"><!-- 제품가격 입력 -->제품가격: <%= vo.getPrice() %></div>
 	<div id="itemDetail-discount" class="text-medium"><!-- 할인율 입력 -->할인율: <%= vo.getDiscount() %> </div>

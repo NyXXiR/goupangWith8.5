@@ -3,28 +3,51 @@
 
 <!-- 네임스페이스 설정 -->
 <!-- 절대 SQL 구문 끝에 ;(세미콜론)을 넣지 마시오 -->
+
+<!-- itemDB 관련 구문 -->
+
 <mapper namespace="Mapper">
-	<insert id="remove" parameterType="String">
-		delete from itemDB where name=#{id}
+
+<!-- map에 seq와 qty 를 넣어서 하자. -->
+<insert id="UpdateItemquantity" parameterType="map">
+update itemDB set qty= qty+#{qty} where id=#{seq}
+</insert>
+
+
+	<insert id="deleteItemBySeq" parameterType="int">
+		delete from itemDB where name=#{seq}
 	</insert>
 
-	<insert id="add" parameterType="model.itemVO">
+	<insert id="Item" parameterType="model.itemVO">
 		insert into itemDB values(item_seq.nextval,
-		#{name},#{price},#{discount},#{seller_id}, sysdate,#{category})
+		#{name},#{price},#{discount},#{seller_id}, sysdate,#{category_num},#{qty})
 	</insert>
 
 
-	<select id="selectAll" resultType="model.itemVO">
+	<select id="ItemAll" resultType="model.itemVO">
 		select * from itemDB
 	</select>
 
 
-	<select id="selectName" parameterType="int" resultType="string">
+	<select id="ItemNameBySeq" parameterType="int" resultType="string">
 		SELECT name FROM itemDB WHERE seq = #{seq}
 	</select>
 
-	<select id="selectByPrice" resultType="model.itemVO">
+	<select id="ItemOrderByPrice" resultType="model.itemVO">
 select * from itemDB order by price
 	</select>
+
+<!--  soldItemDB 관련 구문 -->
+
+<!--  cartItemDB 관련 구문 -->
+
+<!--  buyerDB 관련 구문 -->
+
+<insert id="1" parameterType="model.buyerVO">
+insert into buyerDB values{3개}
+</insert>
+
+<!--  sellerDB 관련 구문 -->
+
 
 </mapper>
