@@ -37,7 +37,7 @@ public itemVO(int seq, String name, int price, int discount, String seller_id, S
     this.qty = qty;
   }
 
-  int getSeq() {
+  public int getSeq() {
     return seq;
   }
 

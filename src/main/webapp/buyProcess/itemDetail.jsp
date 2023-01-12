@@ -1,16 +1,10 @@
 <%@ page import="model.itemVO" %>
+<%@ page import= "java.util.HashMap" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-   <!--  session.setAttribute에 제품식별번호, 수량만 추가하자  -->
-  <% itemVO vo =new itemVO(3,"아이패드",150000,0,"lgh0334","2023-01-09 16:25:39.000",10,10);
-  
-  int discounted = vo.getPrice()/100*(100-vo.getDiscount());
-  
-  %>  
-    
-  
 <!DOCTYPE html>
+<% HashMap<String,String> itemMap =(HashMap<String, String>) session.getAttribute("itemMap"); %>
 <html>
 
 <head>
@@ -57,7 +51,7 @@ font-size:10px;
 justify-content: center;
 }
 .prod-quantity__form{
-display:inline;
+display:flex;
 }
 
 .buy-action{
@@ -66,49 +60,56 @@ display:flex;}
 
 
 </head>
-<jsp:include page="header.jsp" flush="false"/>
+<jsp:include page="../header.jsp" flush="false"/>
 <body>
 <article id=itemDetail-container>
 	<section id=itemDetail-info>
 	<!-- 이미지파일명은 item의 PK와 일치해야 함 -->
-	<figure id="itemImg"><img src="./resources/item/1.jpg" alt=""/>
+	<figure id="itemImg"><img src="../resources/item/3.jpg" alt=""/>
 	<div><!-- 판매자id 입력 --></div>
 	</figure>
+	
+	
+	
 	<span id="itemDetail-text">
 	<div id="itemDetail">
-	<div id="itemDetail-category" class="text-medium"><!-- 대분류 입력 --><%= vo.getCategory_num() %></div>
-	<div id="itemDetail-name" class="text-large"><!-- 제품명 입력 --><%= vo.getName() %></div>
-	<div id="itemDetail-price" class="text-small"><!-- 제품가격 입력 -->제품가격: <%= vo.getPrice() %></div>
-	<div id="itemDetail-discount" class="text-medium"><!-- 할인율 입력 -->할인율: <%= vo.getDiscount() %> </div>
-	<div id="itemDetail-discountPrice" class="text-large"><!-- 할인적용가격 입력.... -->할인적용가격: <%= discounted %></div>
-<div class="prod-quantity__form">
+	<div id="itemDetail-category" class="text-medium"><!-- 대분류 입력 --><%= itemMap.get("category_num") %></div>
+	<div id="itemDetail-name" class="text-large"><!-- 제품명 입력 --><%= itemMap.get("name") %></div>
+	<div id="itemDetail-price" class="text-small"><!-- 제품가격 입력 -->제품가격: <%= itemMap.get("price") %></div>
+	<div id="itemDetail-discount" class="text-medium"><!-- 할인율 입력 -->할인율: <%= itemMap.get("discount") %> </div>
+	<div id="itemDetail-discountPrice" class="text-large"><!-- 할인적용가격 입력.... -->할인적용가격: <%= itemMap.get("discounted") %></div>
+	
+	 <form action="buyPage.jsp" method="post">
+		<div class="prod-quantity__form">
         <input type="text" value="1" class="quantity-count" readonly="true"  >
             <button class="quantity-minus" type="button" onclick="valueMinus(1)">수량 -  </button>
             <button class="quantity-plus" type="button" onclick="valuePlus(1)">수량  +  </button>
         </div>
-        <div class="buy-action">
-      <form action="buyPage.jsp" method="post">
-      <input type="file" value="사진테스트">
+
 <input type="submit" value="장바구니 담기">
-</form>
-<!--  
-1. 받아야 할 정보들을 모아둔다
-상세정보보기 페이지에서 해당 제품의 itemDB 정보를 미리 받아둬야 편함.
-로그인id = session.getAttribute("signedUser")
-제품정보 = seq
-quantity = .quantity-count의 value값
+<!--  .quantity-count의 value를 select
+버튼을 클릭하면 
+1. cartDB에 데이터를 반영
+2. fetch로 "장바구니에 담겼습니다" 출력
+3. 구매페이지로 이동 버튼 생성
+  -->
 
-
-2. ajax로 장바구니에 담겼습니다. 팝업과 구매페이지로 이동하기 버튼을 띄운다. 구매하기로 이동하기 버튼은 바로구매에 다시 사용한다.
- -->
-
-<form action="buyPage.jsp" method="post">
 <input type="submit" value="바로구매">
+<!--  .quantity-count의 value를 select
+버튼을 클릭하면 
+1. cartDB에 데이터를 반영
+3. 구매페이지로 이동 
+  -->
 </form>
+
+<!--  
+
+
+2. ajax로 장바구니에 담겼습니다. 팝업과 구매페이지로 이동하기 버튼을 띄운다. 구매하기로 이동하기 버튼은 바로구매에 다시 사용한다. fetch를 써보고
+ -->
 
         </div>
         
-	</div>
 	
 </span>
 

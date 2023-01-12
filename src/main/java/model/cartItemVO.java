@@ -1,16 +1,16 @@
 package model;
 
 public class cartItemVO {
-  private String cartSeq;
+  private String ItemSeq;
   private String buyerId;
   private String quantity;
 
   public String getCartSeq() {
-    return cartSeq;
+    return ItemSeq;
   }
 
   public void setCartSeq(String cartSeq) {
-    this.cartSeq = cartSeq;
+    this.ItemSeq = cartSeq;
   }
 
   public String getBuyerId() {
@@ -31,7 +31,7 @@ public class cartItemVO {
 
   @Override
   public String toString() {
-    return "cartItemVO [cartSeq=" + cartSeq + ", buyerId=" + buyerId + ", quantity=" + quantity
+    return "cartItemVO [ItemSeq=" + ItemSeq + ", buyerId=" + buyerId + ", quantity=" + quantity
         + "]";
   }
 

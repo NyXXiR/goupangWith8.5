@@ -12,7 +12,7 @@ public class Test {
     SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
     SqlSession session;
     session = sqlSessionFactory.openSession(true);
-
+ 
 //     itemVO vo = new itemVO(0, "banana", 3000, 0, "lgh0334", "sysdate", "toy");
 //     int n = session.insert("add", vo);
 //     if (n > 0) {
