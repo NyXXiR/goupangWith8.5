@@ -33,7 +33,7 @@ public class itemVO {
     this.qty = qty;
   }
 
-  int getSeq() {
+  public int getSeq() {
     return seq;
   }
 
