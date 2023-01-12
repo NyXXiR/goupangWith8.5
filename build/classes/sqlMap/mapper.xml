@@ -10,7 +10,7 @@
 
 <!-- map에 seq와 qty 를 넣어서 하자. -->
 <insert id="UpdateItemquantity" parameterType="map">
-update itemDB set qty= qty+#{qty} where id=#{seq}
+	update itemDB set qty= qty+#{qty} where id=#{seq}
 </insert>
 
 
@@ -23,6 +23,10 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 		#{name},#{price},#{discount},#{seller_id}, sysdate,#{category_num},#{qty})
 	</insert>
 
+	<insert id="ItemUpload" parameterType="model.itemVO">
+		insert into itemDB values(item_seq.nextval,
+		#{name},#{price},#{discount},#{seller_id}, sysdate,#{category_num},#{qty},#{desc},0)
+	</insert>
 
 	<select id="ItemAll" resultType="model.itemVO">
 		select * from itemDB
@@ -45,15 +49,24 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 		SELECT  LAST_NUMBER FROM USER_SEQUENCES WHERE SEQUENCE_NAME = 'ITEM_SEQ'
 	</select>
 	
-	<select id="ItemNameBySeq" parameterType="int" resultType="string">
-		SELECT name FROM itemDB WHERE seq = #{seq}
-	</select>
-
-
 
 	<select id="ItemOrderByPrice" resultType="model.itemVO">
 		select * from itemDB order by price
 	</select>
+	
+	
+	<!-- <select id="ItemSaleRecordSearch" resultType="model.itemVO">
+		<![CDATA[	select * from (select * from itemDB order by salerecord desc, seq) where rownum <=10 ]]>
+	</select> -->
+		
+	<select id="ItemSaleRecordSearch" resultType="int">
+		<![CDATA[	select salerecord from (select * from itemDB order by salerecord desc, seq) where rownum <=10 ]]>
+	</select>
+	
+	<select id="ItemSaleRecordSum" resultType="int">
+		select sum(salerecord) from itemdb
+	</select>
+	
 
 <!--  soldItemDB 관련 구문 -->
 
