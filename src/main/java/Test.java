@@ -26,9 +26,8 @@ public class Test {
 //     System.out.println("추가 실패");
 //    
 //     }
-    
+    dafdsgsgsdgs
      String a = sess.selectOne("selectName", 3);
-     System.out.println(a);
 
 //     String b = session.selectOne("selectPrice", 4);
 //     System.out.println(a);

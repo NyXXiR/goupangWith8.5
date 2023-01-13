@@ -13,9 +13,7 @@
 update itemDB set qty= qty+#{qty} where id=#{seq}
 </insert>
 
-<select id="ItemNameBySeq" parameterType="int" resultType="string">
-		SELECT name FROM itemDB WHERE seq = #{seq}
-	</select>
+
 
 	<insert id="deleteItemBySeq" parameterType="int">
 		delete from itemDB where name=#{seq}

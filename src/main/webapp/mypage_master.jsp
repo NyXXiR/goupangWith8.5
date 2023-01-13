@@ -80,8 +80,8 @@
 			int itemRecord = sess.selectOne("ItemSaleRecordSum");
 			List<Integer> salList = sess.selectList("ItemSaleRecordSum");
 			
-			salList.stream().peek(t -> t/itemRecord).forEach(t -> System.out.println(t));
-			%>
+			//salList.stream().peek(t -> t/itemRecord).forEach(t -> System.out.println(t));
+			%> 
 
 
 
