@@ -13,10 +13,7 @@
 update itemDB set qty= qty+#{qty} where id=#{seq}
 </insert>
 
-<<<<<<< HEAD
 
-=======
->>>>>>> d5e651a9b7e9b5a0f32616b010bfbc3af7fde5ac
 
 	<insert id="deleteItemBySeq" parameterType="int">
 		delete from itemDB where name=#{seq}

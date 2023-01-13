@@ -23,7 +23,6 @@ public class Test {
 //     System.out.println("추가ㅇㄹㅇㄹㄹㅇ뮤ㅠ");
 //    
 //     }
-    dafdsgsgsdgs
      String a = sess.selectOne("selectName", 3);
 
     // itemVO vo = new itemVO(0, "banana", 3000, 0, "lgh0334", "sysdate", "toy");
@@ -37,7 +36,6 @@ public class Test {
     //
     // }
 
-    String a = sess.selectOne("selectName", 3);
 
     // String b = session.selectOne("selectPrice", 4);
     // System.out.println(a);
@@ -59,7 +57,6 @@ public class Test {
 
     // int n= session.insert("add", vo);
      
-		sgsgsdgsfdfsd
 	
   }
 
