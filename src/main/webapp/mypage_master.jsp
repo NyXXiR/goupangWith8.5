@@ -1,12 +1,11 @@
+<%@page import="java.util.List"%>
 <%@page import="org.apache.ibatis.session.SqlSession"%>
 <%@page import="mybatis.Mybatis"%>
 <%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
+<%	SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
 	SqlSession sess;
- 	sess = sqlSessionFactory.openSession(true);
-	int itemNum = sess.selectOne("itemNextval");%>
-
+	sess = sqlSessionFactory.openSession(true); %>
 	<!DOCTYPE html>
 	<html>
 
@@ -15,29 +14,29 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Document</title>
-		<link rel="stylesheet" href="./mypage.css">
+		<link rel="stylesheet" href="./mypage_master.css">
 	</head>
 
 	<body>
-
 		<div id="wrap">
-			<header id="header"> </header>
+			<jsp:include page="header.jsp" flush="false" />
+			<%-- <jsp:params name="상균" value="header" /> --%>
 			<section id="main">
-
 				<div id="left">
+
 					<!-- 목록 -->
 					<ul id="category">
 						<li>
-							<h1 id="myPage" onclick="getPage(this.id)" val="1">마이페이지</h1>
+							<h1 id="mypage" onclick="getPage(this.id)">마이페이지</h1>
 						</li>
 						<li>
-							<h2 id="pdPage" onclick="getPage(this.id)" val="2">상품 관리</h2>
+							<h2 id="pdPage" onclick="getPage(this.id)">상품 등록</h2>
 						</li>
 						<li>
-							<h2 id="dvPage" onclick="getPage(this.id)" val="3">배송 관리</h2>
+							<h2 id="dvPage" onclick="getPage(this.id)">배송 관리</h2>
 						</li>
 						<li>
-							<h2 id="psPage" onclick="getPage(this.id)" val="4">게시글 관리</h2>
+							<h2 id="psPage" onclick="getPage(this.id)">게시글 관리</h2>
 						</li>
 					</ul>
 				</div>
@@ -45,75 +44,16 @@
 				<div id="center">
 					<!-- 내용 -->
 					<div id="changePage">
-						
-						<form action="Upload" name="upload1" method="post" enctype="multipart/form-data">
-						<table class="pdTable">
-						<input type="text" name="itemNum" style="display : none" value = <%=itemNum %>>
-							<tr>
-								<td>
-									<h3>상품명</h3>
-								</td>
-							</tr>
-							<tr>
-								<td class="pdInput"><input type="text" name="pdName"></td>
-							</tr>
-						</table>
-
-						<table class="pdTable">
-							<tr>
-								<td>
-									<h3>가격</h3>
-								</td>
-							</tr>
-							<tr>
-								<td class="pdInput"><input type="text" name="pdPrice"></td>
-							</tr>
-						</table>
-						
-						<table class="pdTable">
-							<tr>
-								<td>
-									<h3>재고수량</h3>
-								</td>
-							</tr>
-							<tr>
-								<td class="pdInput"><input type="text" name="pdPrice"></td>
-							</tr>
-						</table>
-
-						<table class="pdTable">
-							<tr>
-								<td>
-									<h3>제품사진</h3>
-								</td>
-							</tr>
-							<tr>
-								<td class="pdInputP">
-										<img id="fakeInputP1" class="fakeInputP" ></img>
-										<input type="file" name="pdPhoto" accept="image/*" onchange="readURL1(this)" required
-											id="realInputP1" class="realInput">
-										<img id="fakeInputP2" class="fakeInputP" ></img>
-										<input type="file" name="pdPhoto" accept="image/*" onchange="readURL2(this)" required
-											id="realInputP2" class="realInput">
-										<img id="fakeInputP3" class="fakeInputP" ></img>
-										<input type="file" name="pdPhoto" accept="image/*" onchange="readURL3(this)" required
-											id="realInputP3" class="realInput">
-								</td>
-							</tr>
-						</table>
-
-						<table class="pdTable">
-							<tr>
-								<td>
-									<h3>상세설명</h3>
-								</td>
-							</tr>
-							<tr>
-								<td class="pdInput"><input type="text" name="pdEx" id="pdInput2"></td>
-							</tr>
-						</table>
-						<button id="button" type="submit">상  품  저  장</button>
-						</form>
+						<div class="myPage">
+							<div class="pie-chart1">
+								<span class="center">
+								</span>
+							</div>
+							<div class="pie-chart2">
+								<span class="center">
+								</span>
+							</div>
+						</div>
 					</div>
 				</div>
 			</section>
@@ -122,8 +62,8 @@
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 		<script>
+			// 페이지 전환 영역
 			function getPage(id) {
-				// console.log(id);
 				var xhttp;
 				xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function () {
@@ -135,17 +75,28 @@
 				xhttp.open("GET", "./" + id + ".jsp", true);
 				xhttp.send();
 			}
+			//마이페이지 그래프영역
+			<% 
+			int itemRecord = sess.selectOne("ItemSaleRecordSum");
+			List<Integer> salList = sess.selectList("ItemSaleRecordSum");
+			
+			salList.stream().peek(t -> t/itemRecord).forEach(t -> System.out.println(t));
+			%>
 
-			for (let i = 1; i < 4; i++) {
-				$('#fakeInputP' + i).click(function () {
-					$('#realInputP' + i).click();
-				})
-			}
+
 
 			
 			
 			
 			
+			//상품등록 페이지 영역
+			$(document).on('click', '#fakeInputP1', function (e) { $('#realInputP1').click(); });
+			$(document).on('click', '#fakeInputP2', function (e) { $('#realInputP2').click(); });
+			$(document).on('click', '#fakeInputP3', function (e) { $('#realInputP3').click(); });
+
+			
+			
+			//상품등록 페이지 - 상품이미지 기능
 			function readURL1(input) {
 				if (input.files && input.files[0]) {
 					const reader = new FileReader();
@@ -180,6 +131,9 @@
 				}
 			}
 
+			
+			
+			
 		</script>
 
 	</body>
