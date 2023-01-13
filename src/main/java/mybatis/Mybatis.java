@@ -12,11 +12,14 @@ public class Mybatis {
 
   static {
     try {
+    	System.out.println("Mybatis 접속");
       // src 밑의 mybatis-config.xml 파일을 인식
       String resource = "mybatis/mybatis-config.xml";
 
+      System.out.println("con-fig 접속");
 
       InputStream inputStream = Resources.getResourceAsStream(resource);
+      System.out.println("inputstream");
       sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 
       System.out.println("팩토리 접속 성공");

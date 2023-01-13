@@ -13,9 +13,6 @@
 update itemDB set qty= qty+#{qty} where id=#{seq}
 </insert>
 
-<select id="ItemNameBySeq" parameterType="int" resultType="string">
-		SELECT name FROM itemDB WHERE seq = #{seq}
-	</select>
 
 	<insert id="deleteItemBySeq" parameterType="int">
 		delete from itemDB where name=#{seq}
@@ -26,11 +23,22 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 		#{name},#{price},#{discount},#{seller_id}, sysdate,#{category_num},#{qty})
 	</insert>
 
+	<insert id="ItemUpload" parameterType="model.itemVO">
+		insert into itemDB values(item_seq.nextval,
+		#{name},#{price},#{discount},#{seller_id}, sysdate,#{category_num},#{qty},#{desc},0)
+	</insert>
 
 	<select id="ItemAll" resultType="model.itemVO">
 		select * from itemDB
 	</select>
 
+	<select id="ItemSaleRecordSearch" resultType="int">
+		<![CDATA[	select salerecord from (select * from itemDB order by salerecord desc, seq) where rownum <=10 ]]>
+	</select>
+	
+	<select id="ItemSaleRecordSum" resultType="int">
+		select sum(salerecord) from itemdb
+	</select>
 
 	<select id="selectName" parameterType="int" resultType="string">
 		SELECT ITEMNAME FROM itemDB WHERE SEQ = #{seq}
@@ -47,7 +55,10 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 	<select id="ItemNameBySeq" parameterType="int" resultType="string">
 		SELECT name FROM itemDB WHERE seq = #{seq}
 	</select>
-
+	
+	<select id="ItemSaleRecordSum" resultType="int">
+	
+	</select>
 
 	<select id="ItemOrderByPrice" resultType="model.itemVO">
 		select * from itemDB order by price
