@@ -16,6 +16,8 @@ sqlSession = sqlSessionFactory.openSession(true);
 
 List<cartItemVO> cartList = sqlSession.selectList("cartListById", "lgh0334");
 
+
+//get(num)으로 for문 돌리면 댈듯
 %>
 <html>
 <head>
@@ -23,6 +25,20 @@ List<cartItemVO> cartList = sqlSession.selectList("cartListById", "lgh0334");
 <title>Insert title here</title>
 </head>
 <body>
-<%= cartList.size() %>
+<% for(int i=0; i<cartList.size();i++){ 
+%>
+
+
+<div><%= cartList.get(i).getItemSeq() %> </div>
+<div><%= cartList.get(i).getQuantity() %> </div>
+
+
+
+<%
+}
+%>
+
+
+
 </body>
 </html>

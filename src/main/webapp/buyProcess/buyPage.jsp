@@ -4,6 +4,7 @@
 <%@ page import="model.itemVO"%>
 <%@ page import="model.cartItemVO"%>
 <%@ page import="mybatis.Mybatis"%>
+<%@ page import="java.util.List" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -14,8 +15,7 @@ SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
 SqlSession sqlSession;
 sqlSession = sqlSessionFactory.openSession(true);
 
-List<cartItemVO> cartList = sqlSession.
-
+List<cartItemVO> cartList = sqlSession.selectList("cartListById", session.getAttribute("userName"));
 %>
 
 <head>

@@ -75,6 +75,9 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 <!--  soldItemDB 관련 구문 -->
 
 <!--  cartItemDB 관련 구문 -->
+<insert id="cartItem" parameterType="model.cartItemVO">
+insert into cartItemDB values(#{item_seq), #{buyer_id},#{quantity})
+</insert>
 
 <select id="cartListById" parameterType="String" resultType="model.cartItemVO">
 select * from cartItemDB where buyer_id=#{buyer_id}

@@ -21,6 +21,12 @@ itemMap.put("seller_id", vo.getSeller_id());
 // 수량(qty)은 detail.jsp에서 추가될 예정임
 session.setAttribute("itemMap", itemMap);
 
+//userName은 임시로 설정
+session.setAttribute("buyerId", "lgh0334");
+
+//quantity 1로 설정해둠
+session.setAttribute("quantity",1);
+
 %>
 
 <head>

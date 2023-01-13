@@ -1,16 +1,19 @@
 package service;
 
+import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import model.itemVO;
+import model.cartItemVO;
 import mybatis.Mybatis;
 
-public class buyAction {
+public class addToCart {
+
 
 
   SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
-  SqlSession session = sqlSessionFactory.openSession(true);
+  SqlSession sqlSession = sqlSessionFactory.openSession(true);
 
-  itemVO vo = new itemVO(0, "banana", 3000, 0, "lgh0334", "sysdate", 10, 10);
+  List<cartItemVO> cartList = sqlSession.selectList("cartListById", "lgh0334");
+
 
 }

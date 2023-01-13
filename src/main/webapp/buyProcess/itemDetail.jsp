@@ -1,5 +1,11 @@
 <%@ page import="model.itemVO" %>
 <%@ page import= "java.util.HashMap" %>
+<%@ page import="org.apache.ibatis.session.SqlSessionFactory"%>
+<%@ page import="org.apache.ibatis.session.SqlSession"%>
+<%@ page import="model.itemVO"%>
+<%@ page import="model.cartItemVO"%>
+<%@ page import="mybatis.Mybatis"%>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -86,7 +92,7 @@ display:flex;}
             <button class="quantity-plus" type="button" onclick="valuePlus(1)">수량  +  </button>
         </div>
 
-<input type="submit" value="장바구니 담기">
+<input type="button" value="장바구니 담기" onClick="<% addtoCart(); %>">
 <!--  .quantity-count의 value를 select
 버튼을 클릭하면 
 1. cartDB에 데이터를 반영
@@ -144,8 +150,31 @@ function valueMinus(num){
 			cnt.value=1;}
 	}
 
+//seq, buyer_id, quantity로 이뤄진 cartItemVO를 받고 cartItemDB에 인서트.
+
 	
 </script>
+
+<%!  public void addtoCart(int num){
+
+	
+	SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
+	SqlSession sqlSession;
+	sqlSession = sqlSessionFactory.openSession(true);
+
+	cartItemVO vo = new cartItemVO("10","ninja","3");
+
+	int n =sqlSession.insert("cartItem", vo);
+	if (n > 0) {
+    sqlSession.commit();
+    System.out.println("추가 성공");
+    } else {
+      sqlSession.rollback();
+    System.out.println("추가 실패");
+  
+    }
+}
+%>
 
 </body>
 </html>

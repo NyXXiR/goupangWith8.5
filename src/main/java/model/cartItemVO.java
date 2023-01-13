@@ -5,6 +5,15 @@ public class cartItemVO {
   private String buyerId;
   private String quantity;
 
+
+
+  public cartItemVO(String itemSeq, String buyerId, String quantity) {
+    super();
+    this.itemSeq = itemSeq;
+    this.buyerId = buyerId;
+    this.quantity = quantity;
+  }
+
   public String getItemSeq() {
     return itemSeq;
   }
