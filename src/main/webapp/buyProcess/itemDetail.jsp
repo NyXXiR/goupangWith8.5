@@ -81,7 +81,7 @@ display:flex;}
 	
 	 <form action="buyPage.jsp" method="post">
 		<div class="prod-quantity__form">
-        <input type="text" value="1" class="quantity-count" readonly="true"  >
+        <input type="text" value="1" name="quantity "class="quantity-count" readonly="true"  >
             <button class="quantity-minus" type="button" onclick="valueMinus(1)">수량 -  </button>
             <button class="quantity-plus" type="button" onclick="valuePlus(1)">수량  +  </button>
         </div>

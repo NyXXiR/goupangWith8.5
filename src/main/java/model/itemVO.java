@@ -18,14 +18,6 @@ public class itemVO {
 	super();
 }
 
-  
-@Override
-public String toString() {
-	return "itemVO [seq=" + seq + ", itemname=" + itemname + ", price=" + price + ", discount=" + discount
-			+ ", seller_id=" + seller_id + ", rdate=" + rdate + ", category_num=" + category_num + ", qty=" + qty
-			+ ", description=" + description + ", salerecord=" + salerecord + "]";
-}
-
 
 // seq 컬럼은 시퀀스 기능을 갖고 있고 insert시 sysdate를 갖고있어 upload시 필요없는 기능이라 판단하여 int seq, string date가 없는 생성자 추가  
   public itemVO(String name, int price, int discount, String seller_id,int category_num, int qty, String desc) {
@@ -80,6 +72,16 @@ public void setCategory_num(int category_num) {	this.category_num = category_num
 public void setQty(int qty) {	this.qty = qty;}
 public void setDescription(String description) {	this.description = description;}
 public void setSalerecord(int salerecord) {	this.salerecord = salerecord;}
+
+
+
+
+@Override
+public String toString() {
+	return "itemVO [seq=" + seq + ", itemname=" + itemname + ", price=" + price + ", discount=" + discount
+			+ ", seller_id=" + seller_id + ", rdate=" + rdate + ", category_num=" + category_num + ", qty=" + qty
+			+ ", description=" + description + ", salerecord=" + salerecord + "]";
+}
   
   
 }
