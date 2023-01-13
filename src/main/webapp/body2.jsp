@@ -13,6 +13,16 @@
 	crossorigin="anonymous">
 </head>
 <body>
+	<%
+	itemVO vo1 = new itemVO(3, "아이패드", 150000, 0, "lgh0334", "2023-01-09 16:25:39.000", 30, 10);
+	itemVO vo2 = new itemVO(15, "스마트폰", 1000000, 15, "lgh0334", "2023-01-09 16:25:39.000", 30, 10);
+	itemVO vo3 = new itemVO(5, "에어팟", 1300000, 50, "ninja", "2023-01-09 16:25:39.000", 30, 10);
+	itemVO vo4 = new itemVO(6, "키보드", 50000, 0, "ninja", "2023-01-09 16:25:39.000", 30, 10);
+	itemVO vo5 = new itemVO(4, "조던1스캇", 300000, 0, "shoeslover", "2023-01-09 16:25:39.000", 10, 10);
+	itemVO vo6 = new itemVO(12, "브링그린 뱀부 차콜 모공 정화 클렌징 폼", 11000, 13, "lgh0334", "2023-01-09 16:25:39.000", 70, 10);
+	itemVO vo7 = new itemVO(13, "크런키 볼", 1050, 0, "lgh0334", "2023-01-09 16:25:39.000", 40, 5);
+	itemVO vo8 = new itemVO(14, "보조배터리", 20000, 10, "lgh0334", "2023-01-09 16:25:39.000", 30, 5);
+	%>
 	<script>
 		var index = 0; //이미지에 접근하는 인덱스
 		window.onload = function() {
@@ -40,100 +50,145 @@
 			class="slide1" src="./resources/body/slide02.jpg"> <img
 			class="slide1" src="./resources/body/slide03.jpg">
 	</div>
-	<h1>컨테이너이름입력</h1>
-		<div class="flex-container">
-	<div class="row">
-		<div class="col"></div>
-		<div class="card" style="width: 18rem;">
-			<img src="./resources/item/3.jpg" class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">아이패드</h5>
-				<p class="card-text">아이패드</p>
-				<a href="#" class="btn btn-primary">Go somewhere</a>
-			</div>
-		</div>
 
-		<div class="col"></div>
-		<div class="card" style="width: 18rem;">
-			<img src="./resources/item/3.jpg" class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">아이패드</h5>
-				<p class="card-text">아이패드</p>
-				<a href="#" class="btn btn-primary">Go somewhere</a>
-			</div>
-		</div>
-
-		<div class="col"></div>
-		<div class="card" style="width: 18rem;">
-			<img src="./resources/item/3.jpg" class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">Some quick example text to build on the
-					card title and make up the bulk of the card's content.</p>
-				<a href="#" class="btn btn-primary">Go somewhere</a>
-			</div>
-		</div>
-
-		<div class="col"></div>
-		<div class="card" style="width: 18rem;">
-			<img src="./resources/item/3.jpg" class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">Some quick example text to build on the
-					card title and make up the bulk of the card's content.</p>
-				<a href="#" class="btn btn-primary">Go somewhere</a>
-			</div>
-		</div>
-	</div>
-	<h1>컨테이너이름입력</h1>
-		<div class="flex-container">
-	<div class="row">
-		<div class="col"></div>
-		<div class="card" style="width: 18rem;">
-			<img src="./resources/item/3.jpg" class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">아이패드</h5>
-				<p class="card-text">아이패드</p>
-				<a href="#" class="btn btn-primary">Go somewhere</a>
-			</div>
-		</div>
-
-		<div class="col"></div>
-		<div class="card" style="width: 18rem;">
-			<img src="./resources/item/3.jpg" class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">아이패드</h5>
-				<p class="card-text">아이패드</p>
-				<a href="#" class="btn btn-primary">Go somewhere</a>
-			</div>
-		</div>
-
-		<div class="col"></div>
-		<div class="card" style="width: 18rem;">
-			<img src="./resources/item/3.jpg" class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">Some quick example text to build on the
-					card title and make up the bulk of the card's content.</p>
-				<a href="#" class="btn btn-primary">Go somewhere</a>
-			</div>
-		</div>
-
-		<div class="col"></div>
-		<div class="card" style="width: 18rem;">
-			<img src="./resources/item/3.jpg" class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">Some quick example text to build on the
-					card title and make up the bulk of the card's content.</p>
-				<a href="#" class="btn btn-primary">Go somewhere</a>
-			</div>
-		</div>
+	<div id="product_order_list">
+		<p>
+			<a href="javascript:recentlist();">최신순</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+			<a href="javascript:pricelist();">낮은가격</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+			<a href="javascript:pricelistdesc();">높은가격</a>
+		</p>
 	</div>
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-		crossorigin="anonymous"></script>
+	<h1>컨테이너이름입력</h1>
+	<div class="flex-container">
+		<div class="row">
+			<div class="col"></div>
+			<div class="card" style="width: 18rem;">
+				<img src="./resources/item/3.jpg" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">
+						<div id="itemDetail-name" class="text-large"><%=vo1.getName()%></div>
+					</h5>
+					<p class="card-text">
+					<div id="itemDetail-price" class="text-small">
+						<%=vo1.getPrice()%> 원</div>
+					</p>
+					<a href="#" class="btn btn-primary">구매하기</a>
+				</div>
+			</div>
+
+			<div class="col"></div>
+			<div class="card" style="width: 18rem;">
+				<img src="./resources/item/15.jpg" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">
+						<div id="itemDetail-name" class="text-large"><%=vo2.getName()%></div>
+					</h5>
+					<p class="card-text">
+					<div id="itemDetail-price" class="text-small">
+						<%=vo2.getPrice()%> 원</div>
+					</p>
+					<a href="#" class="btn btn-primary">구매하기</a>
+				</div>
+			</div>
+
+			<div class="col"></div>
+			<div class="card" style="width: 18rem;">
+				<img src="./resources/item/5.jpg" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">
+						<div id="itemDetail-name" class="text-large"><%=vo3.getName()%></div>
+					</h5>
+					<p class="card-text">
+					<div id="itemDetail-price" class="text-small">
+						<%=vo3.getPrice()%> 원</div>
+					</p>
+					<a href="#" class="btn btn-primary">구매하기</a>
+				</div>
+			</div>
+
+			<div class="col"></div>
+			<div class="card" style="width: 18rem;">
+				<img src="./resources/item/6.png" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">
+						<div id="itemDetail-name" class="text-large"><%=vo4.getName()%></div>
+					</h5>
+					<p class="card-text">
+					<div id="itemDetail-price" class="text-small">
+						<%=vo4.getPrice()%> 원</div>
+					</p>
+					<a href="#" class="btn btn-primary">구매하기</a>
+				</div>
+			</div>
+		</div>
+		<h1>컨테이너이름입력</h1>
+		<div class="flex-container">
+			<div class="row">
+				<div class="col"></div>
+				<div class="card" style="width: 18rem;">
+					<img src="./resources/item/4.jpg" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">
+						<div id="itemDetail-name" class="text-large"><%=vo5.getName()%></div>
+					</h5>
+					<p class="card-text">
+					<div id="itemDetail-price" class="text-small">
+						<%=vo5.getPrice()%> 원</div>
+					</p>
+						<a href="#" class="btn btn-primary">구매하기</a>
+					</div>
+				</div>
+
+				<div class="col"></div>
+				<div class="card" style="width: 18rem;">
+					<img src="./resources/item/12.jpg" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">
+						<div id="itemDetail-name" class="text-large"><%=vo6.getName()%></div>
+					</h5>
+					<p class="card-text">
+					<div id="itemDetail-price" class="text-small">
+						<%=vo6.getPrice()%> 원</div>
+					</p>
+						<a href="#" class="btn btn-primary">구매하기</a>
+					</div>
+				</div>
+
+				<div class="col"></div>
+				<div class="card" style="width: 18rem;">
+					<img src="./resources/item/13.jpg" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">
+						<div id="itemDetail-name" class="text-large"><%=vo7.getName()%></div>
+					</h5>
+					<p class="card-text">
+					<div id="itemDetail-price" class="text-small">
+						<%=vo7.getPrice()%> 원</div>
+					</p>
+						<a href="#" class="btn btn-primary">구매하기</a>
+					</div>
+				</div>
+
+				<div class="col"></div>
+				<div class="card" style="width: 18rem;">
+					<img src="./resources/item/14.jpg" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">
+						<div id="itemDetail-name" class="text-large"><%=vo8.getName()%></div>
+					</h5>
+					<p class="card-text">
+					<div id="itemDetail-price" class="text-small">
+						<%=vo8.getPrice()%> 원</div>
+					</p>
+						<a href="#" class="btn btn-primary">구매하기</a>
+					</div>
+				</div>
+			</div>
+
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+				crossorigin="anonymous"></script>
 </body>
 </html>
