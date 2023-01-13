@@ -1,78 +1,30 @@
 <%@ page import="model.itemVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Goupang</title>
-<style>
-* {
-	box-sizing: border-box;
-	padding: 0px;
-	margin: 0px;
-}
+<title>Insert title here</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+	crossorigin="anonymous">
 
-.flex-container {
-	width: 500px;
-	border-radius: 5px;
-	background: #d3d3d3;
-	margin: 0 auto;
-	display: flex;
-	justify-content: center;
-}
-
-.flex-container-large {
-	width: 900px;
-	border-radius: 5px;
-	background: #d3d3d3;
-	margin: 0 auto;
-	display: flex;
-	justify-content: space-evenly;
-}
-
-.flex-item {
-	width: 150px;
-	height: 150px;
-	color: #fff;
-	display: flex;
-	border-radius: 5px;
-	background: #708090;
-	justify-content: center;
-	object-fit: cover;
-	background-size: cover;
-}
-
-.b-example-divider {
-	height: 3rem;
-	background-color: rgba(0, 0, 0, .1);
-	border: solid rgba(0, 0, 0, .15);
-	border-width: 1px 0;
-	box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em
-		rgba(0, 0, 0, .15);
-}
-
-.centered {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-.temp-box {
-  background: yellow;
-  width: 100%;
-  height: 100%;
-  font-size: 40px;
-  border: 1px solid #dee3eb;
-  text-align: center;
-}
-}
-</style>
 </head>
 <body>
+	<%
+	itemVO vo1 = new itemVO(3, "아이패드", 150000, 0, "lgh0334", "2023-01-09 16:25:39.000", 30, 10, "아이가 사용한다", 146);
+	itemVO vo2 = new itemVO(15, "스마트폰", 1000000, 15, "lgh0334", "2023-01-09 16:25:39.000", 30, 10, "스마트하다", 10);
+	itemVO vo3 = new itemVO(5, "에어팟", 1300000, 50, "ninja", "2023-01-09 16:25:39.000", 30, 10, "공기", 86);
+	itemVO vo4 = new itemVO(6, "키보드", 50000, 0, "ninja", "2023-01-09 16:25:39.000", 30, 10, "키가타는보드", 111);
+	itemVO vo5 = new itemVO(4, "조던1스캇", 300000, 0, "shoeslover", "2023-01-09 16:25:39.000", 10, 10, "", 0);
+	itemVO vo6 = new itemVO(12, "브링그린 뱀부 차콜 모공 정화 클렌징 폼", 11000, 13, "lgh0334", "2023-01-09 16:25:39.000", 70, 10, "", 0);
+	itemVO vo7 = new itemVO(13, "크런키 볼", 1050, 0, "lgh0334", "2023-01-09 16:25:39.000", 40, 5, "볼", 12);
+	itemVO vo8 = new itemVO(14, "보조배터리", 20000, 10, "lgh0334", "2023-01-09 16:25:39.000", 30, 5, "보조", 11);
+	%>
+
 	<script>
 		var index = 0; //이미지에 접근하는 인덱스
 		window.onload = function() {
@@ -101,108 +53,151 @@
 			class="slide1" src="./resources/body/slide03.jpg">
 	</div>
 
-	<table>
-		<h1>컨테이너이름입력</h1>
-		<div class="flex-container">
+	<div id="product_order_list">
+		<p>
+			<a href="javascript:pricelist();">낮은가격</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+			<a href="javascript:pricelistdesc();">높은가격</a>
+		</p>
+	</div>
 
-			<div class="flex-item">
-				<div class="temp-box">1</div>
-				<div class="temp-box">2</div>
-				<div class="temp-box box-three">
-					<div class="border-dee3eb">3-1</div>
-					<div class="gap-box"></div>
-					<!-- 3-1과 3-2 사이 -->
-					<div class="border-dee3eb">3-2</div>
-					<img alt="" src="./resources/item/3.jpg"
-						onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" />
-					<div id="itemDetail">
-						<div id="itemDetail-name" class=""><%=vo.getName()%></div>
-						<div id="itemDetail-price" class=""><%=vo.getPrice()%></div>
-						<br>
-						<div class="btns">
-							<input type="button" value="상세보기" class="btn1" />
-
-						</div>
-
+	<h1>컨테이너이름입력</h1>
+	<div class="flex-container">
+		<div class="row">
+			<div class="col"></div>
+			<div class="card" style="width: 18rem;">
+				<img src="./resources/item/3.jpg" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">
+						<div id="itemDetail-name" class="text-large"><%=vo1.getItemname()%></div>
+					</h5>
+					<p class="card-text">
+					<div id="itemDetail-price" class="text-small">
+						<%=vo1.getPrice()%>원
 					</div>
-					<div class="flex-item">
-						<img alt="" src="./resources/item/4.jpg"
-							onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" />
-						<div id="itemDetail">
-							<div id="itemDetail-name" class=""><%=vo.getName()%></div>
-							<div id="itemDetail-price" class=""><%=vo.getPrice()%></div>
-							<br>
-							<div class="btns">
-								<input type="button" value="상세보기" class="btn1" />
-
-							</div>
-
-						</div>
-						<div class="flex-item">
-							<img alt="" src="./resources/item/5.jpg"
-								onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" />
-							<div id="itemDetail">
-								<div id="itemDetail-name" class=""><%=vo.getName()%></div>
-								<div id="itemDetail-price" class=""><%=vo.getPrice()%></div>
-								<br>
-								<div class="btns">
-									<input type="button" value="상세보기" class="btn1" />
-
-								</div>
-							</div>
-						</div>
-	</table>
-
-
-
-	<table>
-		<h1>컨테이너이름입력</h1>
-
-		<div class="flex-container-large">
-			<div class="flex-item">
-				<img alt="" src="./resources/item/12.jpg"
-					onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" />
+					</p>
+					<a href="#a" class="btn btn-primary">구매하기</a>
+				</div>
 			</div>
-			<div class="flex-item">
-				<img alt="" src="./resources/item/12.jpg"
-					onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" />
+
+			<div class="col"></div>
+			<div class="card" style="width: 18rem;">
+				<img src="./resources/item/15.jpg" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">
+						<div id="itemDetail-name" class="text-large"><%=vo2.getItemname()%></div>
+					</h5>
+					<p class="card-text">
+					<div id="itemDetail-price" class="text-small">
+						<%=vo2.getPrice()%>원
+					</div>
+					</p>
+					<a href="#a" class="btn btn-primary">구매하기</a>
+				</div>
 			</div>
-			<div class="flex-item">
-				<img alt="" src="./resources/item/12.jpg"
-					onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" />
+
+			<div class="col"></div>
+			<div class="card" style="width: 18rem;">
+				<img src="./resources/item/5.jpg" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">
+						<div id="itemDetail-name" class="text-large"><%=vo3.getItemname()%></div>
+					</h5>
+					<p class="card-text">
+					<div id="itemDetail-price" class="text-small">
+						<%=vo3.getPrice()%>원
+					</div>
+					</p>
+					<a href="#a" class="btn btn-primary">구매하기</a>
+				</div>
 			</div>
-			<div class="flex-item">
-				<img alt="" src="./resources/item/13.jpg"
-					onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" />
-			</div>
-			<div class="flex-item">
-				<img alt="" src="resources/item/14.jpg" onmouseenter="zoomIn(event)"
-					onmouseleave="zoomOut(event)" />
+
+			<div class="col"></div>
+			<div class="card" style="width: 18rem;">
+				<img src="./resources/item/6.png" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">
+						<div id="itemDetail-name" class="text-large"><%=vo4.getItemname()%></div>
+					</h5>
+					<p class="card-text">
+					<div id="itemDetail-price" class="text-small">
+						<%=vo4.getPrice()%>원
+					</div>
+					</p>
+					<a href="#a" class="btn btn-primary">구매하기</a>
+				</div>
 			</div>
 		</div>
-	</table>
+		<h1>컨테이너이름입력</h1>
+		<div class="flex-container">
+			<div class="row">
+				<div class="col"></div>
+				<div class="card" style="width: 18rem;">
+					<img src="./resources/item/4.jpg" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">
+							<div id="itemDetail-name" class="text-large"><%=vo5.getItemname()%></div>
+						</h5>
+						<p class="card-text">
+						<div id="itemDetail-price" class="text-small">
+							<%=vo5.getPrice()%>원
+						</div>
+						</p>
+						<a href="#a" class="btn btn-primary">구매하기</a>
+					</div>
+				</div>
 
-	</tr>
-	</table>
-	</div>
-	<script>
-		function zoomIn(event) {
-			event.target.style.transform = "scale(1.2)";
-			event.target.style.zIndex = 1;
-			event.target.style.transition = "all 0.5s";
-			event.target.style.opacity = 0.5;
-		}
+				<div class="col"></div>
+				<div class="card" style="width: 18rem;">
+					<img src="./resources/item/12.jpg" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">
+							<div id="itemDetail-name" class="text-large"><%=vo6.getItemname()%></div>
+						</h5>
+						<p class="card-text">
+						<div id="itemDetail-price" class="text-small">
+							<%=vo6.getPrice()%>원
+						</div>
+						</p>
+						<a href="#a" class="btn btn-primary">구매하기</a>
+					</div>
+				</div>
 
-		function zoomOut(event) {
-			event.target.style.transform = "scale(1)";
-			event.target.style.zIndex = 0;
-			event.target.style.transition = "all 0.5s";
-			event.target.style.opacity = 1;
-		}
-	</script>
+				<div class="col"></div>
+				<div class="card" style="width: 18rem;">
+					<img src="./resources/item/13.jpg" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">
+							<div id="itemDetail-name" class="text-large"><%=vo7.getItemname()%></div>
+						</h5>
+						<p class="card-text">
+						<div id="itemDetail-price" class="text-small">
+							<%=vo7.getPrice()%>원
+						</div>
+						</p>
+						<a href="#a" class="btn btn-primary">구매하기</a>
+					</div>
+				</div>
 
-	<script src="/docs/5.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-		crossorigin="anonymous"></script>
+				<div class="col"></div>
+				<div class="card" style="width: 18rem;">
+					<img src="./resources/item/14.jpg" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">
+							<div id="itemDetail-name" class="text-large"><%=vo8.getItemname()%></div>
+						</h5>
+						<p class="card-text">
+						<div id="itemDetail-price" class="text-small">
+							<%=vo8.getPrice()%>원
+						</div>
+						</p>
+						<a href="#a" class="btn btn-primary">구매하기</a>
+					</div>
+				</div>
+			</div>
+
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+				crossorigin="anonymous"></script>
 </body>
 </html>
