@@ -68,11 +68,6 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 		SELECT name FROM itemDB WHERE seq = #{seq}
 	</select>
 	
-<!-- <<<<<<< Updated upstream
-
-=======
-	
->>>>>>> Stashed changes -->
 	<select id="ItemOrderByPrice" resultType="model.itemVO">
 		select * from itemDB order by price
 	</select>
@@ -115,6 +110,15 @@ select * from cartItemDB where buyer_id=#{buyer_id}
 <insert id="1" parameterType="model.buyerVO">
 insert into buyerDB values{3개}
 </insert>
+
+	
+<select id="loginCheckID" parameterType="String" resultType="String">
+	select buyer_id from buyerDB where buyer_id = #{buyer_id}
+</select>
+
+<select id="loginCheckPw" parameterType="String" resultType="String">
+	select buyer_pw from buyerDB where buyer_id = #{buyer_id}
+</select>
 
 <!--  sellerDB 관련 구문 -->
 

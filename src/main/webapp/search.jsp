@@ -37,7 +37,7 @@ List<itemVO> listBySellerId = Session.selectList("searchItemsBySellerId", entere
 List<itemVO> listByAll = Session.selectList("searchItemsByNameOrSellerId", enteredText);
 List<itemVO> listByItemName = Session.selectList("searchItemByItemName", enteredText);
 
-itemVO itemvo = new itemVO();
+
 
 List<itemVO> itemlist = new ArrayList<>();
 
@@ -60,15 +60,22 @@ out.println(listByAll);
 
 out.println(listBySellerId);
 
+//String itemname1 = itemvo.getItemname();
+
+out.print("템이름");
+//out.print(itemname1);
+
+
+
 %> <br> <%
-%> <br> <%
+%> <br> <% 
 
 out.println(listByItemName);
 /* try {
 	listByAll.stream().forEach(n->out.println(n));
 } catch(Exception ex) {
 	
-} */
+ */
 
 /* if(enteredText == null || enteredText == "") {
 	out.println("공백");
@@ -95,9 +102,9 @@ if(comboValue.equals("itemName")) {
 /* if(comboValue.equals("all")) */
 /* if(comboValue.equals(""))
 out.println(list); */
-%> <br/><br/><br/><% 
+%> <br/><br/><br/> <%
 out.println("comboValue = " + comboValue);
-%> <br/><br/><br/><% 
+
 
 
 

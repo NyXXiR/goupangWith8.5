@@ -22,17 +22,28 @@
 	  String enteredPassword = request.getParameter("userPassword");
 	  // 입력값 저장
 	  
-	  String check = Session.selectOne("loginBuyer");
-	  
-	  if(enteredID != "" && enteredPassword != "") {
+	  String checkId = Session.selectOne("loginCheckID", enteredID);
+	  String checkPw = Session.selectOne("loginCheckPw", enteredID);
+
+	  if(enteredID == "" && enteredPassword == "") {
+		  %>
+		  <script>
+				alert("아이디 혹은 비밀번호를 확인 해 주세요");
+				window.location.href = 'login.jsp';
+		  </script>
+		  <%
 		 return;
 	  }
-	  
-	  if(check.equals(enteredPassword)) {
-			 session.setAttribute("LoginStatus", "OK");	 
-			 %>
+	 
+	  if(enteredID.equals(checkId)) {
+	  } else {
+		  return;
+	  }
+	  if(enteredPassword.equals(checkPw)) {
+		  session.setAttribute("buyerId", enteredID);
+		  %>
 			 <script> 
-				alert("<%= request.getParameter("userID")%> 님 환영합니다");
+				alert("<%= request.getParameter("buyerId")%> 님 환영합니다");
 				window.location.href = 'header.jsp';
 			</script>
 			 <%
@@ -42,7 +53,9 @@
 				alert("아이디 혹은 비밀번호를 확인 해 주세요");
 				window.location.href = 'login.jsp';
 		  </script>
-		  <%} %>;	
+		  <%
+	  } %>
+	  
 			
 </body>
 </html>

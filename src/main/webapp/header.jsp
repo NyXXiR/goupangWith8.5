@@ -11,8 +11,7 @@
 </head>
 <body>
 <%
-Object loginStatus = session.getAttribute("LoginStatus");
-session.invalidate();
+Object loginStatus = session.getAttribute("buyerId");
 %>
 
 <div id="wrapper">
