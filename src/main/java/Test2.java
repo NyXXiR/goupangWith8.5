@@ -1,14 +1,16 @@
+import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import model.cartItemVO;
 import mybatis.Mybatis;
 
 public class Test2 {
   public static void main(String[] args) {
     SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
-    SqlSession sqlsession;
-    sqlsession = sqlSessionFactory.openSession(true);
+    SqlSession sqlSession;
+    sqlSession = sqlSessionFactory.openSession(true);
 
-    String a = sqlsession.selectOne("selectCategory", 4);
-    System.out.println(a);
+    List<cartItemVO> cartList = sqlSession.selectList("cartListById", "lgh0334");
+    System.out.println(cartList);
   }
 }
