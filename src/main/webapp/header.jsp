@@ -108,6 +108,8 @@ session.invalidate();
         document.querySelector("header").style.backgroundColor = "white";
         // document.getElementById("main").style.marginLeft = "0";
       }
+      
+      document.charset = "UTF-8"; 
     </script>
     </body>
 </html>
