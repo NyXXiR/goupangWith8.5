@@ -77,11 +77,16 @@
 			}
 			//마이페이지 그래프영역
 			<% 
-			int itemRecord = sess.selectOne("ItemSaleRecordSum");
+			/* int itemRecord = sess.selectOne("ItemSaleRecordSum");
 			List<Integer> salList = sess.selectList("ItemSaleRecordSum");
 			
+<<<<<<< HEAD
 			//salList.stream().peek(t -> t/itemRecord).forEach(t -> System.out.println(t));
 			%> 
+=======
+			salList.stream().peek(t -> t/itemRecord).forEach(t -> System.out.println(t)); */
+			%>
+>>>>>>> d5e651a9b7e9b5a0f32616b010bfbc3af7fde5ac
 
 
 
