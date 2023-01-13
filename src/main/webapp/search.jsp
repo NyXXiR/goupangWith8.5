@@ -37,18 +37,48 @@ List<itemVO> listBySellerId = Session.selectList("searchItemsBySellerId", entere
 List<itemVO> listByAll = Session.selectList("searchItemsByNameOrSellerId", enteredText);
 List<itemVO> listByItemName = Session.selectList("searchItemByItemName", enteredText);
 
+itemVO itemvo = new itemVO();
+
+List<itemVO> itemlist = new ArrayList<>();
+
+//itemlist.add(1, itemvo.getName());
 
 
 
-if(enteredText == null || enteredText == "") {
+%><c:forEach var="asd" begin="1" end ="10"> 
+	<tr>
+		<td>
+			${asd}
+		</td>
+	</tr>
+</c:forEach><%
+
+out.println(listByAll);
+
+%> <br> <%
+%> <br> <% 
+
+out.println(listBySellerId);
+
+%> <br> <%
+%> <br> <%
+
+out.println(listByItemName);
+/* try {
+	listByAll.stream().forEach(n->out.println(n));
+} catch(Exception ex) {
+	
+} */
+
+/* if(enteredText == null || enteredText == "") {
 	out.println("공백");
 	return;
-} 
-if(comboValue == null) {
+}  */
+/* if(comboValue == null) {
 	out.println("comboValue null");
 	return;
-}
-if(comboValue.equals("all")) {
+} */
+/* if(comboValue.equals("all")) {
 	out.println(listByAll);
 	return;
 }
@@ -59,7 +89,7 @@ if(comboValue.equals("sellerId")) {
 if(comboValue.equals("itemName")) {
 	out.println(listByItemName);
 	return;
-}
+} */
 
 	
 /* if(comboValue.equals("all")) */
@@ -76,5 +106,9 @@ out.println("comboValue = " + comboValue);
 
 <jsp:include page="footer.jsp" flush="false"/>
 </div>
+
+<script>
+document.charset = "UTF-8"; 
+</script>
 </body>
 </html>

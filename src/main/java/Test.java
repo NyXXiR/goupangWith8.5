@@ -50,6 +50,8 @@ public class Test {
      
     // int n= session.insert("add", vo);
      
+		
+	
   }
 
 }

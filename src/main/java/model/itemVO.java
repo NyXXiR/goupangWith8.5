@@ -14,14 +14,9 @@ public class itemVO {
   private int salerecord;
 
 
-
-
-
   public itemVO() {
 	super();
 }
-
-
 
 
 // seq 컬럼은 시퀀스 기능을 갖고 있고 insert시 sysdate를 갖고있어 upload시 필요없는 기능이라 판단하여 int seq, string date가 없는 생성자 추가  
@@ -89,7 +84,6 @@ public String toString() {
 }
   
   
-
 }
 
 
