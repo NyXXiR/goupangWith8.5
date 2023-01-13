@@ -30,14 +30,27 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 	<select id="ItemAll" resultType="model.itemVO">
 		select * from itemDB
 	</select>
-
-	<select id="ItemSaleRecordSearch" resultType="int">
-		<![CDATA[	select salerecord from (select * from itemDB order by salerecord desc, seq) where rownum <=10 ]]>
+	
+	
+	<!-- 마이페이지 그래프 -->
+	<select id="ItemSaleRecordHSearch" resultType="int">
+		<![CDATA[select salerecord from (select * from itemDB order by salerecord desc, seq) where rownum <=10 ]]>
 	</select>
 	
-	<select id="ItemSaleRecordSum" resultType="int">
-		select sum(salerecord) from itemdb
+	<select id="ItemSaleRecordHSum" resultType="int">
+		<![CDATA[select sum(salerecord) from (select * from itemDB order by salerecord desc, seq) where rownum <=10 ]]>
 	</select>
+	
+	<select id="ItemSaleRecordRSearch" resultType="int">
+		<![CDATA[select salerecord from (select * from itemDB where salerecord !=0 order by salerecord, seq) where rownum <=10 ]]>
+	</select>
+	
+	<select id="ItemSaleRecordRSum" resultType="int">
+		<![CDATA[select sum(salerecord) from (select * from itemDB order by salerecord, seq) where rownum <=10 ]]>
+	</select>
+
+
+
 
 	<select id="selectName" parameterType="int" resultType="string">
 		SELECT ITEMNAME FROM itemDB WHERE SEQ = #{seq}
@@ -54,7 +67,12 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 	<select id="ItemNameBySeq" parameterType="int" resultType="string">
 		SELECT name FROM itemDB WHERE seq = #{seq}
 	</select>
+	
+<!-- <<<<<<< Updated upstream
 
+=======
+	
+>>>>>>> Stashed changes -->
 	<select id="ItemOrderByPrice" resultType="model.itemVO">
 		select * from itemDB order by price
 	</select>

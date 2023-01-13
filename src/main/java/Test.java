@@ -1,7 +1,12 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+
+import com.sun.org.apache.bcel.internal.generic.RETURN;
+
 import mybatis.Mybatis;
 
 public class Test {
@@ -43,16 +48,20 @@ public class Test {
     // List<itemVO> list = session.selectList("selectByPrice");
     // System.out.println(list);
 
-    int itemRecord = sess.selectOne("ItemSaleRecordSum");
-    List<Integer> salList = sess.selectList("ItemSaleRecordSum");
+    int itemRecord = sess.selectOne("ItemSaleRecordHSum");
+	List < Integer > salList = sess.selectList("ItemSaleRecordHSearch");
 
-    salList.stream().flatMapToDouble(t -> {
-      Integer str = Integer.valueOf(t);
-      double dob = (double) str;
-      dob /= itemRecord;
-      double[] doblist = null;
-      return Arrays.stream(doblist);
-    }).forEach(t -> System.out.println(t));
+	double[] salarr = new double[salList.size()];
+
+	for (int i = 0; i < salList.size(); i++) {
+		salarr[i] = salList.get(i);
+		salarr[i] = Math.round((salarr[i] / itemRecord * 100) * 100.0) / 100.0;
+	}
+	for (int i = 1; i < salList.size(); i++) {
+		salarr[i] += salarr[i-1];
+		System.out.println(salarr[i]);
+	}
+	
 
 
     // int n= session.insert("add", vo);
