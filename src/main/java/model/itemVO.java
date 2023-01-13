@@ -16,7 +16,7 @@ public class itemVO {
 
 
 
-<<<<<<< Updated upstream
+
   public itemVO() {
 	super();
 }
@@ -77,7 +77,7 @@ public itemVO(int seq, String name, int price, int discount, String seller_id, S
   public String getDate() {
     return date;
   }
-=======
+
 
 @Override
 public String toString() {
@@ -85,7 +85,7 @@ public String toString() {
 			+ ", seller_id=" + seller_id + ", rdate=" + rdate + ", category_num=" + category_num + ", qty=" + qty
 			+ ", description=" + description + ", salerecord=" + salerecord + "]";
 }
->>>>>>> Stashed changes
+
 
 
 
