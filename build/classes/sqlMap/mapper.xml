@@ -29,10 +29,6 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 	</select>
 
 
-	<select id="ItemNameBySeq" parameterType="int" resultType="string">
-		SELECT name FROM itemDB WHERE seq = #{seq}
-	</select>
-
 	<select id="selectName" parameterType="int" resultType="string">
 		SELECT ITEMNAME FROM itemDB WHERE SEQ = #{seq}
 	</select>
@@ -50,11 +46,23 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 	</select>
 
 
-
 	<select id="ItemOrderByPrice" resultType="model.itemVO">
 		select * from itemDB order by price
 	</select>
 
+
+	<select id="searchItemsBySellerId" parameterType="String" resultType="model.itemVO">
+		select * from itemDB where seller_id like '%'||#{seller_id}||'%'
+	</select>
+	
+	<select id="searchItemByItemName" parameterType="String" resultType="model.itemVO">
+		select * from itemDB where itemname like '%'||#{itemname}||'%'
+	</select>
+	
+	<select id="searchItemsByNameOrSellerId" parameterType="String" resultType="model.itemVO">
+		select * from itemDB where itemname like '%'||#{itemname}||'%' or seller_id like '%'||#{seller_id}||'%'
+	</select>	
+	
 <!--  soldItemDB 관련 구문 -->
 
 <!--  cartItemDB 관련 구문 -->
