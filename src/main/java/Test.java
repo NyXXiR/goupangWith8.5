@@ -23,7 +23,7 @@ public class Test {
 //     System.out.println("추가 성공");
 //     } else {
 //     session.rollback();
-//     System.out.println("추가 실패");
+//     System.out.println("추가ㅇㄹㅇㄹㄹㅇ뮤ㅠ");
 //    
 //     }
     dafdsgsgsdgs
@@ -49,7 +49,7 @@ public class Test {
      
     // int n= session.insert("add", vo);
      
-		
+		sgsgsdgsfdfsd
 	
   }
 
