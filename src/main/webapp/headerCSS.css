@@ -1,6 +1,9 @@
 body {
-  margin: 0;
   font-family:'nanumgothic';
+}
+.wrapper {
+	width:1280px;
+	margin: 0 auto;
 }
 
 #left-slide-container {
@@ -36,6 +39,7 @@ body {
   height: 30px;
   width: 30px;
 }
+
 .slide-close-btn {
   height: 30px;
   width: 30px;
@@ -48,6 +52,7 @@ body {
 .container {
   height: 200px;
 }
+
 .upper-header-white {
   display: flex;
   justify-content: center;
@@ -64,9 +69,11 @@ body {
   height: 40px;
   margin-top: 30px;
 }
+
 .left-slide-btn:hover {
   cursor: pointer;
 }
+
 .logo {
   height: 110px;
   width: 200px;
@@ -75,7 +82,7 @@ body {
 .header-middle-box {
   height: 100%;
   display: flex;
-  width: 35%;
+  width: 40%;
   margin-left: 100px;
 }
 
@@ -90,14 +97,9 @@ select {
      appearance : none;
 
 }
-.search {
-  /* position: relative; */
-  width: 150;
-}
 
 .search-bar {
-
-	height: 25px;
+  height: 25px;
   width: 100%;
   font-size: 14px;
   border-top : none;
@@ -108,18 +110,17 @@ select {
 }
 
 .search-box {
-  width: 300px;
+  width: 350px;
   height: 30px;
-  position: relative;
 }
-.search-img {
-  position: absolute;
-  height: 100%;
-  width: 17px;
-  top: -2px;
-  right: -8px;
-  margin: 0;
+
+.search-container{
+	display: flex;
 }
+
+.search-Btn{
+}
+
 .header-right-box {
   width: 30%;
   margin-left: 100px;
@@ -146,6 +147,7 @@ select {
 .menu-bar .drop2 {
   position: relative;
 }
+
 .menu-bar li:hover .detail-box {
   display: block;
 }
@@ -166,11 +168,13 @@ li {
 .detail-box:hover .drop-menu-1 {
   display: block;
 }
+
 .drop-menu-1 li {
   line-height: 30px;
   height: 30px;
   width: 80px;
 }
+
 .drop-menu-1 li:hover {
   transition: 0.5s;
   background: rgb(116, 116, 116);
@@ -179,15 +183,18 @@ li {
   text-decoration: none;
   color: black;
 }
+
 .drop-menu-2 li {
   line-height: 30px;
   height: 30px;
   width: 80px;
 }
+
 .drop-menu-2 li:hover {
   transition: 0.5s;
   background: rgb(116, 116, 116);
 }
+
 .drop-menu-2 a {
   text-decoration: none;
   color: black;
@@ -197,14 +204,17 @@ li {
   padding-top: 7px;
   height: 40px;
 }
+
 .home-img:hover {
   color: white;
 }
+
 .cart-img {
   margin-left: 10px;
   height: 41px;
   padding-top: 7px;
 }
+
 .menu-img {
   margin-left: 10px;
   padding-top: 0px;

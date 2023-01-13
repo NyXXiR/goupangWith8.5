@@ -13,10 +13,10 @@
 </head>
 <body>
 	<%
-	
+	  
 	  SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
 	  SqlSession Session;
-	  Session = sqlSessionFactory.openSession(true); 
+	  Session = sqlSessionFactory.openSession(true);
 	  // mybatis ¼ÂÆÃ
 	  String enteredID = request.getParameter("userID");
 	  String enteredPassword = request.getParameter("userPassword");

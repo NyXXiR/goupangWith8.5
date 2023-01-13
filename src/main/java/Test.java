@@ -1,6 +1,9 @@
+import java.util.Arrays;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
+
 import model.itemVO;
 import mybatis.Mybatis;
 
@@ -10,8 +13,8 @@ public class Test {
     // TODO Auto-generated method stub
 
     SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
-    SqlSession session;
-    session = sqlSessionFactory.openSession(true);
+    SqlSession sess;
+    sess = sqlSessionFactory.openSession(true);
  
 //     itemVO vo = new itemVO(0, "banana", 3000, 0, "lgh0334", "sysdate", "toy");
 //     int n = session.insert("add", vo);
@@ -24,7 +27,7 @@ public class Test {
 //    
 //     }
     
-     String a = session.selectOne("selectName", 3);
+     String a = sess.selectOne("selectName", 3);
      System.out.println(a);
 
 //     String b = session.selectOne("selectPrice", 4);
@@ -33,12 +36,20 @@ public class Test {
 //     List<itemVO> list = session.selectList("selectByPrice");
 //     System.out.println(list);
 
-     int i = session.selectOne("itemNextval");
+     int itemRecord = sess.selectOne("ItemSaleRecordSum");
+		List<Integer> salList = sess.selectList("ItemSaleRecordSum");
+		
+		salList.stream().flatMapToDouble( t ->	{
+			Integer str = Integer.valueOf(t) ;
+			double dob = (double)str;
+			dob /= itemRecord;
+			double[] doblist = null;
+			return Arrays.stream(doblist);
+			}).forEach(t -> System.out.println(t));
+		
      
-     System.out.println(++i);
-
     // int n= session.insert("add", vo);
-
+     
   }
 
 }

@@ -15,6 +15,7 @@ Object loginStatus = session.getAttribute("LoginStatus");
 session.invalidate();
 %>
 
+<div id="wrapper">
   <div id="left-slide-container">
       <div class="close-btn-box">
         <img src="./resources/header/close.png" class="slide-close-btn" onclick="closeNav()" />
@@ -32,15 +33,16 @@ session.invalidate();
             <img src="./resources/header/goupang.jpg" class="logo" alt="	" />
           </div>
           <div class="header-middle-box">
-              <select name="" id="">
-                <option value="">전체</option>
-                <option value="">판매자</option>
-                <option value="">상품명</option>
-                <option value="">???</option>
+              <select name="comboValue">
+                <option value="all">전체</option>
+                <option value="sellerId">판매자이름</option>
+                <option value="itemName">상품명</option>
               </select>
             <div class="search-box">
-              <input type="text" class="search-bar" placeholder="" />
-              <a href=""><img src="./resources/header/search.png" alt="" class="search-img" /></a>
+             <form action="search.jsp" class="search-container" method="POST">
+              <input type="text" class="search-bar" name="searchbar" placeholder="" />
+              <input type="submit" class="search-Btn"value="검색"/>
+             </form>
             </div>
           </div>
           <div class="header-right-box">
