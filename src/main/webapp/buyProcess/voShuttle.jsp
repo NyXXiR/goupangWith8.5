@@ -1,11 +1,11 @@
-<%@ page import="model.itemVO" %>
+<%@ page import="model.itemVO2" %>
 <%@ page import= "java.util.HashMap" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <% 
-itemVO vo = new itemVO(0, "banana", 30000, 15, "lgh0334", "sysdate", 10, 10);
+itemVO2 vo = new itemVO2(0, "banana", 30000, 15, "lgh0334", "sysdate", 10, 10);
 int discounted = vo.getPrice() / 100 * (100-vo.getDiscount());
 HashMap<String, String> itemMap = new HashMap<>();
 
@@ -32,7 +32,7 @@ session.setAttribute("itemMap", itemMap);
 
 <a href="itemDetail.jsp">상세페이지로</a>
 <%= session.getAttribute("itemMap") %>
-<%= vo.getName() %>
+
 
 </body>
 </html>
