@@ -109,7 +109,7 @@ HashMap<String, String> itemMap = (HashMap<String, String>) session.getAttribute
 
 					<form action="buyPage.jsp" method="post">
 						<div class="prod-quantity__form">
-							<input type="text" value="1" name="quantity "
+							<input type="text" value="1" name="quantity"
 								class="quantity-count" readonly="true" />
 							<button class="quantity-minus" type="button"
 								onclick="valueMinus(1)">수량 -</button>
@@ -184,23 +184,33 @@ function valueMinus(num){
 </script>
 
 <script>
+
+
 function addToCart(){
+	var cnt =document.querySelector(".quantity-count");
+	const data = {
+			item_seq: <%=session.getAttribute("seq")%>,
+			buyer_id: <%=session.getAttribute("buyer_id")%>,
+			qty: cnt,
+			
+			}	
 
-fetch("cartPopup.jsp",{
-
-method:"post",
-headers: {"content-Type": "application/json"},
-body: JSON.stringify({
-	item_seq:<%=itemMap.get("seq")%>,
-	buyer_id: "lgh0334",
-	qty: document.querySelector(".quantity-count").value,
-	
-}),
-	
+fetch("addToCart.jsp",{
+	method:'post',
+	headers:{
+		'Content-Type':'application/json'},
+body:JSON.stringify(data),
 })
-.then((response)=> response.json()).then((result)=> console.log(result));
+.then((response)=> response.json())
+.then((data)=>{
+	console.log('성공:', data);
+})
+.catch((error)=>{
+	console.error('실패:',error);
+});
 
 }
+
 </script>
 
 

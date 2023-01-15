@@ -5,8 +5,6 @@ import java.util.stream.IntStream;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import com.sun.org.apache.bcel.internal.generic.RETURN;
-
 import mybatis.Mybatis;
 
 public class Test {
