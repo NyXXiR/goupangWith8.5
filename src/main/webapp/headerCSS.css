@@ -1,18 +1,27 @@
 body {
-  font-family:'nanumgothic';
+	
+font-family: "Lato", sans-serif;  
+margin: 0;
+  
 }
-.wrapper {
-	width:1280px;
+#wrapper {
+	display: flex;
+	flex-direction:row;
+	width:1400px;
 	margin: 0 auto;
+	height: 200px;
+	border-bottom: 3px solid lightgray;
+	
 }
 
 #left-slide-container {
-  position: fixed;
+  position: absolute;
   background: white;
   height: 100%;
   width: 0px;
   overflow-x: hidden;
   transition: 0.5s;
+  left: 0;
 }
 
 #left-slide-container a {
@@ -49,19 +58,24 @@ body {
   cursor: pointer;
 }
 
-.container {
+.header-container {
+
+	width: 1280px;
+	margin: 0 auto;
   height: 200px;
 }
 
 .upper-header-white {
   display: flex;
   justify-content: center;
+  height: 80%;
   width: 90%;
   align-items: center;
   margin: 0 auto;
 }
 
 .header-left-box {
+	margin-left: 25px;
   display: flex;
 }
 
@@ -80,18 +94,21 @@ body {
 }
 
 .header-middle-box {
-  height: 100%;
+	left: 30px;
   display: flex;
-  width: 40%;
-  margin-left: 100px;
+  width: 400px;
+  height: 100px;
+  margin: 0 0 0 100px;
+  align-items: center;
 }
 
 select {
      width:100px;
+     height:40px;
      padding:5px;
-     border:2px solid #999;
-     font-family:'nanumgothic';
+     border:2px solid rgb(130, 130, 130);
      border-radius:3px;
+     font-size: 13px;
      -webkit-appearance: none;
      -moz-appearance: none;
      appearance : none;
@@ -100,31 +117,43 @@ select {
 
 .search-bar {
   height: 25px;
-  width: 100%;
+  width: 95%;
   font-size: 14px;
   border-top : none;
   border-left : none;
   border-right : none;
-  border-bottom : 3px solid black;
+  border-bottom : 2px solid rgb(130,130,130);
   margin-left: 5px;
+  margin-top: 10px;
 }
 
 .search-box {
+  position: relative;
   width: 350px;
   height: 30px;
 }
 
-.search-container{
+.search-container {
 	display: flex;
 }
 
 .search-Btn{
+	position: absolute;
+	background: url(resources/header/search.png);
+	background-repeat: no-repeat;
+	background-size: 82%;
+	width: 40px;
+	height: 40px;
+	border: 0;
+	top: 2px;
+	right: 0;
 }
 
 .header-right-box {
+	display: flex;
+	margin: 0 0 0 80px;
   width: 30%;
-  margin-left: 100px;
-}
+}	
 
 .detail-box {
   display: none;
@@ -170,6 +199,7 @@ li {
 }
 
 .drop-menu-1 li {
+	border-radius:3px;
   line-height: 30px;
   height: 30px;
   width: 80px;
@@ -185,6 +215,7 @@ li {
 }
 
 .drop-menu-2 li {
+	border-radius:3px;
   line-height: 30px;
   height: 30px;
   width: 80px;
@@ -196,6 +227,7 @@ li {
 }
 
 .drop-menu-2 a {
+	border-radius:3px;
   text-decoration: none;
   color: black;
 }
