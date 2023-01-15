@@ -3,12 +3,12 @@
 <%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
 <%@page import="model.*"%>
 <%@page import="DAO.*"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -17,33 +17,35 @@
 	  SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
 	  SqlSession Session;
 	  Session = sqlSessionFactory.openSession(true); 
-		// mybatis ¼³Á¤°ª »ç¿ëÇÏ±â À§ÇÑ ±âÃÊ ¼ÂÆÃ
+		// mybatis ì„¤ì •ê°’ ì‚¬ìš©í•˜ê¸° ìœ„í•œ ê¸°ì´ˆ ì…‹íŒ…
       String userID = request.getParameter("userID");
 	  String userPassword = request.getParameter("userPassword");
 	  String userName = request.getParameter("userName");
-		// Æû ÅÂ±× ¾ÈÀÇ °ªÀ» ºÒ·¯¿Í¼­ º¯¼ö¿¡ ´ã±â
+		// í¼ íƒœê·¸ ì•ˆì˜ ê°’ì„ ë¶ˆëŸ¬ì™€ì„œ ë³€ìˆ˜ì— ë‹´ê¸°
 	  buyerVO buyer = new buyerVO(userID, userPassword, userName);
-	  	// seq Á¦¿ÜÇÏ°í È¸¿ø°¡ÀÔ ÆäÀÌÁö¿¡¼­ ½ÇÁ¦·Î °¡Á®¿À´Â °ªÀ» ÅëÇØ »õ·Î¿î °´Ã¼ »ı¼º
+	  	// seq ì œì™¸í•˜ê³  íšŒì›ê°€ì… í˜ì´ì§€ì—ì„œ ì‹¤ì œë¡œ ê°€ì ¸ì˜¤ëŠ” ê°’ì„ í†µí•´ ìƒˆë¡œìš´ ê°ì²´ ìƒì„±
 	  	
 	  	
 		if (userID != "" && userPassword != "" && userName != "") {
 			  Session.insert("signUpBuyer", buyer);
 			  %>
 				  <script>
-				  alert("<%= request.getParameter("userName")%> ´Ô È¸¿ø°¡ÀÔ ¿Ï·á µÇ¾ú½À´Ï´Ù");
+				  alert("<%= userName%> ë‹˜ íšŒì›ê°€ì… ì™„ë£Œ ë˜ì—ˆìŠµë‹ˆë‹¤");
 				  window.location.href = 'header.jsp';
 				  </script>
 			  <%
-			  Session.commit();
+			  //Session.commit();
+			  // Session = sqlSessionFactory.openSession(true); ê°€ ì„¤ì •ë˜ì–´ ìˆìœ¼ë¯€ë¡œ, Session.commit() ì„¤ì •ì€ í•„ìš”ì—†ìŒ.
+			  
 			  //response.sendRedirect("header.jsp");
 		} else {
 			  %>
 				  <script>
-				  alert("¾ÆÀÌµğ¿Í ºñ¹Ğ¹øÈ£¸¦ È®ÀÎ ÇØ ÁÖ¼¼¿ä");
+				  alert("ëª¨ë“  í•­ëª©ì„ ì…ë ¥ í•´ ì£¼ì„¸ìš”");
 				  window.location.href = 'register.jsp';
 				  </script>
 			  <%
-			  Session.rollback();
+			  //Session.rollback();
 			//response.sendRedirect("register.jsp");
 		  }
 		  %>

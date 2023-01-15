@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -11,7 +10,9 @@
 </head>
 <body>
 <%
-Object loginStatus = session.getAttribute("buyerId");
+String loginStatus = (String) session.getAttribute("buyerId");
+// getAttribute는 반환형이 Object이므로 형변환 필요함
+// 즉, 모든 클래스 타입을 속성의 값으로 사용 가능 하다는 것을 의미함.
 %>
 
 <div id="wrapper">
@@ -20,30 +21,33 @@ Object loginStatus = session.getAttribute("buyerId");
         <img src="./resources/header/close.png" class="slide-close-btn" onclick="closeNav()" />
       </div>
       <h1><a href="">메뉴</a></h1>
+      <div style="height:5px; background:lightgray"></div>
       <a href="">A</a>
       <a href="">B</a>
       <a href="">C</a>
   </div>
-    <header>
-      <div class="container">
+      <div class="header-container">
         <div class="upper-header-white">
+        
           <div class="header-left-box">
             <img src="./resources/header/menu1.png" class="left-slide-btn" onclick="openNav()" />
-            <img src="./resources/header/goupang.jpg" class="logo" alt="	" />
+            <a href="header.jsp"><img src="./resources/header/goupang.jpg" class="logo" alt="	" /></a>
           </div>
+          
           <div class="header-middle-box">
-              <select name="comboValue">
-                <option value="all">전체</option>
-                <option value="sellerId">판매자이름</option>
-                <option value="itemName">상품명</option>
-              </select>
-            <div class="search-box">
-             <form action="search.jsp" class="search-container" method="POST">
-              <input type="text" class="search-bar" name="searchbar" placeholder="" />
-              <input type="submit" class="search-Btn"value="검색"/>
-             </form>
-            </div>
+           <form action="search.jsp" class="search-container" method="POST">
+                <select name="comboValue">
+                  <option value="all">전체</option>
+                  <option value="sellerId">판매자이름</option>
+                  <option value="itemName">상품명</option>
+                </select>
+	            <div class="search-box">
+	              <input type="text" class="search-bar" name="searchbar" placeholder="" />
+	              <input type="submit" class="search-Btn" value=""/>
+	            </div>
+            </form>
           </div>
+          
           <div class="header-right-box">
             <ul class="menu-bar">
            	<% if(loginStatus == null) {
@@ -52,10 +56,10 @@ Object loginStatus = session.getAttribute("buyerId");
             	  <a href="#"><img src="./resources/header/account.png" alt="" class="account-img"/></a>
                 	<div class="detail-box">
                   		<ul class="drop-menu-1">
-		                    <a href="./myPage.jsp"><li>회원 정보</li></a>
-		                    <a href="myPage.jsp"><li>메뉴 1</li></a>
-		                    <a href="myPage.jsp"><li>메뉴 2</li></a>
-		                    <a href="myPage.jsp"><li>메뉴 3</li></a>
+		                    <li><a href="myPage.jsp">회원 정보</a></li>
+		                    <li><a href="myPage.jsp">메뉴 1</a></li>
+		                    <li><a href="myPage.jsp">메뉴 2</a></li>
+		                    <li><a href="myPage.jsp">메뉴 3</a></li>
                   		</ul>
                 	</div>
              	 </li>
@@ -74,14 +78,14 @@ Object loginStatus = session.getAttribute("buyerId");
 	                  <ul class="drop-menu-2">
 		                  <%
 		                  if(loginStatus == null) {%>
-		                  	<a href="login.jsp"><li>로그인</li></a>
+		                  	<li><a href="login.jsp">로그인</a></li>
 		                  <% } else{
 		                	  %> 
-		                	  <a href="logout.jsp"><li>로그아웃</li></a>
+		                	  <li><a href="logout.jsp">로그아웃</a></li>
 		                	  <% 
 		                  }
 		                  %>
-	                    <a href="register.jsp"><li>회원가입</li></a>
+	                    <li><a href="register.jsp">회원가입</a></li>
 	                  </ul>
 	                </div>
 	              </li>
@@ -92,7 +96,6 @@ Object loginStatus = session.getAttribute("buyerId");
           <div class="bottom-container"></div>
         </div>
       </div>
-    </header>
 
     <script>
       function openNav() {
@@ -110,5 +113,6 @@ Object loginStatus = session.getAttribute("buyerId");
       
       document.charset = "UTF-8"; 
     </script>
+    </div>
     </body>
 </html>

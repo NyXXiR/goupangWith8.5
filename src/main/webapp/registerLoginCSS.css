@@ -6,6 +6,7 @@ body {
 .signup-container {
   width: 415px;
   height: 100%;
+  margin-top: 80px;
 }
 .logo-container {
   width: 300px;
