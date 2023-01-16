@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="model.itemVO"%>
+<%@page import="member.itemVO"%>
 <%@page import="org.apache.ibatis.session.SqlSession"%>
 <%@page import="mybatis.Mybatis"%>
 <%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
