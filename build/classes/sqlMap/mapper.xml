@@ -32,6 +32,8 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 	</select>
 	
 	
+	
+	
 	<!-- 마이페이지 그래프 -->
 	<select id="ItemSaleRecordHSearch" resultType="int">
 		<![CDATA[select salerecord from (select * from itemDB order by salerecord desc, seq) where rownum <=10 ]]>
