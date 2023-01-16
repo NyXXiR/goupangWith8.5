@@ -136,9 +136,10 @@ insert into buyerDB values{3개}
 <select id="selectByMessageId" parameterType="int" resultType="String">
 	select * from guestbook_message where message_id=?
 </select>
+-->
 
 
-<!-- 익명게시판 관련 구문  -->
+<!-- 익명게시판 관련구문  -->
 <!-- <select id="insertMessage" parameterType="model.MessageVO">
 	insert into guestbook_message values(seq_guestbook_message.nextval, #{bookPassword},#{bookPwd},#{bookMessage})
 </select>
