@@ -1,49 +1,46 @@
 package model;
 
 public class cartItemVO {
-  private String itemSeq;
-  private String buyerId;
-  private String quantity;
+  private String item_seq;
+  private String buyer_id;
+  private String qty;
 
 
-
-  public cartItemVO(String itemSeq, String buyerId, String quantity) {
+  public cartItemVO(String item_seq, String buyer_id, String qty) {
     super();
-    this.itemSeq = itemSeq;
-    this.buyerId = buyerId;
-    this.quantity = quantity;
-  }
-
-  public String getItemSeq() {
-    return itemSeq;
-  }
-
-  public void setItemSeq(String itemSeq) {
-    this.itemSeq = itemSeq;
-  }
-
-  public String getBuyerId() {
-    return buyerId;
-  }
-
-  public void setBuyerId(String buyerId) {
-    this.buyerId = buyerId;
-  }
-
-  public String getQuantity() {
-    return quantity;
-  }
-
-  public void setQuantity(String quantity) {
-    this.quantity = quantity;
+    this.item_seq = item_seq;
+    this.buyer_id = buyer_id;
+    this.qty = qty;
   }
 
   @Override
   public String toString() {
-    return "cartItemVO [itemSeq=" + itemSeq + ", buyerId=" + buyerId + ", quantity=" + quantity
-        + "]";
+    return "cartItemVO [item_seq=" + item_seq + ", buyer_id=" + buyer_id + ", qty=" + qty + "]";
   }
 
+  public String getItem_seq() {
+    return item_seq;
+  }
+
+  public void setItem_seq(String item_seq) {
+    this.item_seq = item_seq;
+  }
+
+  public String getBuyer_id() {
+    return buyer_id;
+  }
+
+  public void setBuyer_id(String buyer_id) {
+    this.buyer_id = buyer_id;
+  }
+
+  public String getQty() {
+    return qty;
+  }
+
+  public void setQty(String qty) {
+    this.qty = qty;
+  }
 
 
 }
