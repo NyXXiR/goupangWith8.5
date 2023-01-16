@@ -123,4 +123,22 @@ insert into buyerDB values{3개}
 <!--  sellerDB 관련 구문 -->
 
 
+<!-- 익명게시판 관련 구문  -->
+<!-- <select id="insertMessage" parameterType="model.MessageVO">
+	insert into guestbook_message values(seq_guestbook_message.nextval, #{bookPassword},#{bookPwd},#{bookMessage})
+</select>
+
+<select id="selectMessage" resultType="model.MessageVO">
+select from guestbook_message where bookId=#{bookId}
+</select>
+
+<select id="selectCount" parameterType="Integer">
+select count(*) from guestbook_message
+</select>
+
+<select id="selectList" parameterType="Integer">
+select count(*) from guestbook_message
+</select>
+ -->
+
 </mapper>
