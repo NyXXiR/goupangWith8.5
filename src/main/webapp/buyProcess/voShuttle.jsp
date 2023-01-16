@@ -1,11 +1,11 @@
-<%@ page import="model.itemVO2" %>
+<%@ page import="member.itemVO2" %>
 <%@ page import= "java.util.HashMap" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <% 
-itemVO2 vo = new itemVO2(0, "banana", 30000, 15, "lgh0334", "sysdate", 10, 10);
+itemVO2 vo = new itemVO2(3, "아이패드", 150000, 15, "lgh0334", "sysdate", 10, 100);
 int discounted = vo.getPrice() / 100 * (100-vo.getDiscount());
 HashMap<String, String> itemMap = new HashMap<>();
 
@@ -22,7 +22,7 @@ itemMap.put("seller_id", vo.getSeller_id());
 session.setAttribute("itemMap", itemMap);
 
 //userName은 임시로 설정
-session.setAttribute("buyerId", "lgh0334");
+session.setAttribute("buyer_id", "lgh0334");
 
 //quantity 1로 설정해둠
 session.setAttribute("quantity",1);

@@ -1,7 +1,7 @@
 
 <%@ page import="org.apache.ibatis.session.SqlSessionFactory"%>
 <%@ page import="org.apache.ibatis.session.SqlSession"%>
-<%@ page import="model.itemVO"%>
+<%@ page import="member.itemVO"%>
 <%@ page import="mybatis.Mybatis"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
