@@ -127,10 +127,10 @@ insert into buyerDB values{3개}
 <!--  sellerDB 관련 구문 -->
 
 <!-- MessageDB 관련구문  -->
+<!--  오류 뜨는 구문 잠시 주석처리했음. 고친 뒤 사용하시면 될듯
 <insert id="WriteMessage" parameterType="model.messageVO">
 	insert into guestbook_message values(seq_guestbook_message, #{guest_name}, #{password}), #{message})
 </insert>
-
 <select id="selectByMessageId" parameterType="int" resultType="String">
 	select * from guestbook_message where message_id=?
 </select>
