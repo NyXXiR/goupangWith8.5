@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="model.itemVO"%>
+<%@page import="member.itemVO"%>
 <%@page import="org.apache.ibatis.session.SqlSession"%>
 <%@page import="mybatis.Mybatis"%>
 <%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
@@ -119,7 +119,6 @@ font-size: 20px;
 font-size: 15px;
 margin-top: 10px;
 font-weight: bold;
-text-decoration:line-through;
 }
 .item-price-discount {
 
@@ -132,11 +131,20 @@ font-size: 20px;
 <body>
 
 <script>
-		
-	function sortBySalesRecode() {
-		
+	var sortBySalesRecord = function(url) {
+		$.ajax({
+				type: 'get',
+				url: "../sort",
+				data: "",
+				contentType:"application/x-www-form-urlencoded; charset=UTF-8"
+				success: function(data) {
+					$('#.search-wrapper').html(data);
+				},
+				error: function(request, status, error) {
+					alert(error);
+				}	
+		});
 	};
-	
 </script>
 
 <% 
@@ -154,28 +162,30 @@ List<itemVO> listBySellerId = Session.selectList("searchItemsBySellerId", entere
 List<itemVO> listByItemName = Session.selectList("searchItemByItemName", enteredText);
 // 판매자이름, 상품명, 전체로 검색한 결과 값 List에 담기
 
-List<String> getName = Session.selectList("searchId", enteredText);
-// 판매자 이름 값 가져오는것 테스트용
 %>
 
+<!-- 해결해야 할 문제 -->
 
+<!-- 한글검색 안됨, 랭킹, 카테고리, 전체 버튼 sort 기능 -->
+<!-- 마이페이지 연동 방법 -->
+<!-- 상품 상세페이지 연동 방법 -->
 <jsp:include page="header.jsp" flush="false"/>
 		
 <div class="wrapper">
 	
 		<!-- sort button area -->
 		<div class="sort-btn-box">
-			<div class="sort-by-rank" onclick="sortBySalesRecode()">랭킹</div>
+			<div class="sort-by-rank" onclick="sortBySalesRecord()">랭킹</div>
 			<div class="sort-by-category"><a href="#">카테고리</a>
 				<div class="category-dropbox">
 					<ul>
-						<li>10</li>
-						<li>20</li>
-						<li>30</li>
-						<li>40</li>
-						<li>50</li>
-						<li>60</li>
-						<li>70</li>
+						<li>패션</li>
+						<li>뷰티</li>
+						<li>전자제품</li>
+						<li>팬트리</li>
+						<li>자동차 용품</li>
+						<li>완구</li>
+						<li>기타</li>
 					</ul>
 				</div>
 			</div>
@@ -198,12 +208,18 @@ List<String> getName = Session.selectList("searchId", enteredText);
 						int itemPrice = listByAll.get(i).getPrice();
 						int discountRate = listByAll.get(i).getDiscount(); %>
 						
-						<div class="product-div" onclick="location.href ='search2.jsp?itemName=<%=listByAll.get(i).getItemname()%>'">
-							<div class="img-box"><img src="resources/item/12.jpg" class="search-img-thumbnail" width="100%" height="225"></div>
+						<div class="product-div" onclick="location.href ='search2.jsp?itemSeq=<%=listByAll.get(i).getSeq()%>'">
+							<div class="img-box"><img src="resources/item/<%=listByAll.get(i).getSeq() %>.jpg" class="search-img-thumbnail" width="100%" height="225"></div>
 							<div class="item-name-box"><%=listByAll.get(i).getItemname() %></div>
-							<div class="item-price-box"><%=listByAll.get(i).getPrice() %></div>
-							<div class="item-price-discount"><%=itemPrice * (100 - discountRate) / 100 %></div>
-							<!-- 할인율 0일때 추가로 적용시키기 -->
+							<%if(discountRate != 0) {%>
+								<div class="item-price-box" style="text-decoration:line-through"><%=listByAll.get(i).getPrice() %></div>
+								<div class="item-price-discount"><%=itemPrice * (100 - discountRate) / 100 %></div>
+							<%
+							} else { %>
+								<div class="item-price-box"><%=listByAll.get(i).getPrice() %></div>
+							<% 
+							}
+							%>
 						</div>
 					<% } 
 				return; 
@@ -212,14 +228,22 @@ List<String> getName = Session.selectList("searchId", enteredText);
 				<!-- 판매자 아이디 검색 결과 -->
 				<% if(comboValue.equals("sellerId")) {
 					for(int i=0; i<listBySellerId.size(); i++) { 
-						int itemPrice = listByAll.get(i).getPrice();
-						int discountRate = listByAll.get(i).getDiscount(); %>
-						<div class="product-div" onclick="location.href ='search2.jsp?itemName=<%=listBySellerId.get(i).getItemname()%>'">
+						int itemPrice = listBySellerId.get(i).getPrice();
+						int discountRate = listBySellerId.get(i).getDiscount(); %>
+						
+						<div class="product-div" onclick="location.href ='search2.jsp?itemSeq=<%=listBySellerId.get(i).getSeq()%>'">
 						<!-- 해당 주소로 상세페이지 넘기기 -->
-							<div class="img-box"><img src="resources/item/12.jpg" class="search-img-thumbnail" width="100%" height="225"></div>
+							<div class="img-box"><img src="resources/item/<%=listBySellerId.get(i).getSeq() %>.jpg" class="search-img-thumbnail" width="100%" height="225"></div>
 							<div class="item-name-box"><%=listBySellerId.get(i).getItemname() %></div>
-							<div class="item-price-box"><%=listBySellerId.get(i).getPrice() %></div>
-							<div class="item-price-discount"><%=itemPrice * (100 - discountRate) / 100 %></div>
+							<%if(discountRate != 0) {%>
+								<div class="item-price-box" style="text-decoration:line-through"><%=listBySellerId.get(i).getPrice() %></div>
+								<div class="item-price-discount"><%=itemPrice * (100 - discountRate) / 100 %></div>
+							<%
+							} else { %>
+								<div class="item-price-box"><%=listBySellerId.get(i).getPrice() %></div>
+							<% 
+							}
+							%>
 						</div>
 					<% } 
 				return; 
@@ -228,13 +252,21 @@ List<String> getName = Session.selectList("searchId", enteredText);
 				<!-- 상품 이름 검색 결과 -->
 				<% if(comboValue.equals("itemName")) {
 					for(int i=0; i<listByItemName.size(); i++) { 
-						int itemPrice = listByAll.get(i).getPrice();
-						int discountRate = listByAll.get(i).getDiscount(); %>
-						<div class="product-div" onclick="location.href ='search2.jsp?itemName=<%=listByItemName.get(i).getItemname()%>'">
-							<div class="img-box"><img src="resources/item/12.jpg" class="search-img-thumbnail" width="100%" height="225"></div>
+						int itemPrice = listByItemName.get(i).getPrice();
+						int discountRate = listByItemName.get(i).getDiscount(); %>
+						<div class="product-div" onclick="location.href ='search2.jsp?itemSeq=<%=listByItemName.get(i).getSeq()%>'">
+							<div class="img-box"><img src="resources/item/<%=listByItemName.get(i).getSeq() %>.jpg" class="search-img-thumbnail" width="100%" height="225"></div>
 							<div class="item-name-box"><%=listByItemName.get(i).getItemname() %></div>
 							<div class="item-price-box"><%=listByItemName.get(i).getPrice() %></div>
-							<div class="item-price-discount"><%=itemPrice * (100 - discountRate) / 100 %></div>
+								<%if(discountRate != 0) {%>
+									<div class="item-price-box" style="text-decoration:line-through"><%=listByItemName.get(i).getPrice() %></div>
+									<div class="item-price-discount"><%=itemPrice * (100 - discountRate) / 100 %></div>
+								<%
+								} else { %>
+									<div class="item-price-box"><%=listByItemName.get(i).getPrice() %></div>
+								<% 
+								}
+								%>
 						</div>
 					<% } 
 				return; 

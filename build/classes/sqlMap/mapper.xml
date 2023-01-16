@@ -85,6 +85,9 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 		select * from itemDB where itemname like '%'||#{itemname}||'%' or seller_id like '%'||#{seller_id}||'%'
 	</select>	
 	
+	<select id="sortBySalesRecord" resultType="model.itemVO">
+		select * from itemDB order by salerecord desc
+	</select>
 <!--  soldItemDB 관련 구문 -->
 
 <!--  cartItemDB 관련 구문 -->
