@@ -131,11 +131,20 @@ font-size: 20px;
 <body>
 
 <script>
-		
-	function sortBySalesRecode() {
-		
+	var sortBySalesRecord = function(url) {
+		$.ajax({
+				type: 'get',
+				url: "../sort",
+				data: "",
+				contentType:"application/x-www-form-urlencoded; charset=UTF-8"
+				success: function(data) {
+					$('#.search-wrapper').html(data);
+				},
+				error: function(request, status, error) {
+					alert(error);
+				}	
+		});
 	};
-	
 </script>
 
 <% 
@@ -155,24 +164,28 @@ List<itemVO> listByItemName = Session.selectList("searchItemByItemName", entered
 
 %>
 
+<!-- 해결해야 할 문제 -->
 
+<!-- 한글검색 안됨, 랭킹, 카테고리, 전체 버튼 sort 기능 -->
+<!-- 마이페이지 연동 방법 -->
+<!-- 상품 상세페이지 연동 방법 -->
 <jsp:include page="header.jsp" flush="false"/>
 		
 <div class="wrapper">
 	
 		<!-- sort button area -->
 		<div class="sort-btn-box">
-			<div class="sort-by-rank" onclick="sortBySalesRecode()">랭킹</div>
+			<div class="sort-by-rank" onclick="sortBySalesRecord()">랭킹</div>
 			<div class="sort-by-category"><a href="#">카테고리</a>
 				<div class="category-dropbox">
 					<ul>
-						<li>10</li>
-						<li>20</li>
-						<li>30</li>
-						<li>40</li>
-						<li>50</li>
-						<li>60</li>
-						<li>70</li>
+						<li>패션</li>
+						<li>뷰티</li>
+						<li>전자제품</li>
+						<li>팬트리</li>
+						<li>자동차 용품</li>
+						<li>완구</li>
+						<li>기타</li>
 					</ul>
 				</div>
 			</div>
@@ -195,7 +208,7 @@ List<itemVO> listByItemName = Session.selectList("searchItemByItemName", entered
 						int itemPrice = listByAll.get(i).getPrice();
 						int discountRate = listByAll.get(i).getDiscount(); %>
 						
-						<div class="product-div" onclick="location.href ='search2.jsp?itemName=<%=listByAll.get(i).getItemname()%>'">
+						<div class="product-div" onclick="location.href ='search2.jsp?itemSeq=<%=listByAll.get(i).getSeq()%>'">
 							<div class="img-box"><img src="resources/item/<%=listByAll.get(i).getSeq() %>.jpg" class="search-img-thumbnail" width="100%" height="225"></div>
 							<div class="item-name-box"><%=listByAll.get(i).getItemname() %></div>
 							<%if(discountRate != 0) {%>
@@ -218,7 +231,7 @@ List<itemVO> listByItemName = Session.selectList("searchItemByItemName", entered
 						int itemPrice = listBySellerId.get(i).getPrice();
 						int discountRate = listBySellerId.get(i).getDiscount(); %>
 						
-						<div class="product-div" onclick="location.href ='search2.jsp?itemName=<%=listBySellerId.get(i).getItemname()%>'">
+						<div class="product-div" onclick="location.href ='search2.jsp?itemSeq=<%=listBySellerId.get(i).getSeq()%>'">
 						<!-- 해당 주소로 상세페이지 넘기기 -->
 							<div class="img-box"><img src="resources/item/<%=listBySellerId.get(i).getSeq() %>.jpg" class="search-img-thumbnail" width="100%" height="225"></div>
 							<div class="item-name-box"><%=listBySellerId.get(i).getItemname() %></div>
@@ -241,7 +254,7 @@ List<itemVO> listByItemName = Session.selectList("searchItemByItemName", entered
 					for(int i=0; i<listByItemName.size(); i++) { 
 						int itemPrice = listByItemName.get(i).getPrice();
 						int discountRate = listByItemName.get(i).getDiscount(); %>
-						<div class="product-div" onclick="location.href ='search2.jsp?itemName=<%=listByItemName.get(i).getItemname()%>'">
+						<div class="product-div" onclick="location.href ='search2.jsp?itemSeq=<%=listByItemName.get(i).getSeq()%>'">
 							<div class="img-box"><img src="resources/item/<%=listByItemName.get(i).getSeq() %>.jpg" class="search-img-thumbnail" width="100%" height="225"></div>
 							<div class="item-name-box"><%=listByItemName.get(i).getItemname() %></div>
 							<div class="item-price-box"><%=listByItemName.get(i).getPrice() %></div>
