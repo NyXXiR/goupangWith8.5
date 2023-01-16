@@ -14,6 +14,7 @@
 
 </head>
 <body>
+
 	<%
 	itemVO vo1 = new itemVO(3, "아이패드", 150000, 0, "lgh0334", "2023-01-09 16:25:39.000", 30, 10, "아이가 사용한다", 146);
 	itemVO vo2 = new itemVO(15, "스마트폰", 1000000, 15, "lgh0334", "2023-01-09 16:25:39.000", 30, 10, "스마트하다", 10);
@@ -46,18 +47,20 @@
 
 		}
 	</script>
-
+	
+	
 	<div>
-		<img class="slide1" src="./resources/body/slide01.jpg"> <img
-			class="slide1" src="./resources/body/slide02.jpg"> <img
-			class="slide1" src="./resources/body/slide03.jpg">
+		<img class="slide1" src="./resources/body/slide01.jpg">
+		<img class="slide1" src="./resources/body/slide02.jpg">
+		<img class="slide1" src="./resources/body/slide03.jpg">
 	</div>
-
-	<div id="product_order_list">
-		<p>
-			<a href="javascript:pricelist();">낮은가격</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
-			<a href="javascript:pricelistdesc();">높은가격</a>
-		</p>
+	
+	<div class="container">
+		<div class="card-group container" id="items"></div>
+		<div class="container">
+			<button class="btn btn-danger mt-3" id="sortPrice">낮은가격순</button>
+			<button class="btn btn-danger mt-3" id="filterPrice">높은가격순</button>
+		</div>
 	</div>
 
 	<h1>컨테이너이름입력</h1>
