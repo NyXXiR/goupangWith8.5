@@ -12,6 +12,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<!-- 마스터 아이디 정해놓고 해당 아이디로 로그인 하면 관리자 페이지 보이게 -->
 	<%
 	  
 	  SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
@@ -52,11 +53,11 @@
 	  if(enteredPassword.equals(checkPw)) {
 		  session.setAttribute("buyerId", enteredID);
 		  //로그인에 성공하면 buyerId 세션값을 입력받은 아이디로 설정
-		  session.setAttribute("buyerName", buyerName);
+		  //session.setAttribute("buyerName", buyerName);
 		  //로그인에 성공하면 buyerName 세션값 로그인한 회원의 이름으로 저장
 		  %>
 			 <script> 
-				alert("<%=buyerName%> 님 환영합니다");
+				<%-- alert("<%=buyerName%> 님 환영합니다"); --%>
 				window.location.href = 'header.jsp';
 				//로그인 성공 시 돌아갈 화면
 			</script>
