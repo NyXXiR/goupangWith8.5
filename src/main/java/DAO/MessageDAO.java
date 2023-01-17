@@ -90,7 +90,7 @@ public class MessageDAO {
 		return message;
 	}
 
-	public int selectCount(Connection conn) throws SQLException {
+	public int selectCount() throws SQLException {
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
@@ -104,7 +104,7 @@ public class MessageDAO {
 		}
 	}
 
-	public List<MessageVO> selectList(Connection conn, int firstRow, int endRow) throws SQLException {
+	public List<MessageVO> selectList(int firstRow, int endRow) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -133,7 +133,7 @@ public class MessageDAO {
 		}
 	}
 
-	public int delete(Connection conn, int messageId) throws SQLException {
+	public int delete(int messageId) throws SQLException {
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement("delete from guestbook_message where message_id = ?");

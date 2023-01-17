@@ -2,13 +2,13 @@ package guestBook.service;
 
 import java.util.List;
 
-import oracle.jdbc.driver.Message;
+import model.MessageVO;
 
 public class MessageListView {
 
 	private int messageTotalCount;
 	private int currentPageNumber;
-	private List<Message> messageList;
+	private List<MessageVO> messageList;
 	private int pageTotalCount;
 	private int messageCountPerPage;
 	private int firstRow;
@@ -16,7 +16,7 @@ public class MessageListView {
 	
 	
 	//생성자 
-	public MessageListView(List<Message> messageList, int messageTotalCount, int currentPageNumber,
+	public MessageListView(List<MessageVO> messageList, int messageTotalCount, int currentPageNumber,
 			int messageCountPerPage, int startRow, int endRow) {
 		this.messageList = messageList;
 		this.messageTotalCount = messageTotalCount;
@@ -28,6 +28,8 @@ public class MessageListView {
 		calculatePageTotalCount();
 	}
 	
+
+
 	// 페이지 총 개수 = 메시지개수 / 페이지당 메시지 개수로 구함. 메시지 총 개수를 페이지당으로 구한 값이 0보다 크면, 페이지 개수 ++  
 	private void calculatePageTotalCount() {
 		if (messageTotalCount == 0) {
@@ -48,7 +50,7 @@ public class MessageListView {
 		return currentPageNumber;
 	}
 
-	public List<Message> getMessageList() {
+	public List<MessageVO> getMessageList() {
 		return messageList;
 	}
 
