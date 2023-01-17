@@ -12,5 +12,8 @@ public class Test2 {
 
     List<cartItemVO> cartList = sqlSession.selectList("cartListById", "lgh0334");
     System.out.println(cartList);
+
+
+
   }
 }
