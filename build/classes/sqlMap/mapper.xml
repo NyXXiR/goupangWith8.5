@@ -31,7 +31,13 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 		select * from itemDB
 	</select>
 	
+	<select id="getNameBySeq" parameterType="int" resultType="String">
+	select itemname from itemDB where seq=#{item_seq}
+	</select>
 	
+	<select id="getDiscountedBySeq" parameterType="int" resultType="String">
+select price/100*(100-discount) from ItemDB where seq=#{item_seq}
+</select>
 	
 	
 	<!-- 마이페이지 그래프 -->
