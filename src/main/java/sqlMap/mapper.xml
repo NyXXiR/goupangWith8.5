@@ -125,16 +125,16 @@ insert into buyerDB values{3개}
 
 <!--  sellerDB 관련 구문 -->
 
+
+
+<!-- 익명게시판 관련 구문  -->
 <!-- MessageDB 관련구문  -->
-<insert id="WriteMessage" parameterType="model.messageVO">
+<!-- <insert id="WriteMessage" parameterType="model.messageVO">
 	insert into guestbook_message values(seq_guestbook_message, #{guest_name}, #{password}), #{message})
 </insert>
 <select id="selectByMessageId" parameterType="int" resultType="String">
 	select * from guestbook_message where message_id=?
-</select>
-
-
-<!-- 익명게시판 관련 구문  -->
+</select> -->
 <!-- <select id="insertMessage" parameterType="model.MessageVO">
 	insert into guestbook_message values(seq_guestbook_message.nextval, #{bookPassword},#{bookPwd},#{bookMessage})
 </select>
