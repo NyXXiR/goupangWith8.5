@@ -1,3 +1,4 @@
+<%@page import="DAO.ItemDao2"%>
 <%@page import="model.itemVO3"%>
 <%@page import="model.itemVO"%>
 <%@page import="java.util.List" %>
@@ -10,11 +11,20 @@ sess=sqlSessionFactory.openSession(true); %>
 
 <%
 	String right = request.getParameter("right");
-	
 	if(right == null){
-		right = "myPage.jsp";
+		right = "myPageMain.jsp";
+	}
+	
+	ItemDao2 itemdao = ItemDao2.getInstance();
+	String numstr = request.getParameter("num");
+	int num;
+	if(request.getParameter("num") == null){
+		num = 1;
+	}else{
+		num = Integer.valueOf(numstr);
 	}
 %>
+
 <!DOCTYPE html>
 <html>
 
@@ -36,10 +46,13 @@ sess=sqlSessionFactory.openSession(true); %>
 				<!-- 목록 -->
 				<ul id="category">
 					<li>
-						<h1 id="myPage" onclick="location.href='mypage_master.jsp?right=myPage.jsp'">마이페이지</h1>
+						<h1 id="myPage" onclick="location.href='mypage_master.jsp?right=myPageMain.jsp'">마이페이지</h1>
 					</li>
 					<li>
-						<h2 id="pdPage" onclick="location.href='mypage_master.jsp?right=pdPage.jsp'">상품 등록</h2>
+						<h2 id="pdPage" onclick="location.href='mypage_master.jsp?right=pdUpdatePage.jsp'">상품 등록</h2>
+					</li>
+					<li>
+						<h2 id="pdPage" onclick="location.href='mypage_master.jsp?right=pdRetouchPage.jsp'">상품 수정</h2>
 					</li>
 					<li>
 						<h2 id="dvPage" onclick="getPage(this.id)">배송 관리</h2>
@@ -53,15 +66,35 @@ sess=sqlSessionFactory.openSession(true); %>
 			<div id="center">
 				<!-- 내용 -->
 				<div id="changePage">
-						<jsp:include page="<%=right %>"></jsp:include>
+					<%-- <jsp:include page="<%=right %>"/> --%>
+					<div id="span" style="display : none"></div>	
+					
+					<div id="itemList">
+					    <table id="itemListTable">
+					        <thead>
+					            <tr>
+					                <th>상품 번호</th>
+					                <th>상품 이름</th>
+					                <th>상품 가격</th>
+					                <th>할 인 율</th>
+					                <th>카테 고리</th>
+					            </tr>
+					        </thead>
+					        <tbody id="itemListadd">
+					            
+					        </tbody>
+					    </table>
+				    	<label id="itemAllCount">전체 상품 수</label><br>
+				    	<label id="itemCount"></label>
+					</div>
 				</div>
 			</div>
 		</section>
 	</div>
 
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<script>
 //마이페이지 그래프영역
 
@@ -84,7 +117,14 @@ for (int i = 0; i < salListH.size(); i++) {
 	$('.pie-chart1').css({ "background": "conic-gradient(#7500f2 0% <%=salarrH[0]%>%,#0011ff <%=salarrH[0]%>% <%=salarrH[1]%>%,#03f0d1 <%=salarrH[1]%>% <%=salarrH[2]%>%,#0dfb05 <%=salarrH[2]%>% <%=salarrH[3]%>%,#d0fd06da <%=salarrH[3]%>% <%=salarrH[4]%>%,#fff83b <%=salarrH[4]%>% <%=salarrH[5]%>%,#f3a621 <%=salarrH[5]%>% <%=salarrH[6]%>%,#fc0101 <%=salarrH[6]%>% <%=salarrH[7]%>%,#fd00c2 <%=salarrH[7]%>% <%=salarrH[8]%>%,#9c9c9c <%=salarrH[8]%>% 100%)" });
 }) --%>
 
-const dougnut = document.getElementById('dougnutGraph');
+let dougnut = document.getElementById('dougnutGraph');
+let bar = document.getElementById('barGraph');
+
+if(dougnut == null || bar == null){
+	dougnut = document.getElementById('span');
+	bar = document.getElementById('span');
+}
+
  new Chart(dougnut, {
    type: 'doughnut',
    data: {
@@ -123,7 +163,7 @@ int sumMaxSale = sess.selectOne("Itemprice*recordSum");
 
 
 
-const bar = document.getElementById('barGraph');
+
 new Chart(bar, {
   type: 'bar',
   data: {
@@ -173,52 +213,84 @@ $('#minSaleItem').append(str);
 																						
 						
 
-					//상품등록 페이지 영역
-					$(document).on('click', '#fakeInputP1', function (e) { $('#realInputP1').click(); });
-					$(document).on('click', '#fakeInputP2', function (e) { $('#realInputP2').click(); });
-					$(document).on('click', '#fakeInputP3', function (e) { $('#realInputP3').click(); });
+//상품등록 페이지 영역
+$(document).on('click', '#fakeInputP1', function (e) { $('#realInputP1').click(); });
+$(document).on('click', '#fakeInputP2', function (e) { $('#realInputP2').click(); });
+$(document).on('click', '#fakeInputP3', function (e) { $('#realInputP3').click(); });
 
 
 
-					//상품등록 페이지 - 상품이미지 기능
-					function readURL1(input) {
-						if (input.files && input.files[0]) {
-							const reader = new FileReader();
+//상품등록 페이지 - 상품이미지 기능
+function readURL1(input) {
+	if (input.files && input.files[0]) {
+		const reader = new FileReader();
 
-							reader.onload = (e) => {
-								const previewImage = document.getElementById('fakeInputP1');
-								previewImage.src = e.target.result;
-							}
-							reader.readAsDataURL(input.files[0]);
-						}
-					}
-					function readURL2(input) {
-						if (input.files && input.files[0]) {
-							const reader = new FileReader();
+		reader.onload = (e) => {
+			const previewImage = document.getElementById('fakeInputP1');
+			previewImage.src = e.target.result;
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+function readURL2(input) {
+	if (input.files && input.files[0]) {
+		const reader = new FileReader();
 
-							reader.onload = (e) => {
-								const previewImage = document.getElementById('fakeInputP2');
-								previewImage.src = e.target.result;
-							}
-							reader.readAsDataURL(input.files[0]);
-						}
-					}
-					function readURL3(input) {
-						if (input.files && input.files[0]) {
-							const reader = new FileReader();
+		reader.onload = (e) => {
+			const previewImage = document.getElementById('fakeInputP2');
+			previewImage.src = e.target.result;
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+function readURL3(input) {
+	if (input.files && input.files[0]) {
+		const reader = new FileReader();
 
-							reader.onload = (e) => {
-								const previewImage = document.getElementById('fakeInputP3');
-								previewImage.src = e.target.result;
-							}
-							reader.readAsDataURL(input.files[0]);
-						}
-					}
+		reader.onload = (e) => {
+			const previewImage = document.getElementById('fakeInputP3');
+			previewImage.src = e.target.result;
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+}
 
+		
+//등록된 상품 리스트
+$(function(){
+<%	
+int itemCount = sess.selectOne("ItemAllCount");
+%>	$("#itemAllCount").append(":"+<%=itemCount%>);
+<%
+int listcount = (int)Math.ceil(itemCount/10.0);
+for(int i=1; i<=listcount; i++){
+%>	$('#itemCount').append("<a href='#' onclick='location.href=mypage_master.jsp?num=<%=i%>'>"+<%=i%>+"</a>");
+<%
+}
 
+List<itemVO> itemList = itemdao.itemRetouchListMain(num);
+for(int i=0; i<itemList.size(); i++){
+%>
+var cate;
+if(<%=itemList.get(i).getCategorynum()%> == 10){	cate = 'Fashion';}
+else if(<%=itemList.get(i).getCategorynum()%> == 20){	cate = 'Beauty';}
+else if(<%=itemList.get(i).getCategorynum()%> == 30){	cate = 'Electronic';}
+else if(<%=itemList.get(i).getCategorynum()%> == 40){	cate = 'Pantry';}
+else if(<%=itemList.get(i).getCategorynum()%> == 50){	cate = 'Car';}
+else if(<%=itemList.get(i).getCategorynum()%> == 60){	cate = 'Toy';}
+else{	cate = 'Etc';}
 
-
-				</script>
+var str = "<tr><td>"+<%=itemList.get(i).getSeq()%>+"</td>";
+		str += "<td>"+"<%=itemList.get(i).getItemname()%>"+"</td>";
+		str += "<td>"+<%=itemList.get(i).getPrice()%>+"</td>";
+		str += "<td>"+<%=itemList.get(i).getDiscount()%>+"</td>";
+		str += "<td>"+cate+"</td></tr>";
+	$('#itemListadd').append(str);
+<%		
+}%>
+	
+})
+</script>
 
 </body>
 

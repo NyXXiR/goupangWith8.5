@@ -48,15 +48,12 @@ public class Test {
     // List<itemVO> list = session.selectList("selectByPrice");
     // System.out.println(list);
 
-   int sumMaxSale = sess.selectOne("Itemprice*recordSum");
-   
-	List <itemVO3> salListR = sess.selectList("ItemSaleRecordRSearch");
-	for(int i=0; i<salListR.size(); i++){
-		String str = salListR.get(i).getItemname();
-		salListR.get(i).setItemname(str.replace(" ", "&nbsp"));
-		System.out.println(salListR.get(i).getItemname());
+	List <itemVO> salListR = sess.selectList("ItemAllseq");
+	for (int i=0;i<salListR.size(); i++) {
+		System.out.println(salListR.get(i).getPrice());
+		System.out.println(salListR.get(i).getSellerid());
+		System.out.println(salListR.get(i).getCategorynum());
 	}
-
 
     // int n= session.insert("add", vo);
      
