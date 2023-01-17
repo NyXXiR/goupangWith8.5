@@ -56,10 +56,14 @@ String loginStatus = (String) session.getAttribute("buyerId");
             	  <a href="#"><img src="./resources/header/account.png" alt="" class="account-img"/></a>
                 	<div class="detail-box">
                   		<ul class="drop-menu-1">
+                  		<%if(loginStatus.equals("master")) {%>
+                  			<li><a href="mypage_master.jsp">관리자 페이지</a></li>
+                  		<% 	} else { %> 
 		                    <li><a href="myPage.jsp">회원 정보</a></li>
 		                    <li><a href="myPage.jsp">메뉴 1</a></li>
 		                    <li><a href="myPage.jsp">메뉴 2</a></li>
 		                    <li><a href="myPage.jsp">메뉴 3</a></li>
+		                <% } %>
                   		</ul>
                 	</div>
              	 </li>
