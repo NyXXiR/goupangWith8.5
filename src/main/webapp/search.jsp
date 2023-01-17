@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="member.itemVO"%>
+<%@page import="model.itemVO"%>
 <%@page import="org.apache.ibatis.session.SqlSession"%>
 <%@page import="mybatis.Mybatis"%>
 <%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
@@ -127,31 +127,14 @@ font-size: 20px;
 }
 
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <body>
-
-<script>
-	var sortBySalesRecord = function(url) {
-		$.ajax({
-				type: 'get',
-				url: "../sort",
-				data: "",
-				contentType:"application/x-www-form-urlencoded; charset=UTF-8"
-				success: function(data) {
-					$('#.search-wrapper').html(data);
-				},
-				error: function(request, status, error) {
-					alert(error);
-				}	
-		});
-	};
-</script>
-
-<% 
+<%
 SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
 SqlSession Session;
 Session = sqlSessionFactory.openSession(true); 
-//myBatis 기초 설정
+//마이바티스 기초 셋팅
 
 String comboValue = request.getParameter("comboValue");
 String enteredText = request.getParameter("searchbar");
@@ -162,11 +145,92 @@ List<itemVO> listBySellerId = Session.selectList("searchItemsBySellerId", entere
 List<itemVO> listByItemName = Session.selectList("searchItemByItemName", enteredText);
 // 판매자이름, 상품명, 전체로 검색한 결과 값 List에 담기
 
+
+
+List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 %>
+
+<!-- 
+<select id="selectBuyerName" parameterType="String" resultType="String">
+	select buyer_name from buyerDB where buyer_id = #{buyer_id}
+</select>
+<select id="loginCheckID" parameterType="String" resultType="String">
+	select buyer_id from buyerDB where buyer_id = #{buyer_id}
+</select>
+ -->
+
+<script>
+<%-- function asd2() {
+	type: 'get',
+	url: "../sort",
+	data :  <% for(int i=0; i<testSort.size(); i++) {
+			int itemPrice = testSort.get(i).getPrice();
+			int discountRate = testSort.get(i).getDiscount(); %>
+		
+			<div class="product-div" onclick="location.href ='search2.jsp?itemSeq=<%=testSort.get(i).getSeq()%>'">
+				<div class="img-box"><img src="resources/item/<%=testSort.get(i).getSeq() %>.jpg" class="search-img-thumbnail" width="100%" height="225"></div>
+				<div class="item-name-box"><%=testSort.get(i).getItemname() %></div>
+			<%if(discountRate != 0) {%>
+				<div class="item-price-box" style="text-decoration:line-through"><%=testSort.get(i).getPrice() %></div>
+				<div class="item-price-discount"><%=itemPrice * (100 - discountRate) / 100 %></div>
+			<%
+			} else { %>
+				<div class="item-price-box"><%=testSort.get(i).getPrice() %></div>
+			<% 
+			}
+			%>
+			</div>
+		<%}%>
+	contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+	success: function(data) {
+		$('.search-wrapper').html(data);
+	},
+	error: function(request, status, error) {
+		alert(error);
+	}
+	
+	
+} --%>
+
+	function sortTest() {
+	$.ajax({
+		type: 'get',
+		url: "../sort",
+		data: "",
+		contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+		success: function(data) {
+			$('.search-wrapper').html(data);
+		},
+		error: function(request, status, error) {
+			alert(error);
+		}
+	});
+}
+
+	/* $(".sort-by-rank").click(function() { 
+		
+		$.ajax({
+		type: 'get',
+		url: "../sort",
+		data: "",
+		contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+		success: function(data) {
+			$('.search-wrapper').html(data);
+		},
+		error: function(request, status, error) {
+			alert(error);
+		}
+	});
+		} 
+	); */
+	
+</script>
+
+
 
 <!-- 해결해야 할 문제 -->
 
-<!-- 한글검색 안됨, 랭킹, 카테고리, 전체 버튼 sort 기능 -->
+<!-- 랭킹, 카테고리, 전체 버튼 sort 기능 -->
 <!-- 마이페이지 연동 방법 -->
 <!-- 상품 상세페이지 연동 방법 -->
 <jsp:include page="header.jsp" flush="false"/>
@@ -175,8 +239,8 @@ List<itemVO> listByItemName = Session.selectList("searchItemByItemName", entered
 	
 		<!-- sort button area -->
 		<div class="sort-btn-box">
-			<div class="sort-by-rank" onclick="sortBySalesRecord()">랭킹</div>
-			<div class="sort-by-category"><a href="#">카테고리</a>
+			<div class="sort-by-rank" onclick="sortTest()">랭킹</div>
+			<div class="sort-by-category" onclick="sortTest()"><a href="#">카테고리</a>
 				<div class="category-dropbox">
 					<ul>
 						<li>패션</li>
@@ -279,7 +343,46 @@ List<itemVO> listByItemName = Session.selectList("searchItemByItemName", entered
 		
 		
 	</div>
+	<script>
+var asd {
+	data :  <% for(int i=0; i<testSort.size(); i++) {
+		int itemPrice = testSort.get(i).getPrice();
+		int discountRate = testSort.get(i).getDiscount(); %>
+	
+		<div class="product-div" onclick="location.href ='search2.jsp?itemSeq=<%=testSort.get(i).getSeq()%>'">
+			<div class="img-box"><img src="resources/item/<%=testSort.get(i).getSeq() %>.jpg" class="search-img-thumbnail" width="100%" height="225"></div>
+			<div class="item-name-box"><%=testSort.get(i).getItemname() %></div>
+		<%if(discountRate != 0) {%>
+			<div class="item-price-box" style="text-decoration:line-through"><%=testSort.get(i).getPrice() %></div>
+			<div class="item-price-discount"><%=itemPrice * (100 - discountRate) / 100 %></div>
+		<%
+		} else { %>
+			<div class="item-price-box"><%=testSort.get(i).getPrice() %></div>
+		<% 
+		}
+		%>
+		</div>
+	<%}%>
 	
 	
+};
+
+function sortTest(url) {
+	$.ajax({
+		type: 'get',
+		url: "../java/com/ser/sort",
+		data: "asd",
+		contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+		success: function(data) {
+			$('.search-wrapper').html(data);
+		},
+		error: function(request, status, error) {
+			alert(error);
+		}
+	});
+}
+
+</script>
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 </body>
 </html>

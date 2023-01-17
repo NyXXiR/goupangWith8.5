@@ -32,21 +32,30 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 	</select>
 	
 	
+	
+	
 	<!-- 마이페이지 그래프 -->
-	<select id="ItemSaleRecordHSearch" resultType="int">
-		<![CDATA[select salerecord from (select * from itemDB order by salerecord desc, seq) where rownum <=10 ]]>
+	<select id="ItemSaleRecordHSearch" resultType="model.itemVO">
+		<![CDATA[select * from (select * from itemDB order by salerecord desc, seq) where rownum <=10 ]]>
 	</select>
 	
 	<select id="ItemSaleRecordHSum" resultType="int">
 		<![CDATA[select sum(salerecord) from (select * from itemDB order by salerecord desc, seq) where rownum <=10 ]]>
 	</select>
 	
-	<select id="ItemSaleRecordRSearch" resultType="int">
-		<![CDATA[select salerecord from (select * from itemDB where salerecord !=0 order by salerecord, seq) where rownum <=10 ]]>
+	<select id="ItemSaleRecordRSearch" resultType="model.itemVO3">
+		<![CDATA[select * from (select seq,itemname,price,description,salerecord,price*salerecord as multi from itemdb where salerecord !=0 order by salerecord) where rownum <=10 ]]>
 	</select>
 	
 	<select id="ItemSaleRecordRSum" resultType="int">
 		<![CDATA[select sum(salerecord) from (select * from itemDB order by salerecord, seq) where rownum <=10 ]]>
+	</select>
+
+	<select id="Itemprice*recordSearch" resultType="model.itemVO3">
+		<![CDATA[select * from (select seq,itemname,price,description,salerecord,price*salerecord as multi from itemdb order by multi desc) where rownum<=10 ]]>
+	</select>
+	<select id="Itemprice*recordSum" resultType="int">
+		<![CDATA[select sum(multi) from (select price*salerecord as multi from itemdb order by multi desc) where rownum<=10 ]]>
 	</select>
 
 
@@ -135,6 +144,7 @@ insert into buyerDB values{3개}
 <select id="selectByMessageId" parameterType="int" resultType="String">
 	select * from guestbook_message where message_id=?
 </select>
+-->
 
 
 <!-- 익명게시판 관련 구문  -->
