@@ -1,4 +1,5 @@
-<%@page import="java.util.List"%>
+<%@ page import="java.util.List"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ page import="model.itemVO"%>
 <%@ page import="org.apache.ibatis.session.SqlSessionFactory"%>
 <%@ page import="org.apache.ibatis.session.SqlSession"%>
@@ -10,6 +11,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.text-small {
+	text-decoration: line-through;
+}
+</style>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -28,6 +34,14 @@
 	itemVO vo6 = new itemVO(12, "브링그린 뱀부 차콜 모공 정화 클렌징 폼", 11000, 13, "lgh0334", "2023-01-09 16:25:39.000", 70, 10, "", 0);
 	itemVO vo7 = new itemVO(13, "크런키 볼", 1050, 0, "lgh0334", "2023-01-09 16:25:39.000", 40, 5, "볼", 12);
 	itemVO vo8 = new itemVO(14, "보조배터리", 20000, 10, "lgh0334", "2023-01-09 16:25:39.000", 30, 5, "보조", 11);
+	int discounted1 = vo1.getPrice() / 100 * (100 - vo1.getDiscount());
+	int discounted2 = vo2.getPrice() / 100 * (100 - vo2.getDiscount());
+	int discounted3 = vo3.getPrice() / 100 * (100 - vo3.getDiscount());
+	int discounted4 = vo4.getPrice() / 100 * (100 - vo4.getDiscount());
+	int discounted5 = vo5.getPrice() / 100 * (100 - vo5.getDiscount());
+	int discounted6 = vo6.getPrice() / 100 * (100 - vo6.getDiscount());
+	int discounted7 = vo7.getPrice() / 100 * (100 - vo7.getDiscount());
+	int discounted8 = vo8.getPrice() / 100 * (100 - vo8.getDiscount());
 	%>
 
 	<script>
@@ -51,149 +65,179 @@
 
 		}
 	</script>
-	
-	
+
+
 	<div>
-		<img class="slide1" src="./resources/body/slide01.jpg">
-		<img class="slide1" src="./resources/body/slide02.jpg">
-		<img class="slide1" src="./resources/body/slide03.jpg">
+		<img class="slide1" src="./resources/body/slide01.jpg"> <img
+			class="slide1" src="./resources/body/slide02.jpg"> <img
+			class="slide1" src="./resources/body/slide03.jpg">
 	</div>
-	
+
 
 	<h1>컨테이너이름입력</h1>
 	<div class="flex-container"></div>
-	
-		<div class="row">
-			<div class="col"></div>
-			<div class="card" style="width: 18rem;">
-				<img src="./resources/item/3.jpg" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">
-						<div id="itemDetail-name" class="text-large"><%=vo1.getItemname()%></div>
-					</h5>
-					<p class="card-text"></p>
-					<div id="itemDetail-price" class="text-small">
-						<%=vo1.getPrice()%>원
-					</div>
-					<a href="#a" class="btn btn-primary">구매하기</a>
-				</div>
-			</div>
 
-			<div class="col"></div>
-			<div class="card" style="width: 18rem;">
-				<img src="./resources/item/15.jpg" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">
-						<div id="itemDetail-name" class="text-large"><%=vo2.getItemname()%></div>
-					</h5>
-					<p class="card-text"></p>
-					<div id="itemDetail-price" class="text-small">
-						<%=vo2.getPrice()%>원
-					</div>
-					<a href="#a" class="btn btn-primary">구매하기</a>
+	<div class="row">
+		<div class="col"></div>
+		<div class="card" style="width: 18rem;">
+			<img src="./resources/item/3.jpg" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">
+					<div id="itemName" class="text-large"><%=vo1.getItemname()%></div>
+				</h5>
+				<p class="card-text"></p>
+				<div id="itemPrice" class="text-small">
+					<%=vo1.getPrice()%>원
 				</div>
-			</div>
+				<div id="itemDiscountPrice" class="text-large"><%=discounted1%>원
+				</div>
 
-			<div class="col"></div>
-			<div class="card" style="width: 18rem;">
-				<img src="./resources/item/5.jpg" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">
-						<div id="itemDetail-name" class="text-large"><%=vo3.getItemname()%></div>
-					</h5>
-					<p class="card-text"></p>
-					<div id="itemDetail-price" class="text-small">
-						<%=vo3.getPrice()%>원
-					</div>
-					<a href="#a" class="btn btn-primary">구매하기</a>
-				</div>
-			</div>
 
-			<div class="col"></div>
-			<div class="card" style="width: 18rem;">
-				<img src="./resources/item/6.png" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">
-						<div id="itemDetail-name" class="text-large"><%=vo4.getItemname()%></div>
-					</h5>
-					<p class="card-text"></p>
-					<div id="itemDetail-price" class="text-small">
-						<%=vo4.getPrice()%>원
-					</div>
-					<a href="#a" class="btn btn-primary">구매하기</a>
-				</div>
+				<a href="#a" class="btn btn-primary">구매하기</a>
 			</div>
 		</div>
-		
-		<h1>컨테이너이름입력</h1>
-		<div class="flex-container"></div>
-			<div class="row">
-				<div class="col"></div>
-				<div class="card" style="width: 18rem;">
-					<img src="./resources/item/4.jpg" class="card-img-top" alt="...">
-					<div class="card-body">
-						<h5 class="card-title">
-							<div id="itemDetail-name" class="text-large"><%=vo5.getItemname()%></div>
-						</h5>
-						<p class="card-text"></p>
-						<div id="itemDetail-price" class="text-small">
-							<%=vo5.getPrice()%>원
-						</div>
-						
-						<a href="#a" class="btn btn-primary">구매하기</a>
-					</div>
-				</div>
 
-				<div class="col"></div>
-				<div class="card" style="width: 18rem;">
-					<img src="./resources/item/12.jpg" class="card-img-top" alt="...">
-					<div class="card-body">
-						<h5 class="card-title">
-							<div id="itemDetail-name" class="text-large"><%=vo6.getItemname()%></div>
-						</h5>
-						<p class="card-text"></p>
-						<div id="itemDetail-price" class="text-small">
-							<%=vo6.getPrice()%>원
-						</div>
-						<a href="#a" class="btn btn-primary">구매하기</a>
-					</div>
-				</div>
 
-				<div class="col"></div>
-				<div class="card" style="width: 18rem;">
-					<img src="./resources/item/13.jpg" class="card-img-top" alt="...">
-					<div class="card-body">
-						<h5 class="card-title">
-							<div id="itemDetail-name" class="text-large"><%=vo7.getItemname()%></div>
-						</h5>
-						<p class="card-text">
-						<div id="itemDetail-price" class="text-small">
-							<%=vo7.getPrice()%>원
-						</div>
-						</p>
-						<a href="#a" class="btn btn-primary">구매하기</a>
-					</div>
-				</div>
 
-				<div class="col"></div>
-				<div class="card" style="width: 18rem;">
-					<img src="./resources/item/14.jpg" class="card-img-top" alt="...">
-					<div class="card-body">
-						<h5 class="card-title">
-							<div id="itemDetail-name" class="text-large"><%=vo8.getItemname()%></div>
-						</h5>
-						<p class="card-text"></p>
-						<div id="itemDetail-price" class="text-small">
-							<%=vo8.getPrice()%>원
-						</div>
-						<a href="#a" class="btn btn-primary">구매하기</a>
-					</div>
+		<div class="col"></div>
+		<div class="card" style="width: 18rem;">
+			<img src="./resources/item/15.jpg" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">
+					<div id="itemName" class="text-large"><%=vo2.getItemname()%></div>
+				</h5>
+
+				<p class="card-text"></p>
+				<div id="itemPrice" class="text-small">
+					<%=vo2.getPrice()%>원
 				</div>
+				<div id="itemDiscountPrice" class="text-large"><%=discounted2%>원
+				</div>
+				<a href="#a" class="btn btn-primary">구매하기</a>
 			</div>
+		</div>
 
-			<script
-				src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-				integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-				crossorigin="anonymous"></script>
+		<div class="col"></div>
+		<div class="card" style="width: 18rem;">
+			<img src="./resources/item/5.jpg" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">
+					<div id="itemName" class="text-large"><%=vo3.getItemname()%></div>
+				</h5>
+
+				<p class="card-text"></p>
+				<div id="itemPrice" class="text-small">
+					<%=vo3.getPrice()%>원
+				</div>
+				<div id="itemDiscountPrice" class="text-large"><%=discounted3%>원
+				</div>
+				<a href="#a" class="btn btn-primary">구매하기</a>
+			</div>
+		</div>
+
+		<div class="col"></div>
+		<div class="card" style="width: 18rem;">
+			<img src="./resources/item/6.png" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">
+					<div id="itemName" class="text-large"><%=vo4.getItemname()%></div>
+				</h5>
+
+				<p class="card-text"></p>
+				<div id="itemPrice" class="text-small">
+					<%=vo4.getPrice()%>원
+				</div>
+				<div id="itemDiscountPrice" class="text-large"><%=discounted4%>원
+				</div>
+				<a href="#a" class="btn btn-primary">구매하기</a>
+			</div>
+		</div>
+	</div>
+
+	<h1>컨테이너이름입력</h1>
+	<div class="flex-container"></div>
+	<div class="row">
+		<div class="col"></div>
+		<div class="card" style="width: 18rem;">
+			<img src="./resources/item/4.jpg" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">
+					<div id="itemName" class="text-large"><%=vo5.getItemname()%></div>
+				</h5>
+
+				<p class="card-text"></p>
+				<div id="itemPrice" class="text-small">
+					<%=vo5.getPrice()%>원
+				</div>
+				<div id="itemDiscountPrice" class="text-large"><%=discounted5%>원
+				</div>
+
+				<a href="#a" class="btn btn-primary">구매하기</a>
+			</div>
+		</div>
+
+		<div class="col"></div>
+		<div class="card" style="width: 18rem;">
+			<img src="./resources/item/12.jpg" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">
+					<div id="itemName" class="text-large"><%=vo6.getItemname()%></div>
+				</h5>
+
+				<p class="card-text"></p>
+				<div id="itemPrice" class="text-small">
+					<%=vo6.getPrice()%>원
+				</div>
+				<div id="itemDiscountPrice" class="text-large"><%=discounted6%>원
+				</div>
+				<a href="#a" class="btn btn-primary">구매하기</a>
+			</div>
+		</div>
+
+		<div class="col"></div>
+		<div class="card" style="width: 18rem;">
+			<img src="./resources/item/13.jpg" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">
+					<div id="itemName" class="text-large"><%=vo7.getItemname()%></div>
+				</h5>
+
+				<p class="card-text"></p>
+				<div id="itemDetail-price" class="text-small">
+					<%=vo7.getPrice()%>원
+				</div>
+				<div id="itemDiscountPrice" class="text-large"><%=discounted7%>원
+				</div>
+
+				<a href="#a" class="btn btn-primary">구매하기</a>
+			</div>
+		</div>
+
+		<div class="col"></div>
+		<div class="card" style="width: 18rem;">
+			<img src="./resources/item/14.jpg" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">
+					<div id="itemName" class="text-large"><%=vo8.getItemname()%></div>
+				</h5>
+
+				<p class="card-text"></p>
+				<div id="itemPrice" class="text-small">
+					<%=vo8.getPrice()%>원
+				</div>
+				<div id="itemDiscountPrice" class="text-large"><%=discounted8%>원
+				</div>
+
+				<a href="#a" class="btn btn-primary">구매하기</a>
+			</div>
+		</div>
+	</div>
+
+
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+		crossorigin="anonymous"></script>
 </body>
 </html>
