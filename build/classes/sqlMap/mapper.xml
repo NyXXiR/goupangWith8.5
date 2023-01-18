@@ -23,15 +23,30 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 	</insert>
 
 	<insert id="ItemUpload" parameterType="model.itemVO">
-		insert into itemDB values(item_seq.nextval,
-		#{name},#{price},#{discount},#{seller_id}, sysdate,#{category_num},#{qty},#{desc},0)
+		insert into itemDB values(item_seq.nextval,#{itemname},#{price},#{discount},#{seller_id}, sysdate,#{category_num},#{qty},#{description},0)
 	</insert>
 
 	<select id="ItemAll" resultType="model.itemVO">
 		select * from itemDB
 	</select>
 	
+<<<<<<< Updated upstream
+	<select id="getNameBySeq" parameterType="int" resultType="String">
+	select itemname from itemDB where seq=#{item_seq}
+	</select>
 	
+	<select id="getDiscountedBySeq" parameterType="int" resultType="String">
+select price/100*(100-discount) from ItemDB where seq=#{item_seq}
+</select>
+=======
+	<select id="ItemAllseq" resultType="model.itemVO">
+		select * from itemDB order by seq
+	</select>
+	
+	<select id="ItemAllCount" resultType="int">
+		select count(*) from itemdb
+	</select>
+>>>>>>> Stashed changes
 	
 	
 	<!-- 마이페이지 그래프 -->

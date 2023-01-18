@@ -34,6 +34,7 @@ public class sort extends HttpServlet {
 		List<itemVO> sortBySalesRecord = Session.selectList("sortBySalesRecord");
 		request.setAttribute("sortedList", sortBySalesRecord);
 	
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("../src/main/webapp/search.jsp");
 		dispatcher.forward(request, response);
 		System.out.println("전송완료");

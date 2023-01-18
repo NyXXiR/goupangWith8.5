@@ -13,13 +13,16 @@
 	
 	<div class="graph1">
 		<table border="1" id="minSaleItem">
-			<tr>
-				<td style = "width : 100px">상품 번호</td>
-				<td style = "width : 500px">상품 이름</td>
-				<td style = "width : 100px">상품 가격</td>
-				<td style = "width : 100px">상품 판매량</td>
-				<td style = "width : 100px">상품 매출</td>
-			</tr>
+			<thead>
+				<tr>
+					<td style = "width : 100px">상품 번호</td>
+					<td style = "width : 500px">상품 이름</td>
+					<td style = "width : 100px">상품 가격</td>
+					<td style = "width : 100px">상품 판매량</td>
+					<td style = "width : 100px">상품 매출</td>
+				</tr>
+			</thead>
 		</table>
 	</div>
 </div>
+
