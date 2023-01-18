@@ -12,7 +12,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<!-- 마스터 아이디 정해놓고 해당 아이디로 로그인 하면 관리자 페이지 보이게 -->
 	<%
 	  
 	  SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
@@ -23,7 +22,7 @@
 	  String enteredPassword = request.getParameter("userPassword");
 	  // 입력값 저장
 	  
-	  String checkId = Session.selectOne("loginCheckID", enteredID);
+	  String isBuyer = Session.selectOne("loginCheckID", enteredID);
 	  String checkPw = Session.selectOne("loginCheckPw", enteredID);
 	  String buyerName = Session.selectOne("selectBuyerName", enteredID);
 	
@@ -61,10 +60,11 @@
 		  </script>
 		  <%
 		 return;
-	  	}
+	  	}  
+	  
 	 //공백검사
 	 
-	  if(enteredID.equals(checkId)) {
+	  if(enteredID.equals(isBuyer)) {
 	  } else {
 		  %>
 		  <script>

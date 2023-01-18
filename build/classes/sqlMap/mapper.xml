@@ -123,6 +123,10 @@ insert into buyerDB values{3개}
 	select buyer_pw from buyerDB where buyer_id = #{buyer_id}
 </select>
 
+<select id="selectBuyerName" parameterType="String" resultType="String">
+		select buyer_name from buyerdb where buyer_id = #{buyer_id}
+	</select>
+	
 <!--  sellerDB 관련 구문 -->
 
 

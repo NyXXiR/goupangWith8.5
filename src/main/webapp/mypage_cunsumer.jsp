@@ -5,11 +5,14 @@
 <%@page import="mybatis.Mybatis" %>
 <%@page import="org.apache.ibatis.session.SqlSessionFactory" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<% SqlSessionFactory sqlSessionFactory=Mybatis.getSqlSessionFactory(); SqlSession sess;
+<% SqlSessionFactory sqlSessionFactory=Mybatis.getSqlSessionFactory(); 
+SqlSession sess;
 sess=sqlSessionFactory.openSession(true); %>
 
 <%
 	String right = request.getParameter("right");
+	String buyerId = (String) request.getAttribute("buyerId");
+	
 	
 	if(right == null){
 		right = "myPage.jsp";

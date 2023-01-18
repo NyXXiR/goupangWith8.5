@@ -24,7 +24,7 @@ String sellerLoginStatus = (String) session.getAttribute("");
 %>
 
 <div id="wrapper">
-  <div id="left-slide-container">
+  <div id="left-slide-container" style="display:flex">
       <div class="close-btn-box">
         <img src="./resources/header/close.png" class="slide-close-btn" onclick="closeNav()" />
       </div>
@@ -69,10 +69,10 @@ String sellerLoginStatus = (String) session.getAttribute("");
                   		if(sellerCheck != null) {%>
                   			<li><a href="mypage_master.jsp">관리자 페이지</a></li>
                   		<% 	} else { %> 
-		                    <li><a href="myPage_consumer.jsp?buyer_id=<%=loginStatus %>">회원 정보</a></li>
-		                    <li><a href="myPage.jsp">메뉴 1</a></li>
-		                    <li><a href="myPage.jsp">메뉴 2</a></li>
-		                    <li><a href="myPage.jsp">메뉴 3</a></li>
+		                    <li><a href="mypage_cunsumer.jsp?buyer_id=<%=loginStatus %>">회원 정보</a></li>
+		                    <li><a href="mypage.jsp">메뉴 1</a></li>
+		                    <li><a href="mypage.jsp">메뉴 2</a></li>
+		                    <li><a href="mypage.jsp">메뉴 3</a></li>
 		                <% } %>
                   		</ul>
                 	</div>
