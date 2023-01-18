@@ -117,7 +117,8 @@ HashMap<String, String> itemMap = (HashMap<String, String>) session.getAttribute
 								onclick="valuePlus(1)">수량 +</button>
 						</div>
 
-						<input type="button" value="장바구니 담기" onclick="addToCart()">
+<div id="tb"></div>
+						<input type="button" id="addToCart" value="장바구니 담기">
 						<!--  .quantity-count의 value를 select
 버튼을 클릭하면 
 1. cartDB에 데이터를 반영
@@ -166,7 +167,11 @@ HashMap<String, String> itemMap = (HashMap<String, String>) session.getAttribute
 	</article>
 
 
-	<script>
+
+
+
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
 
 function valuePlus(num){
 	var cnt =document.querySelector(".quantity-count");
@@ -184,13 +189,29 @@ function valueMinus(num){
 </script>
 
 <script>
+$('#addToCart').click(function() {
+	$.ajax({
+		url : './addToCart.jsp',
+		
+		type:'post',
+		data:{
+			"item_seq": `<%=itemMap.get("seq")%>`,
+			"buyer_id": `<%= session.getAttribute("buyer_id")%>`,
+			"qty": document.querySelector(".quantity-count").value,
 
+		},
+		success : function(data) {
+			$('#tb').html(data);
 
-function addToCart(){
+		}
+	})
+});
+
+/* function addToCart(){
 	var cnt =document.querySelector(".quantity-count");
 	const data = {
-			item_seq: <%=session.getAttribute("seq")%>,
-			buyer_id: <%=session.getAttribute("buyer_id")%>,
+			item_seq: <%=itemMap.get("seq")%>,
+			buyer_id: <%= session.getAttribute("buyer_id")%>,
 			qty: cnt,
 			
 			}	
@@ -208,12 +229,11 @@ body:JSON.stringify(data),
 .catch((error)=>{
 	console.error('실패:',error);
 });
+	
 
-}
+} 
+*/
 
 </script>
-
-
-
 </body>
 </html>

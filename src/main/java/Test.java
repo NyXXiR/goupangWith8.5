@@ -5,6 +5,8 @@ import java.util.stream.IntStream;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import model.itemVO;
+import model.itemVO3;
 import mybatis.Mybatis;
 
 public class Test {
@@ -46,21 +48,12 @@ public class Test {
     // List<itemVO> list = session.selectList("selectByPrice");
     // System.out.println(list);
 
-    int itemRecord = sess.selectOne("ItemSaleRecordHSum");
-	List < Integer > salList = sess.selectList("ItemSaleRecordHSearch");
-
-	double[] salarr = new double[salList.size()];
-
-	for (int i = 0; i < salList.size(); i++) {
-		salarr[i] = salList.get(i);
-		salarr[i] = Math.round((salarr[i] / itemRecord * 100) * 100.0) / 100.0;
+	List <itemVO> salListR = sess.selectList("ItemAllseq");
+	for (int i=0;i<salListR.size(); i++) {
+		System.out.println(salListR.get(i).getPrice());
+		System.out.println(salListR.get(i).getSellerid());
+		System.out.println(salListR.get(i).getCategorynum());
 	}
-	for (int i = 1; i < salList.size(); i++) {
-		salarr[i] += salarr[i-1];
-		System.out.println(salarr[i]);
-	}
-	
-
 
     // int n= session.insert("add", vo);
      
