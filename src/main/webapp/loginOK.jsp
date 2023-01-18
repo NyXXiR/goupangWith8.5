@@ -26,9 +26,34 @@
 	  String checkId = Session.selectOne("loginCheckID", enteredID);
 	  String checkPw = Session.selectOne("loginCheckPw", enteredID);
 	  String buyerName = Session.selectOne("selectBuyerName", enteredID);
+	
+	  String isSeller = Session.selectOne("isSeller", enteredID);
+	  String sellerPwCheck = Session.selectOne("sellerPwCheck", enteredID);
+	  String sellerName = Session.selectOne("selectSellerName", enteredID);
 
-
-	  if(enteredID == "" || enteredPassword == "") {
+	  if(isSeller != null || isSeller != "") {
+		  if(sellerPwCheck.equals(enteredPassword)) {
+			  session.setAttribute("sellerId", enteredID);
+			  //로그인에 성공하면 buyerId 세션값을 입력받은 아이디로 설정
+			  session.setAttribute("sellerName", sellerName);
+			  //로그인에 성공하면 buyerName 세션값 로그인한 회원의 이름으로 저장
+			  %>
+			  <script>
+					alert("판매자 로그인 성공");
+					window.location.href = 'header.jsp';
+			  </script>
+			  <%
+		   }else {
+			  %>
+			  <script>
+					alert("판매자 비밀번호 실패");
+					window.location.href = 'login.jsp';
+			  </script>
+			  <%
+		  }
+	  } else {
+		  %>
+		  if(enteredID == "" || enteredPassword == "") {
 		  %>
 		  <script>
 				alert("아이디 혹은 비밀번호를 입력 해 주세요");
@@ -36,7 +61,7 @@
 		  </script>
 		  <%
 		 return;
-	  }
+	  	}
 	 //공백검사
 	 
 	  if(enteredID.equals(checkId)) {
@@ -71,6 +96,9 @@
 		  </script>
 		  <%
 	  } %>
+		
+	  
+	  
 	  <%-- 해당 아이디가 DB에 존재한다면 해당 아이디의 비밀번호와 입력받은 비밀번호가 일치하는지 검사 --%>
 			
 </body>
