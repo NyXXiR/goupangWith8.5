@@ -23,54 +23,30 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 	</insert>
 
 	<insert id="ItemUpload" parameterType="model.itemVO">
-		insert into itemDB values(item_seq.nextval,#{itemname},#{price},#{discount},#{seller_id}, sysdate,#{category_num},#{qty},#{description},0)
+		insert into itemDB values(item_seq.nextval,
+		#{name},#{price},#{discount},#{seller_id}, sysdate,#{category_num},#{qty},#{desc},0)
 	</insert>
 
 	<select id="ItemAll" resultType="model.itemVO">
 		select * from itemDB
 	</select>
 	
-<<<<<<< Updated upstream
-	<select id="getNameBySeq" parameterType="int" resultType="String">
-	select itemname from itemDB where seq=#{item_seq}
-	</select>
-	
-	<select id="getDiscountedBySeq" parameterType="int" resultType="String">
-select price/100*(100-discount) from ItemDB where seq=#{item_seq}
-</select>
-=======
-	<select id="ItemAllseq" resultType="model.itemVO">
-		select * from itemDB order by seq
-	</select>
-	
-	<select id="ItemAllCount" resultType="int">
-		select count(*) from itemdb
-	</select>
->>>>>>> Stashed changes
-	
 	
 	<!-- 마이페이지 그래프 -->
-	<select id="ItemSaleRecordHSearch" resultType="model.itemVO">
-		<![CDATA[select * from (select * from itemDB order by salerecord desc, seq) where rownum <=10 ]]>
+	<select id="ItemSaleRecordHSearch" resultType="int">
+		<![CDATA[select salerecord from (select * from itemDB order by salerecord desc, seq) where rownum <=10 ]]>
 	</select>
 	
 	<select id="ItemSaleRecordHSum" resultType="int">
 		<![CDATA[select sum(salerecord) from (select * from itemDB order by salerecord desc, seq) where rownum <=10 ]]>
 	</select>
 	
-	<select id="ItemSaleRecordRSearch" resultType="model.itemVO3">
-		<![CDATA[select * from (select seq,itemname,price,description,salerecord,price*salerecord as multi from itemdb where salerecord !=0 order by salerecord) where rownum <=10 ]]>
+	<select id="ItemSaleRecordRSearch" resultType="int">
+		<![CDATA[select salerecord from (select * from itemDB where salerecord !=0 order by salerecord, seq) where rownum <=10 ]]>
 	</select>
 	
 	<select id="ItemSaleRecordRSum" resultType="int">
 		<![CDATA[select sum(salerecord) from (select * from itemDB order by salerecord, seq) where rownum <=10 ]]>
-	</select>
-
-	<select id="Itemprice*recordSearch" resultType="model.itemVO3">
-		<![CDATA[select * from (select seq,itemname,price,description,salerecord,price*salerecord as multi from itemdb order by multi desc) where rownum<=10 ]]>
-	</select>
-	<select id="Itemprice*recordSum" resultType="int">
-		<![CDATA[select sum(multi) from (select price*salerecord as multi from itemdb order by multi desc) where rownum<=10 ]]>
 	</select>
 
 
@@ -116,13 +92,12 @@ select price/100*(100-discount) from ItemDB where seq=#{item_seq}
 
 <!--  cartItemDB 관련 구문 -->
 <insert id="cartItem" parameterType="model.cartItemVO">
-insert into cartItemDB values(#{item_seq}, #{buyer_id},#{qty})
+insert into cartItemDB values(#{item_seq}, #{buyer_id},#{quantity})
 </insert>
 
 <select id="cartListById" parameterType="String" resultType="model.cartItemVO">
 select * from cartItemDB where buyer_id=#{buyer_id}
 </select>
-
 
 <!--  buyerDB 관련 구문 -->
 
@@ -150,20 +125,17 @@ insert into buyerDB values{3개}
 
 <!--  sellerDB 관련 구문 -->
 
-<!-- MessageDB 관련구문  -->
-<!--  오류 뜨는 구문 잠시 주석처리했음. 고친 뒤 사용하시면 될듯
-<insert id="WriteMessage" parameterType="model.messageVO">
-	insert into guestbook_message values(seq_guestbook_message, #{guest_name}, #{password}), #{message})
-</insert>
--->
-<select id="selectByMessageId" parameterType="int" resultType="String">
-	select * from guestbook_message where message_id=?
-</select>
--->
 
 
 <!-- 익명게시판 관련 구문  -->
- <select id="insertMessage" parameterType="model.MessageVO">
+<!-- MessageDB 관련구문  -->
+<!-- <insert id="WriteMessage" parameterType="model.messageVO">
+	insert into guestbook_message values(seq_guestbook_message, #{guest_name}, #{password}), #{message})
+</insert>
+<select id="selectByMessageId" parameterType="int" resultType="String">
+	select * from guestbook_message where message_id=?
+</select> -->
+<!-- <select id="insertMessage" parameterType="model.MessageVO">
 	insert into guestbook_message values(seq_guestbook_message.nextval, #{bookPassword},#{bookPwd},#{bookMessage})
 </select>
 

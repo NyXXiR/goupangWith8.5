@@ -1,3 +1,6 @@
+<%@page import="org.apache.ibatis.session.SqlSession"%>
+<%@page import="mybatis.Mybatis"%>
+<%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -10,7 +13,12 @@
 </head>
 <body>
 <%
+SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
+SqlSession Session;
+Session = sqlSessionFactory.openSession(true); 
+
 String loginStatus = (String) session.getAttribute("buyerId");
+String sellerLoginStatus = (String) session.getAttribute("");
 // getAttribute는 반환형이 Object이므로 형변환 필요함
 // 즉, 모든 클래스 타입을 속성의 값으로 사용 가능 하다는 것을 의미함.
 %>
@@ -56,10 +64,12 @@ String loginStatus = (String) session.getAttribute("buyerId");
             	  <a href="#"><img src="./resources/header/account.png" alt="" class="account-img"/></a>
                 	<div class="detail-box">
                   		<ul class="drop-menu-1">
-                  		<%if(loginStatus.equals("master")) {%>
+                  		<% 
+                  		String sellerCheck = Session.selectOne("isSeller", loginStatus);
+                  		if(sellerCheck != null) {%>
                   			<li><a href="mypage_master.jsp">관리자 페이지</a></li>
                   		<% 	} else { %> 
-		                    <li><a href="myPage.jsp">회원 정보</a></li>
+		                    <li><a href="myPage_consumer.jsp?buyer_id=<%=loginStatus %>">회원 정보</a></li>
 		                    <li><a href="myPage.jsp">메뉴 1</a></li>
 		                    <li><a href="myPage.jsp">메뉴 2</a></li>
 		                    <li><a href="myPage.jsp">메뉴 3</a></li>

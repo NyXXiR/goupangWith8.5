@@ -28,6 +28,30 @@ int itemSeq=cartList.get(0).getItem_seq();
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+
+*{
+border:1px solid black;
+}
+.img-box{
+width:300px;
+height:300px;
+display: inline-block;
+}
+
+.search-img-thumbnail{
+width:300px;
+height:300px;
+object-fit: cover;
+}
+#cartItem-detail{
+display:inline-block;
+
+}
+#cartItem{
+display:flex;}
+
+</style>
 </head>
 <body>
 제품 구매 페이지. itemDetail에서 넘어옴.
@@ -42,11 +66,20 @@ buyer가 장바구니에 담아둔 항목과 바로구매에서 가져온 항목
 %>
 
 <div id="cartItem">
-<div class="img-box"><img src="../resources/item/<%=items %>.jpg" class="search-img-thumbnail" width="100%" height="225"></div> //이미지
+<p class="img-box"><img src="../resources/item/<%=items %>.jpg" class="search-img-thumbnail"></p>
 
-<div><%=itemName %></div> //이름
-
-<div><%=sqlSession.selectOne("getDiscountedBySeq",items) %></div> //가격x수량
+<div id="cartItem-detail">
+<p><%=itemName %></p>
+						<div class="prod-quantity__form">
+							<input type="text" value="1" name="quantity"
+								class="quantity-count" readonly="true" />
+							<button class="quantity-minus" type="button"
+								onclick="valueMinus(1)">수량 -</button>
+							<button class="quantity-plus" type="button"
+								onclick="valuePlus(1)">수량 +</button>
+						</div>
+<p><%=sqlSession.selectOne("getDiscountedBySeq",items) %></p>
+</div>
 </div>
 
 <%
@@ -74,6 +107,20 @@ soldItemDB에 수량만큼의 quantity를 추가
 =======
 
 
-
+<script>
+function valuePlus(num){
+	var cnt =document.querySelector(".quantity-count");
+	cnt.value= parseInt(cnt.value)+num;
+	}
+	
+	
+function valueMinus(num){
+		var cnt =document.querySelector(".quantity-count");
+		cnt.value= parseInt(cnt.value)-num;
+		if(cnt.value==0){
+			cnt.value=1;
+			}
+	}
+</script>
 </body>
 </html>
