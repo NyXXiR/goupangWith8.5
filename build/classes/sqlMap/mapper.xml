@@ -111,9 +111,6 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 		select * from itemDB order by salerecord desc
 	</select>
 	
-	<select id="selectBuyerName" parameterType="String" resultType="String">
-		select buyer_name from buyerdb where buyer_id = #{buyer_id}
-	</select>
 <!--  soldItemDB 관련 구문 -->
 
 <!--  cartItemDB 관련 구문 -->
@@ -150,9 +147,25 @@ insert into buyerDB values{3개}
 	select buyer_pw from buyerDB where buyer_id = #{buyer_id}
 </select>
 
+<select id="selectBuyerName" parameterType="String" resultType="String">
+		select buyer_name from buyerdb where buyer_id = #{buyer_id}
+	</select>
 <!--  sellerDB 관련 구문 -->
+
 <select id="isSeller" parameterType="String" resultType="String">
-	select seller_id from sellerdb where seller_id = #{seller_id}
+	select seller_id from sellerDB where seller_id = #{seller_id}
+</select>
+
+<select id="sellerPwCheck" parameterType="String" resultType="String">
+	select seller_pw from sellerDB where seller_id = #{seller_id}
+</select>
+
+<select id="sellerLoginCheck" parameterType="String" resultType="String">
+	select seller_pw from sellerDB where seller_id = #{seller_id}
+</select>
+
+<select id="selectSellerName" parameterType="String" resultType="String">
+	select seller_name from sellerDB where seller seller_id = #{seller_id}
 </select>
 
 <!-- MessageDB 관련구문  -->
