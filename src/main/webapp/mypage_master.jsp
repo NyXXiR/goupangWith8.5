@@ -23,6 +23,7 @@ sess=sqlSessionFactory.openSession(true); %>
 	}else{
 		num = Integer.valueOf(numstr);
 	}
+	System.out.println(num);
 %>
 
 <!DOCTYPE html>

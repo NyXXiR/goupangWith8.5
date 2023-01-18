@@ -46,6 +46,10 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 		select count(*) from itemdb
 	</select>
 	
+	<select id="itemRetouchListMain" resultType="model.itemVO">
+		select * from itemdb order by seq
+	</select>
+	
 	
 	<!-- 마이페이지 그래프 -->
 	<select id="ItemSaleRecordHSearch" resultType="model.itemVO">
