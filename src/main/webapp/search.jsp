@@ -6,6 +6,9 @@
 <%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,7 +71,7 @@ position: relative;
   color: white;
 }
  
-}
+
 .title-text-box {
     height: 80px;
     text-align: center;
@@ -77,10 +80,7 @@ position: relative;
 }
 
 .search-wrapper {
-	display: flex;
-	justify-content: start;
-	flex-flow: wrap;
-	margin: 30px auto;
+	
 }
 
 #product-box {
@@ -124,6 +124,13 @@ font-weight: bold;
 
 font-size: 20px;
 }
+
+.search-list-box {
+	display: flex;
+	justify-content: start;
+	flex-flow: wrap;
+	margin: 30px auto;
+}
 }
 
 </style>
@@ -150,64 +157,28 @@ List<itemVO> listByItemName = Session.selectList("searchItemByItemName", entered
 List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 %>
 
-<!-- 
-<select id="selectBuyerName" parameterType="String" resultType="String">
-	select buyer_name from buyerDB where buyer_id = #{buyer_id}
-</select>
-<select id="loginCheckID" parameterType="String" resultType="String">
-	select buyer_id from buyerDB where buyer_id = #{buyer_id}
-</select>
- -->
 
 <script>
-<%-- function asd2() {
-	type: 'get',
-	url: "../sort",
-	data :  <% for(int i=0; i<testSort.size(); i++) {
-			int itemPrice = testSort.get(i).getPrice();
-			int discountRate = testSort.get(i).getDiscount(); %>
-		
-			<div class="product-div" onclick="location.href ='search2.jsp?itemSeq=<%=testSort.get(i).getSeq()%>'">
-				<div class="img-box"><img src="resources/item/<%=testSort.get(i).getSeq() %>.jpg" class="search-img-thumbnail" width="100%" height="225"></div>
-				<div class="item-name-box"><%=testSort.get(i).getItemname() %></div>
-			<%if(discountRate != 0) {%>
-				<div class="item-price-box" style="text-decoration:line-through"><%=testSort.get(i).getPrice() %></div>
-				<div class="item-price-discount"><%=itemPrice * (100 - discountRate) / 100 %></div>
-			<%
-			} else { %>
-				<div class="item-price-box"><%=testSort.get(i).getPrice() %></div>
-			<% 
-			}
-			%>
-			</div>
-		<%}%>
-	contentType:"application/x-www-form-urlencoded; charset=UTF-8",
-	success: function(data) {
-		$('.search-wrapper').html(data);
-	},
-	error: function(request, status, error) {
-		alert(error);
-	}
-	
-	
-} --%>
 
+	
 	function sortTest() {
 	$.ajax({
-		type: 'get',
-		url: "../sort",
-		data: "",
+		type: "GET",
+		url: "/sort",
 		contentType:"application/x-www-form-urlencoded; charset=UTF-8",
 		success: function(data) {
-			$('.search-wrapper').html(data);
+			console.log("테스트용");
+			$(".search-wrapper").val(data);
+			console.log("테스트용");
 		},
+		data: "",
 		error: function(request, status, error) {
 			alert(error);
 		}
 	});
 }
 
-	/* $(".sort-by-rank").click(function() { 
+	  /* $(".sort-by-rank").click(function() { 
 		
 		$.ajax({
 		type: 'get',
@@ -222,17 +193,18 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 		}
 	});
 		} 
-	); */
+	);   */
 	
 </script>
-
 
 
 <!-- 해결해야 할 문제 -->
 
 <!-- 랭킹, 카테고리, 전체 버튼 sort 기능 -->
+<!-- 상품 컨테이너 body 형식과 통일시키기 -->
 <!-- 마이페이지 연동 방법 -->
 <!-- 상품 상세페이지 연동 방법 -->
+
 <jsp:include page="header.jsp" flush="false"/>
 		
 <div class="wrapper">
@@ -265,10 +237,19 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 
 		<!-- 검색 상품 출력 란 --> 
 		<div class="search-wrapper">
-
+			<div id = "product_total">
+				<p>Total&nbsp:&nbsp&nbsp<span><%=listByAll.size() %></span></p>
+			</div>
+			
+			
+			<div class="search-list-box">
 				<!-- 전체 상품 검색 결과 -->
+			<%-- 	<c:forEach var="i" value="<%=listByAll %>" begin="0" end="<%=listByAll.size() %>"> --%>
 				<% if(comboValue.equals("all")) {
-					for(int i=0; i<listByAll.size(); i++) { 
+					for(int i=0; i<listByAll.size(); i++) { %>
+							
+						
+						<%
 						int itemPrice = listByAll.get(i).getPrice();
 						int discountRate = listByAll.get(i).getDiscount(); %>
 						
@@ -280,14 +261,16 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 								<div class="item-price-discount"><%=itemPrice * (100 - discountRate) / 100 %></div>
 							<%
 							} else { %>
-								<div class="item-price-box"><%=listByAll.get(i).getPrice() %></div>
+								<%-- <div class="item-price-box"><fmt:formatNumber value="${i.getPrice()}" pattern="#,###" /></div> --%>
 							<% 
 							}
 							%>
 						</div>
 					<% } 
-				return; 
+					
+				return;
 				} %>
+				
 				
 				<!-- 판매자 아이디 검색 결과 -->
 				<% if(comboValue.equals("sellerId")) {
@@ -338,11 +321,17 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 				
 				
 				
-				
+			</div>	
 		</div>
 		
 		
 	</div>
+	
+	
+	
+	
+	
+	
 	<script>
 var asd {
 	data :  <% for(int i=0; i<testSort.size(); i++) {
@@ -367,20 +356,22 @@ var asd {
 	
 };
 
-function sortTest(url) {
+/* function sortTest() {
 	$.ajax({
-		type: 'get',
-		url: "../java/com/ser/sort",
-		data: "asd",
+		type: "GET",
+		url: "/sort",
 		contentType:"application/x-www-form-urlencoded; charset=UTF-8",
 		success: function(data) {
-			$('.search-wrapper').html(data);
+			console.log("테스트용");
+			$(".search-wrapper").val(data);
+			console.log("테스트용");
 		},
+		data: "테스트용"
 		error: function(request, status, error) {
 			alert(error);
 		}
 	});
-}
+} */
 
 </script>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>

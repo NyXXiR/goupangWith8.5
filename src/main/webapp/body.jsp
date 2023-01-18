@@ -20,7 +20,6 @@
 <body>
 
 	<%
-	
 	itemVO vo1 = new itemVO(3, "아이패드", 150000, 0, "lgh0334", "2023-01-09 16:25:39.000", 30, 10, "아이가 사용한다", 146);
 	itemVO vo2 = new itemVO(15, "스마트폰", 1000000, 15, "lgh0334", "2023-01-09 16:25:39.000", 30, 10, "스마트하다", 10);
 	itemVO vo3 = new itemVO(5, "에어팟", 1300000, 50, "ninja", "2023-01-09 16:25:39.000", 30, 10, "공기", 86);
@@ -62,7 +61,8 @@
 	
 
 	<h1>컨테이너이름입력</h1>
-	<div class="flex-container">
+	<div class="flex-container"></div>
+	
 		<div class="row">
 			<div class="col"></div>
 			<div class="card" style="width: 18rem;">
@@ -71,11 +71,10 @@
 					<h5 class="card-title">
 						<div id="itemDetail-name" class="text-large"><%=vo1.getItemname()%></div>
 					</h5>
-					<p class="card-text">
+					<p class="card-text"></p>
 					<div id="itemDetail-price" class="text-small">
 						<%=vo1.getPrice()%>원
 					</div>
-					</p>
 					<a href="#a" class="btn btn-primary">구매하기</a>
 				</div>
 			</div>
@@ -87,11 +86,10 @@
 					<h5 class="card-title">
 						<div id="itemDetail-name" class="text-large"><%=vo2.getItemname()%></div>
 					</h5>
-					<p class="card-text">
+					<p class="card-text"></p>
 					<div id="itemDetail-price" class="text-small">
 						<%=vo2.getPrice()%>원
 					</div>
-					</p>
 					<a href="#a" class="btn btn-primary">구매하기</a>
 				</div>
 			</div>
@@ -103,11 +101,10 @@
 					<h5 class="card-title">
 						<div id="itemDetail-name" class="text-large"><%=vo3.getItemname()%></div>
 					</h5>
-					<p class="card-text">
+					<p class="card-text"></p>
 					<div id="itemDetail-price" class="text-small">
 						<%=vo3.getPrice()%>원
 					</div>
-					</p>
 					<a href="#a" class="btn btn-primary">구매하기</a>
 				</div>
 			</div>
@@ -119,17 +116,17 @@
 					<h5 class="card-title">
 						<div id="itemDetail-name" class="text-large"><%=vo4.getItemname()%></div>
 					</h5>
-					<p class="card-text">
+					<p class="card-text"></p>
 					<div id="itemDetail-price" class="text-small">
 						<%=vo4.getPrice()%>원
 					</div>
-					</p>
 					<a href="#a" class="btn btn-primary">구매하기</a>
 				</div>
 			</div>
 		</div>
+		
 		<h1>컨테이너이름입력</h1>
-		<div class="flex-container">
+		<div class="flex-container"></div>
 			<div class="row">
 				<div class="col"></div>
 				<div class="card" style="width: 18rem;">
@@ -138,11 +135,11 @@
 						<h5 class="card-title">
 							<div id="itemDetail-name" class="text-large"><%=vo5.getItemname()%></div>
 						</h5>
-						<p class="card-text">
+						<p class="card-text"></p>
 						<div id="itemDetail-price" class="text-small">
 							<%=vo5.getPrice()%>원
 						</div>
-						</p>
+						
 						<a href="#a" class="btn btn-primary">구매하기</a>
 					</div>
 				</div>
@@ -154,11 +151,10 @@
 						<h5 class="card-title">
 							<div id="itemDetail-name" class="text-large"><%=vo6.getItemname()%></div>
 						</h5>
-						<p class="card-text">
+						<p class="card-text"></p>
 						<div id="itemDetail-price" class="text-small">
 							<%=vo6.getPrice()%>원
 						</div>
-						</p>
 						<a href="#a" class="btn btn-primary">구매하기</a>
 					</div>
 				</div>
@@ -186,11 +182,10 @@
 						<h5 class="card-title">
 							<div id="itemDetail-name" class="text-large"><%=vo8.getItemname()%></div>
 						</h5>
-						<p class="card-text">
+						<p class="card-text"></p>
 						<div id="itemDetail-price" class="text-small">
 							<%=vo8.getPrice()%>원
 						</div>
-						</p>
 						<a href="#a" class="btn btn-primary">구매하기</a>
 					</div>
 				</div>

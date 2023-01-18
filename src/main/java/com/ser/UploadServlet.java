@@ -43,11 +43,25 @@ public class UploadServlet extends HttpServlet {
 			++inttemNum;
 
 		PrintWriter writer = resp.getWriter();
-		System.out.println("서블릿");
 		String contentType = req.getContentType();
 		if (contentType != null
 				&& contentType.toLowerCase().startsWith("multipart/")) {
 			printPartInfo(req, writer,inttemNum);
+			
+			if (req.getParameter("pdName") == null) {
+				writer.println("<script> alert('상품명을 작성하여주십시오.')</script>");
+			}else if(req.getParameter("pdPrice") == null) {
+				writer.println("<script> alert('상품가격을 작성하여주십시오.')</script>");
+			}else if(req.getParameter("pdDiscount") == null) {
+				writer.println("<script> alert('상품할인율을 작성하여주십시오.')</script>");
+			}else if(req.getParameter("pdQTY") == null) {
+				writer.println("<script> alert('상품수량을 작성하여주십시오.')</script>");
+			}else if(req.getParameter("pdCategory") == null) {
+				writer.println("<script> alert('상품카테고리를 작성하여주십시오.')</script>");
+			}else if(req.getParameter("pdDesc") == null) {
+				writer.println("<script> alert('상품설명을 작성하여주십시오.')</script>");
+			}else {
+			
 			
 			String productName = req.getParameter("pdName");
 			int productPrice = Integer.valueOf(req.getParameter("pdPrice"));
@@ -55,36 +69,30 @@ public class UploadServlet extends HttpServlet {
 			int productQTY = Integer.valueOf(req.getParameter("pdQTY"));
 			int productSelect = Integer.valueOf(req.getParameter("pdCategory"));
 			String productDesc = req.getParameter("pdDesc");
-			System.out.println(productName);
-			System.out.println(productPrice);
-			System.out.println(productDiscount);
-			System.out.println(productQTY);
-			System.out.println(productSelect);
+
+			
+			
 			itemVO item = new itemVO(productName, productPrice, productDiscount, "ninja", productSelect, productQTY,productDesc);
 			System.out.println(item);
 			sess.selectOne("ItemUpload", item);
-			
+			writer.println("<script> alert('상품등록의 성공하였습니다.')</script>");
+			}
 		} else {
 			writer.println("<html><body>");
 			writer.println("multipart가 아님");
 		}
 		
-		writer.println("<script>location.href='mypage_master.jsp'</script>");
+		writer.println("<script> location.href='mypage_master.jsp'</script>");
 		writer.println("</body></html>");
 	}
 
 	private void printPartInfo(HttpServletRequest req, PrintWriter writer, int inttemNum)
 			throws IOException, ServletException {
-		System.out.println("메서드");
-	    
-		
-		
 		int i = 1;
 		Collection<Part> parts = req.getParts();
 		for (Part part : parts) {
 			String itemNum = String.valueOf(inttemNum);
 			String contentType = part.getContentType();
-			System.out.println("파라미터 시작");
 			
 			if (part.getHeader("Content-Disposition").contains("filename=")) {
 				String fileName = part.getSubmittedFileName();
