@@ -1,44 +1,77 @@
 package model;
 
-public class messageVO {
-	private int id;
+public class MessageVO {
+	private int guestId;
 	private String guestName;
-	private String password;
-	private String message;
+	private String guestPassword;
+	private String guestMessage;
 	
-	public messageVO(int id, String guestName, String password, String message) {
+	public MessageVO() {}
+	
+	public MessageVO(int guestId, String guestName, String guestPassword, String guestMessage) {
 		super();
-		this.id = id;
+		this.guestId = guestId;
 		this.guestName = guestName;
-		this.password = password;
-		this.message = message;
+		this.guestPassword = guestPassword;
+		this.guestMessage = guestMessage;
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	
+	public int getGuestId() {
+		return guestId;
 	}
+
+
+	public void setGuestId(int guestId) {
+		this.guestId = guestId;
+	}
+
+
+	public String getGuestName() {
+		return guestName;
+	}
+
+
 	public void setGuestName(String guestName) {
 		this.guestName = guestName;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+
+
+	public String getGuestPassword() {
+		return guestPassword;
 	}
-	public void setMessage(String message) {
-		this.message = message;
+
+
+	public void setGuestPassword(String guestPassword) {
+		this.guestPassword = guestPassword;
 	}
-	
+
+
+	public String getGuestMessage() {
+		return guestMessage;
+	}
+
+
+	public void setGuestMessage(String guestMessage) {
+		this.guestMessage = guestMessage;
+	}
+
+
 	public boolean hasPassword() {
-		return password != null && !password.isEmpty();
+		return guestPassword != null && !guestPassword.isEmpty();
 	}
 	
 	//파라미터로 받은 pwd가 암호를 저장한 password필드와  동일한지 확인 
 	public boolean matchPassword(String pwd) {
-		return password!= null &&password.equals(pwd);
+		return guestPassword!= null &&guestPassword.equals(pwd);
 	}
+
 	
 	@Override
 	public String toString() {
-		return "MessageVO [id=" + id + ", guestName=" + guestName + ", password=" + password + ", message=" + message
-				+ "]";
+		return "messageVO [guestid=" + guestId + ", guestName=" + guestName + ", guestpassword=" + guestPassword
+				+ ", guestmessage=" + guestMessage + "]";
 	}
 	
+
 }
