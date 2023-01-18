@@ -12,7 +12,7 @@ public class MessageListView {
 	private int pageTotalCount;
 	private int messageCountPerPage;
 	private int firstRow;
-	private int endRow;
+	private int endRow; 
 	
 	
 	//생성자 

@@ -35,7 +35,7 @@ public class MessageDAO {
 			String url = prop.getProperty("url");
 			String user = prop.getProperty("user");
 			String pw = prop.getProperty("pw");
-			Connection conn = DriverManager.getConnection(url, user, pw);
+			conn = DriverManager.getConnection(url, user, pw);
 			return conn;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -48,8 +48,7 @@ public class MessageDAO {
 	
 	
 	// (게시판) 메시지 저장  
-	public int insertMessage(MessageVO messageVo) throws SQLException {
-		MessageDAO.getInstance();
+	public int insertMessage(MessageVO messageVo)  {
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement("insert into guestbook_message "
@@ -58,13 +57,13 @@ public class MessageDAO {
 			pstmt.setString(2, messageVo.getGuestPassword());
 			pstmt.setString(3, messageVo.getGuestMessage());
 			return pstmt.executeUpdate();
-		} finally {
-			conn.close();
-		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return 0;
 	}
 	// (게시판) 메시지 선택 
 	public MessageVO selectMessage(int guestId) throws SQLException {
-		MessageDAO.getInstance();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -77,7 +76,7 @@ public class MessageDAO {
 				return null;
 			}
 		} finally {
-			conn.close();
+			pstmt.close();
 		}
 	}
 	// resultset에서  데이터를 읽어와 message생성. 추후, 셀렉으와 셀렉트 리스트 메소드에서 사용  
@@ -99,8 +98,7 @@ public class MessageDAO {
 			rs.next();
 			return rs.getInt(1);
 		} finally {
-			conn.close();
-			conn.close();
+			stmt.close();
 		}
 	}
 
@@ -129,7 +127,7 @@ public class MessageDAO {
 				return Collections.emptyList();
 			}
 		} finally {
-			conn.close();
+			pstmt.close();
 		}
 	}
 
@@ -140,7 +138,7 @@ public class MessageDAO {
 			pstmt.setInt(1, messageId);
 			return pstmt.executeUpdate();
 		} finally {
-			conn.close();
+			pstmt.close();
 		}
 	}
 }

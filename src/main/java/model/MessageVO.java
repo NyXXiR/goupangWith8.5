@@ -6,7 +6,8 @@ public class MessageVO {
 	private String guestPassword;
 	private String guestMessage;
 	
-
+	public MessageVO() {}
+	
 	public MessageVO(int guestId, String guestName, String guestPassword, String guestMessage) {
 		super();
 		this.guestId = guestId;

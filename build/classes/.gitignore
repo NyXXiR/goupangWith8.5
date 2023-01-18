@@ -1,8 +1,1 @@
-
-/com/
-/model/
-/service/
-
-
-/mybatis/
-/sqlMap/
+/DAO/
