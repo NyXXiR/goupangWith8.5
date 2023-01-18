@@ -18,13 +18,13 @@ SqlSession Session;
 Session = sqlSessionFactory.openSession(true); 
 
 String loginStatus = (String) session.getAttribute("buyerId");
-String sellerLoginStatus = (String) session.getAttribute("");
+String sellerLoginStatus = (String) session.getAttribute("sellerId");
 // getAttribute는 반환형이 Object이므로 형변환 필요함
 // 즉, 모든 클래스 타입을 속성의 값으로 사용 가능 하다는 것을 의미함.
 %>
 
 <div id="wrapper">
-  <div id="left-slide-container" style="display:flex">
+  <div id="left-slide-container">
       <div class="close-btn-box">
         <img src="./resources/header/close.png" class="slide-close-btn" onclick="closeNav()" />
       </div>
@@ -58,16 +58,15 @@ String sellerLoginStatus = (String) session.getAttribute("");
           
           <div class="header-right-box">
             <ul class="menu-bar">
-           	<% if(loginStatus == null) {
+           	<% if(loginStatus == null && sellerLoginStatus == null) {
            	} else { %>
             	 <li>
             	  <a href="#"><img src="./resources/header/account.png" alt="" class="account-img"/></a>
                 	<div class="detail-box">
                   		<ul class="drop-menu-1">
                   		<% 
-                  		String sellerCheck = Session.selectOne("isSeller", loginStatus);
-                  		if(sellerCheck != null) {%>
-                  			<li><a href="mypage_master.jsp">관리자 페이지</a></li>
+                  		if(sellerLoginStatus != null) {%>
+                  			<li><a href="mypage_master.jsp?seller_id=">관리자 페이지</a></li>
                   		<% 	} else { %> 
 		                    <li><a href="mypage_cunsumer.jsp?buyer_id=<%=loginStatus %>">회원 정보</a></li>
 		                    <li><a href="mypage.jsp">메뉴 1</a></li>

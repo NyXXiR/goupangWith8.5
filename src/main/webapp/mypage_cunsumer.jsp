@@ -1,4 +1,3 @@
-<%@page import="model.itemVO3"%>
 <%@page import="model.itemVO"%>
 <%@page import="java.util.List" %>
 <%@page import="org.apache.ibatis.session.SqlSession" %>

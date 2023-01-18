@@ -33,7 +33,7 @@
                 <h4 class="password">password</h4>
                 <input class="input1" name="userPassword" type="password" placeholder="PW" />
               </div>
-    
+    			<div><input type="checkbox" name="sellerLogin" value="seller"/>관리자 로그인</div>
               <input id="input2" type="submit" value="Log in" />
             </form>
           </div>
