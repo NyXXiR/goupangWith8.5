@@ -30,15 +30,14 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 		select * from itemDB
 	</select>
 	
-<<<<<<< Updated upstream
 	<select id="getNameBySeq" parameterType="int" resultType="String">
-	select itemname from itemDB where seq=#{item_seq}
+		select itemname from itemDB where seq=#{item_seq}
 	</select>
 	
 	<select id="getDiscountedBySeq" parameterType="int" resultType="String">
-select price/100*(100-discount) from ItemDB where seq=#{item_seq}
-</select>
-=======
+		select price/100*(100-discount) from ItemDB where seq=#{item_seq}
+	</select>
+
 	<select id="ItemAllseq" resultType="model.itemVO">
 		select * from itemDB order by seq
 	</select>
@@ -46,7 +45,6 @@ select price/100*(100-discount) from ItemDB where seq=#{item_seq}
 	<select id="ItemAllCount" resultType="int">
 		select count(*) from itemdb
 	</select>
->>>>>>> Stashed changes
 	
 	
 	<!-- 마이페이지 그래프 -->
@@ -112,6 +110,10 @@ select price/100*(100-discount) from ItemDB where seq=#{item_seq}
 	<select id="sortBySalesRecord" resultType="model.itemVO">
 		select * from itemDB order by salerecord desc
 	</select>
+	
+	<select id="selectBuyerName" parameterType="String" resultType="String">
+		select buyer_name from buyerdb where buyer_id = #{buyer_id}
+	</select>
 <!--  soldItemDB 관련 구문 -->
 
 <!--  cartItemDB 관련 구문 -->
@@ -149,6 +151,9 @@ insert into buyerDB values{3개}
 </select>
 
 <!--  sellerDB 관련 구문 -->
+<select id="isSeller" parameterType="String" resultType="String">
+	select seller_id from sellerdb where seller_id = #{seller_id}
+</select>
 
 <!-- MessageDB 관련구문  -->
 <!--  오류 뜨는 구문 잠시 주석처리했음. 고친 뒤 사용하시면 될듯
@@ -159,15 +164,14 @@ insert into buyerDB values{3개}
 <select id="selectByMessageId" parameterType="int" resultType="String">
 	select * from guestbook_message where message_id=?
 </select>
--->
 
 
 <!-- 익명게시판 관련 구문  -->
- <select id="insertMessage" parameterType="model.MessageVO">
+ <select id="insertMessage" parameterType="model.messageVO">
 	insert into guestbook_message values(seq_guestbook_message.nextval, #{bookPassword},#{bookPwd},#{bookMessage})
 </select>
 
-<select id="selectMessage" resultType="model.MessageVO">
+<select id="selectMessage" resultType="model.messageVO">
 select from guestbook_message where bookId=#{bookId}
 </select>
 
@@ -178,6 +182,5 @@ select count(*) from guestbook_message
 <select id="selectList" parameterType="Integer">
 select count(*) from guestbook_message
 </select>
- -->
 
 </mapper>

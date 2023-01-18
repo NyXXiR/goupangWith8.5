@@ -159,55 +159,26 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 
 
 <script>
-<%-- function asd2() {
-	type: 'get',
-	url: "../sort",
-	data :  <% for(int i=0; i<testSort.size(); i++) {
-			int itemPrice = testSort.get(i).getPrice();
-			int discountRate = testSort.get(i).getDiscount(); %>
-		
-			<div class="product-div" onclick="location.href ='search2.jsp?itemSeq=<%=testSort.get(i).getSeq()%>'">
-				<div class="img-box"><img src="resources/item/<%=testSort.get(i).getSeq() %>.jpg" class="search-img-thumbnail" width="100%" height="225"></div>
-				<div class="item-name-box"><%=testSort.get(i).getItemname() %></div>
-			<%if(discountRate != 0) {%>
-				<div class="item-price-box" style="text-decoration:line-through"><%=testSort.get(i).getPrice() %></div>
-				<div class="item-price-discount"><%=itemPrice * (100 - discountRate) / 100 %></div>
-			<%
-			} else { %>
-				<div class="item-price-box"><%=testSort.get(i).getPrice() %></div>
-			<% 
-			}
-			%>
-			</div>
-		<%}%>
-	contentType:"application/x-www-form-urlencoded; charset=UTF-8",
-	success: function(data) {
-		$('.search-wrapper').html(data);
-	},
-	error: function(request, status, error) {
-		alert(error);
-	}
-	
-	
-} --%>
 
+	
 	function sortTest() {
 	$.ajax({
-		type: 'POST',
-		url: "HelloWorld.do",
+		type: "GET",
+		url: "/sort",
 		contentType:"application/x-www-form-urlencoded; charset=UTF-8",
 		success: function(data) {
 			console.log("테스트용");
 			$(".search-wrapper").val(data);
 			console.log("테스트용");
 		},
+		data: "",
 		error: function(request, status, error) {
 			alert(error);
 		}
 	});
 }
 
-	 /* $(".sort-by-rank").click(function() { 
+	  /* $(".sort-by-rank").click(function() { 
 		
 		$.ajax({
 		type: 'get',
@@ -222,10 +193,9 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 		}
 	});
 		} 
-	);  */
+	);   */
 	
 </script>
-
 
 
 <!-- 해결해야 할 문제 -->
@@ -234,6 +204,7 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 <!-- 상품 컨테이너 body 형식과 통일시키기 -->
 <!-- 마이페이지 연동 방법 -->
 <!-- 상품 상세페이지 연동 방법 -->
+
 <jsp:include page="header.jsp" flush="false"/>
 		
 <div class="wrapper">
@@ -299,7 +270,6 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 					
 				return;
 				} %>
-				<%-- </c:forEach>  --%>
 				
 				
 				<!-- 판매자 아이디 검색 결과 -->
@@ -386,20 +356,22 @@ var asd {
 	
 };
 
-function sortTest(url) {
+/* function sortTest() {
 	$.ajax({
-		type: 'get',
-		url: "../java/com/ser/sort",
-		data: "asd",
+		type: "GET",
+		url: "/sort",
 		contentType:"application/x-www-form-urlencoded; charset=UTF-8",
 		success: function(data) {
-			$('.search-wrapper').html(data);
+			console.log("테스트용");
+			$(".search-wrapper").val(data);
+			console.log("테스트용");
 		},
+		data: "테스트용"
 		error: function(request, status, error) {
 			alert(error);
 		}
 	});
-}
+} */
 
 </script>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>

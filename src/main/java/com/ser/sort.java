@@ -31,22 +31,24 @@ public class sort extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<itemVO> sortBySalesRecord = Session.selectList("sortBySalesRecord");
-		request.setAttribute("sortedList", sortBySalesRecord);
+		doGet(request, response);
 	
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("../src/main/webapp/search.jsp");
-		dispatcher.forward(request, response);
-		System.out.println("전송완료");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		doPost(request, response);
 	}
 	
-	public void init(ServletConfig config) throws ServletException {
-		System.out.println("init() 실행됨!");
+	public void sortItemsByRanking(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<itemVO> sortItems = Session.selectList("sortBySalesRecord");
+		
+		request.setAttribute("sortedList", sortItems);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/search.jsp");
+		dispatcher.forward(request, response);
+		System.out.println("전송완료");
+		
 	}
 
 }
