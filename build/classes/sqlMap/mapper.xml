@@ -30,6 +30,9 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 		select * from itemDB
 	</select>
 	
+	
+	
+	
 	<select id="getNameBySeq" parameterType="int" resultType="String">
 		select itemname from itemDB where seq=#{item_seq}
 	</select>
@@ -76,6 +79,14 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 	</select>
 
 
+	<!-- 아이템 수정 -->
+	<select id="ItemRetouchOne" parameterType="int" resultType="model.itemVO">
+		select * from itemDB where seq=#{item_seq}
+	</select>
+
+	<select id="categoryNameSearch" parameterType="int" resultType="string">
+		select catename from category where catenum = #{catenum}
+	</select>
 
 
 	<select id="selectName" parameterType="int" resultType="string">

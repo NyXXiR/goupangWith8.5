@@ -5,6 +5,7 @@ import java.util.stream.IntStream;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import DAO.ItemDao2;
 import model.itemVO;
 import model.itemVO3;
 import mybatis.Mybatis;
@@ -48,11 +49,11 @@ public class Test {
     // List<itemVO> list = session.selectList("selectByPrice");
     // System.out.println(list);
 
-	List <itemVO> salListR = sess.selectList("ItemAllseq");
-	for (int i=0;i<salListR.size(); i++) {
-		System.out.println(salListR.get(i).getPrice());
-		System.out.println(salListR.get(i).getSellerid());
-		System.out.println(salListR.get(i).getCategorynum());
+     ItemDao2 itemdao = ItemDao2.getInstance();
+     List<itemVO> itemList = itemdao.itemRetouchListMain(1);
+     
+     for (int i=0; i<itemList.size(); i++) {
+		System.out.println(itemList.get(i));
 	}
 
     // int n= session.insert("add", vo);

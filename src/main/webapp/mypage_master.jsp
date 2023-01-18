@@ -11,19 +11,24 @@ sess=sqlSessionFactory.openSession(true); %>
 
 <%
 	String right = request.getParameter("right");
-	if(right == null){
+	if(request.getParameter("right") == null){
 		right = "myPageMain.jsp";
+	}else{
+		right = request.getParameter("right");
 	}
 	
 	ItemDao2 itemdao = ItemDao2.getInstance();
-	String numstr = request.getParameter("num");
-	int num;
-	if(request.getParameter("num") == null){
-		num = 1;
+	String numstr = request.getParameter("pageNum");
+	System.out.print(numstr);
+	int pageNum;
+	if(request.getParameter("pageNum") == null){
+		pageNum = 1;
 	}else{
-		num = Integer.valueOf(numstr);
+		pageNum = Integer.valueOf(numstr);
 	}
-	System.out.println(num);
+	System.out.print(pageNum);
+	
+
 %>
 
 <!DOCTYPE html>
@@ -67,27 +72,10 @@ sess=sqlSessionFactory.openSession(true); %>
 			<div id="center">
 				<!-- 내용 -->
 				<div id="changePage">
-					<%-- <jsp:include page="<%=right %>"/> --%>
+					<jsp:include page="<%=right %>"/>
 					<div id="span" style="display : none"></div>	
 					
-					<div id="itemList">
-					    <table id="itemListTable">
-					        <thead>
-					            <tr>
-					                <th>상품 번호</th>
-					                <th>상품 이름</th>
-					                <th>상품 가격</th>
-					                <th>할 인 율</th>
-					                <th>카테 고리</th>
-					            </tr>
-					        </thead>
-					        <tbody id="itemListadd">
-					            
-					        </tbody>
-					    </table>
-				    	<label id="itemAllCount">전체 상품 수</label><br>
-				    	<label id="itemCount"></label>
-					</div>
+					
 				</div>
 			</div>
 		</section>
@@ -256,20 +244,30 @@ function readURL3(input) {
 	}
 }
 
-		
+
+
+function locationNum(num){
+	location.href="mypage_master.jsp?right=pdRetouchPage.jsp?pageNum="+num;
+}		
+
+
+
 //등록된 상품 리스트
 $(function(){
+	$('#itemListadd').append("");
 <%	
 int itemCount = sess.selectOne("ItemAllCount");
 %>	$("#itemAllCount").append(":"+<%=itemCount%>);
 <%
 int listcount = (int)Math.ceil(itemCount/10.0);
 for(int i=1; i<=listcount; i++){
-%>	$('#itemCount').append("<a href='#' onclick='location.href=mypage_master.jsp?num=<%=i%>'>"+<%=i%>+"</a>");
+%>	$('#itemCount').append("<a href='javascript:;' onclick='locationNum(<%=i%>)'>"+<%=i%>+"</a>");
+
+
 <%
 }
 
-List<itemVO> itemList = itemdao.itemRetouchListMain(num);
+List<itemVO> itemList = itemdao.itemRetouchListMain(pageNum);
 for(int i=0; i<itemList.size(); i++){
 %>
 var cate;
@@ -282,7 +280,7 @@ else if(<%=itemList.get(i).getCategorynum()%> == 60){	cate = 'Toy';}
 else{	cate = 'Etc';}
 
 var str = "<tr><td>"+<%=itemList.get(i).getSeq()%>+"</td>";
-		str += "<td>"+"<%=itemList.get(i).getItemname()%>"+"</td>";
+		str += "<td><a href='javascript:;' onclick='callRetouchItem(<%=itemList.get(i).getSeq()%>)'>"+"<%=itemList.get(i).getItemname()%>"+"</td>";
 		str += "<td>"+<%=itemList.get(i).getPrice()%>+"</td>";
 		str += "<td>"+<%=itemList.get(i).getDiscount()%>+"</td>";
 		str += "<td>"+cate+"</td></tr>";
@@ -291,6 +289,10 @@ var str = "<tr><td>"+<%=itemList.get(i).getSeq()%>+"</td>";
 }%>
 	
 })
+
+function callRetouchItem(num){
+	location.href="mypage_master.jsp?right=pdRetouchItemPage.jsp&reItemNum="+num;
+}
 </script>
 
 </body>

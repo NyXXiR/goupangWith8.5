@@ -1,6 +1,22 @@
+<%@page import="DAO.ItemDao2"%>
+<%@page import="model.itemVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<form action="Upload" name="upload1" method="post" enctype="multipart/form-data">
+<% 
+	ItemDao2 id2 = ItemDao2.getInstance();
+
+	String reItemNumstr = request.getParameter("reItemNum");
+	if(request.getParameter("reItemNum") == null){
+		reItemNumstr = "0";
+	}else{
+		reItemNumstr = request.getParameter("reItemNum");
+	}
+	int reItemNum = Integer.valueOf(reItemNumstr);
+	
+	itemVO reItem = id2.reItemSearchOne(reItemNum);
+	String cateNameSea = id2.cateNameSearch(reItem.getCategorynum());		
+%>	
+<form action="ReTouch" name="upload1" method="post" enctype="multipart/form-data">
 	<table class="pdTable">
 		<tr>
 			<td>
@@ -8,7 +24,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="pdInput"><input type="text" name="pdName"></td>
+			<td class="pdInput"><input type="text" name="pdName" value="<%=reItem.getItemname()%>"></td>
 		</tr>
 	</table>
 	
@@ -20,7 +36,7 @@
 		</tr>
 		<tr>
 			<td><select name="pdCategory"  id = "pdSelect">
-				<option value="0">카테고리 선택</option>
+				<option selected value="<%=reItem.getCategorynum()%>"><%=cateNameSea %></option>
 				<option value="10">Fashion</option>
 				<option value="20">Beauty</option>
 				<option value="30">Eletronic</option>
@@ -39,7 +55,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="pdInput"><input type="text" name="pdPrice"></td>
+			<td class="pdInput"><input type="text" name="pdPrice" value="<%=reItem.getPrice()%>"></td>
 		</tr>
 	</table>
 	
@@ -50,7 +66,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="pdInput"><input type="text" name="pdQTY"></td>
+			<td class="pdInput"><input type="text" name="pdQTY" value="<%=reItem.getQty()%>"></td>
 		</tr>
 	</table>
 
@@ -61,7 +77,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="pdInput"><input type="text" name="pdDiscount"></td>
+			<td class="pdInput"><input type="text" name="pdDiscount" value="<%=reItem.getDiscount()%>"></td>
 		</tr>
 	</table>
 	<table class="pdTable">
@@ -72,13 +88,13 @@
 		</tr>
 		<tr>
 			<td class="pdInputP">
-					<img id="fakeInputP1" class="fakeInputP" ></img>
+					<img id="fakeInputP1" class="fakeInputP" src="./석류.jpg"></img>
 					<input type="file" name="pdPhoto" accept="image/*" onchange="readURL1(this)" required
 						id="realInputP1" class="realInput">
-					<img id="fakeInputP2" class="fakeInputP" ></img>
+					<img id="fakeInputP2" class="fakeInputP" src="./resources/item/<%=reItem.getSeq()%>(2).jpg"></img>
 					<input type="file" name="pdPhoto" accept="image/*" onchange="readURL2(this)" required
 						id="realInputP2" class="realInput">
-					<img id="fakeInputP3" class="fakeInputP" ></img>
+					<img id="fakeInputP3" class="fakeInputP" src="./resources/item/<%=reItem.getSeq()%>(3).jpg"></img>
 					<input type="file" name="pdPhoto" accept="image/*" onchange="readURL3(this)" required
 						id="realInputP3" class="realInput">
 			</td>
@@ -87,12 +103,12 @@
 
 	<table class="pdTable">
 		<tr>
-			<td>
+			<td>	
 				<h3>상세설명</h3>
 			</td>
 		</tr>
 		<tr>
-			<td class="pdInput"><input type="text" name="pdDesc" id="pdInput2"></td>
+			<td class="pdInput"><input type="text" name="pdDesc" id="pdInput2" value="<%=reItem.getDescription()%>"></td>
 		</tr>
 	</table>
 	<button id="button" type="submit">상  품  저  장</button>

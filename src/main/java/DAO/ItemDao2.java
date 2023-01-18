@@ -23,14 +23,28 @@ public class ItemDao2 {
 	public List<itemVO> itemRetouchListMain(int num) {
 		List<itemVO> itemList = sess.selectList("ItemAllseq");
 		List<itemVO> resultList = new ArrayList<>();
+		int MaxCount = sess.selectOne("ItemAllCount");
+		--MaxCount;
 		
 		int x = (num-1)*10;
 		int y = (num*10)-1;
+		
+		y = MaxCount<y ? MaxCount : y;
 		
 		for (int i=x; i <y; i++) {
 			resultList.add(itemList.get(i));
 		}
 		return resultList;
 		
+	}
+	
+	public itemVO reItemSearchOne(int num) {
+		itemVO result = sess.selectOne("ItemRetouchOne",num);
+		return result;
+	}
+	
+	public String cateNameSearch(int num) {
+		String str = sess.selectOne("categoryNameSearch",num);
+		return str;
 	}
 }
