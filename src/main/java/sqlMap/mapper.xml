@@ -55,7 +55,7 @@
 	
 	<!-- 마이페이지 그래프 -->
 	<select id="ItemSaleRecordHSearch" resultType="model.itemVO">
-		<![CDATA[select salerecord from (select * from itemDB order by salerecord desc, seq) where rownum <=10 ]]>
+		<![CDATA[select * from (select * from itemDB order by salerecord desc, seq) where rownum <=10 ]]>
 	</select>
 	
 	<select id="ItemSaleRecordHSum" resultType="int">
@@ -76,10 +76,7 @@
 	<select id="Itemprice*recordSum" resultType="int">
 		<![CDATA[select sum(multi) from (select price*salerecord as multi from itemdb order by multi desc) where rownum<=10 ]]>
 	</select>
-	
-	<select id="ItemAllseq" resultType="model.itemVO">
-		select * from itemDB order by seq
-	</select>
+
 	
 	
 	
