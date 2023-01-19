@@ -29,7 +29,6 @@ public class ItemDao2 {
 		int y = (num*10)-1;
 		
 		y = MaxCount<y ? MaxCount : y;
-		System.out.println(y);
 		for (int i=x; i <y; i++) {
 			resultList.add(itemList.get(i));
 		}

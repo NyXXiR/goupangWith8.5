@@ -51,7 +51,7 @@
 	</select>
 	
 	<select id="ItemSaleRecordRSearch" resultType="model.itemVO3">
-		<![CDATA[select salerecord from (select * from itemDB where salerecord !=0 order by salerecord, seq) where rownum <=10 ]]>
+		<![CDATA[select * from (select * from itemDB where salerecord !=0 order by salerecord, seq) where rownum <=10 ]]>
 	</select>
 	
 	<select id="ItemSaleRecordRSum" resultType="int">
