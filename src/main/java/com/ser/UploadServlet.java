@@ -46,7 +46,6 @@ public class UploadServlet extends HttpServlet {
 		String contentType = req.getContentType();
 		if (contentType != null
 				&& contentType.toLowerCase().startsWith("multipart/")) {
-			printPartInfo(req, writer,inttemNum);
 			
 			if (req.getParameter("pdName") == null) {
 				writer.println("<script> alert('상품명을 작성하여주십시오.')</script>");
@@ -70,6 +69,7 @@ public class UploadServlet extends HttpServlet {
 			int productSelect = Integer.valueOf(req.getParameter("pdCategory"));
 			String productDesc = req.getParameter("pdDesc");
 
+			printPartInfo(req, writer,inttemNum);
 			
 			
 			itemVO item = new itemVO(productName, productPrice, productDiscount, "ninja", productSelect, productQTY,productDesc);

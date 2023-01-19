@@ -10,9 +10,9 @@
 <mapper namespace="Mapper">
 
 <!-- map에 seq와 qty 를 넣어서 하자. -->
-<insert id="UpdateItemquantity" parameterType="map">
-update itemDB set qty= qty+#{qty} where id=#{seq}
-</insert>
+	<insert id="UpdateItemquantity" parameterType="map">
+	update itemDB set qty= qty+#{qty} where id=#{seq}
+	</insert>
 
 	<insert id="deleteItemBySeq" parameterType="int">
 		delete from itemDB where name=#{seq}
@@ -20,12 +20,12 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 
 	<insert id="Item" parameterType="model.itemVO">
 		insert into itemDB values(item_seq.nextval,
-		#{name},#{price},#{discount},#{seller_id}, sysdate,#{category_num},#{qty})
+		#{name},#{price},#{discount},#{seller_id}, sysdate,#{categorynum},#{qty})
 	</insert>
 
 	<insert id="ItemUpload" parameterType="model.itemVO">
 		insert into itemDB values(item_seq.nextval,
-		#{name},#{price},#{discount},#{seller_id}, sysdate,#{category_num},#{qty},#{desc},0)
+		#{itemname},#{price},#{discount},#{sellerid}, sysdate,#{categorynum},#{qty},#{description},0)
 	</insert>
 
 	<select id="ItemAll" resultType="model.itemVO">
@@ -68,6 +68,9 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 	<select id="ItemAllseq" resultType="model.itemVO">
 		select * from itemDB order by seq
 	</select>
+	
+	
+	
 
 
 
@@ -79,6 +82,10 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 	<select id="categoryNameSearch" parameterType="int" resultType="string">
 		select catename from category where catenum = #{catenum}
 	</select>
+	
+	<insert id="UpdateItemRe" parameterType="model.itemVO">
+		<![CDATA[update itemdb set itemname=#{itemname} ,price=#{price} ,discount=#{discount} ,category_num=#{categorynum} ,qty=#{qty} ,description=#{description} where seq=#{seq}]]>
+	</insert>
 
 
 

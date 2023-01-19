@@ -16,17 +16,19 @@ sess=sqlSessionFactory.openSession(true); %>
 	}else{
 		right = request.getParameter("right");
 	}
-	System.out.print(right);
+	/* System.out.print(right); */
 	
 	ItemDao2 itemdao = ItemDao2.getInstance();
+	
+	
 	String numstr = request.getParameter("pageNum");
 	int pageNum;
+	/* System.out.println(numstr); */
 	if(request.getParameter("pageNum") == null){
 		pageNum = 1;
 	}else{
 		pageNum = Integer.valueOf(numstr);
 	}
-	System.out.print(pageNum);
 	
 
 %>
@@ -85,6 +87,8 @@ sess=sqlSessionFactory.openSession(true); %>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<script>
+	
+	
 //마이페이지 그래프영역
 
 
@@ -209,6 +213,9 @@ $(document).on('click', '#fakeInputP3', function (e) { $('#realInputP3').click()
 
 
 
+
+
+
 //상품등록 페이지 - 상품이미지 기능
 function readURL1(input) {
 	if (input.files && input.files[0]) {
@@ -247,7 +254,7 @@ function readURL3(input) {
 
 
 function locationNum(num){
-	location.href="mypage_master.jsp?right=pdRetouchPage.jsp?pageNum="+num;
+	location.href="mypage_master.jsp?right=pdRetouchPage.jsp&pageNum="+num;
 }		
 
 

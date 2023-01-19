@@ -30,6 +30,16 @@ public class itemVO {
 	    this.description = desc;
 	  }
   
+  
+  public itemVO(String name, int price, int discount,int categorynum, int qty, String desc, int seq) {
+	    this.itemname = name;
+	    this.price = price;
+	    this.discount = discount;
+	    this.categorynum = categorynum;
+	    this.qty = qty;
+	    this.description = desc;
+	    this.seq = seq;
+	  }
       
 
   public itemVO(int seq, String itemname, int price, int discount, String sellerid, String rdate, int categorynum,

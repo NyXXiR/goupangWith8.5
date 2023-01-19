@@ -17,6 +17,7 @@ public class itemVO2 {
     super();
   }
 
+  
   public itemVO2(int seq, String name, int price, int discount, String seller_id, String date,
       int category_num, int qty) {
     super();

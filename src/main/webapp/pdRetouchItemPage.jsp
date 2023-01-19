@@ -16,7 +16,8 @@
 	itemVO reItem = id2.reItemSearchOne(reItemNum);
 	String cateNameSea = id2.cateNameSearch(reItem.getCategorynum());		
 %>	
-<form action="ReTouch" name="upload1" method="post" enctype="multipart/form-data">
+<form action="ReTouch" name="ReTouch1" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="pdSeq" value="<%=reItem.getSeq() %>"/>
 	<table class="pdTable">
 		<tr>
 			<td>
@@ -88,15 +89,15 @@
 		</tr>
 		<tr>
 			<td class="pdInputP">
-					<img id="fakeInputP1" class="fakeInputP" src="./석류.jpg"></img>
-					<input type="file" name="pdPhoto" accept="image/*" onchange="readURL1(this)" required
-						id="realInputP1" class="realInput">
+					<img id="fakeInputP1" class="fakeInputP" src="./resources/item/<%=reItem.getSeq()%>(1).jpg"></img>
+					<input type="file" name="pdPhoto" accept="image/*" onchange="readURL1(this)" 
+						id="realInputP1" class="realInput" value="./resources/item/<%=reItem.getSeq()%>(1).jpg">
 					<img id="fakeInputP2" class="fakeInputP" src="./resources/item/<%=reItem.getSeq()%>(2).jpg"></img>
-					<input type="file" name="pdPhoto" accept="image/*" onchange="readURL2(this)" required
-						id="realInputP2" class="realInput">
+					<input type="file" name="pdPhoto" accept="image/*" onchange="readURL2(this)" 
+						id="realInputP2" class="realInput" value="./resources/item/<%=reItem.getSeq()%>(2).jpg">
 					<img id="fakeInputP3" class="fakeInputP" src="./resources/item/<%=reItem.getSeq()%>(3).jpg"></img>
-					<input type="file" name="pdPhoto" accept="image/*" onchange="readURL3(this)" required
-						id="realInputP3" class="realInput">
+					<input type="file" name="pdPhoto" accept="image/*" onchange="readURL3(this)" 
+						id="realInputP3" class="realInput" value="./resources/item/<%=reItem.getSeq()%>(3).jpg">
 			</td>
 		</tr>
 	</table>
