@@ -55,7 +55,7 @@
 	
 	<!-- 마이페이지 그래프 -->
 	<select id="ItemSaleRecordHSearch" resultType="model.itemVO">
-		<![CDATA[select salerecord from (select * from itemDB order by salerecord desc, seq) where rownum <=10 ]]>
+		<![CDATA[select * from (select * from itemDB order by salerecord desc, seq) where rownum <=10 ]]>
 	</select>
 	
 	<select id="ItemSaleRecordHSum" resultType="int">
@@ -63,7 +63,7 @@
 	</select>
 	
 	<select id="ItemSaleRecordRSearch" resultType="model.itemVO3">
-		<![CDATA[select salerecord from (select * from itemDB where salerecord !=0 order by salerecord, seq) where rownum <=10 ]]>
+		<![CDATA[select * from (select * from itemDB where salerecord !=0 order by salerecord, seq) where rownum <=10 ]]>
 	</select>
 	
 	<select id="ItemSaleRecordRSum" resultType="int">
