@@ -86,7 +86,7 @@ buyer가 장바구니에 담아둔 항목과 바로구매에서 가져온 항목
 							<button class="quantity-plus" type="button"
 								onclick="valuePlus(this)">수량 +</button>
 								<button class="delete-from-cart" type="button" onclick=""> X </button>
-								
+								<br>
 								<input type= "text" class="item-price" readonly="true" value=<%=sqlSession.selectOne("getDiscountedBySeq",items)%>>
 <input type="text" class="quantity-count" readonly="true" value=<%=qty %>>
 <input type="text" class="priceCal" value="">

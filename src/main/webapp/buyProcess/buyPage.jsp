@@ -86,17 +86,21 @@ buyer가 장바구니에 담아둔 항목과 바로구매에서 가져온 항목
 							<button class="quantity-plus" type="button"
 								onclick="valuePlus(this)">수량 +</button>
 								<button class="delete-from-cart" type="button" onclick=""> X </button>
+								<br>
+								
 								
 								<input type= "text" class="item-price" readonly="true" value=<%=sqlSession.selectOne("getDiscountedBySeq",items)%>>
+								<span> x</span>
 <input type="text" class="quantity-count" readonly="true" value=<%=qty %>>
-<input type="text" class="priceCal" value="">
+<% int calculatedPrice= (int)sqlSession.selectOne("getDiscountedBySeq",items)*qty; %> 
+<span>=</span>
+<input type="text" class="calculated-price" value=<%=calculatedPrice %>>
 	</div>
 								
 						</div>
-						<% int calculatedPrice= (int)sqlSession.selectOne("getDiscountedBySeq",items)*qty; %> 
+						
 
 </div>
-<% finalPrice +=calculatedPrice; %>
 </div>
 
 
@@ -104,7 +108,7 @@ buyer가 장바구니에 담아둔 항목과 바로구매에서 가져온 항목
 }
 %>
 </div>
-<div id="final-price">최종가격: <%=finalPrice %></div>
+최종가격: <input id="final-price" name="final-price" value="">
 <input type="button" value="구매하기"/>
 
 
@@ -128,7 +132,13 @@ soldItemDB에 수량만큼의 quantity를 추가
 
 <script>
 
+var sum=0;
+document.querySelectorAll(".calculated-price").forEach(function(item){
 
+	sum+= parseInt(item.getAttribute("value"));
+});
+
+$('input[name=final-price]').attr('value',sum);
 
 function thisValue(vm){
 	var count= parseInt($(vm).parent().children(".quantity-count").attr("value"));
@@ -141,6 +151,12 @@ function valuePlus(vm){
 	var temp= count+1;
 	count=parseInt($(vm).parent().children(".quantity-count").attr("value", temp));
 
+
+	
+	var calCount= parseInt($(vm).parent().children(".calculated-price").attr("value"));
+	var temp2 = parseInt($(vm).parent().children(".item-price").attr("value"))*temp;
+
+	calCount=parseInt($(vm).parent().children(".calculated-price").attr("value",temp2));
 
 	}
 	
