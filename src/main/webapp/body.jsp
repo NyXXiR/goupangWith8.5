@@ -11,11 +11,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <style>
 .text-small {
 	text-decoration: line-through;
+	color: #9E9E9E;
 }
 </style>
+
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -74,13 +77,13 @@
 	</div>
 
 
-	<h1>컨테이너이름입력</h1>
+	<h1>전체상품</h1>
 	<div class="flex-container"></div>
 
 	<div class="row">
 		<div class="col"></div>
 		<div class="card" style="width: 18rem;">
-			<img src="./resources/item/3.jpg" class="card-img-top" alt="...">
+			<img src="./resources/item/3(1).jpg" class="card-img-top" alt="...">
 			<div class="card-body">
 				<h5 class="card-title">
 					<div id="itemName" class="text-large"><%=vo1.getItemname()%></div>
@@ -154,7 +157,7 @@
 		</div>
 	</div>
 
-	<h1>컨테이너이름입력</h1>
+	<h1>  </h1>
 	<div class="flex-container"></div>
 	<div class="row">
 		<div class="col"></div>
