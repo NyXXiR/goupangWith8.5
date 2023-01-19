@@ -22,9 +22,9 @@ import mybatis.Mybatis;
 /**
  * Servlet implementation class UploadServlet
  */
-@WebServlet("/Upload")
+@WebServlet("/ReTouch")
 @MultipartConfig(location = "C:\\temp")
-public class UploadServlet extends HttpServlet {
+public class ReTouchServlet extends HttpServlet {
 	
 
 	
@@ -36,11 +36,11 @@ public class UploadServlet extends HttpServlet {
 
 		resp.setContentType("text/html; charset=utf-8");
 		
+		System.out.println("서블릿");
+		
 		SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
 		SqlSession sess;
 	 	sess = sqlSessionFactory.openSession(true);
-		int inttemNum = sess.selectOne("itemNextval");
-			++inttemNum;
 
 		PrintWriter writer = resp.getWriter();
 		String contentType = req.getContentType();
@@ -62,6 +62,7 @@ public class UploadServlet extends HttpServlet {
 			}else {
 			
 			
+			int productSeq = Integer.valueOf(req.getParameter("pdSeq"));
 			String productName = req.getParameter("pdName");
 			int productPrice = Integer.valueOf(req.getParameter("pdPrice"));
 			int productDiscount = Integer.valueOf(req.getParameter("pdDiscount"));
@@ -69,13 +70,13 @@ public class UploadServlet extends HttpServlet {
 			int productSelect = Integer.valueOf(req.getParameter("pdCategory"));
 			String productDesc = req.getParameter("pdDesc");
 
-			printPartInfo(req, writer,inttemNum);
 			
+			printPartInfo(req, writer,productSeq);
 			
-			itemVO item = new itemVO(productName, productPrice, productDiscount, "ninja", productSelect, productQTY,productDesc);
-			System.out.println(item);
-			sess.selectOne("ItemUpload", item);
-			writer.println("<script> alert('상품등록의 성공하였습니다.')</script>");
+			itemVO reitem = new itemVO(productName, productPrice, productDiscount, productSelect, productQTY,productDesc,productSeq);
+			System.out.println(reitem);
+			sess.selectOne("UpdateItemRe", reitem);
+			writer.println("<script> alert('상품수정의 성공하였습니다.')</script>");
 			}
 		} else {
 			writer.println("<html><body>");
@@ -86,18 +87,18 @@ public class UploadServlet extends HttpServlet {
 		writer.println("</body></html>");
 	}
 
-	private void printPartInfo(HttpServletRequest req, PrintWriter writer, int inttemNum)
+	private void printPartInfo(HttpServletRequest req, PrintWriter writer, int productSeq)
 			throws IOException, ServletException {
 		int i = 1;
 		Collection<Part> parts = req.getParts();
 		for (Part part : parts) {
-			String itemNum = String.valueOf(inttemNum);
-			String contentType = part.getContentType();
+			
+			/*String contentType = part.getContentType();*/
 			
 			if (part.getHeader("Content-Disposition").contains("filename=")) {
-				String fileName = part.getSubmittedFileName();
+				/*String fileName = part.getSubmittedFileName();*/
 				if (part.getSize() > 0) {
-					part.write("C:\\goupangWith8.5\\src\\main\\webapp\\resources\\item\\" + itemNum+"("+i+").jpg");
+					part.write("C:\\goupangWith8.5\\src\\main\\webapp\\resources\\item\\" + productSeq+"("+i+").jpg");
 					part.delete();
 					i++;
 					

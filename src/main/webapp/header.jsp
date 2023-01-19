@@ -18,7 +18,7 @@ SqlSession Session;
 Session = sqlSessionFactory.openSession(true); 
 
 String loginStatus = (String) session.getAttribute("buyerId");
-String sellerCheck = Session.selectOne("isSeller", loginStatus);
+String sellerLoginStatus = (String) session.getAttribute("sellerId");
 // getAttribute는 반환형이 Object이므로 형변환 필요함
 // 즉, 모든 클래스 타입을 속성의 값으로 사용 가능 하다는 것을 의미함.
 %>
@@ -43,7 +43,7 @@ String sellerCheck = Session.selectOne("isSeller", loginStatus);
           </div>
           
           <div class="header-middle-box">
-           <form action="search.jsp" class="search-container" method="POST">
+           <form action="search2.jsp" class="search-container" method="POST">
                 <select name="comboValue">
                   <option value="all">전체</option>
                   <option value="sellerId">판매자이름</option>
@@ -58,19 +58,20 @@ String sellerCheck = Session.selectOne("isSeller", loginStatus);
           
           <div class="header-right-box">
             <ul class="menu-bar">
-           	<% if(loginStatus == null) {
+           	<% if(loginStatus == null && sellerLoginStatus == null) {
            	} else { %>
             	 <li>
             	  <a href="#"><img src="./resources/header/account.png" alt="" class="account-img"/></a>
                 	<div class="detail-box">
                   		<ul class="drop-menu-1">
-                  		<%if(sellerCheck != null) {%>
-                  			<li><a href="mypage_master.jsp">관리자 페이지</a></li>
+                  		<% 
+                  		if(sellerLoginStatus != null) {%>
+                  			<li><a href="mypage_master.jsp?seller_id=">관리자 페이지</a></li>
                   		<% 	} else { %> 
-		                    <li><a href="myPage_consumer.jsp?buyer_id=<%=loginStatus %>">회원 정보</a></li>
-		                    <li><a href="myPage.jsp">메뉴 1</a></li>
-		                    <li><a href="myPage.jsp">메뉴 2</a></li>
-		                    <li><a href="myPage.jsp">메뉴 3</a></li>
+		                    <li><a href="mypage_cunsumer.jsp?buyer_id=<%=loginStatus %>">회원 정보</a></li>
+		                    <li><a href="mypage.jsp">메뉴 1</a></li>
+		                    <li><a href="mypage.jsp">메뉴 2</a></li>
+		                    <li><a href="mypage.jsp">메뉴 3</a></li>
 		                <% } %>
                   		</ul>
                 	</div>

@@ -1,15 +1,17 @@
-<%@page import="model.itemVO3"%>
 <%@page import="model.itemVO"%>
 <%@page import="java.util.List" %>
 <%@page import="org.apache.ibatis.session.SqlSession" %>
 <%@page import="mybatis.Mybatis" %>
 <%@page import="org.apache.ibatis.session.SqlSessionFactory" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<% SqlSessionFactory sqlSessionFactory=Mybatis.getSqlSessionFactory(); SqlSession sess;
+<% SqlSessionFactory sqlSessionFactory=Mybatis.getSqlSessionFactory(); 
+SqlSession sess;
 sess=sqlSessionFactory.openSession(true); %>
 
 <%
 	String right = request.getParameter("right");
+	String buyerId = (String) request.getAttribute("buyerId");
+	
 	
 	if(right == null){
 		right = "myPage.jsp";
@@ -36,10 +38,10 @@ sess=sqlSessionFactory.openSession(true); %>
 				<!-- 목록 -->
 				<ul id="category">
 					<li>
-						<h1 id="myPage" onclick="location.href='mypage_master.jsp?right=myPage.jsp'">마이페이지</h1>
+						<h1 id="myPage" onclick="location.href='mypage_consumer.jsp?right=myPage.jsp'">마이페이지</h1>
 					</li>
 					<li>
-						<h2 id="pdPage" onclick="location.href='mypage_master.jsp?right=pdPage.jsp'">주문 내역</h2>
+						<h2 id="pdPage" onclick="location.href='mypage_consumer.jsp?right=pdPage.jsp'">주문 내역</h2>
 					</li>
 					<li>
 						<h2 id="dvPage" onclick="getPage(this.id)">게시글 내역</h2>
