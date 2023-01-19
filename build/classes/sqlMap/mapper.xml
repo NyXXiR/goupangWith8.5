@@ -231,9 +231,6 @@ select count(*) from guestbook_message
  
  
  
-<!-- orderHistory 관련 구문 -->
 
-<select>
-	
-</select>
+
 </mapper>
