@@ -63,7 +63,7 @@ sess=sqlSessionFactory.openSession(true); %>
 						<h2 id="pdPage" onclick="location.href='mypage_master.jsp?right=pdRetouchPage.jsp'">상품 수정</h2>
 					</li>
 					<li>
-						<h2 id="dvPage" onclick="getPage(this.id)">배송 관리</h2>
+						<h2 id="dvPage" onclick="location.href='mypage_master.jsp?right=orderCarePage.jsp'">주문/배송 관리</h2>
 					</li>
 					<li>
 						<h2 id="psPage" onclick="getPage(this.id)">게시글 관리</h2>
@@ -76,7 +76,7 @@ sess=sqlSessionFactory.openSession(true); %>
 				<div id="changePage">
 					<jsp:include page="<%=right %>"/>
 					<div id="span" style="display : none"></div>	
-					
+						
 					
 				</div>
 			</div>
@@ -311,6 +311,24 @@ var str = "<tr><td>"+<%=itemList.get(i).getSeq()%>+"</td>";
 function callRetouchItem(num){
 	location.href="mypage_master.jsp?right=pdRetouchItemPage.jsp&reItemNum="+num;
 }
+
+
+//수정할 상품을 찾는 기능
+function searchItem(){s
+	<%	String itemK,itemV=null;
+	if(request.getParameter("searchItemkey")==null && request.getParameter("searchItemValue")==null){
+		%>
+		alert("값을 정확하게 입력해주세요.");
+		history.back();
+<%	}else{
+		itemK = request.getParameter("searchItemkey");
+		itemV = request.getParameter("searchItemValue");
+		itemdao.itemSearchList(itemK,itemV);
+		%>
+		$('#itemListadd').append(str);
+		<%
+		
+}%>}
 </script>
 
 </body>

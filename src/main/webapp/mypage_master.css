@@ -67,6 +67,10 @@ h2 {
 }
 
 
+
+
+
+
 /* myPage 영역 */
 .myPage {
   margin-top: 50px;
@@ -153,6 +157,11 @@ h2 {
   font-family: "Gothic A1", sans-serif;
 }
 
+
+
+
+
+
 /* pdUpdatePage영역  */
 
 #insertPd {
@@ -221,6 +230,11 @@ h2 {
 
 
 
+
+
+
+
+
 /* pdRetouchPage 영역 */
 #itemList{
 	margin : 0 auto;
@@ -229,12 +243,12 @@ h2 {
 }
 #itemListTable{
 	width : 100%;
-	margin-top : 100px;
+	margin-top : 50px;
 	font-size : 20px;
 	border-top: 1px solid #444444;
     border-collapse: collapse;
 }
-#itemList label{
+#itemAllCount{
 	line-height : 100px;
 	font-size : 18px;	
 }
@@ -242,4 +256,21 @@ h2 {
     border-bottom: 1px solid #a0a0a0;
     padding: 10px;
   }
-
+#itemSearchInput{
+	margin-top:100px;
+}
+#itemSearchInput select{
+	height : 30px;
+}
+#itemSearchInput input{
+	height : 25px;
+	margin : 0 5px;
+}
+#itemSearchInput button{
+	height : 30px;
+	width : 60px;
+}
+#itemCount a{
+	margin-left : 10px;
+	margin-right : 10px;
+}

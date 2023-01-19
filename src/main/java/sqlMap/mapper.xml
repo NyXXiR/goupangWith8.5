@@ -99,6 +99,27 @@
 
 
 
+	<select id="itemSearchitemname" parameterType="string" resultType="model.itemVO">
+		select * from itemdb where itemname = #{value}
+	</select>
+	
+	<select id="itemSearchseq" parameterType="int" resultType="model.itemVO">
+		select * from itemdb where seq = #{val}
+	</select>
+	
+	<select id="itemSearchprice" parameterType="int" resultType="model.itemVO">
+		select * from itemdb where price = #{val}
+	</select>
+	
+	<select id="itemSearchcategory" parameterType="string" resultType="model.itemVO">
+		select * from itemdb where category = #{value}
+	</select>
+	
+
+
+
+
+
 
 	<select id="selectName" parameterType="int" resultType="string">
 		SELECT ITEMNAME FROM itemDB WHERE SEQ = #{seq}

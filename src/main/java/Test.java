@@ -50,10 +50,10 @@ public class Test {
     // System.out.println(list);
 
      ItemDao2 itemdao = ItemDao2.getInstance();
-     List<itemVO> itemList = itemdao.itemRetouchListMain(1);
      
-     for (int i=0; i<itemList.size(); i++) {
-		System.out.println(itemList.get(i));
+     List<itemVO> list = itemdao.itemSearchList("seq", "3");
+     for (int i=0; i<list.size(); i++) {
+		System.out.println(list.get(i));
 	}
 
     // int n= session.insert("add", vo);
