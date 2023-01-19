@@ -6,6 +6,7 @@
 
 <!-- itemDB 관련 구문 -->
 
+
 <mapper namespace="Mapper">
 
 <!-- map에 seq와 qty 를 넣어서 하자. -->
@@ -31,9 +32,17 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 		select * from itemDB
 	</select>
 	
+	<select id="ItemAllCount" resultType="int">
+		select count(*) from itemdb
+	</select>
+	
+	<select id="itemRetouchListMain" resultType="model.itemVO">
+		select * from itemdb order by seq
+	</select>
+	
 	
 	<!-- 마이페이지 그래프 -->
-	<select id="ItemSaleRecordHSearch" resultType="int">
+	<select id="ItemSaleRecordHSearch" resultType="model.itemVO">
 		<![CDATA[select salerecord from (select * from itemDB order by salerecord desc, seq) where rownum <=10 ]]>
 	</select>
 	
@@ -41,12 +50,34 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 		<![CDATA[select sum(salerecord) from (select * from itemDB order by salerecord desc, seq) where rownum <=10 ]]>
 	</select>
 	
-	<select id="ItemSaleRecordRSearch" resultType="int">
+	<select id="ItemSaleRecordRSearch" resultType="model.itemVO3">
 		<![CDATA[select salerecord from (select * from itemDB where salerecord !=0 order by salerecord, seq) where rownum <=10 ]]>
 	</select>
 	
 	<select id="ItemSaleRecordRSum" resultType="int">
 		<![CDATA[select sum(salerecord) from (select * from itemDB order by salerecord, seq) where rownum <=10 ]]>
+	</select>
+	
+	<select id="Itemprice*recordSearch" resultType="model.itemVO3">
+		<![CDATA[select * from (select seq,itemname,price,description,salerecord,price*salerecord as multi from itemdb order by multi desc) where rownum<=10 ]]>
+	</select>
+	<select id="Itemprice*recordSum" resultType="int">
+		<![CDATA[select sum(multi) from (select price*salerecord as multi from itemdb order by multi desc) where rownum<=10 ]]>
+	</select>
+	
+	<select id="ItemAllseq" resultType="model.itemVO">
+		select * from itemDB order by seq
+	</select>
+
+
+
+	<!-- 아이템 수정 -->
+	<select id="ItemRetouchOne" parameterType="int" resultType="model.itemVO">
+		select * from itemDB where seq=#{item_seq}
+	</select>
+
+	<select id="categoryNameSearch" parameterType="int" resultType="string">
+		select catename from category where catenum = #{catenum}
 	</select>
 
 
@@ -65,7 +96,7 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 	</select>
 	
 	<select id="ItemNameBySeq" parameterType="int" resultType="string">
-		SELECT name FROM itemDB WHERE seq = #{seq}
+		SELECT itemname FROM itemDB WHERE seq = #{seq}
 	</select>
 	
 	<select id="ItemOrderByPrice" resultType="model.itemVO">
@@ -88,6 +119,7 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 	<select id="sortBySalesRecord" resultType="model.itemVO">
 		select * from itemDB order by salerecord desc
 	</select>
+	
 <!--  soldItemDB 관련 구문 -->
 
 <!--  cartItemDB 관련 구문 -->
@@ -106,36 +138,43 @@ select * from cartItemDB where buyer_id=#{buyer_id}
 </insert>
 
 
-<select id="loginBuyer" parameterType="model.buyerVO" resultType="model.buyerVO">
-	select #{buyerId} from buyerDB where buyer_pw = #{buyerPw}
-</select>
-
 <insert id="1" parameterType="model.buyerVO">
 insert into buyerDB values{3개}
 </insert>
 
 	
-<select id="loginCheckID" parameterType="String" resultType="String">
+<select id="buyerIdCheck" parameterType="String" resultType="String">
 	select buyer_id from buyerDB where buyer_id = #{buyer_id}
 </select>
 
-<select id="loginCheckPw" parameterType="String" resultType="String">
+<select id="buyerPwCheck" parameterType="String" resultType="String">
 	select buyer_pw from buyerDB where buyer_id = #{buyer_id}
 </select>
 
+<select id="selectBuyerName" parameterType="String" resultType="String">
+		select buyer_name from buyerDB where buyer_id = #{buyer_id}
+</select>
+	
 <!--  sellerDB 관련 구문 -->
 
+<select id="sellerIdCheck" parameterType="String" resultType="String">
+	select seller_id from sellerDB where seller_id = #{seller_id}
+</select>
 
+<select id="sellerPwCheck" parameterType="String" resultType="String">
+	select seller_pw from sellerDB where seller_id = #{seller_id}
+</select>
 
 <!-- 익명게시판 관련 구문  -->
 <!-- MessageDB 관련구문  -->
+
 <!-- <insert id="WriteMessage" parameterType="model.messageVO">
 	insert into guestbook_message values(seq_guestbook_message, #{guest_name}, #{password}), #{message})
 </insert>
 <select id="selectByMessageId" parameterType="int" resultType="String">
 	select * from guestbook_message where message_id=?
-</select> -->
-<!-- <select id="insertMessage" parameterType="model.MessageVO">
+</select>
+<select id="insertMessage" parameterType="model.MessageVO">
 	insert into guestbook_message values(seq_guestbook_message.nextval, #{bookPassword},#{bookPwd},#{bookMessage})
 </select>
 

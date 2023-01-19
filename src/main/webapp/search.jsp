@@ -159,41 +159,22 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 
 
 <script>
-
 	
-	function sortTest() {
+	function sortBySalesRecord() {
 	$.ajax({
 		type: "GET",
-		url: "/sort",
-		contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+		url: "sortedItems.jsp",
 		success: function(data) {
 			console.log("테스트용");
-			$(".search-wrapper").val(data);
+			$(".search-wrapper").html(data);
 			console.log("테스트용");
 		},
-		data: "",
 		error: function(request, status, error) {
 			alert(error);
 		}
 	});
 }
 
-	  /* $(".sort-by-rank").click(function() { 
-		
-		$.ajax({
-		type: 'get',
-		url: "../sort",
-		data: "",
-		contentType:"application/x-www-form-urlencoded; charset=UTF-8",
-		success: function(data) {
-			$('.search-wrapper').html(data);
-		},
-		error: function(request, status, error) {
-			alert(error);
-		}
-	});
-		} 
-	);   */
 	
 </script>
 
@@ -211,7 +192,7 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 	
 		<!-- sort button area -->
 		<div class="sort-btn-box">
-			<div class="sort-by-rank" onclick="sortTest()">랭킹</div>
+			<div class="sort-by-rank" onclick="sortBySalesRecord()">랭킹</div>
 			<div class="sort-by-category" onclick="sortTest()"><a href="#">카테고리</a>
 				<div class="category-dropbox">
 					<ul>
@@ -244,7 +225,6 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 			
 			<div class="search-list-box">
 				<!-- 전체 상품 검색 결과 -->
-			<%-- 	<c:forEach var="i" value="<%=listByAll %>" begin="0" end="<%=listByAll.size() %>"> --%>
 				<% if(comboValue.equals("all")) {
 					for(int i=0; i<listByAll.size(); i++) { %>
 							
@@ -261,7 +241,7 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 								<div class="item-price-discount"><%=itemPrice * (100 - discountRate) / 100 %></div>
 							<%
 							} else { %>
-								<%-- <div class="item-price-box"><fmt:formatNumber value="${i.getPrice()}" pattern="#,###" /></div> --%>
+								<div class="item-price-box"><%=itemPrice %></div>
 							<% 
 							}
 							%>
@@ -327,53 +307,6 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 		
 	</div>
 	
-	
-	
-	
-	
-	
-	<script>
-var asd {
-	data :  <% for(int i=0; i<testSort.size(); i++) {
-		int itemPrice = testSort.get(i).getPrice();
-		int discountRate = testSort.get(i).getDiscount(); %>
-	
-		<div class="product-div" onclick="location.href ='search2.jsp?itemSeq=<%=testSort.get(i).getSeq()%>'">
-			<div class="img-box"><img src="resources/item/<%=testSort.get(i).getSeq() %>.jpg" class="search-img-thumbnail" width="100%" height="225"></div>
-			<div class="item-name-box"><%=testSort.get(i).getItemname() %></div>
-		<%if(discountRate != 0) {%>
-			<div class="item-price-box" style="text-decoration:line-through"><%=testSort.get(i).getPrice() %></div>
-			<div class="item-price-discount"><%=itemPrice * (100 - discountRate) / 100 %></div>
-		<%
-		} else { %>
-			<div class="item-price-box"><%=testSort.get(i).getPrice() %></div>
-		<% 
-		}
-		%>
-		</div>
-	<%}%>
-	
-	
-};
-
-/* function sortTest() {
-	$.ajax({
-		type: "GET",
-		url: "/sort",
-		contentType:"application/x-www-form-urlencoded; charset=UTF-8",
-		success: function(data) {
-			console.log("테스트용");
-			$(".search-wrapper").val(data);
-			console.log("테스트용");
-		},
-		data: "테스트용"
-		error: function(request, status, error) {
-			alert(error);
-		}
-	});
-} */
-
-</script>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 </body>
 </html>
