@@ -16,10 +16,10 @@ sess=sqlSessionFactory.openSession(true); %>
 	}else{
 		right = request.getParameter("right");
 	}
+	System.out.print(right);
 	
 	ItemDao2 itemdao = ItemDao2.getInstance();
 	String numstr = request.getParameter("pageNum");
-	System.out.print(numstr);
 	int pageNum;
 	if(request.getParameter("pageNum") == null){
 		pageNum = 1;
