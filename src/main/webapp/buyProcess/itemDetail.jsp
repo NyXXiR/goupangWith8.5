@@ -154,10 +154,7 @@ HashMap<String, String> itemMap = (HashMap<String, String>) session.getAttribute
 		</section>
 		<section id=itemDescription>
 			<h1>제품 설명</h1>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi
-				cumque quisquam culpa perspiciatis doloremque iste exercitationem
-				repellat tempora alias doloribus. Pariatur perspiciatis aspernatur
-				repudiandae harum corporis eaque minus modi repellendus?</p>
+			<p><%= itemMap.get("description") %></p>
 		</section>
 		<!-- userID 인식해서 구매자일 경우 댓글달기 활성화,
 	제품판매 당사자일 경우 답글달기 활성화-->

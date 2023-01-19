@@ -77,9 +77,7 @@
 		<![CDATA[select sum(multi) from (select price*salerecord as multi from itemdb order by multi desc) where rownum<=10 ]]>
 	</select>
 	
-	<select id="ItemAllseq" resultType="model.itemVO">
-		select * from itemDB order by seq
-	</select>
+	
 	
 	
 	
@@ -143,7 +141,7 @@
 
 <!--  cartItemDB 관련 구문 -->
 <insert id="cartItem" parameterType="model.cartItemVO">
-insert into cartItemDB values(#{item_seq}, #{buyer_id},#{quantity})
+insert into cartItemDB values(#{item_seq}, #{buyer_id},#{qty})
 </insert>
 
 <select id="cartListById" parameterType="String" resultType="model.cartItemVO">
