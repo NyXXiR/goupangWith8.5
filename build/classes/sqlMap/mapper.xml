@@ -206,5 +206,12 @@ select count(*) from guestbook_message
 select count(*) from guestbook_message
 </select>
  -->
+ 
+ 
+ 
+<!-- orderHistory 관련 구문 -->
 
+<select>
+	
+</select>
 </mapper>

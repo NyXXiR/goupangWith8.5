@@ -206,5 +206,11 @@ select count(*) from guestbook_message
 select count(*) from guestbook_message
 </select>
  -->
+ 
+ 
+ 
 
+<select>
+	
+</select>
 </mapper>
