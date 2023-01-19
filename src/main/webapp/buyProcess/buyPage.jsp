@@ -20,11 +20,12 @@ sqlSession = sqlSessionFactory.openSession(true);
 List<cartItemVO> cartList = sqlSession.selectList("cartListById", session.getAttribute("buyer_id"));
 
 int itemSeq=cartList.get(0).getItem_seq();
-
+int finalPrice=0;
 %>
 
 <%=cartList.get(0).getItem_seq() %>
 <%= sqlSession.selectOne("getNameBySeq", cartList.get(0).getItem_seq()) %>
+
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -34,14 +35,16 @@ int itemSeq=cartList.get(0).getItem_seq();
 border:1px solid black;
 }
 .img-box{
-width:300px;
-height:300px;
+width:200px;
+height:200px;
+object-fit: cover;
+
 display: inline-block;
 }
 
 .search-img-thumbnail{
-width:300px;
-height:300px;
+width:100%;
+
 object-fit: cover;
 }
 #cartItem-detail{
@@ -49,9 +52,14 @@ display:inline-block;
 
 }
 #cartItem{
-display:flex;}
+display:flex;
+align-items: center;
+justify-content: center;
+}
 
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
 </head>
 <body>
 제품 구매 페이지. itemDetail에서 넘어옴.
@@ -62,7 +70,7 @@ buyer가 장바구니에 담아둔 항목과 바로구매에서 가져온 항목
 <%for(int i=0;i<cartList.size();i++){
   int items=cartList.get(i).getItem_seq();
   String itemName= sqlSession.selectOne("getNameBySeq", items);
-  
+  int qty= cartList.get(i).getQty();
 %>
 
 <div id="cartItem">
@@ -71,22 +79,33 @@ buyer가 장바구니에 담아둔 항목과 바로구매에서 가져온 항목
 <div id="cartItem-detail">
 <p><%=itemName %></p>
 						<div class="prod-quantity__form">
-							<input type="text" value="1" name="quantity"
+							<input type="text" value=<%=qty %> name="quantity"
 								class="quantity-count" readonly="true" />
 							<button class="quantity-minus" type="button"
-								onclick="valueMinus(1)">수량 -</button>
+								onclick="valueMinus(this)">수량 -</button>
 							<button class="quantity-plus" type="button"
-								onclick="valuePlus(1)">수량 +</button>
+								onclick="valuePlus(this)">수량 +</button>
+								<button class="delete-from-cart" type="button" onclick=""> X </button>
+								
+								<input type= "text" class="item-price" readonly="true" value=<%=sqlSession.selectOne("getDiscountedBySeq",items)%>>
+<input type="text" class="quantity-count" readonly="true" value=<%=qty %>>
+<input type="text" class="priceCal" value="">
+	</div>
+								
 						</div>
-<p><%=sqlSession.selectOne("getDiscountedBySeq",items) %></p>
+						<% int calculatedPrice= (int)sqlSession.selectOne("getDiscountedBySeq",items)*qty; %> 
+
 </div>
+<% finalPrice +=calculatedPrice; %>
 </div>
+
 
 <%
 }
 %>
 </div>
-
+<div id="final-price">최종가격: <%=finalPrice %></div>
+<input type="button" value="구매하기"/>
 
 
 ===
@@ -108,19 +127,38 @@ soldItemDB에 수량만큼의 quantity를 추가
 
 
 <script>
-function valuePlus(num){
-	var cnt =document.querySelector(".quantity-count");
-	cnt.value= parseInt(cnt.value)+num;
+
+
+
+function thisValue(vm){
+	var count= parseInt($(vm).parent().children(".quantity-count").attr("value"));
+	return count;
+}
+
+function valuePlus(vm){
+
+	var count= parseInt($(vm).parent().children(".quantity-count").attr("value"));
+	var temp= count+1;
+	count=parseInt($(vm).parent().children(".quantity-count").attr("value", temp));
+
+
 	}
 	
 	
-function valueMinus(num){
-		var cnt =document.querySelector(".quantity-count");
-		cnt.value= parseInt(cnt.value)-num;
-		if(cnt.value==0){
-			cnt.value=1;
+function valueMinus(vm){
+	var count= parseInt($(vm).parent().children(".quantity-count").attr("value"));
+	var temp= count-1;
+	if(temp>0){
+		
+		count=parseInt($(vm).parent().children(".quantity-count").attr("value", temp));
+
+		}else if(temp==0){
+			alert("선택된 제품을 장바구니에서 삭제하시겠습니까?");
+		
+		}
+	
+
 			}
-	}
 </script>
 </body>
 </html>

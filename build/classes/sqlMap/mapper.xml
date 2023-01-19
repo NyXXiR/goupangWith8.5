@@ -34,7 +34,7 @@ update itemDB set qty= qty+#{qty} where id=#{seq}
 		select itemname from itemDB where seq=#{item_seq}
 	</select>
 	
-	<select id="getDiscountedBySeq" parameterType="int" resultType="String">
+	<select id="getDiscountedBySeq" parameterType="int" resultType="int">
 		select price/100*(100-discount) from ItemDB where seq=#{item_seq}
 	</select>
 
