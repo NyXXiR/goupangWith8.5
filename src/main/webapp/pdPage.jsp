@@ -1,5 +1,20 @@
+<%@page import="model.historyVO"%>
+<%@page import="java.util.List"%>
+<%@page import="org.apache.ibatis.session.SqlSession"%>
+<%@page import="mybatis.Mybatis"%>
+<%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+    
+<%
+SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
+SqlSession Session;
+Session = sqlSessionFactory.openSession(true); 
+String loginStatus = (String) session.getAttribute("buyerId");
+
+List<historyVO> orderedItemList = Session.selectList("getItems", loginStatus);
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,15 +42,24 @@
 				<td style="background-color: #fafafa; text-align:center;"><h5>주문 취소</h5></td>
 			</tr>
 		</thead>
+		
 		<tbody>
-			<tr>
-				<td style="background-color: #fafafa; text-align:center;"><h5>이름</h5></td>
-				<td style="background-color: #fafafa; text-align:center;"><h5>이름</h5></td>
-				<td style="background-color: #fafafa; text-align:center;"><h5>이름</h5></td>
-				<td style="background-color: #fafafa; text-align:center;"><h5>이름</h5></td>
-				<td style="background-color: #fafafa; text-align:center;"><h5>이름</h5></td>
-			</tr>
-			
+			<% 
+				for(int i=0; i<orderedItemList.size(); i++){ 
+				String orderNum = orderedItemList.get(i).getOrderSeq();
+				int productNum = orderedItemList.get(i).getItemNumber();
+				String status = orderedItemList.get(i).getStatus();
+				String orderDate = orderedItemList.get(i).getOrderDate();
+				%>	
+					<tr>
+						<td style="background-color: #fafafa; text-align:center;"><h5><%=orderNum %></h5></td>
+						<td style="background-color: #fafafa; text-align:center;"><h5><%=productNum %></h5></td>
+						<td style="background-color: #fafafa; text-align:center;"><h5><%=status %></h5></td>
+						<td style="background-color: #fafafa; text-align:center;"><h5><%=orderDate %></h5></td>          
+						<td class="cancel" style="background-color: #fafafa; text-align:center;"><h5><a href="orderCancel.jsp?status=<%=status %>&orderNum=<%=orderNum %>">주문 취소</a></td>
+					</tr>
+				 <% }
+				 %>
 		</tbody>
 	</table>
 </div>
