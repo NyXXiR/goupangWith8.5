@@ -32,6 +32,18 @@
 		select * from itemDB
 	</select>
 	
+	<select id="getNameBySeq" parameterType="int" resultType="String">
+		select itemname from itemDB where seq=#{item_seq}
+	</select>
+	
+	<select id="getDiscountedBySeq" parameterType="int" resultType="int">
+		select price/100*(100-discount) from ItemDB where seq=#{item_seq}
+	</select>
+
+	<select id="ItemAllseq" resultType="model.itemVO">
+		select * from itemDB order by seq
+	</select>
+	
 	<select id="ItemAllCount" resultType="int">
 		select count(*) from itemdb
 	</select>

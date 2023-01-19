@@ -43,7 +43,7 @@ String sellerLoginStatus = (String) session.getAttribute("sellerId");
           </div>
           
           <div class="header-middle-box">
-           <form action="search.jsp" class="search-container" method="POST">
+           <form action="search2.jsp" class="search-container" method="POST">
                 <select name="comboValue">
                   <option value="all">전체</option>
                   <option value="sellerId">판매자이름</option>

@@ -10,7 +10,7 @@ int discounted = vo.getPrice() / 100 * (100-vo.getDiscount());
 HashMap<String, String> itemMap = new HashMap<>();
 
 
-// 구매 프로세스에 필요한 vo 값:              
+// 구매 프로세스에 필요한 vo 값: category_sum, name, price, discount, seller_id
 itemMap.put("seq",Integer.toString(vo.getSeq()));
 itemMap.put("name", vo.getItemname());
 itemMap.put("category_num",Integer.toString(vo.getCategorynum()));

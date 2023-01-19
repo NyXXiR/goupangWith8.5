@@ -75,7 +75,9 @@ HashMap<String, String> itemMap = (HashMap<String, String>) session.getAttribute
 
 
 </head>
-<jsp:include page="../header.jsp" flush="false" />
+
+<!--  헤더 부분 에러나서 잠시 제외 -->
+
 <body>
 	<article id=itemDetail-container>
 		<section id=itemDetail-info>
