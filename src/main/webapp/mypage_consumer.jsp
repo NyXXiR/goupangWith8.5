@@ -38,7 +38,8 @@ sess=sqlSessionFactory.openSession(true); %>
 				<!-- 목록 -->
 				<ul id="category">
 					<li>
-						<h3 id="myPage" onclick="location.href='mypage_consumer.jsp?right=myPage.jsp'">마이페이지</h3>
+						<h3 id="pdPage" onclick="location.href='mypage_consumer.jsp?right=myPage.jsp'">마이페이지</h3>
+						<!-- orderstatus db랑 연계 -->
 					</li>
 					<li>
 						<h3 id="pdPage" onclick="location.href='mypage_consumer.jsp?right=pdPage.jsp'">주문 내역</h3>
@@ -49,7 +50,7 @@ sess=sqlSessionFactory.openSession(true); %>
 						<!-- 방명록db랑 연계 -->
 					</li>
 					<li>
-						<h3 id="psPage" onclick="getPage(this.id)">회원정보 수정</h3>
+						<h3 id="psPage" onclick="location.href='buyerModify.jsp'">회원정보수정</h3>
 					</li>
 				</ul>
 			</div>

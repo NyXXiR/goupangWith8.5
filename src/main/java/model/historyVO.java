@@ -1,26 +1,40 @@
 package model;
 
-public class orderHistory {
+public class historyVO {
 
-	private int orderSeq;
+	private String orderSeq;
 	private int itemNumber;
-	private String buyerId;
+	private int itemCount;
+	private String buyer_id;
 	private String status;
 	private String orderDate;
 	
 	
-	public orderHistory(int itemNumber, String buyerId, String status, String orderDate) {
+	public historyVO() {
 		super();
+	}
+
+	
+	
+	public historyVO(String buyer_Id, String orderSeq) {
+		super();
+		this.orderSeq = orderSeq;
+		this.buyer_id = buyer_Id;
+	}
+
+
+	public historyVO(String orderSeq, int itemNumber, String status, String orderDate) {
+		super();
+		this.orderSeq = orderSeq;
 		this.itemNumber = itemNumber;
-		this.buyerId = buyerId;
 		this.status = status;
 		this.orderDate = orderDate;
 	}
 	
-	public int getOrderSeq() {
+	public String getOrderSeq() {
 		return orderSeq;
 	}
-	public void setOrderSeq(int orderSeq) {
+	public void setOrderSeq(String orderSeq) {
 		this.orderSeq = orderSeq;
 	}
 	public int getItemNumber() {
@@ -30,10 +44,10 @@ public class orderHistory {
 		this.itemNumber = itemNumber;
 	}
 	public String getBuyerId() {
-		return buyerId;
+		return buyer_id;
 	}
 	public void setBuyerId(String buyerId) {
-		this.buyerId = buyerId;
+		this.buyer_id = buyerId;
 	}
 	public String getStatus() {
 		return status;
@@ -46,6 +60,14 @@ public class orderHistory {
 	}
 	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
+	}
+
+	public int getItemCount() {
+		return itemCount;
+	}
+
+	public void setItemCount(int itemCount) {
+		this.itemCount = itemCount;
 	}
 	
 	

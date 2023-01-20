@@ -12,7 +12,8 @@ public class itemVO {
   private int qty;
   private String description;
   private int salerecord;
-
+  private String imgsrc;
+  
 
   public itemVO() {
 	super();
@@ -69,7 +70,7 @@ public int getCategorynum() {	return categorynum;}
 public int getQty() {	return qty;}
 public String getDescription() {	return description;}
 public int getSalerecord() {	return salerecord;}
-
+public String getImgsrc() {	return imgsrc;}
 
 
 public void setSeq(int seq) {	this.seq = seq;}
@@ -82,7 +83,7 @@ public void setCategorynum(int categorynum) {	this.categorynum = categorynum;}
 public void setQty(int qty) {	this.qty = qty;}
 public void setDescription(String description) {	this.description = description;}
 public void setSalerecord(int salerecord) {	this.salerecord = salerecord;}
-
+public void setImgsrc(String imgsrc) {	this.imgsrc = imgsrc;}
 
 
 

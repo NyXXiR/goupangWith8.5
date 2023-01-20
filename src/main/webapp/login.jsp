@@ -1,3 +1,7 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="mybatis.Mybatis"%>
+<%@page import="org.apache.ibatis.session.SqlSession"%>
+<%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -36,6 +40,26 @@
     			<div><input type="checkbox" name="sellerLogin" value="seller"/>관리자 로그인</div>
               <input id="input2" type="submit" value="Log in" />
             </form>
+            
+            <%
+            
+      	  SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
+      	  SqlSession Session;
+      	  Session = sqlSessionFactory.openSession(true);
+      	  
+            HashMap<String, String> s1 = (HashMap<String,String>) session.getAttribute("itemDetail");
+            
+            //out.print(s1);
+            
+            out.print(s1);
+            
+            String getSeq = (String) request.getParameter("a");
+            String getName = (String) request.getParameter("b");
+            
+            out.print(getSeq);
+            out.print(getName);
+            
+            %>
           </div>
       </div>
     </div>

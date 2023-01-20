@@ -15,134 +15,17 @@
 <head>
 <meta charset="UTF-8">
 <title>검색 버튼 누르면 출력되는 화면</title>
-<style>
-.wrapper {
-	width: 1280px;
-	margin: 0 auto;
-}
 
-.sort-btn-box {
-	display: flex;
-}
-
-.sort-btn-box a {
-text-decoration: none;
-color: black;
-}
-
-.sort-btn-box div {
-	cursor: pointer;
-	font-size: 20px;
-	text-align: center;
-	line-height: 80px;
-	width: 200px;
-	height: 80px;
-	margin-bottom: 2px;
-}
-
-.sort-by-category {
-position: relative;
-}
-
-.sort-by-category:hover .category-dropbox{
- display: block;
-}
-
-.category-dropbox {
-	display: none;
-  position: absolute;
-  top: 50px;
-  left: 10px;
-}
-
- .category-dropbox ul li {
- margin: 10px 0 10px 0;
- font-size: 17px;
-  border-radius:3px;
-  line-height: 17px;
-  height: 25px;
-  line-height: 25px;
-  width: 100px;
-  text-align: left;
-}
-
-.category-dropbox ul li:hover {
-  transition: 0.5s;
-  background: steelblue;
-  color: white;
-}
- 
-
-.title-text-box {
-    height: 80px;
-    text-align: center;
-    line-height: 80px;
-    border-bottom: 3px solid darkgray;
-}
-
-.search-wrapper {
-	
-}
-
-#product-box {
-	width: 300px;
-	margin: 0 50px 0 50px;
-	text-align: center;
-}
-
-.card {	
-    cursor: pointer;
- 	text-align: center;
-    width: 19%;
-    height: 300px;
-    margin: 20px 0 0 0;
-}
-
-.card .img-box img {
-	transition: all 0.2s linear;
-}
-
-.card:hover .img-box img {
-	trainsition: 0.8s;
-	transform: scale(1.1);
-}
-	
-.img-box {
-	overflow: hidden;
-    vertical-align:middle;
-}
-	
-.item-name-box {
-font-size: 20px; 
-}
-
-.item-price-box {
-font-size: 15px;
-margin-top: 10px;
-font-weight: bold;
-}
-.item-price-discount {
-
-font-size: 20px;
-}
-
-.search-list-box {
-	display: flex;
-	justify-content: start;
-	flex-flow: wrap;
-	margin: 30px auto;
-}
-}
-
-</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
 	crossorigin="anonymous">
+<link rel="stylesheet" href="headerCSS.css" />
 </head>
 <body>
+
 <%
 SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
 SqlSession Session;
@@ -163,9 +46,7 @@ List<itemVO> listByItemName = Session.selectList("searchItemByItemName", entered
 List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 %>
 
-
 <script>
-	
 	function sortBySalesRecord() {
 	$.ajax({
 		type: "GET",
@@ -180,8 +61,8 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 		}
 	});
 }
-
 	
+	function 
 </script>
 
 
@@ -234,29 +115,19 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 				
 				<% if(comboValue.equals("all")) {
 					for(int i=0; i<listByAll.size(); i++) { 
-						
-						HashMap<String, String> itemMap = new HashMap<>();
 						int discounted = listByAll.get(i).getPrice() / 100 * (100 - listByAll.get(i).getDiscount());
-						
-						// 구매 프로세스에 필요한 vo 값:              
-							itemMap.put("seq",Integer.toString(listByAll.get(i).getSeq()));
-							itemMap.put("name", listByAll.get(i).getItemname());
-							itemMap.put("category_num",Integer.toString(listByAll.get(i).getCategorynum()));
-							itemMap.put("price", Integer.toString(listByAll.get(i).getPrice()));
-							itemMap.put("discount",Integer.toString(listByAll.get(i).getDiscount()));
-							itemMap.put("discounted", Integer.toString(discounted));
-							itemMap.put("seller_id", listByAll.get(i).getSellerid());
-							itemMap.put("description", listByAll.get(i).getDescription());
-						
-							request.setAttribute("key", itemMap); %>
+						int itemSeq = listByAll.get(i).getSeq();
+							%>
+							
+							
 						<div class="card" style="width: 24%">
-							<img src="./resources/item/<%=i %>.jpg" class="card-img-top" alt="...">
+							<img src="./resources/item/<%=listByAll.get(i).getImgsrc() %>" class="card-img-top" alt="...">
 							<div class="card-body">
 								<h5 class="card-title"><div id="itemName" class="text-large"><%=listByAll.get(i).getItemname()%></div></h5>
 								<p class="card-text"></p>
 								<div id="itemPrice" class="text-small" style="text-decoration:line-through"><%=listByAll.get(i).getPrice()%>원</div>
 								<div id="itemDiscountPrice" class="text-large"><%= discounted %>원</div>
-								<div><a href="itemDetail.jsp?<%=itemMap %>" class="btn btn-primary" style="margin-bottom:0">구매하기</a></div>
+								<div><a href="./itemDetail.jsp?a=<%=itemSeq %>" class="btn btn-primary" style="margin-bottom:0">구매하기</a></div>
 							</div>
 						</div>
 				<% 	}
@@ -264,74 +135,50 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 				%>
 				
 				
-				<% if(comboValue.equals("all")) {
-					for(int i=0; i<listByAll.size(); i++) { 
-						
-						HashMap<String, String> itemMap = new HashMap<>();
-						int discounted = listByAll.get(i).getPrice() / 100 * (100 - listByAll.get(i).getDiscount());%>
-						
-						// 구매 프로세스에 필요한 vo 값:              
-							itemMap.put("seq",Integer.toString(listByAll.get(i).getSeq()));
-							itemMap.put("name", listByAll.get(i).getItemname());
-							itemMap.put("category_num",Integer.toString(listByAll.get(i).getCategorynum()));
-							itemMap.put("price", Integer.toString(listByAll.get(i).getPrice()));
-							itemMap.put("discount",Integer.toString(listByAll.get(i).getDiscount()));
-							itemMap.put("discounted", Integer.toString(discounted));
-							itemMap.put("seller_id", listByAll.get(i).getSellerid());
-							itemMap.put("description", listByAll.get(i).getDescription());
-						
-							request.setAttribute("vo", listByAll.get(i)); %>
+				<% if(comboValue.equals("sellerId")) {
+					for(int i=0; i<listBySellerId.size(); i++) { 
+						int discounted = listBySellerId.get(i).getPrice() / 100 * (100 - listBySellerId.get(i).getDiscount());
+						int itemSeq = listBySellerId.get(i).getSeq();
+							%>
+							
+							
 						<div class="card" style="width: 24%">
-							<img src="./resources/item/<%=i %>.jpg" class="card-img-top" alt="...">
+							<img src="./resources/item/<%=listBySellerId.get(i).getImgsrc() %>" class="card-img-top" alt="...">
 							<div class="card-body">
-								<h5 class="card-title"><div id="itemName" class="text-large"><%=listByAll.get(i).getItemname()%></div></h5>
+								<h5 class="card-title"><div id="itemName" class="text-large"><%=listBySellerId.get(i).getItemname()%></div></h5>
 								<p class="card-text"></p>
-								<div id="itemPrice" class="text-small" style="text-decoration:line-through"><%=listByAll.get(i).getPrice()%>원</div>
+								<div id="itemPrice" class="text-small" style="text-decoration:line-through"><%=listBySellerId.get(i).getPrice()%>원</div>
 								<div id="itemDiscountPrice" class="text-large"><%= discounted %>원</div>
-								<div><a href="itemDetail.jsp?<%=listByAll.get(i) %>" class="btn btn-primary" style="margin-bottom:0">구매하기</a></div>
+								<div><a href="./itemDetail.jsp?a=<%=itemSeq %>" class="btn btn-primary" style="margin-bottom:0">구매하기</a></div>
 							</div>
 						</div>
 				<% 	}
 				}
 				%>
 				
-				<% if(comboValue.equals("all")) {
-					for(int i=0; i<listByAll.size(); i++) { 
-						
-						HashMap<String, String> itemMap = new HashMap<>();
-						int discounted = listByAll.get(i).getPrice() / 100 * (100 - listByAll.get(i).getDiscount());%>
-						
-						// 구매 프로세스에 필요한 vo 값:              
-							itemMap.put("seq",Integer.toString(listByAll.get(i).getSeq()));
-							itemMap.put("name", listByAll.get(i).getItemname());
-							itemMap.put("category_num",Integer.toString(listByAll.get(i).getCategorynum()));
-							itemMap.put("price", Integer.toString(listByAll.get(i).getPrice()));
-							itemMap.put("discount",Integer.toString(listByAll.get(i).getDiscount()));
-							itemMap.put("discounted", Integer.toString(discounted));
-							itemMap.put("seller_id", listByAll.get(i).getSellerid());
-							itemMap.put("description", listByAll.get(i).getDescription());
-						
-							request.setAttribute("vo", listByAll.get(i)); %>
+				<% if(comboValue.equals("itemName")) {
+					for(int i=0; i<listByItemName.size(); i++) { 
+						int discounted = listByItemName.get(i).getPrice() / 100 * (100 - listByItemName.get(i).getDiscount());
+						int itemSeq = listByItemName.get(i).getSeq();
+							%>
+							
+							
 						<div class="card" style="width: 24%">
-							<img src="./resources/item/<%=i %>.jpg" class="card-img-top" alt="...">
+							<img src="./resources/item/<%=listByItemName.get(i).getImgsrc() %>" class="card-img-top" alt="...">
 							<div class="card-body">
-								<h5 class="card-title"><div id="itemName" class="text-large"><%=listByAll.get(i).getItemname()%></div></h5>
+								<h5 class="card-title"><div id="itemName" class="text-large"><%=listByItemName.get(i).getItemname()%></div></h5>
 								<p class="card-text"></p>
-								<div id="itemPrice" class="text-small" style="text-decoration:line-through"><%=listByAll.get(i).getPrice()%>원</div>
+								<div id="itemPrice" class="text-small" style="text-decoration:line-through"><%=listByItemName.get(i).getPrice()%>원</div>
 								<div id="itemDiscountPrice" class="text-large"><%= discounted %>원</div>
-								<div><a href="itemDetail.jsp?<%=listByAll.get(i) %>" class="btn btn-primary" style="margin-bottom:0">구매하기</a></div>
+								<div><a href="./itemDetail.jsp?a=<%=itemSeq %>" class="btn btn-primary" style="margin-bottom:0">구매하기</a></div>
 							</div>
 						</div>
 				<% 	}
 				}
 				%>
-				
-				
 				
 			</div>	
 		</div>
-		
-		
 	</div>
 	
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>

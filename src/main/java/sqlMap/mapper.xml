@@ -11,8 +11,12 @@
 <mapper namespace="Mapper">
 
 <!-- map에 seq와 qty 를 넣어서 하자. -->
-	<insert id="UpdateItemquantity" parameterType="map">
-	update itemDB set qty= qty+#{qty} where id=#{seq}
+	<insert id="itemquantityPlus" parameterType="int">
+	update itemDB set qty= qty+#{qty} where 'item_seq'=#{seq}
+	</insert>
+	
+	<insert id="itemquantityMinus" parameterType="int">
+	update itemDB set qty= qty-#{qty} where 'item_seq'=#{seq}
 	</insert>
 
 	<insert id="deleteItemBySeq" parameterType="int">
@@ -159,6 +163,9 @@
 		select * from itemDB order by salerecord desc
 	</select>
 	
+	<select id="sortByCategory" parameterType="int" resultType="model.itemVO">
+		select * from itemDB category_num = #{category_num}
+	</select>
 <!--  soldItemDB 관련 구문 -->
 
 <!--  cartItemDB 관련 구문 -->
@@ -169,6 +176,22 @@ insert into cartItemDB values(#{item_seq}, #{buyer_id},#{qty})
 <select id="cartListById" parameterType="String" resultType="model.cartItemVO">
 select * from cartItemDB where buyer_id=#{buyer_id}
 </select>
+
+<select id="cartList"  resultType="model.cartItemVO">
+select * from cartItemDB
+</select>
+
+<insert id="deleteFromCart" parameterType="map">
+delete from cartItemDB where "item_seq"=#{item_seq} and buyer_id=#{buyer_id}
+</insert>
+
+<insert id="cartQtyPlus" parameterType="map"> 
+update cartitemDB set "qty" = "qty"+#{qty} where "item_seq"=#{item_seq} and buyer_id=#{buyer_id}
+</insert>
+
+<insert id="cartQtyMinus" parameterType="map"> 
+update cartitemDB set "qty" = "qty"-#{qty} where "item_seq" =#{seq} and buyer_id=#{buyer_id}
+</insert>
 
 <!--  buyerDB 관련 구문 -->
 
@@ -230,7 +253,24 @@ select count(*) from guestbook_message
 </select>
  -->
  
+<<<<<<< HEAD
  
  
+=======
+  <!-- ORDERHISTORY 관련 구문 
+<select id="getItems" parameterType="String" resultType="model.historyVO">
+ select orderseq, itemnumber, status, orderdate from orderhistory WHERE buyer_id = #{buyer_id}
+</select>
+-->
+
+<insert id="deleteOrderedItems" parameterType="Map">
+	delete from orderhistory where buyer_id = #{buyer_id} and orderSeq = #{orderSeq}
+</insert>
+ 
+<select id="getStatus" parameterType="String" resultType="String">
+	select status from orderhistory where orderSeq = #{orderSeq}
+</select>
+
+>>>>>>> 4d59ef5ab881bd646fcb89ed2679df53a4662b9b
 
 </mapper>
