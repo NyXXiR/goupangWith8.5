@@ -109,8 +109,10 @@ HashMap<String, String> itemMap = (HashMap<String, String>) session.getAttribute
 						할인적용가격:
 						<%=itemMap.get("discounted")%></div>
 
-					<form action="buyPage.jsp" method="post">
+					<form action="aaa.jsp" method="post">
 						<div class="prod-quantity__form">
+						<input type="hidden" name="item_seq" value=<%=itemMap.get("seq")%>>
+						<input type="hidden" name="buyer_id" value=<%=session.getAttribute("buyer_id") %>>
 							<input type="text" value="1" name="quantity"
 								class="quantity-count" readonly="true" />
 							<button class="quantity-minus" type="button"
