@@ -85,7 +85,7 @@ buyer가 장바구니에 담아둔 항목과 바로구매에서 가져온 항목
 								onclick="valueMinus(this)">수량 -</button>
 							<button class="quantity-plus" type="button"
 								onclick="valuePlus(this)">수량 +</button>
-								<button class="delete-from-cart" type="button" onclick=""> X </button>
+								<button class="delete-from-cart" type="button" onclick="location.href='deleteFromCart.jsp?item_seq=<%=items%>'"> X </button>
 								<br>
 								
 								
@@ -172,7 +172,10 @@ function valueMinus(vm){
 			alert("선택된 제품을 장바구니에서 삭제하시겠습니까?");
 		
 		}
-	
+	var calCount= parseInt($(vm).parent().children(".calculated-price").attr("value"));
+	var temp2 = parseInt($(vm).parent().children(".item-price").attr("value"))*temp;
+
+	calCount=parseInt($(vm).parent().children(".calculated-price").attr("value",temp2));
 
 			}
 </script>

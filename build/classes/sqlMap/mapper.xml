@@ -169,6 +169,11 @@ insert into cartItemDB values(#{item_seq}, #{buyer_id},#{qty})
 select * from cartItemDB where buyer_id=#{buyer_id}
 </select>
 
+<insert id="deleteFromCart" parameterType="map">
+delete from cartItemDB where "item_seq"=#{item_seq} and buyer_id=#{buyer_id}
+
+</insert>
+
 <!--  buyerDB 관련 구문 -->
 
 <insert id="signUpBuyer" parameterType="model.buyerVO">
