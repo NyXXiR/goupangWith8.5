@@ -1,0 +1,120 @@
+@charset "EUC-KR";
+
+<style>
+.wrapper {
+	width: 1280px;
+	margin: 0 auto;
+}
+
+.sort-btn-box {
+	display: flex;
+}
+
+.sort-btn-box a {
+text-decoration: none;
+color: black;
+}
+
+.sort-btn-box div {
+	cursor: pointer;
+	font-size: 20px;
+	text-align: center;
+	line-height: 80px;
+	width: 200px;
+	height: 80px;
+	margin-bottom: 2px;
+}
+
+.sort-by-category {
+position: relative;
+}
+
+.sort-by-category:hover .category-dropbox{
+ display: block;
+}
+
+.category-dropbox {
+	display: none;
+  position: absolute;
+  top: 50px;
+  left: 10px;
+}
+
+ .category-dropbox ul li {
+ margin: 10px 0 10px 0;
+ font-size: 17px;
+  border-radius:3px;
+  line-height: 17px;
+  height: 25px;
+  line-height: 25px;
+  width: 100px;
+  text-align: left;
+}
+
+.category-dropbox ul li:hover {
+  transition: 0.5s;
+  background: steelblue;
+  color: white;
+}
+ 
+
+.title-text-box {
+    height: 80px;
+    text-align: center;
+    line-height: 80px;
+    border-bottom: 3px solid darkgray;
+}
+
+.search-wrapper {
+	
+}
+
+#product-box {
+	width: 300px;
+	margin: 0 50px 0 50px;
+	text-align: center;
+}
+
+.card {	
+    cursor: pointer;
+ 	text-align: center;
+    width: 19%;
+    height: 300px;
+    margin: 20px 0 0 0;
+}
+
+.card .img-box img {
+	transition: all 0.2s linear;
+}
+
+.card:hover .img-box img {
+	trainsition: 0.8s;
+	transform: scale(1.1);
+}
+	
+.img-box {
+	overflow: hidden;
+    vertical-align:middle;
+}
+	
+.item-name-box {
+font-size: 20px; 
+}
+
+.item-price-box {
+font-size: 15px;
+margin-top: 10px;
+font-weight: bold;
+}
+.item-price-discount {
+
+font-size: 20px;
+}
+
+.search-list-box {
+	display: flex;
+	justify-content: start;
+	flex-flow: wrap;
+	margin: 30px auto;
+}
+}
