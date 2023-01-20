@@ -99,6 +99,27 @@
 
 
 
+	<select id="itemSearchitemname" parameterType="string" resultType="model.itemVO">
+		select * from itemdb where itemname = #{value}
+	</select>
+	
+	<select id="itemSearchseq" parameterType="int" resultType="model.itemVO">
+		select * from itemdb where seq = #{val}
+	</select>
+	
+	<select id="itemSearchprice" parameterType="int" resultType="model.itemVO">
+		select * from itemdb where price = #{val}
+	</select>
+	
+	<select id="itemSearchcategory" parameterType="string" resultType="model.itemVO">
+		select * from itemdb where category = #{value}
+	</select>
+	
+
+
+
+
+
 
 	<select id="selectName" parameterType="int" resultType="string">
 		SELECT ITEMNAME FROM itemDB WHERE SEQ = #{seq}
@@ -212,5 +233,16 @@ select count(*) from guestbook_message
 select count(*) from guestbook_message
 </select>
  -->
+ 
+  <!-- ORDERHISTORY 관련 구문 -->
+<select id="getItems" parameterType="String" resultType="model.historyVO">
+ select orderseq, itemnumber, status, orderdate from orderhistory WHERE buyer_id = #{buyer_id}
+</select>
+
+<insert id="deleteOrderedItems" parameterType="hashmap">
+	delete from orderhistory where buyer_id = #{buyer_id} and orderSeq = #{orderSeq}
+</insert>
+ 
+
 
 </mapper>

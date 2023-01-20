@@ -1,8 +1,11 @@
 package DAO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -44,5 +47,26 @@ public class ItemDao2 {
 	public String cateNameSearch(int num) {
 		String str = sess.selectOne("categoryNameSearch",num);
 		return str;
+	}
+	
+	public List<itemVO> itemSearchList(String key, String value){
+		List<itemVO> result = new ArrayList<>();
+		
+		if (key.equals("itemname")) {
+			result = sess.selectList("itemSearchitemname", value);
+		}else if(key.equals("seq")) {
+			int val = Integer.valueOf(value);
+			result = sess.selectList("itemSearchseq", val);
+		}else if(key.equals("price")) {
+			int val = Integer.valueOf(value);
+			result = sess.selectList("itemSearchprice", val);
+		}else if(key.equals("category")) {
+			result = sess.selectList("itemSearchcategory", value);
+		}else {
+			System.out.println("실패");
+		}
+		
+		
+		return result;
 	}
 }

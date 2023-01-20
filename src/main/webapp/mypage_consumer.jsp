@@ -38,16 +38,18 @@ sess=sqlSessionFactory.openSession(true); %>
 				<!-- 목록 -->
 				<ul id="category">
 					<li>
-						<h1 id="myPage" onclick="location.href='mypage_consumer.jsp?right=myPage.jsp'">마이페이지</h1>
+						<h3 id="myPage" onclick="location.href='mypage_consumer.jsp?right=myPage.jsp'">마이페이지</h3>
 					</li>
 					<li>
-						<h2 id="pdPage" onclick="location.href='mypage_consumer.jsp?right=pdPage.jsp'">주문 내역</h2>
+						<h3 id="pdPage" onclick="location.href='mypage_consumer.jsp?right=pdPage.jsp'">주문 내역</h3>
+						<!-- orderstatus db랑 연계 -->
 					</li>
 					<li>
-						<h2 id="dvPage" onclick="getPage(this.id)">게시글 내역</h2>
+						<h3 id="dvPage" onclick="getPage(this.id)">게시글 내역</h3>
+						<!-- 방명록db랑 연계 -->
 					</li>
 					<li>
-						<h2 id="psPage" onclick="getPage(this.id)">회원정보 수정</h2>
+						<h3 id="psPage" onclick="getPage(this.id)">회원정보 수정</h3>
 					</li>
 				</ul>
 			</div>

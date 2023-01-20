@@ -14,6 +14,7 @@
 	int reItemNum = Integer.valueOf(reItemNumstr);
 	
 	itemVO reItem = id2.reItemSearchOne(reItemNum);
+	System.out.println(reItem);
 	String cateNameSea = id2.cateNameSearch(reItem.getCategorynum());		
 %>	
 <form action="ReTouch" name="ReTouch1" method="post" enctype="multipart/form-data">

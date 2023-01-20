@@ -15,18 +15,18 @@
     <environment id="development">
       <transactionManager type="JDBC"/>
       <dataSource type="POOLED">
-  		<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+        <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
         <property name="url" value="jdbc:oracle:thin:@172.30.1.95:1521:xe"/>
         <property name="username" value="goupang"/>
-        <property name="password" value="tiger"/> 
+        <property name="password" value="tiger"/>
 
         <!-- 테스트용 -->
-        
-        <!-- <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+        <!--
+        <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
         <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-        <property name="username" value="scott"/>
-        <property name="password" value="tiger"/>  -->
-        
+        <property name="username" value="goupang"/>
+        <property name="password" value="tiger"/>
+        -->
         
       </dataSource>
     </environment>

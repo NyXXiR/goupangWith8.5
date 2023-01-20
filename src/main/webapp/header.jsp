@@ -68,7 +68,7 @@ String sellerLoginStatus = (String) session.getAttribute("sellerId");
                   		if(sellerLoginStatus != null) {%>
                   			<li><a href="mypage_master.jsp?seller_id=">관리자 페이지</a></li>
                   		<% 	} else { %> 
-		                    <li><a href="mypage_cunsumer.jsp?buyer_id=<%=loginStatus %>">회원 정보</a></li>
+		                    <li><a href="mypage_consumer.jsp?buyer_id=<%=loginStatus %>">회원 정보</a></li>
 		                    <li><a href="mypage.jsp">메뉴 1</a></li>
 		                    <li><a href="mypage.jsp">메뉴 2</a></li>
 		                    <li><a href="mypage.jsp">메뉴 3</a></li>
@@ -90,7 +90,7 @@ String sellerLoginStatus = (String) session.getAttribute("sellerId");
 	                <div class="detail-box2">
 	                  <ul class="drop-menu-2">
 		                  <%
-		                  if(loginStatus == null) {%>
+		                  if(loginStatus == null && sellerLoginStatus == null) {%>
 		                  	<li><a href="login.jsp">로그인</a></li>
 		                  <% } else{
 		                	  %> 
