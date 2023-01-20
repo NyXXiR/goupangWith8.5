@@ -146,7 +146,6 @@ function thisValue(vm){
 }
 
 function valuePlus(vm){
-
 	var count= parseInt($(vm).parent().children(".quantity-count").attr("value"));
 	var temp= count+1;
 	count=parseInt($(vm).parent().children(".quantity-count").attr("value", temp));
@@ -158,6 +157,15 @@ function valuePlus(vm){
 
 	calCount=parseInt($(vm).parent().children(".calculated-price").attr("value",temp2));
 
+
+
+	sum=0;
+	document.querySelectorAll(".calculated-price").forEach(function(item){
+
+		sum+= parseInt(item.getAttribute("value"));
+	});
+
+	$('input[name=final-price]').attr('value',sum);
 	}
 	
 	
@@ -176,7 +184,14 @@ function valueMinus(vm){
 	var temp2 = parseInt($(vm).parent().children(".item-price").attr("value"))*temp;
 
 	calCount=parseInt($(vm).parent().children(".calculated-price").attr("value",temp2));
+	
+	sum=0;
+	document.querySelectorAll(".calculated-price").forEach(function(item){
 
+		sum+= parseInt(item.getAttribute("value"));
+	});
+
+	$('input[name=final-price]').attr('value',sum);
 			}
 </script>
 </body>
