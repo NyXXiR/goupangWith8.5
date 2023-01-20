@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import model.itemVO;
+import model.itemVO3;
 import mybatis.Mybatis;
 
 public class ItemDao2 {
@@ -39,6 +40,42 @@ public class ItemDao2 {
 		
 	}
 	
+	public String itemMinTable(List<itemVO3> itemlist) {
+		String result = "";
+		for(int i=0; i<itemlist.size(); i++){
+			result += "<tr><td>"+itemlist.get(i).getSeq()+ "</td>";
+			result += "<td>"+itemlist.get(i).getItemname()+ "</td>" ;
+			result += "<td>"+itemlist.get(i).getPrice()+ "</td>";
+			result += "<td>"+itemlist.get(i).getSalerecord()+ "</td>";
+			result += "<td>"+itemlist.get(i).getMulti()+"</td></tr>";
+		}
+		return result;
+	}
+	
+	public String itemListTable(List<itemVO> itemlist) {
+		String result="";
+		String cate = null;
+		for(int i=0; i<itemlist.size(); i++) {
+			if(itemlist.get(i).getCategorynum() == 10){	cate = "Fashion";}
+			else if(itemlist.get(i).getCategorynum() == 20){	cate = "Beauty";}
+			else if(itemlist.get(i).getCategorynum() == 30){	cate = "Electronic";}
+			else if(itemlist.get(i).getCategorynum() == 40){	cate = "Pantry";}
+			else if(itemlist.get(i).getCategorynum() == 50){	cate = "Car";}
+			else if(itemlist.get(i).getCategorynum() == 60){	cate = "Toy";}
+			else{	cate = "Etc";}
+
+			result += "<tr><td>"+itemlist.get(i).getSeq()+"</td>";
+			result += "<td><a href='javascript:;' onclick='callRetouchItem("+itemlist.get(i).getSeq()+")'>"+itemlist.get(i).getItemname()+"</td>";
+			result += "<td>"+itemlist.get(i).getPrice()+"</td>";
+			result += "<td>"+itemlist.get(i).getDiscount()+"</td>";
+			result += "<td>"+cate+"</td></tr>";
+		}
+		
+		return result;
+	}
+	
+	
+	
 	public itemVO reItemSearchOne(int num) {
 		itemVO result = sess.selectOne("ItemRetouchOne",num);
 		return result;
@@ -48,6 +85,7 @@ public class ItemDao2 {
 		String str = sess.selectOne("categoryNameSearch",num);
 		return str;
 	}
+	
 	
 	public List<itemVO> itemSearchList(String key, String value){
 		List<itemVO> result = new ArrayList<>();

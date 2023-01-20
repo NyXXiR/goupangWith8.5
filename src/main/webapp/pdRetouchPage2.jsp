@@ -22,16 +22,10 @@
                 <th>카테 고리</th>
             </tr>
         </thead>
-        <tbody id="itemListadd">
+        <tbody id="itemListadd2">
             
         </tbody>
     </table>
-   	<label id="itemAllCount"></label><br>
-   		<div id="pageNumdiv">
-   			<button id="itemCountMoveF">이전</button>
-   				<div id="qwer">
-   					<label id="itemCount"></label>
-  			 	</div>
-   			<button id="itemCountMoveT">다음</button>
-   		</div>
+   	<label id="itemAllCount2"></label><br>
+   	<label id="itemCount2"></label>
 </div>

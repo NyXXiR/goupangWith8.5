@@ -50,12 +50,11 @@ public class Test {
     // System.out.println(list);
 
      ItemDao2 itemdao = ItemDao2.getInstance();
-     
-     List<itemVO> list = itemdao.itemSearchList("seq", "3");
-     for (int i=0; i<list.size(); i++) {
-		System.out.println(list.get(i));
-	}
-
+     String str = null;
+     List<itemVO> list = itemdao.itemSearchList("seq","3");
+		/*System.out.println(list.get(i));*/
+    	 str = itemdao.itemListTable(list);
+    	 System.out.println(str);
     // int n= session.insert("add", vo);
      
 	

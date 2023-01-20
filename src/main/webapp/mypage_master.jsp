@@ -109,6 +109,27 @@ for (int i = 0; i < salListH.size(); i++) {
 %>
 
 
+//최대 매출
+//최대 매출을 확인하기 위하여 item가격과 판매량을 곱하여 가장 높은 매출을 기록한 상품을 10위까지 불러오고 더하여 sumMaxSale의 담아준다.
+//똑같이 10위까지의 상품을 list의 담아주고 매출 / 전체매출을 해주어 매출의 퍼센트 비율을 반환 받는다.
+//최대 매출은 bar형식의 그래프를 사용하여 아이템별 매출비율과 매출을 대입함
+<%
+int sumMaxSale = sess.selectOne("Itemprice*recordSum");
+List<itemVO3> MaxSalList = sess.selectList("Itemprice*recordSearch");
+
+double[] dobSalList = new double[MaxSalList.size()];
+for (int i=0; i<dobSalList.length; i++) {
+dobSalList[i] = MaxSalList.get(i).getMulti();
+dobSalList[i] =  Math.round((dobSalList[i] / sumMaxSale * 100.0)*100.0)/100.0;
+}%>
+
+
+
+<%
+//right가 mypagemain일때만 chart.js실행
+if(right.equals("myPageMain.jsp")){
+%>
+
 let dougnut = document.getElementById('dougnutGraph');
 let bar = document.getElementById('barGraph');
 
@@ -140,25 +161,6 @@ if(dougnut == null || bar == null){
     }
   });
   
- 
- 
-		
-//최대 매출
-//최대 매출을 확인하기 위하여 item가격과 판매량을 곱하여 가장 높은 매출을 기록한 상품을 10위까지 불러오고 더하여 sumMaxSale의 담아준다.
-//똑같이 10위까지의 상품을 list의 담아주고 매출 / 전체매출을 해주어 매출의 퍼센트 비율을 반환 받는다.
-//최대 매출은 bar형식의 그래프를 사용하여 아이템별 매출비율과 매출을 대입함
-<%
-int sumMaxSale = sess.selectOne("Itemprice*recordSum");
-List<itemVO3> MaxSalList = sess.selectList("Itemprice*recordSearch");
- 
-double[] dobSalList = new double[MaxSalList.size()];
- for (int i=0; i<dobSalList.length; i++) {
-  dobSalList[i] = MaxSalList.get(i).getMulti();
-  dobSalList[i] =  Math.round((dobSalList[i] / sumMaxSale * 100.0)*100.0)/100.0;
- }%>
-
-
-
 
 new Chart(bar, {
   type: 'bar',
@@ -189,26 +191,21 @@ new Chart(bar, {
 //판매량을 오름차순으로 정렬하여 가장 적게팔린 상품들을 10위까지 리스트로 받아서 table의 추가
 
 <%
-/* int itemRecordR = sess.selectOne("ItemSaleRecordRSum"); */
 List <itemVO3> salListR = sess.selectList("ItemSaleRecordRSearch");
-
+String itemMinSale = itemdao.itemMinTable(salListR);
 %>
-$(function(){
-	<% for(int i=0; i<salListR.size(); i++){%>
-var str = "<tr><td>"+<%=salListR.get(i).getSeq()%> + "</td>";
-str += "<td>"+"<%=salListR.get(i).getItemname()%>"+ "</td>" ;
-str += "<td>"+<%=salListR.get(i).getPrice()%>+ "</td>";
-str += "<td>"+<%=salListR.get(i).getSalerecord()%>+ "</td>";
-str += "<td>"+<%=salListR.get(i).getMulti()%>+"</td></tr>";
-$('#minSaleItem').append(str);
-<%}%>
-})						
+$('#minSaleItem').html("<%=itemMinSale%>");
+
+<%
+}
+%>					
 						
 
-				
+
+	
 
 
-																						
+
 						
 
 //상품등록 페이지 영역
@@ -264,71 +261,87 @@ function locationNum(num){
 }		
 
 
+
 $(function(){
 <%	
 	//상품 등록된 갯수를 불러와서 테이블 하단의 표시
 int itemCount = sess.selectOne("ItemAllCount");
-%>	$("#itemAllCount").append(":"+<%=itemCount%>);
+%>	$("#itemAllCount").html("전체 상품 수 :"+<%=itemCount%>);
 <%
 	//상품 등록된 갯수의 10.0으로 나누고 ceil로 올림처리하여 필요한 상품페이지를 반환받음
 	//최대 상품이 98개라면 10개씩 등록했을때 9개의 페이지와 8개가 남게되는데, 남는 상품들을 위해서 올림 처리하여 8개도 보여지기 위해 (10번째 페이지를 위해) 올림처리
 	//a 태그와 상단의 locationNum메서드 처리
-int listcount = (int)Math.ceil(itemCount/10.0);
+/* int listcount = (int)Math.ceil(itemCount/10.0); */
+int listcount = 15;
 for(int i=1; i<=listcount; i++){
 %>	$('#itemCount').append("<a href='javascript:;' onclick='locationNum(<%=i%>)'>"+<%=i%>+"</a>");
-
-
 <%
 }
+
+
 
 // itemdao2의 설정해둔 메서드를 불러오는데,itemRetouchListMain는 내가 누른 상품리스트 pageNum,즉 상품수정 목록에 있는 상품리스트 하단의 페이지 번호를 받아 보여질 상품의 List를 반환받는데,
 // 누른 값이 없다면(null&0일경우) 1이 반환되어 제일 앞부분의 영역이 노출되고,2를 누른다면 pageNum으로 매개변수가 들어가고 메서드에서 int x = (num-1)*10; int y = (num*10)-1; 처리하여
 //최대값과 최솟값을 만들어 해당 영역을 잡아준 후 리스트를 반환받아 for문으로 테이블 추가
 //상품이름을 눌렀을때 해당 상품의 seq로 서치하여 item수정영역으로 보내 수정할 수 있도록 처리
 List<itemVO> itemList = itemdao.itemRetouchListMain(pageNum);
-for(int i=0; i<itemList.size(); i++){
+String itemTableEl = itemdao.itemListTable(itemList);
 %>
-var cate;
-if(<%=itemList.get(i).getCategorynum()%> == 10){	cate = 'Fashion';}
-else if(<%=itemList.get(i).getCategorynum()%> == 20){	cate = 'Beauty';}
-else if(<%=itemList.get(i).getCategorynum()%> == 30){	cate = 'Electronic';}
-else if(<%=itemList.get(i).getCategorynum()%> == 40){	cate = 'Pantry';}
-else if(<%=itemList.get(i).getCategorynum()%> == 50){	cate = 'Car';}
-else if(<%=itemList.get(i).getCategorynum()%> == 60){	cate = 'Toy';}
-else{	cate = 'Etc';}
-
-var str = "<tr><td>"+<%=itemList.get(i).getSeq()%>+"</td>";
-		str += "<td><a href='javascript:;' onclick='callRetouchItem(<%=itemList.get(i).getSeq()%>)'>"+"<%=itemList.get(i).getItemname()%>"+"</td>";
-		str += "<td>"+<%=itemList.get(i).getPrice()%>+"</td>";
-		str += "<td>"+<%=itemList.get(i).getDiscount()%>+"</td>";
-		str += "<td>"+cate+"</td></tr>";
-	$('#itemListadd').append(str);
-<%		
-}%>
+$('#itemListadd').html("<%=itemTableEl%>");
 	
 })
+
 //수정영역인 pdRetouchitempage로 이동하면서 파라미터값으로 seq를 보낸다.
 function callRetouchItem(num){
 	location.href="mypage_master.jsp?right=pdRetouchItemPage.jsp&reItemNum="+num;
 }
 
 
+
+
+
+
+
 //수정할 상품을 찾는 기능
-function searchItem(){s
-	<%	String itemK,itemV=null;
-	if(request.getParameter("searchItemkey")==null && request.getParameter("searchItemValue")==null){
-		%>
-		alert("값을 정확하게 입력해주세요.");
-		history.back();
-<%	}else{
-		itemK = request.getParameter("searchItemkey");
-		itemV = request.getParameter("searchItemValue");
-		itemdao.itemSearchList(itemK,itemV);
-		%>
-		$('#itemListadd').append(str);
-		<%
-		
-}%>}
+$(function(){
+	<%
+	String str = "pdRetouchPage2.jsp";
+	if(right.equals(str)){
+		String itemK = request.getParameter("searchItemkey");
+		String itemV = request.getParameter("searchItemValue");
+		List<itemVO> itemSearchList =  itemdao.itemSearchList(itemK,itemV);
+		String itemEle = itemdao.itemListTable(itemSearchList);
+	%>$('#itemListadd2').html("<%=itemEle%>");
+	  $("#itemAllCount2").html("검색 상품 수 :"+<%=itemSearchList.size()%>);
+	<%	
+	}
+	%>
+})
+
+
+$(function(){
+	var pageMax = -(Math.trunc($('#itemCount').children().length/10))*400;
+	var locationLeftCont = 0;
+	$('#itemCountMoveF').on('click',function(){
+		$('#itemCount').stop().animate({left:"+=400px"},0);
+		locationLeftCont += 400;
+	})
+	$('#itemCountMoveT').on('click',function(){
+		$('#itemCount').stop().animate({left:"-=400px"},0);
+		locationLeftCont -= 400;
+
+	})
+	if(locationLeftCont == 0){
+		$('#itemCountMoveF').stop().animate({display:"none"});
+		$('#itemCountMoveT').stop().animate({display:"block"});
+	}else if(locationLeftCont != 0){
+		$('#itemCountMoveF').stop().animate({display:"block"});
+		$('#itemCountMoveT').stop().animate({display:"block"});
+	}else{
+		$('#itemCountMoveF').stop().animate({"display":"block"});
+		$('#itemCountMoveT').stop().animate({"display":"block"});
+	}
+})
 </script>
 
 </body>
