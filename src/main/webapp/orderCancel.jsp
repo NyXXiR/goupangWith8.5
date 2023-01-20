@@ -20,22 +20,21 @@
 <body>
 
 <%
-
-String status =  request.getParameter("status");
-String buyer_id = (String) request.getAttribute("buyerId");
-String orderNum = request.getParameter("orderNum");
+String buyer_id = (String) session.getAttribute("buyerId");
+String orderSeq = request.getParameter("orderSeq");
+String status = request.getParameter("status");
 
 HashMap<String, String> map = new HashMap<>();
 map.put("buyer_id", buyer_id);
-map.put("orderSeq", orderNum);
+map.put("orderSeq", orderSeq);
 
 
 if(status.equals("stand-by")) {
-	Session.selectOne("deleteOrderedItems", map);
+	Session.delete("deleteOrderedItems", map);
 		%>
 		<script>
 			alert("주문 취소 처리 되었습니다.");
-			location.href = 'javascript:history.back();';
+			window.location.href = 'mypage_comsumer.jsp';
 		</script>
 		<%
 	// 주문 취소완료.
@@ -43,7 +42,7 @@ if(status.equals("stand-by")) {
 		%>
 		<script>
 			alert(status + orderNum + "발송 완료된 상품은 취소가 불가능 합니다.");
-			location.href = 'javascript:history.back();';
+			window.location.href = 'mypage_comsumer.jsp';
 		</script>
 		<%
 	// 발송 처리 된 상품으로 주문 취소가 불가능 합니다.

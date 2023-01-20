@@ -255,10 +255,13 @@ select count(*) from guestbook_message
 </select>
 -->
 
-<insert id="deleteOrderedItems" parameterType="hashmap">
+<insert id="deleteOrderedItems" parameterType="Map">
 	delete from orderhistory where buyer_id = #{buyer_id} and orderSeq = #{orderSeq}
 </insert>
  
+<select id="getStatus" parameterType="String" resultType="String">
+	select status from orderhistory where orderSeq = #{orderSeq}
+</select>
 
 
 </mapper>
