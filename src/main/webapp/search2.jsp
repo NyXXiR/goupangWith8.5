@@ -7,7 +7,9 @@
 <%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,6 +61,8 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 		}
 	});
 }
+	
+	function 
 </script>
 
 
@@ -112,8 +116,7 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 				<% if(comboValue.equals("all")) {
 					for(int i=0; i<listByAll.size(); i++) { 
 						int discounted = listByAll.get(i).getPrice() / 100 * (100 - listByAll.get(i).getDiscount());
-						HashMap<String, String> itemMap = new HashMap<>(); 
-							String itemSeq = itemMap.get("seq");
+						int itemSeq = listByAll.get(i).getSeq();
 							%>
 							
 							
@@ -124,7 +127,7 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 								<p class="card-text"></p>
 								<div id="itemPrice" class="text-small" style="text-decoration:line-through"><%=listByAll.get(i).getPrice()%>원</div>
 								<div id="itemDiscountPrice" class="text-large"><%= discounted %>원</div>
-								<div><a href="login.jsp?a=<%=itemSeq %>" class="btn btn-primary" style="margin-bottom:0">구매하기</a></div>
+								<div><a href="./itemDetail.jsp?a=<%=itemSeq %>" class="btn btn-primary" style="margin-bottom:0">구매하기</a></div>
 							</div>
 						</div>
 				<% 	}
@@ -135,8 +138,7 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 				<% if(comboValue.equals("sellerId")) {
 					for(int i=0; i<listBySellerId.size(); i++) { 
 						int discounted = listBySellerId.get(i).getPrice() / 100 * (100 - listBySellerId.get(i).getDiscount());
-						HashMap<String, String> itemMap = new HashMap<>(); 
-							String itemSeq = itemMap.get("seq");
+						int itemSeq = listBySellerId.get(i).getSeq();
 							%>
 							
 							
@@ -147,7 +149,7 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 								<p class="card-text"></p>
 								<div id="itemPrice" class="text-small" style="text-decoration:line-through"><%=listBySellerId.get(i).getPrice()%>원</div>
 								<div id="itemDiscountPrice" class="text-large"><%= discounted %>원</div>
-								<div><a href="login.jsp?a=<%=itemSeq %>" class="btn btn-primary" style="margin-bottom:0">구매하기</a></div>
+								<div><a href="./itemDetail.jsp?a=<%=itemSeq %>" class="btn btn-primary" style="margin-bottom:0">구매하기</a></div>
 							</div>
 						</div>
 				<% 	}
@@ -157,8 +159,7 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 				<% if(comboValue.equals("itemName")) {
 					for(int i=0; i<listByItemName.size(); i++) { 
 						int discounted = listByItemName.get(i).getPrice() / 100 * (100 - listByItemName.get(i).getDiscount());
-						HashMap<String, String> itemMap = new HashMap<>(); 
-							String itemSeq = itemMap.get("seq");
+						int itemSeq = listByItemName.get(i).getSeq();
 							%>
 							
 							
@@ -169,7 +170,7 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 								<p class="card-text"></p>
 								<div id="itemPrice" class="text-small" style="text-decoration:line-through"><%=listByItemName.get(i).getPrice()%>원</div>
 								<div id="itemDiscountPrice" class="text-large"><%= discounted %>원</div>
-								<div><a href="login.jsp?a=<%=itemSeq %>" class="btn btn-primary" style="margin-bottom:0">구매하기</a></div>
+								<div><a href="./itemDetail.jsp?a=<%=itemSeq %>" class="btn btn-primary" style="margin-bottom:0">구매하기</a></div>
 							</div>
 						</div>
 				<% 	}

@@ -50,7 +50,7 @@ sess=sqlSessionFactory.openSession(true); %>
 						<!-- 방명록db랑 연계 -->
 					</li>
 					<li>
-						<h3 id="psPage" onclick="getPage(this.id)">회원정보수정</h3>
+						<h3 id="psPage" onclick="location.href='buyerModify.jsp'">회원정보수정</h3>
 					</li>
 				</ul>
 			</div>

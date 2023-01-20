@@ -24,13 +24,13 @@
 		</thead>
 		
 		<tbody>
-				<% 
+				<%-- <% 
 					for(int i=0; i<orderedItemList.size(); i++){ 
 					String orderSeq = orderedItemList.get(i).getOrderSeq();
 					int itemNumber = orderedItemList.get(i).getItemNumber();
 					String status = orderedItemList.get(i).getStatus();
 					String orderDate = orderedItemList.get(i).getOrderDate();
-				%>	
+				%>	 --%>
 					<tr>
 						<td style="background-color: #fafafa; text-align:center;"><h5><%=orderSeq %></h5></td>
 						<td style="background-color: #fafafa; text-align:center;"><h5><%=itemNumber %></h5></td>

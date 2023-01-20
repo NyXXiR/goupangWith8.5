@@ -162,6 +162,9 @@
 		select * from itemDB order by salerecord desc
 	</select>
 	
+	<select id="sortByCategory" parameterType="int" resultType="model.itemVO">
+		select * from itemDB category_num = #{category_num}
+	</select>
 <!--  soldItemDB 관련 구문 -->
 
 <!--  cartItemDB 관련 구문 -->
