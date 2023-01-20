@@ -44,12 +44,12 @@ List<historyVO> orderedItemList = Session.selectList("getItems", loginStatus);
 		</thead>
 		
 		<tbody>
-			<% 
-				for(int i=0; i<orderedItemList.size(); i++){ 
-				String orderNum = orderedItemList.get(i).getOrderSeq();
-				int productNum = orderedItemList.get(i).getItemNumber();
-				String status = orderedItemList.get(i).getStatus();
-				String orderDate = orderedItemList.get(i).getOrderDate();
+				<% 
+					for(int i=0; i<orderedItemList.size(); i++){ 
+					String orderNum = orderedItemList.get(i).getOrderSeq();
+					int productNum = orderedItemList.get(i).getItemNumber();
+					String status = orderedItemList.get(i).getStatus();
+					String orderDate = orderedItemList.get(i).getOrderDate();
 				%>	
 					<tr>
 						<td style="background-color: #fafafa; text-align:center;"><h5><%=orderNum %></h5></td>

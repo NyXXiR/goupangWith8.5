@@ -234,10 +234,8 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 				
 				<% if(comboValue.equals("all")) {
 					for(int i=0; i<listByAll.size(); i++) { 
-						
-						HashMap<String, String> itemMap = new HashMap<>();
 						int discounted = listByAll.get(i).getPrice() / 100 * (100 - listByAll.get(i).getDiscount());
-						
+						HashMap<String, String> itemMap = new HashMap<>(); 
 						// 구매 프로세스에 필요한 vo 값:              
 							itemMap.put("seq",Integer.toString(listByAll.get(i).getSeq()));
 							itemMap.put("name", listByAll.get(i).getItemname());
@@ -248,7 +246,13 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 							itemMap.put("seller_id", listByAll.get(i).getSellerid());
 							itemMap.put("description", listByAll.get(i).getDescription());
 						
-							request.setAttribute("key", itemMap); %>
+							String a = itemMap.get("seq");
+							String b = itemMap.get("name");
+							
+							session.setAttribute("itemDetail", itemMap); 
+							%>
+							
+							
 						<div class="card" style="width: 24%">
 							<img src="./resources/item/<%=i %>.jpg" class="card-img-top" alt="...">
 							<div class="card-body">
@@ -256,7 +260,7 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 								<p class="card-text"></p>
 								<div id="itemPrice" class="text-small" style="text-decoration:line-through"><%=listByAll.get(i).getPrice()%>원</div>
 								<div id="itemDiscountPrice" class="text-large"><%= discounted %>원</div>
-								<div><a href="itemDetail.jsp?<%=itemMap %>" class="btn btn-primary" style="margin-bottom:0">구매하기</a></div>
+								<div><a href="login.jsp?a=<%=a %>&b=<%=b %>" class="btn btn-primary" style="margin-bottom:0">구매하기</a></div>
 							</div>
 						</div>
 				<% 	}
@@ -264,23 +268,22 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 				%>
 				
 				
-				<% if(comboValue.equals("all")) {
+				<% if(comboValue.equals("sellerId")) {
 					for(int i=0; i<listByAll.size(); i++) { 
 						
 						HashMap<String, String> itemMap = new HashMap<>();
 						int discounted = listByAll.get(i).getPrice() / 100 * (100 - listByAll.get(i).getDiscount());%>
 						
 						// 구매 프로세스에 필요한 vo 값:              
-							itemMap.put("seq",Integer.toString(listByAll.get(i).getSeq()));
-							itemMap.put("name", listByAll.get(i).getItemname());
-							itemMap.put("category_num",Integer.toString(listByAll.get(i).getCategorynum()));
-							itemMap.put("price", Integer.toString(listByAll.get(i).getPrice()));
-							itemMap.put("discount",Integer.toString(listByAll.get(i).getDiscount()));
+							itemMap.put("seq",Integer.toString(listBySellerId.get(i).getSeq()));
+							itemMap.put("name", listBySellerId.get(i).getItemname());
+							itemMap.put("category_num",Integer.toString(listBySellerId.get(i).getCategorynum()));
+							itemMap.put("price", Integer.toString(listBySellerId.get(i).getPrice()));
+							itemMap.put("discount",Integer.toString(listBySellerId.get(i).getDiscount()));
 							itemMap.put("discounted", Integer.toString(discounted));
-							itemMap.put("seller_id", listByAll.get(i).getSellerid());
-							itemMap.put("description", listByAll.get(i).getDescription());
+							itemMap.put("seller_id", listBySellerId.get(i).getSellerid());
+							itemMap.put("description", listBySellerId.get(i).getDescription());
 						
-							request.setAttribute("vo", listByAll.get(i)); %>
 						<div class="card" style="width: 24%">
 							<img src="./resources/item/<%=i %>.jpg" class="card-img-top" alt="...">
 							<div class="card-body">
@@ -295,23 +298,22 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 				}
 				%>
 				
-				<% if(comboValue.equals("all")) {
+				<% if(comboValue.equals("itemName")) {
 					for(int i=0; i<listByAll.size(); i++) { 
 						
 						HashMap<String, String> itemMap = new HashMap<>();
 						int discounted = listByAll.get(i).getPrice() / 100 * (100 - listByAll.get(i).getDiscount());%>
 						
 						// 구매 프로세스에 필요한 vo 값:              
-							itemMap.put("seq",Integer.toString(listByAll.get(i).getSeq()));
-							itemMap.put("name", listByAll.get(i).getItemname());
-							itemMap.put("category_num",Integer.toString(listByAll.get(i).getCategorynum()));
-							itemMap.put("price", Integer.toString(listByAll.get(i).getPrice()));
-							itemMap.put("discount",Integer.toString(listByAll.get(i).getDiscount()));
+							itemMap.put("seq",Integer.toString(listByItemName.get(i).getSeq()));
+							itemMap.put("name", listByItemName.get(i).getItemname());
+							itemMap.put("category_num",Integer.toString(listByItemName.get(i).getCategorynum()));
+							itemMap.put("price", Integer.toString(listByItemName.get(i).getPrice()));
+							itemMap.put("discount",Integer.toString(listByItemName.get(i).getDiscount()));
 							itemMap.put("discounted", Integer.toString(discounted));
-							itemMap.put("seller_id", listByAll.get(i).getSellerid());
-							itemMap.put("description", listByAll.get(i).getDescription());
+							itemMap.put("seller_id", listByItemName.get(i).getSellerid());
+							itemMap.put("description", listByItemName.get(i).getDescription());
 						
-							request.setAttribute("vo", listByAll.get(i)); %>
 						<div class="card" style="width: 24%">
 							<img src="./resources/item/<%=i %>.jpg" class="card-img-top" alt="...">
 							<div class="card-body">
