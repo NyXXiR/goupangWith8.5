@@ -41,25 +41,6 @@
               <input id="input2" type="submit" value="Log in" />
             </form>
             
-            <%
-            
-      	  SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
-      	  SqlSession Session;
-      	  Session = sqlSessionFactory.openSession(true);
-      	  
-            HashMap<String, String> s1 = (HashMap<String,String>) session.getAttribute("itemDetail");
-            
-            //out.print(s1);
-            
-            out.print(s1);
-            
-            String getSeq = (String) request.getParameter("a");
-            String getName = (String) request.getParameter("b");
-            
-            out.print(getSeq);
-            out.print(getName);
-            
-            %>
           </div>
       </div>
     </div>

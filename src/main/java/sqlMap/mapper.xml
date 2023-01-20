@@ -253,10 +253,8 @@ select count(*) from guestbook_message
 </select>
  -->
  
-<<<<<<< HEAD
  
  
-=======
   <!-- ORDERHISTORY 관련 구문 
 <select id="getItems" parameterType="String" resultType="model.historyVO">
  select orderseq, itemnumber, status, orderdate from orderhistory WHERE buyer_id = #{buyer_id}
@@ -271,6 +269,5 @@ select count(*) from guestbook_message
 	select status from orderhistory where orderSeq = #{orderSeq}
 </select>
 
->>>>>>> 4d59ef5ab881bd646fcb89ed2679df53a4662b9b
 
 </mapper>
