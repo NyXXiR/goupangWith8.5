@@ -6,12 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body> 
+<body>
 
-<div>
-구매에 성공했습니다.
-
-<button type="button" onclick="location.href='voShuttle.jsp';"> 메인으로 돌아가기 </button></div>
-</div>
 </body>
 </html>

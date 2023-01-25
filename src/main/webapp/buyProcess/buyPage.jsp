@@ -108,7 +108,14 @@ buyer가 장바구니에 담아둔 항목과 바로구매에서 가져온 항목
 }
 %>
 </div>
-최종가격: <input id="final-price" name="final-price" value="">
+
+<div>
+<span>최종가격: </span>
+<input id="final-price" name="final-price" value="">
+<input type="button" value="구매하기"/>
+</div>
+
+<input id="final-price" name="final-price" value="">
 <input type="button" value="구매하기"/>
 
 
