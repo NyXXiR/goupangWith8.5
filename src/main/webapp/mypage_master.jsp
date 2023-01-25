@@ -1,3 +1,4 @@
+<%@page import="DAO.historyDAO"%>
 <%@page import="model.historyVO"%>
 <%@page import="DAO.ItemDao2"%>
 <%@page import="model.itemVO3"%>
@@ -9,9 +10,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% SqlSessionFactory sqlSessionFactory=Mybatis.getSqlSessionFactory(); SqlSession sess;
-sess=sqlSessionFactory.openSession(true); %>
+sess=sqlSessionFactory.openSession(true); 
 
-<%
+	ItemDao2 itemdao = ItemDao2.getInstance();
+	historyDAO hisDao = historyDAO.getInstance();
+
 	String right = request.getParameter("right");
 	if(request.getParameter("right") == null){
 		right = "myPageMain.jsp";
@@ -20,7 +23,6 @@ sess=sqlSessionFactory.openSession(true); %>
 	}
 	/* System.out.print(right); */
 	
-	ItemDao2 itemdao = ItemDao2.getInstance();
 	
 	
 	String numstr = request.getParameter("pageNum");
@@ -31,6 +33,7 @@ sess=sqlSessionFactory.openSession(true); %>
 	}else{
 		pageNum = Integer.valueOf(numstr);
 	}
+	
 	
 	String listPage = request.getParameter("listPage");
 	int minListPage;
@@ -98,25 +101,9 @@ sess=sqlSessionFactory.openSession(true); %>
 			<div id="center">
 				<!-- 내용 -->
 				<div id="changePage">
-					 <jsp:include page="<%=right %>"/> 
+					<jsp:include page="<%=right %>"/>
 					<div id="span" style="display : none"></div>	
-						<div id="orderList">
-							<table id="orderListTable">
-								<theade>
-									<tr>
-										<td>주문번호</td>
-										<td>상품번호</td>
-										<td>상품수량</td>
-										<td>주문자</td>
-										<td>주문상태</td>
-										<td>주소지</td>
-										<td>주문일자</td>
-									</tr>
-								</theade>
-								<tbody id="orderTableAdd">
-								</tbody>
-							</table>
-						</div>
+						
 				</div>
 			</div>
 		</section>
@@ -388,11 +375,18 @@ $(function(){
 
 /*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  */
 //주문내역 처리영역
+$(function(){
+	
 <%
-List<historyVO> orderList = sess.selectOne("orderAllSelect");
-String orderstr = itemdao.
+List<historyVO> orderList = sess.selectList("orderAllSelect");
+String orderstr = hisDao.orderTable(orderList);
 %>
+$('#orderTableAdd').append("<%=orderstr%>");
+})
 
+function orderStChange(num){
+	location.href="mypage_master.jsp?right=orderStChangePage.jsp&orderNum="+num;
+}
 
 </script>
 

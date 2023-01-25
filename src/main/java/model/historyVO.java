@@ -8,7 +8,7 @@ public class historyVO {
 	private String buyerid;
 	private String status;
 	private String orderDate;
-	private String orderAddress;
+	private String buyerAddress;
 	
 	public historyVO() {
 		super();
@@ -20,6 +20,13 @@ public class historyVO {
 		this.buyerid = buyerId;
 	}
 
+
+	@Override
+	public String toString() {
+		return "historyVO [orderSeq=" + orderSeq + ", itemNumber=" + itemNumber + ", itemCount=" + itemCount
+				+ ", buyerid=" + buyerid + ", status=" + status + ", orderDate=" + orderDate + ", buyerAddress="
+				+ buyerAddress + "]";
+	}
 
 	public historyVO(String orderSeq, int itemNumber, String status, String orderDate) {
 		super();
@@ -77,12 +84,12 @@ public class historyVO {
 		this.orderDate = orderDate;
 	}
 
-	public String getOrderAddress() {
-		return orderAddress;
+	public String getBuyerAddress() {
+		return buyerAddress;
 	}
 
-	public void setOrderAddress(String orderAddress) {
-		this.orderAddress = orderAddress;
+	public void setBuyerAddress(String buyerAddress) {
+		this.buyerAddress = buyerAddress;
 	}
 	
 }
