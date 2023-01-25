@@ -6,6 +6,8 @@
 <%@ page import="mybatis.Mybatis"%>
 <%@ page import="java.util.List" %>
 <%@ page import="model.soldItemVO" %>
+<%@ page import= "java.util.HashMap" %>
+
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -67,14 +69,14 @@ height:300px;
 }
 
 .hidingData{
-display:none;}
+display:none;
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
 </head>
 <body>
 
-<form action="buyAction.jsp" method="post">
 
 <div class="addressContainer">
 주소입력 <input type="text" class="addressInput" placeholder="주소입력"/>
@@ -84,6 +86,9 @@ display:none;}
   int items=cartList.get(i).getItem_seq();
   String itemName= sqlSession.selectOne("getNameBySeq", items);
   int qty= cartList.get(i).getQty();
+  itemVO vo;
+  HashMap<String, Integer> buyMap = new HashMap<>();
+  
 %>
 
 <div id="cartItem">
@@ -109,14 +114,15 @@ display:none;}
 <span>=</span>
 <input type="text" class="calculated-price" value=<%=calculatedPrice %>>
 	</div>
-						<div class="hidingData">	
-						<input type="text" name="item-seq" value=<%=items %>/>
+	
+	<div class="hidingData">
+						<input type="text" value=<%=items %> name="item-seq" class="item-seq"/>
+						</div>
 								</div>
 						</div>
 						
 
-</div>
-</div>
+
 
 
 <%
@@ -127,9 +133,9 @@ display:none;}
 <div>
 <span>최종가격: </span>
 <input id="final-price" name="final-price" value="">
-<input type="submit" value="구매하기"/>
+<button type="button" value="구매하기" onclick="buyAction()">구매하기</button>
 </div>
-</form>
+
 
 
 ===
@@ -214,7 +220,27 @@ function valueMinus(vm){
 	$('input[name=final-price]').attr('value',sum);
 			}
 
+</script>
 
+<script>
+function buyAction(){
+
+var itemInfo= [];
+	
+var arr = document.querySelectorAll(".item-seq");
+for(var i=0; i<arr.length;i++){
+
+var item_seq=document.querySelectorAll(".item-seq")[i].value;
+var qty = document.querySelectorAll(".quantity-count")[2*i].value;
+
+itemInfo[i]=[item_seq, qty];
+
+}
+
+sessionStorage.setItem("itemInfo",itemInfo);
+location.href("buyAction.jsp");	>>여기 오류남 여기부터 ㄱㄱ
+	
+}
 
 </script>
 </body>

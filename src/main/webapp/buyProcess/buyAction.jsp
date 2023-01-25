@@ -10,11 +10,7 @@
 
 
 
-<script>
-<%=request.getParameter("quantity"));%>
-console.log(request.getParameter("item-seq"));
 
 
-</script>
 </body>
 </html>
