@@ -32,8 +32,8 @@ HashMap<String, String> itemMap = (HashMap<String, String>) session.getAttribute
 }
 
 #itemImg {
-	width: 300px;
-	height: 300px;
+	width: 250px;
+	height: 250px;
 	background-color: tomato;
 	display: flex;
 }
@@ -84,7 +84,7 @@ HashMap<String, String> itemMap = (HashMap<String, String>) session.getAttribute
 		<section id=itemDetail-info>
 			<!-- 이미지파일명은 item의 PK와 일치해야 함 -->
 			<figure id="itemImg">
-				<img src="../resources/item/3.jpg" alt="" />
+				<img src="../resources/item/<%=itemMap.get("seq") %>.jpg" alt="" />
 				<div>
 					<!-- 판매자id 입력 -->
 				</div>
@@ -103,7 +103,7 @@ HashMap<String, String> itemMap = (HashMap<String, String>) session.getAttribute
 					<div id="itemDetail-discount" class="text-medium">
 						<!-- 할인율 입력 -->
 						할인율:
-						<%=itemMap.get("discount")%>
+						<%=itemMap.get("discount")%> %
 					</div>
 					<div id="itemDetail-discountPrice" class="text-large">
 						<!-- 할인적용가격 입력.... -->

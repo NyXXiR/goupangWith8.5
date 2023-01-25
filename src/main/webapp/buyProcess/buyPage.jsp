@@ -23,8 +23,6 @@ int itemSeq=cartList.get(0).getItem_seq();
 int finalPrice=0;
 %>
 
-<%=cartList.get(0).getItem_seq() %>
-<%= sqlSession.selectOne("getNameBySeq", cartList.get(0).getItem_seq()) %>
 
 <head>
 <meta charset="UTF-8">
