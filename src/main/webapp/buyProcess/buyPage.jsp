@@ -55,15 +55,30 @@ align-items: center;
 justify-content: center;
 }
 
+.addressInput{
+width:300px;
+height:300px;
+
+}
+.addressContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hidingData{
+display:none;}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
 </head>
 <body>
-제품 구매 페이지. itemDetail에서 넘어옴.
-제품정보와 수량 전달받아 입력.
-buyer가 장바구니에 담아둔 항목과 바로구매에서 가져온 항목을 더해서 보여줘야 함
 
+<form action="buyAction.jsp" method="post">
+
+<div class="addressContainer">
+주소입력 <input type="text" class="addressInput" placeholder="주소입력"/>
+</div>
 <div id="cartItem-container">
 <%for(int i=0;i<cartList.size();i++){
   int items=cartList.get(i).getItem_seq();
@@ -72,7 +87,7 @@ buyer가 장바구니에 담아둔 항목과 바로구매에서 가져온 항목
 %>
 
 <div id="cartItem">
-<p class="img-box"><img src="../resources/item/<%=items %>.jpg" class="search-img-thumbnail"></p>
+<p class="img-box"><img src="../resources/item/<%=items %>(1).jpg" class="search-img-thumbnail"></p>
 
 <div id="cartItem-detail">
 <p><%=itemName %></p>
@@ -94,7 +109,9 @@ buyer가 장바구니에 담아둔 항목과 바로구매에서 가져온 항목
 <span>=</span>
 <input type="text" class="calculated-price" value=<%=calculatedPrice %>>
 	</div>
-								
+						<div class="hidingData">	
+						<input type="text" name="item-seq" value=<%=items %>/>
+								</div>
 						</div>
 						
 
@@ -110,11 +127,9 @@ buyer가 장바구니에 담아둔 항목과 바로구매에서 가져온 항목
 <div>
 <span>최종가격: </span>
 <input id="final-price" name="final-price" value="">
-<input type="button" value="구매하기"/>
+<input type="submit" value="구매하기"/>
 </div>
-
-<input id="final-price" name="final-price" value="">
-<input type="button" value="구매하기"/>
+</form>
 
 
 ===
@@ -129,7 +144,7 @@ buyer가 장바구니에 담아둔 항목과 바로구매에서 가져온 항목
 ㄴif 수량>잔여수량일 경우 품절 메시지 띄우고 rollback()처리
 rollback();
 soldItemDB에 수량만큼의 quantity를 추가
-ㄴif 제품id와 구매자 id가 동일한 행이 있을 경우 quantity 증가 처리
+
 
 
 =======
@@ -198,6 +213,9 @@ function valueMinus(vm){
 
 	$('input[name=final-price]').attr('value',sum);
 			}
+
+
+
 </script>
 </body>
 </html>
