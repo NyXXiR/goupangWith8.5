@@ -30,7 +30,7 @@
 
 	<insert id="ItemUpload" parameterType="model.itemVO">
 		insert into itemDB values(item_seq.nextval,
-		#{itemname},#{price},#{discount},#{sellerid}, sysdate,#{categorynum},#{qty},#{description},0,#{imgsrc})
+		#{itemname},#{price},#{discount},#{sellerid}, sysdate,#{categorynum},#{qty},#{description},0)
 	</insert>
 
 	<select id="ItemAll" resultType="model.itemVO">
@@ -273,10 +273,6 @@ select count(*) from guestbook_message
 	select status from orderhistory where orderSeq = #{orderSeq}
 </select>
 
-<select id="getImgsrc" parameterType="int" resultType="String">
-	select imgsrc from itemdb where seq = #{seq}
-</select>
-
 <select id="getItemname" parameterType="int" resultType="String">
 	select itemname from itemdb where seq = #{seq}
 </select>
@@ -289,8 +285,8 @@ select count(*) from guestbook_message
 	select category_num from itemdb i, orderhistory o where i.seq = o.itemnumber and buyer_id = #{buyer_id}
 </select>
 
-<insert id="insertOrderHistory" parameterType="historyVO">
- 	insert into orderhistory values #{orderhistory_seq.nextval, #{itemnumber}, #{itemcount}, #{buyer_id}
+<insert id="insertOrderHistory" parameterType="model.historyVO">
+ 	insert into orderhistory values (orderhistory_seq.nextval, #{itemnumber}, #{itemcount}, #{buyer_id})
 </insert>
 
 </mapper>

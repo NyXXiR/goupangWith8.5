@@ -85,5 +85,4 @@ public class historyVO {
 		this.orderAddress = orderAddress;
 	}
 	
-	
 }

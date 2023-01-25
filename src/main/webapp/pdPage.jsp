@@ -73,14 +73,13 @@ height: 100%;
 					String status = orderedItemList.get(i).getStatus();
 					String orderDate = orderedItemList.get(i).getOrderDate();
 					
-					String imgsrc = Session.selectOne("getImgsrc", itemNumber);
 					String itemname = Session.selectOne("getItemname", itemNumber); 
 				%>	
 				<tbody style="line-height: 100px;">
 					<tr>
 						<td style="background-color: #fafafa; text-align:center;">
 							<div class="product-img-box">
-								<img src="./resources/item/<%=imgsrc %>"/>
+								<img src="./resources/item/<%=itemNumber %>(1).jpg"/>
 							</div>
 						</td>
 						<td style="background-color: #fafafa; text-align:center;"><h5 style="line-height: 100px;"><%=itemname%></h5></td>
