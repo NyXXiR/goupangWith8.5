@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -7,25 +8,7 @@
 <%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>검색 버튼 누르면 출력되는 화면</title>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
-	crossorigin="anonymous">
-<link rel="stylesheet" href="headerCSS.css" />
-</head>
-<body>
-
+    
 <%
 SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
 SqlSession Session;
@@ -42,36 +25,59 @@ List<itemVO> listByItemName = Session.selectList("searchItemByItemName", entered
 // 판매자이름, 상품명, 전체로 검색한 결과 값 List에 담기
 
 
-
+DecimalFormat decFormat = new DecimalFormat("###,###");
 List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 %>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>검색 버튼 누르면 출력되는 화면</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="searchCss.css" />
+</head>
+<body>
 
 <script>
 	function sortBySalesRecord() {
 	$.ajax({
 		type: "GET",
-		url: "sortedItems.jsp",
+		//method: "sortItemsByRanking",  
+		url: "./sortProcess/sortBySalesRecord.jsp",
 		success: function(data) {
-			console.log("테스트용");
 			$(".search-list-box").html(data);
-			console.log("테스트용");
 		},
 		error: function(request, status, error) {
 			alert(error);
 		}
 	});
 }
-	
-	function 
+	function selectAllProduct() {
+		$.ajax({
+			type: "GET",
+			//method: "sortItemsByRanking",  
+			url: "./sortProcess/selectAllProcuct.jsp",
+			success: function(data) {
+				$(".search-list-box").html(data);
+			},
+			error: function(request, status, error) {
+				alert(error);
+			}
+		});
+	}
 </script>
-
 
 <!-- 해결해야 할 문제 -->
 
 <!-- 랭킹, 카테고리, 전체 버튼 sort 기능 -->
-<!-- 상품 컨테이너 body 형식과 통일시키기 -->
 <!-- 마이페이지 연동 방법 -->
-<!-- 상품 상세페이지 연동 방법 -->
 
 <jsp:include page="header.jsp" flush="false"/>
 		
@@ -93,9 +99,9 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 					</ul>
 				</div>
 			</div>
-			<div class="recommend"><a href="#">추천 상품</a></div>
+			<div class="recommend">추천 상품</div>
 			<!-- 로그인 한 유저가 특정 상품 클릭 할 때마다, db의 카테고리 column 숫자가 1씩 올라감. 가장 높은 숫자의 카테고리 상품부터 순차적으로 출력하기 -->
-			<div class="show-all"><a href="#">전체</a></div>
+			<div class="show-all" onclick="selectAllProduct()">전체</div>
 			<!-- search-wrapper 영역에 ajax 통해서 부분 렌더링 하기 -->
 		</div>
 
@@ -104,78 +110,46 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 		</div>
 
 		<!-- 검색 상품 출력 란 --> 
+		
 		<div class="search-wrapper">
 			<div id = "product_total">
+			<br/><br/>
 				<p>Total&nbsp:&nbsp&nbsp<span><%=listByAll.size() %></span></p>
 			</div>
 			
-			
 			<div class="search-list-box">
+			
 				<!-- 전체 상품 검색 결과 -->
 				
-				<% if(comboValue.equals("all")) {
-					for(int i=0; i<listByAll.size(); i++) { 
+					<% for(int i=0; i<listByAll.size(); i++) { 
 						int discounted = listByAll.get(i).getPrice() / 100 * (100 - listByAll.get(i).getDiscount());
 						int itemSeq = listByAll.get(i).getSeq();
 							%>
+							<!-- <img src="./resources/item/<%=listByAll.get(i).getImgsrc() %>" style="object-fit: cover; width: 100%; height: 100%;" class="card-img-top" alt="..."> -->
 							
-							
-						<div class="card" style="width: 24%">
-							<img src="./resources/item/<%=listByAll.get(i).getImgsrc() %>" class="card-img-top" alt="...">
+						<div class="card" style="width: 24%; height: 400px;">
+							<div class="card-img-box">
+								<img src="./resources/item/<%=listByAll.get(i).getImgsrc() %>" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" class="card-img-top" alt="..."> 
+							</div>
 							<div class="card-body">
 								<h5 class="card-title"><div id="itemName" class="text-large"><%=listByAll.get(i).getItemname()%></div></h5>
 								<p class="card-text"></p>
-								<div id="itemPrice" class="text-small" style="text-decoration:line-through"><%=listByAll.get(i).getPrice()%>원</div>
-								<div id="itemDiscountPrice" class="text-large"><%= discounted %>원</div>
+								
+								<%if(listByAll.get(i).getDiscount()==0) {
+									%>
+										<div id="itemPrice" class="text-small"><%= decFormat.format(listByAll.get(i).getPrice())%>원</div> 
+									<% 
+								} else {
+									%>
+										<div id="itemPrice" class="text-small" style="text-decoration:line-through; font-size: 13px;"><%=decFormat.format(listByAll.get(i).getPrice())%>원</div>
+										<div id="itemDiscountPrice" class="text-large"><%= decFormat.format(discounted) %>원</div>
+								    <% 
+									}
+									%>
 								<div><a href="./itemDetail.jsp?a=<%=itemSeq %>" class="btn btn-primary" style="margin-bottom:0">구매하기</a></div>
 							</div>
-						</div>
-				<% 	}
-				}
-				%>
-				
-				
-				<% if(comboValue.equals("sellerId")) {
-					for(int i=0; i<listBySellerId.size(); i++) { 
-						int discounted = listBySellerId.get(i).getPrice() / 100 * (100 - listBySellerId.get(i).getDiscount());
-						int itemSeq = listBySellerId.get(i).getSeq();
-							%>
-							
-							
-						<div class="card" style="width: 24%">
-							<img src="./resources/item/<%=listBySellerId.get(i).getImgsrc() %>" class="card-img-top" alt="...">
-							<div class="card-body">
-								<h5 class="card-title"><div id="itemName" class="text-large"><%=listBySellerId.get(i).getItemname()%></div></h5>
-								<p class="card-text"></p>
-								<div id="itemPrice" class="text-small" style="text-decoration:line-through"><%=listBySellerId.get(i).getPrice()%>원</div>
-								<div id="itemDiscountPrice" class="text-large"><%= discounted %>원</div>
-								<div><a href="./itemDetail.jsp?a=<%=itemSeq %>" class="btn btn-primary" style="margin-bottom:0">구매하기</a></div>
-							</div>
-						</div>
-				<% 	}
-				}
-				%>
-				
-				<% if(comboValue.equals("itemName")) {
-					for(int i=0; i<listByItemName.size(); i++) { 
-						int discounted = listByItemName.get(i).getPrice() / 100 * (100 - listByItemName.get(i).getDiscount());
-						int itemSeq = listByItemName.get(i).getSeq();
-							%>
-							
-							
-						<div class="card" style="width: 24%">
-							<img src="./resources/item/<%=listByItemName.get(i).getImgsrc() %>" class="card-img-top" alt="...">
-							<div class="card-body">
-								<h5 class="card-title"><div id="itemName" class="text-large"><%=listByItemName.get(i).getItemname()%></div></h5>
-								<p class="card-text"></p>
-								<div id="itemPrice" class="text-small" style="text-decoration:line-through"><%=listByItemName.get(i).getPrice()%>원</div>
-								<div id="itemDiscountPrice" class="text-large"><%= discounted %>원</div>
-								<div><a href="./itemDetail.jsp?a=<%=itemSeq %>" class="btn btn-primary" style="margin-bottom:0">구매하기</a></div>
-							</div>
-						</div>
-				<% 	}
-				}
-				%>
+					</div>
+				<% 	}%>
 				
 			</div>	
 		</div>

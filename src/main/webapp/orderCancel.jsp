@@ -3,8 +3,8 @@
 <%@page import="org.apache.ibatis.session.SqlSession"%>
 <%@page import="mybatis.Mybatis"%>
 <%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
     <%
     SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -28,25 +28,23 @@ HashMap<String, String> map = new HashMap<>();
 map.put("buyer_id", buyer_id);
 map.put("orderSeq", orderSeq);
 
-
-if(status.equals("stand-by")) {
+if(status.equals("ë°°ì†¡ ì¤€ë¹„ì¤‘")) {
 	Session.delete("deleteOrderedItems", map);
 		%>
 		<script>
-			alert("ÁÖ¹® Ãë¼Ò Ã³¸® µÇ¾ú½À´Ï´Ù.");
-			window.location.href = 'mypage_comsumer.jsp';
+			alert("ì£¼ë¬¸ ì·¨ì†Œ ì²˜ë¦¬ ë˜ì—ˆìŠµë‹ˆë‹¤.");
+			window.location.href = 'mypage_consumer.jsp?right=pdPage.jsp';
 		</script>
 		<%
-	// ÁÖ¹® Ãë¼Ò¿Ï·á.
-} else {
+	// ì£¼ë¬¸ ì·¨ì†Œì™„ë£Œ.
+} else if(status.equals("ë°°ì†¡ì¤‘") || status.equals("ë°°ì†¡ ì™„ë£Œ")){
 		%>
 		<script>
-			alert(status + orderNum + "¹ß¼Û ¿Ï·áµÈ »óÇ°Àº Ãë¼Ò°¡ ºÒ°¡´É ÇÕ´Ï´Ù.");
-			window.location.href = 'mypage_comsumer.jsp';
+			alert("ì·¨ì†Œê°€ ë¶ˆê°€ëŠ¥í•œ ìƒí’ˆì…ë‹ˆë‹¤.");
+			window.location.href = 'mypage_consumer.jsp?right=pdPage.jsp';
 		</script>
 		<%
-	// ¹ß¼Û Ã³¸® µÈ »óÇ°À¸·Î ÁÖ¹® Ãë¼Ò°¡ ºÒ°¡´É ÇÕ´Ï´Ù.
-}
-%>
+	// ë°œì†¡ ì²˜ë¦¬ ëœ ìƒí’ˆì€ ì·¨ì†Œë¶ˆê°€ëŠ¥.
+} %>
 </body>
 </html>

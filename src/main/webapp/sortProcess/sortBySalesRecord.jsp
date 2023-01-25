@@ -1,10 +1,11 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="model.itemVO"%>
 <%@page import="java.util.List"%>
 <%@page import="org.apache.ibatis.session.SqlSession"%>
 <%@page import="mybatis.Mybatis"%>
 <%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -15,9 +16,9 @@ SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
 SqlSession Session;
 Session = sqlSessionFactory.openSession(true); 
 
+DecimalFormat decFormat = new DecimalFormat("###,###");
 List<itemVO> sortItems = Session.selectList("sortBySalesRecord");
 
-//request.setAttribute("sortedList", sortItems);
 
 						for(int i=0; i<sortItems.size(); i++) { 
 						int discounted = sortItems.get(i).getPrice() / 100 * (100 - sortItems.get(i).getDiscount());
@@ -31,9 +32,18 @@ List<itemVO> sortItems = Session.selectList("sortBySalesRecord");
 							<div class="card-body">
 								<h5 class="card-title"><div id="itemName" class="text-large"><%=sortItems.get(i).getItemname()%></div></h5>
 								<p class="card-text"></p>
-								<div id="itemPrice" class="text-small" style="text-decoration:line-through"><%=sortItems.get(i).getPrice()%>©Ь</div>
-								<div id="itemDiscountPrice" class="text-large"><%= discounted %>©Ь</div>
-								<div><a href="./itemDetail.jsp?a=<%=itemSeq %>" class="btn btn-primary" style="margin-bottom:0">╠╦╦его╠Б</a></div>
+								<%if(sortItems.get(i).getDiscount()==0) {
+									%>
+										<div id="itemPrice" class="text-small"><%= decFormat.format(sortItems.get(i).getPrice())%>Л⌡░</div> 
+									<% 
+								} else {
+									%>
+										<div id="itemPrice" class="text-small" style="text-decoration:line-through; font-size: 13px;"><%=decFormat.format(sortItems.get(i).getPrice())%>Л⌡░</div>
+										<div id="itemDiscountPrice" class="text-large"><%= decFormat.format(discounted) %>Л⌡░</div>
+								    <% 
+									}
+									%>
+								<div><a href="./itemDetail.jsp?a=<%=itemSeq %>" class="btn btn-primary" style="margin-bottom:0">Й╣╛К╖╓М∙≤Й╦╟</a></div>
 							</div>
 						</div>
 				<% 	}

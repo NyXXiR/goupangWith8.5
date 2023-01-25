@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>header</title>
 <link rel="stylesheet" href="headerCSS.css" />
 </head>
 <body>
@@ -28,11 +28,11 @@ String sellerLoginStatus = (String) session.getAttribute("sellerId");
       <div class="close-btn-box">
         <img src="./resources/header/close.png" class="slide-close-btn" onclick="closeNav()" />
       </div>
-      <h1><a href="">메뉴</a></h1>
+      <h1><a href="#">특가 상품</a></h1>
       <div style="height:5px; background:lightgray"></div>
-      <a href="">A</a>
-      <a href="">B</a>
-      <a href="">C</a>
+      <a href="#">A</a>
+      <a href="#">B</a>
+      <a href="#">C</a>
   </div>
       <div class="header-container">
         <div class="upper-header-white">
@@ -44,11 +44,6 @@ String sellerLoginStatus = (String) session.getAttribute("sellerId");
           
           <div class="header-middle-box">
            <form action="search2.jsp" class="search-container" method="POST">
-                <select name="comboValue">
-                  <option value="all">전체</option>
-                  <option value="sellerId">판매자이름</option>
-                  <option value="itemName">상품명</option>
-                </select>
 	            <div class="search-box">
 	              <input type="text" class="search-bar" name="searchbar" placeholder="" />
 	              <input type="submit" class="search-Btn" value=""/>

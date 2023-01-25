@@ -30,7 +30,7 @@
 
 	<insert id="ItemUpload" parameterType="model.itemVO">
 		insert into itemDB values(item_seq.nextval,
-		#{itemname},#{price},#{discount},#{sellerid}, sysdate,#{categorynum},#{qty},#{description},0)
+		#{itemname},#{price},#{discount},#{sellerid}, sysdate,#{categorynum},#{qty},#{description},0,#{imgsrc})
 	</insert>
 
 	<select id="ItemAll" resultType="model.itemVO">
@@ -255,11 +255,11 @@ select count(*) from guestbook_message
  
  
  
-  <!-- ORDERHISTORY 관련 구문 
+  <!-- ORDERHISTORY 관련 구문 -->
+
 <select id="getItems" parameterType="String" resultType="model.historyVO">
- select orderseq, itemnumber, status, orderdate from orderhistory WHERE buyer_id = #{buyer_id}
+ select orderseq, itemnumber, itemcount, status, orderdate from orderhistory WHERE buyer_id = #{buyer_id}
 </select>
--->
 
 <insert id="deleteOrderedItems" parameterType="Map">
 	delete from orderhistory where buyer_id = #{buyer_id} and orderSeq = #{orderSeq}
@@ -269,5 +269,16 @@ select count(*) from guestbook_message
 	select status from orderhistory where orderSeq = #{orderSeq}
 </select>
 
+<select id="getImgsrc" parameterType="int" resultType="String">
+	select imgsrc from itemdb where seq = #{seq}
+</select>
+
+<select id="getItemname" parameterType="int" resultType="String">
+	select itemname from itemdb where seq = #{seq}
+</select>
+
+<select id="getItemByCatenum" parameterType="int" resultType="model.itemVO">
+	select * from itemdb where category_num = #{category_num}
+</select>
 
 </mapper>

@@ -1,6 +1,3 @@
-@charset "EUC-KR";
-
-<style>
 .wrapper {
 	width: 1280px;
 	margin: 0 auto;
@@ -91,7 +88,11 @@ position: relative;
 	trainsition: 0.8s;
 	transform: scale(1.1);
 }
-	
+.card-img-box {
+height: 60%;
+position: relative;
+						
+}
 .img-box {
 	overflow: hidden;
     vertical-align:middle;
@@ -117,4 +118,4 @@ font-size: 20px;
 	flex-flow: wrap;
 	margin: 30px auto;
 }
-}
+

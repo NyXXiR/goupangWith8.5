@@ -26,9 +26,18 @@ sess=sqlSessionFactory.openSession(true); %>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<link rel="stylesheet" href="./mypage_master.css">
+	
+	<style>
+		body {
+			
+		font-family: "Lato", sans-serif;  
+		margin: 0;
+		  
+		}
+	</style>
 </head>
 
-<body>
+<body style="font-family: "Lato", sans-serif;">
 	<div id="wrap">
 		<jsp:include page="header.jsp" flush="false" />
 		<%-- <jsp:params name="상균" value="header" /> --%>
@@ -38,20 +47,27 @@ sess=sqlSessionFactory.openSession(true); %>
 				<!-- 목록 -->
 				<ul id="category">
 					<li>
-						<h3 id="pdPage" onclick="location.href='mypage_consumer.jsp?right=myPage.jsp'">마이페이지</h3>
+						<h4 id="pdPage" onclick="location.href='mypage_consumer.jsp?right=myPage.jsp'">마이페이지</h4>			
+								<!-- carousel 통해서 보여주기-->
+								
+						
+					</li>
+					<br/>
+					<li>
+						<h4 id="pdPage" onclick="location.href='mypage_consumer.jsp?right=pdPage.jsp'">주문 내역</h4>
 						<!-- orderstatus db랑 연계 -->
 					</li>
+					<br/>
 					<li>
-						<h3 id="pdPage" onclick="location.href='mypage_consumer.jsp?right=pdPage.jsp'">주문 내역</h3>
-						<!-- orderstatus db랑 연계 -->
-					</li>
-					<li>
-						<h3 id="dvPage" onclick="getPage(this.id)">게시글 내역</h3>
+						<h4 id="dvPage" onclick="getPage(this.id)">문의 내역</h4>
 						<!-- 방명록db랑 연계 -->
 					</li>
+					<br/>
 					<li>
-						<h3 id="psPage" onclick="location.href='buyerModify.jsp'">회원정보수정</h3>
+						<h4 id="dvPage" onclick="getPage(this.id)">장바구니</h4>
+						<!-- 방명록db랑 연계 -->
 					</li>
+					<br/>
 				</ul>
 			</div>
 

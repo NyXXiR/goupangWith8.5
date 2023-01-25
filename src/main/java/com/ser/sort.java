@@ -45,7 +45,7 @@ public class sort extends HttpServlet {
 		List<itemVO> sortItems = Session.selectList("sortBySalesRecord");
 		
 		request.setAttribute("sortedList", sortItems);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/search1.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/search2.jsp");
 		dispatcher.forward(request, response);
 		System.out.println("전송완료");
 		
