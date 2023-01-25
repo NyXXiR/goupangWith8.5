@@ -264,6 +264,9 @@ select count(*) from guestbook_message
  select * from orderhistory order by orderseq desc
 </select>
 
+<select id="orderOneSelectBySeq" parameterType="int" resultType="model.historyVO">
+ select * from orderhistory where orderSeq = #{orderSeq}
+</select>
 
 <select id="getItems" parameterType="String" resultType="model.historyVO">
  select orderseq, itemnumber, itemcount, status, orderdate from orderhistory WHERE buyer_id = #{buyer_id}
