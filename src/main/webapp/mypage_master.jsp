@@ -1,3 +1,4 @@
+<%@page import="model.historyVO"%>
 <%@page import="DAO.ItemDao2"%>
 <%@page import="model.itemVO3"%>
 <%@page import="model.itemVO"%>
@@ -6,6 +7,7 @@
 <%@page import="mybatis.Mybatis" %>
 <%@page import="org.apache.ibatis.session.SqlSessionFactory" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% SqlSessionFactory sqlSessionFactory=Mybatis.getSqlSessionFactory(); SqlSession sess;
 sess=sqlSessionFactory.openSession(true); %>
 
@@ -30,8 +32,30 @@ sess=sqlSessionFactory.openSession(true); %>
 		pageNum = Integer.valueOf(numstr);
 	}
 	
+	String listPage = request.getParameter("listPage");
+	int minListPage;
+	/* System.out.println(numstr); */
+	if(request.getParameter("listPage") == null){
+		minListPage = 1;
+	}else{
+		minListPage = Integer.valueOf(listPage);
+	}
+	
+	
+	//상품 등록된 갯수의 10.0으로 나누고 ceil로 올림처리하여 필요한 상품페이지를 반환받음
+	//최대 상품이 98개라면 10개씩 등록했을때 9개의 페이지와 8개가 남게되는데, 남는 상품들을 위해서 올림 처리하여 8개도 보여지기 위해 (10번째 페이지를 위해) 올림처리
+	int itemC = sess.selectOne("ItemAllCount");
+	int maxListPage = (int)Math.ceil(itemC/10.0); 
+	/* int maxListPage = 11; */ 
+	int showListPage = minListPage+9;
+	
+	showListPage = showListPage < maxListPage ? showListPage : maxListPage;
 
 %>
+<c:set var="minListPage" value="<%=minListPage%>"/>
+<c:set var="showListPage" value="<%=showListPage%>"/>
+<c:set var="maxListPage" value="<%=maxListPage%>"/>
+
 
 <!DOCTYPE html>
 <html>
@@ -74,10 +98,25 @@ sess=sqlSessionFactory.openSession(true); %>
 			<div id="center">
 				<!-- 내용 -->
 				<div id="changePage">
-					<jsp:include page="<%=right %>"/>
+					 <jsp:include page="<%=right %>"/> 
 					<div id="span" style="display : none"></div>	
-						
-					
+						<div id="orderList">
+							<table id="orderListTable">
+								<theade>
+									<tr>
+										<td>주문번호</td>
+										<td>상품번호</td>
+										<td>상품수량</td>
+										<td>주문자</td>
+										<td>주문상태</td>
+										<td>주소지</td>
+										<td>주문일자</td>
+									</tr>
+								</theade>
+								<tbody id="orderTableAdd">
+								</tbody>
+							</table>
+						</div>
 				</div>
 			</div>
 		</section>
@@ -89,6 +128,7 @@ sess=sqlSessionFactory.openSession(true); %>
 	<script>
 	
 	
+/*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  */	
 //마이페이지 그래프영역
 
 
@@ -200,14 +240,12 @@ $('#minSaleItem').html("<%=itemMinSale%>");
 }
 %>					
 						
-
-
 	
 
 
 
 						
-
+/*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  */
 //상품등록 페이지 영역
 //input을 히든으로 두고 img박스를 클릭했을때 input 클릭반응을 이끌어내기 위해서 img박스에 클릭이벤트를 부여
 $(document).on('click', '#fakeInputP1', function (e) { $('#realInputP1').click(); });
@@ -252,6 +290,8 @@ function readURL3(input) {
 
 
 
+
+/*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  */
 //상품 수정 페이지 영역
 //등록된 상품 리스트
 
@@ -261,22 +301,46 @@ function locationNum(num){
 }		
 
 
-
 $(function(){
 <%	
 	//상품 등록된 갯수를 불러와서 테이블 하단의 표시
 int itemCount = sess.selectOne("ItemAllCount");
 %>	$("#itemAllCount").html("전체 상품 수 :"+<%=itemCount%>);
 <%
-	//상품 등록된 갯수의 10.0으로 나누고 ceil로 올림처리하여 필요한 상품페이지를 반환받음
-	//최대 상품이 98개라면 10개씩 등록했을때 9개의 페이지와 8개가 남게되는데, 남는 상품들을 위해서 올림 처리하여 8개도 보여지기 위해 (10번째 페이지를 위해) 올림처리
-	//a 태그와 상단의 locationNum메서드 처리
-/* int listcount = (int)Math.ceil(itemCount/10.0); */
-int listcount = 15;
-for(int i=1; i<=listcount; i++){
+
+
+	
+//상단에서 minListPage와 MaxListPage, showListPage를 설정해 두었는데,
+//상품을 리스트화 했을때 10번 페이지가 넘어가게 되면 다음버튼이 활성화되게 하며 클릭시 minListPage, 다시 노출될 번호를 11로 지정해준다.
+//마지막 번호와 현재보여지는 showListPage의 숫자가 같을때 다음 페이지가 사라지게 설정
+//a 태그와 상단의 locationNum메서드 처리
+for(int i=minListPage; i<= showListPage; i++){
 %>	$('#itemCount').append("<a href='javascript:;' onclick='locationNum(<%=i%>)'>"+<%=i%>+"</a>");
 <%
 }
+%>
+	if(${minListPage == 1}){
+		$('#itemCountMoveF').css("display","none");
+	}else{
+		$('#itemCountMoveF').css("display","block");
+	}
+		
+	if(${maxListPage == showListPage}){
+		$('#itemCountMoveT').css("display","none");
+	}else{
+		$('#itemCountMoveT').css("display","block");
+	}
+
+
+$('#itemCountMoveF').on('click',function(){
+	location.href="mypage_master.jsp?right=pdRetouchPage.jsp&listPage="+<%=minListPage-10%>;
+})
+$('#itemCountMoveT').on('click',function(){
+	location.href="mypage_master.jsp?right=pdRetouchPage.jsp&listPage="+<%=minListPage+10%>;
+	console.log(${maxListPage});
+	console.log(${showListPage});
+})
+<%
 
 
 
@@ -291,12 +355,13 @@ $('#itemListadd').html("<%=itemTableEl%>");
 	
 })
 
+
+
+
 //수정영역인 pdRetouchitempage로 이동하면서 파라미터값으로 seq를 보낸다.
 function callRetouchItem(num){
 	location.href="mypage_master.jsp?right=pdRetouchItemPage.jsp&reItemNum="+num;
 }
-
-
 
 
 
@@ -319,29 +384,16 @@ $(function(){
 })
 
 
-$(function(){
-	var pageMax = -(Math.trunc($('#itemCount').children().length/10))*400;
-	var locationLeftCont = 0;
-	$('#itemCountMoveF').on('click',function(){
-		$('#itemCount').stop().animate({left:"+=400px"},0);
-		locationLeftCont += 400;
-	})
-	$('#itemCountMoveT').on('click',function(){
-		$('#itemCount').stop().animate({left:"-=400px"},0);
-		locationLeftCont -= 400;
 
-	})
-	if(locationLeftCont == 0){
-		$('#itemCountMoveF').stop().animate({display:"none"});
-		$('#itemCountMoveT').stop().animate({display:"block"});
-	}else if(locationLeftCont != 0){
-		$('#itemCountMoveF').stop().animate({display:"block"});
-		$('#itemCountMoveT').stop().animate({display:"block"});
-	}else{
-		$('#itemCountMoveF').stop().animate({"display":"block"});
-		$('#itemCountMoveT').stop().animate({"display":"block"});
-	}
-})
+
+/*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  *//*  */
+//주문내역 처리영역
+<%
+List<historyVO> orderList = sess.selectOne("orderAllSelect");
+String orderstr = itemdao.
+%>
+
+
 </script>
 
 </body>

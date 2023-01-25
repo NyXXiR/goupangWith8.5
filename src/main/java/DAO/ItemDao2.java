@@ -103,8 +103,7 @@ public class ItemDao2 {
 		}else {
 			System.out.println("실패");
 		}
-		
-		
 		return result;
 	}
+	
 }
