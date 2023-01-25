@@ -5,7 +5,7 @@ public class historyVO {
 	private String orderSeq;
 	private int itemNumber;
 	private int itemCount;
-	private String buyer_id;
+	private String buyerid;
 	private String status;
 	private String orderDate;
 	private String orderAddress;
@@ -14,10 +14,10 @@ public class historyVO {
 		super();
 	}
 	
-	public historyVO(String buyer_Id, String orderSeq) {
+	public historyVO(String buyerId, String orderSeq) {
 		super();
 		this.orderSeq = orderSeq;
-		this.buyer_id = buyer_Id;
+		this.buyerid = buyerId;
 	}
 
 
@@ -53,12 +53,12 @@ public class historyVO {
 		this.itemCount = itemCount;
 	}
 
-	public String getBuyer_id() {
-		return buyer_id;
+	public String getBuyerid() {
+		return buyerid;
 	}
 
-	public void setBuyer_id(String buyer_id) {
-		this.buyer_id = buyer_id;
+	public void setBuyer_id(String buyerid) {
+		this.buyerid = buyerid;
 	}
 
 	public String getStatus() {
