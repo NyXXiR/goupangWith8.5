@@ -200,7 +200,7 @@ update cartitemDB set "qty" = "qty"-#{qty} where "item_seq" =#{seq} and buyer_id
 <!--  buyerDB 관련 구문 -->
 
 <insert id="signUpBuyer" parameterType="model.buyerVO">
-	insert into buyerDB values(buyer_seq.nextval, #{buyerId}, #{buyerPw} ,#{buyerName})
+	insert into buyerDB values(buyer_seq.nextval, #{buyerId}, #{buyerPw} ,#{buyerName}, #{buyerAddress})
 </insert>
 
 
@@ -284,5 +284,13 @@ select count(*) from guestbook_message
 <select id="getItemByCatenum" parameterType="int" resultType="model.itemVO">
 	select * from itemdb where category_num = #{category_num}
 </select>
+
+<select id="getCatenumFromHistory" parameterType="String" resultType="model.itemVO">
+	select category_num from itemdb i, orderhistory o where i.seq = o.itemnumber and buyer_id = #{buyer_id}
+</select>
+
+<insert id="insertOrderHistory" parameterType="historyVO">
+ 	insert into orderhistory values #{orderhistory_seq.nextval, #{itemnumber}, #{itemcount}, #{buyer_id}
+</insert>
 
 </mapper>

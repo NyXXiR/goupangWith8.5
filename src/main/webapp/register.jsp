@@ -23,6 +23,10 @@
             <input class="input1" name="userName" type="text" placeholder="Name"/>
           </div>
           <div class="box">
+            <h4 class="address">Address</h4>
+            <input class="input1" name="userAddress" type="text" placeholder="Address"/>
+          </div>
+          <div class="box">
             <h4 class="password">password</h4>
 
             <input class="input1" name="userPassword" type="password" placeholder="PW"/>

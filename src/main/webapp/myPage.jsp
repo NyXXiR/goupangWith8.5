@@ -77,7 +77,7 @@ height: 100%;
 				%>	
 				 <div class="product-box">
 					<div class="product-img-box">
-						<img src="./resources/item/<%=imgsrc %>"/>
+						<img src="./resources/item/<%=orderedItemList.get(i).getItemNumber() %>(1).jpg"/>
 					</div>
 						
 					<div class="product-detail-box" style="line-height: 40px;">
@@ -102,7 +102,7 @@ height: 100%;
 		%>	
 		 <div class="product-box">
 			<div class="product-img-box">
-				<img src="./resources/item/<%=imgsrc %>"/>
+				<img src="./resources/item/<%=orderedItemList.get(i).getItemNumber() %>(1).jpg"/>
 			</div>
 				
 			<div class="product-detail-box" style="line-height: 30px;">

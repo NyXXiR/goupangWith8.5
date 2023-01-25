@@ -21,17 +21,19 @@
       String userID = request.getParameter("userID");
 	  String userPassword = request.getParameter("userPassword");
 	  String userName = request.getParameter("userName");
+	  String userAddress = request.getParameter("userAddress");
+	  
 		// 폼 태그 안의 값을 불러와서 변수에 담기
-	  buyerVO buyer = new buyerVO(userID, userPassword, userName);
+	  buyerVO buyer = new buyerVO(userID, userPassword, userName, userAddress);
 	  	// seq 제외하고 회원가입 페이지에서 실제로 가져오는 값을 통해 새로운 객체 생성
 	  	
 	  	
-		if (userID != "" && userPassword != "" && userName != "") {
+		if (userID != "" && userPassword != "" && userName != "" && userAddress != "") {
 			  Session.insert("signUpBuyer", buyer);
 			  %>
 				  <script>
 				  alert("<%= userName%> 님 회원가입 완료 되었습니다");
-				  window.location.href = 'header.jsp';
+				  window.location.href = 'view.jsp';
 				  </script>
 			  <%
 			  //Session.commit();
@@ -42,7 +44,7 @@
 			  %>
 				  <script>
 				  alert("모든 항목을 입력 해 주세요");
-				  window.location.href = 'register.jsp';
+				  window.location.href = 'view.jsp';
 				  </script>
 			  <%
 			  //Session.rollback();

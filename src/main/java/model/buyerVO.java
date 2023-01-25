@@ -5,6 +5,7 @@ public class buyerVO {
 	private String buyerId;
 	private String buyerPw;
 	private String buyerName;
+	private String buyerAddress;
 	
 	
 	@Override
@@ -14,17 +15,17 @@ public class buyerVO {
 	}
 
 	
-	public buyerVO(String buyerId, String buyerPw, String buyerName) {
+	public buyerVO(String buyerId, String buyerPw, String buyerName, String buyerAddress) {
 		super();
 		this.buyerId = buyerId;
 		this.buyerPw = buyerPw;
 		this.buyerName = buyerName;
+		this.buyerAddress = buyerAddress;
 	}
 
 
-	public buyerVO(String buyerSeq, String buyerId, String buyerPw, String buyerName) {
+	public buyerVO(String buyerId, String buyerPw, String buyerName) {
 		super();
-		this.buyerSeq = buyerSeq;
 		this.buyerId = buyerId;
 		this.buyerPw = buyerPw;
 		this.buyerName = buyerName;
@@ -63,7 +64,14 @@ public class buyerVO {
 		this.buyerName = buyerName;
 	}
 
-	
+	public String getBuyerAddress() {
+		return buyerAddress;
+	}
+
+	public void setBuyerAddress(String buyerAddress) {
+		this.buyerAddress = buyerAddress;
+	}
+
 
 	
 
