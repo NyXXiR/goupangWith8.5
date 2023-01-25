@@ -70,7 +70,6 @@ height: 100%;
 				String status = orderedItemList.get(i).getStatus();
 				int itemCount = orderedItemList.get(i).getItemCount();
 				String orderDate = orderedItemList.get(i).getOrderDate();
-				String imgsrc = Session.selectOne("getImgsrc", itemNumber);
 				String itemname = Session.selectOne("getItemname", itemNumber); 
 			
 			 // 구매내역 3개 이상일 경우 
@@ -95,7 +94,6 @@ height: 100%;
 				String status = orderedItemList.get(i).getStatus();
 				int itemCount = orderedItemList.get(i).getItemCount();
 				String orderDate = orderedItemList.get(i).getOrderDate();
-				String imgsrc = Session.selectOne("getImgsrc", itemNumber);
 				String itemname = Session.selectOne("getItemname", itemNumber); 
 			
 			 // 구매내역 3개 미만일 경우 
