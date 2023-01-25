@@ -83,7 +83,7 @@
 	<div class="row">
 		<div class="col"></div>
 		<div class="card" style="width: 18rem;">
-			<img src="./resources/item/3(1).jpg" class="card-img-top" alt="...">
+			<img src="./resources/item/3.jpg" class="card-img-top" alt="...">
 			<div class="card-body">
 				<h5 class="card-title">
 					<div id="itemName" class="text-large"><%=vo1.getItemname()%></div>

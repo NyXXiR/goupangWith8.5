@@ -10,6 +10,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
+
 HashMap<String, String> itemMap = (HashMap<String, String>) session.getAttribute("itemMap");
 %>
 <html>

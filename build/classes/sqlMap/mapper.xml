@@ -37,6 +37,10 @@
 		select * from itemDB
 	</select>
 	
+	<select id="getVOBySeq" resultType="model.itemVO">
+		select * from itemDB where seq=#{item_seq}
+	</select>
+	
 	<select id="getNameBySeq" parameterType="int" resultType="String">
 		select itemname from itemDB where seq=#{item_seq}
 	</select>

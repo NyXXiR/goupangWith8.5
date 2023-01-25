@@ -146,7 +146,7 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 								    <% 
 									}
 									%>
-								<div><a href="./itemDetail.jsp?a=<%=itemSeq %>" class="btn btn-primary" style="margin-bottom:0">구매하기</a></div>
+								<div><a href="./buyProcess/voShuttle.jsp?item_seq=<%=itemSeq %>" class="btn btn-primary" style="margin-bottom:0">구매하기</a></div>
 							</div>
 					</div>
 				<% 	}%>
