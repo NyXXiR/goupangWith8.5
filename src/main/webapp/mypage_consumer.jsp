@@ -28,12 +28,12 @@ sess=sqlSessionFactory.openSession(true); %>
 	<link rel="stylesheet" href="./mypage_master.css">
 	
 	<style>
-		body {
-			
-		font-family: "Lato", sans-serif;  
-		margin: 0;
-		  
-		}
+body {
+	
+font-family: "Lato", sans-serif;  
+margin: 0;
+  
+}
 	</style>
 </head>
 

@@ -27,7 +27,7 @@ List<itemVO> sortItems = Session.selectList("sortBySalesRecord");
 							
 						<div class="card" style="width: 24%; height: 500px;">
 							<div class="card-img-box">
-								<img src="./resources/item/<%=sortItems.get(i).getImgsrc() %>" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" class="card-img-top" alt="..."> 
+								<img src="./resources/item/<%=sortItems.get(i).getSeq() %>(1).jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" class="card-img-top" alt="..."> 
 							</div>
 							<div class="card-body">
 								<h5 class="card-title"><div id="itemName" class="text-large"><%=sortItems.get(i).getItemname()%></div></h5>

@@ -1,3 +1,7 @@
+<%@page import="model.historyVO"%>
+<%@page import="org.apache.ibatis.session.SqlSession"%>
+<%@page import="mybatis.Mybatis"%>
+<%@page import="org.apache.ibatis.session.SqlSessionFactory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -41,5 +45,26 @@
         </div>
       </div>
     </div>
-</body>
+    
+    
+    <%
+      SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
+	  SqlSession Session;
+	  Session = sqlSessionFactory.openSession(true); 
+	  
+    session.setAttribute("prdSeq", 5);
+    session.setAttribute("prdCount", 5);
+    
+	int prdSeq = (int) session.getAttribute("prdSeq");
+	int prdCount =  (int) session.getAttribute("prdCount");
+	String buyerid = (String) session.getAttribute("buyerId");
+	
+	String address = Session.selectOne("getBuyerAddress", buyerid);
+	
+	  
+	   %>
+	   <form action="insertOrderOK.jsp">
+	   	<input type="submit" value="주문내역 업데이트"/>
+	   </form>
+	  </body>
 </html>

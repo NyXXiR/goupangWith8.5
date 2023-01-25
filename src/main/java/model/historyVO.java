@@ -21,6 +21,14 @@ public class historyVO {
 	}
 
 
+	public historyVO(int itemNumber, int itemCount, String buyerid, String orderAddress) {
+		super();
+		this.itemNumber = itemNumber;
+		this.itemCount = itemCount;
+		this.buyerid = buyerid;
+		this.orderAddress = orderAddress;
+	}
+
 	public historyVO(String orderSeq, int itemNumber, String status, String orderDate) {
 		super();
 		this.orderSeq = orderSeq;
