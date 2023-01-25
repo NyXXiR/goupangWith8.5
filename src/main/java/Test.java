@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import DAO.ItemDao2;
+import DAO.historyDAO;
 import model.historyVO;
 import model.itemVO;
 import model.itemVO3;
@@ -58,8 +59,12 @@ public class Test {
     	 System.out.println(str);
     // int n= session.insert("add", vo);
      
-    	List<historyVO> listt = sess.selectOne("orderAllSelect");
-    	System.out.println(listt);
+    /*	List<historyVO> listt = sess.selectList("orderAllSelect");
+    	System.out.println(listt);*/
+    	
+    	historyDAO hd = historyDAO.getInstance();
+    	historyVO order = hd.selectOne(25);
+    	System.out.println(order);
   }
 
 }
