@@ -23,11 +23,22 @@
 <link rel="stylesheet" href="searchCss.css" />
 
 <script>
+
+.wrapper {
+	width: 1280px;
+	margin: 0 auto;
+}
 .search-list-box {
 	display: flex;
 	justify-content: start;
 	flex-flow: wrap;
 	margin: 30px auto;
+}
+.title-text-box {
+    height: 80px;
+    text-align: center;
+    line-height: 80px;
+    border-bottom: 3px solid darkgray;
 }
 
 </script>
@@ -77,40 +88,42 @@
 	
 <div class="wrapper"></div>
 
-	<h2>상품 리스트</h2>
+	<div class="title-text-box">
+			<h2>전체 상품</h2>
+		</div>
 
 		<div id="product_total">
 			<br/><br/>
 			<p>
-				Total&nbsp:&nbsp&nbsp<span><%=listByRdate.size()%></span>
+				Total&nbsp:&nbsp&nbsp<span><%=listByItemName.size()%></span>
 			</p>
 		</div>
 
 	<div class="search-list-box">
 	
-		<% for(int i=0; i<listByRdate.size(); i++) { 
-			int discounted = listByRdate.get(i).getPrice() / 100 * (100 - listByRdate.get(i).getDiscount());
-			int itemSeq = listByRdate.get(i).getSeq();
-				%>
-				<%=listByRdate.get(i).getImgsrc() %>
+		<% for(int i=0; i<listByItemName.size(); i++) { 
+			int discounted = listByItemName.get(i).getPrice() / 100 * (100 - listByItemName.get(i).getDiscount());
+			int itemSeq = listByItemName.get(i).getSeq();
+		%>
+		
 
 			<div class="card" style="width: 24%; height: 400px;">
 				<div class="card-img-box">
 					<img
-						src="./resources/item/<%=listByRdate.get(i).getSeq()%>(1).jpg"
+						src="./resources/item/<%=listByItemName.get(i).getSeq()%>(1).jpg"
 						style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
 						class="card-img-top" alt="...">
 				</div>
 				<div class="card-body">
 					<h5 class="card-title">
-						<div id="itemName" class="text-large"><%=listByRdate.get(i).getItemname()%></div>
+						<div id="itemName" class="text-large"><%=listByItemName.get(i).getItemname()%></div>
 					</h5>
 					<p class="card-text"></p>
 
 					<%
-					if (listByRdate.get(i).getDiscount() == 0) {
+					if (listByItemName.get(i).getDiscount() == 0) {
 					%>
-					<div id="itemPrice" class="text-small"><%=decFormat.format(listByRdate.get(i).getPrice())%>원
+					<div id="itemPrice" class="text-small"><%=decFormat.format(listByItemName.get(i).getPrice())%>원
 					</div>
 					<%
 					} else {
@@ -131,6 +144,7 @@
 			</div>
 			<%
 			}
+			
 			%>
 
 		</div>
