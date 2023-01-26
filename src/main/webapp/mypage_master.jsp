@@ -221,7 +221,7 @@ new Chart(bar, {
 List <itemVO3> salListR = sess.selectList("ItemSaleRecordRSearch");
 String itemMinSale = itemdao.itemMinTable(salListR);
 %>
-$('#minSaleItem').html("<%=itemMinSale%>");
+$('#minSaleItem').append("<%=itemMinSale%>");
 
 <%
 }
@@ -324,8 +324,6 @@ $('#itemCountMoveF').on('click',function(){
 })
 $('#itemCountMoveT').on('click',function(){
 	location.href="mypage_master.jsp?right=pdRetouchPage.jsp&listPage="+<%=minListPage+10%>;
-	console.log(${maxListPage});
-	console.log(${showListPage});
 })
 <%
 
@@ -385,7 +383,7 @@ $('#orderTableAdd').append("<%=orderstr%>");
 })
 
 function orderStChange(num){
-	location.href="mypage_master.jsp?right=orderStChangePage.jsp&orderNum="+num;
+	location.href="mypage_master.jsp?right=orderStPage.jsp&orderNum="+num;
 }
 
 </script>

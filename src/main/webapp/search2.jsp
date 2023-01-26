@@ -72,6 +72,20 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 			}
 		});
 	}
+	
+	function catenum10() {
+		$.ajax({
+			type: "GET",
+			//method: "sortItemsByRanking",  
+			url: "./sortProcess/catenum10.jsp",
+			success: function(data) {
+				$(".search-list-box").html(data);
+			},
+			error: function(request, status, error) {
+				alert(error);
+			}
+		});
+	}
 </script>
 
 <!-- 해결해야 할 문제 -->
@@ -89,13 +103,13 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 			<div class="sort-by-category" onclick="sortTest()"><a href="#">카테고리</a>
 				<div class="category-dropbox">
 					<ul>
-						<li>패션</li>
-						<li>뷰티</li>
-						<li>전자제품</li>
-						<li>팬트리</li>
-						<li>자동차 용품</li>
-						<li>완구</li>
-						<li>기타</li>
+						<li onclick="catenum10()">패션</li>
+						<li onclick="catenum20()">뷰티</li>
+						<li onclick="catenum30()">전자제품</li>
+						<li onclick="catenum40()">팬트리</li>
+						<li onclick="catenum50()">자동차 용품</li>
+						<li onclick="catenum60()">완구</li>
+						<li onclick="catenum70()">기타</li>
 					</ul>
 				</div>
 			</div>

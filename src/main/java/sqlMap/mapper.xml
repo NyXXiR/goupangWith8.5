@@ -293,7 +293,7 @@ select count(*) from guestbook_message
 </select>
 
 <select id="getItemByCatenum" parameterType="int" resultType="model.itemVO">
-	select * from itemdb where category_num = #{category_num}
+	select * from itemdb where category_num = #{category_num} order by salerecord
 </select>
 
 <select id="getCatenumFromHistory" parameterType="String" resultType="int">
@@ -307,5 +307,9 @@ select count(*) from guestbook_message
 <select id="getBuyerAddress" parameterType="String" resultType="String">
 	select buyer_address from buyerdb where buyer_id = #{buyer_id}
 </select>
+
+<insert id="updateOrderHistory" parameterType="model.historyVO">
+ 	update orderhistory set itemcount= #{itemCount} , buyeraddress= #{buyerAddress} , status= #{status} where orderseq = #{orderSeq} 
+</insert>
 
 </mapper>

@@ -12,7 +12,6 @@ public class itemVO {
   private int qty;
   private String description;
   private int salerecord;
-  private String imgsrc;
 
 
   public itemVO() {
@@ -67,7 +66,6 @@ public class itemVO {
   }
 
 
-
   public int getSeq() {
     return seq;
   }
@@ -108,9 +106,6 @@ public class itemVO {
     return salerecord;
   }
 
-  public String getImgsrc() {
-    return imgsrc;
-  }
 
 
   public void setSeq(int seq) {
@@ -153,9 +148,6 @@ public class itemVO {
     this.salerecord = salerecord;
   }
 
-  public void setImgsrc(String imgsrc) {
-    this.imgsrc = imgsrc;
-  }
 
 
 

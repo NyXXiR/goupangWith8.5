@@ -17,15 +17,15 @@ SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
 SqlSession Session;
 Session = sqlSessionFactory.openSession(true); 
 
-session.setAttribute("prdSeq", 5);
+session.setAttribute("prdSeq", 69);
 session.setAttribute("prdCount", 5);
 
-int prdSeq = (int) session.getAttribute("prdSeq");
+int prdNum = (int) session.getAttribute("prdSeq");
 int prdCount =  (int) session.getAttribute("prdCount");
 String buyerid = (String) session.getAttribute("buyerId");
 
-String address = Session.selectOne("getBuyerAddress", buyerid);
-historyVO vo = new historyVO(prdSeq, prdCount, buyerid, address);
+//String address = Session.selectOne("getBuyerAddress", buyerid);
+historyVO vo = new historyVO(prdNum, prdCount, "test", "서울시 대흥동");
 
 
 try {

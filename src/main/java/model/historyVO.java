@@ -28,12 +28,31 @@ public class historyVO {
 				+ buyerAddress + "]";
 	}
 
+	public historyVO(int itemNumber, int itemCount, String buyerid, String buyerAddress) {
+			super();
+			this.itemNumber = itemNumber;
+			this.itemCount = itemCount;
+			this.buyerid = buyerid;
+			this.buyerAddress = buyerAddress;
+	}
+	
 	public historyVO(String orderSeq, int itemNumber, String status, String orderDate) {
 		super();
 		this.orderSeq = orderSeq;
 		this.itemNumber = itemNumber;
 		this.status = status;
 		this.orderDate = orderDate;
+	}
+
+	
+	
+	public historyVO(String orderSeq, int itemNumber, int itemCount, String buyerAddress, String status) {
+		super();
+		this.orderSeq = orderSeq;
+		this.itemNumber = itemNumber;
+		this.itemCount = itemCount;
+		this.buyerAddress = buyerAddress;
+		this.status = status;
 	}
 
 	public String getOrderSeq() {

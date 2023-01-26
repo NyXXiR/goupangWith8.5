@@ -1,3 +1,6 @@
+<%@page import="model.itemVO"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.historyVO"%>
 <%@page import="java.util.List"%>
@@ -16,8 +19,8 @@ SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
 SqlSession Session;
 Session = sqlSessionFactory.openSession(true); 
 
-String buyerId = (String) session.getAttribute("buyerId");
-List<historyVO> orderedItemList = Session.selectList("getItems", buyerId);
+//String buyerId = (String) session.getAttribute("buyerId");
+List<historyVO> orderedItemList = Session.selectList("getItems", "test");
 
 
 %>
@@ -32,7 +35,11 @@ display: flex;
 height: 200px;
 width: 100%;
 }
-
+.recommend-item-box {
+display: flex;
+height: 200px;
+width: 100%;
+}
 .product-box {
 display: flex;
 height: 100%;
@@ -127,62 +134,113 @@ height: 100%;
 			<tr>
 				<th colspan="5" style="background-color: #fafafa; text-align: center;"><h3>추천 상품</h3></th>
 			</tr>
-			
-			<%
-			List<Integer> list = Session.selectList("getCatenumFromHistory", buyerId);
-			out.print(list);
-			
-			   // 내림차순 정리
-	        int max, maxidx;
-	        for(int i=0; i<list.size(); i++) {
-	            max = list.get(i);
-	            maxidx=i;
-	            for(int j=i+1; j<list.size(); j++) {
-	                if(list.get(j)>max) {
-	                    maxidx=j;
-	                    max=list.get(j);
-	                }           
-	            }
-	            list.set(maxidx, list.get(i));
-	            list.set(i, max);
-	        }
-			
-			ArrayList<Integer> result = new ArrayList<>();
-	        result.add(list.get(0));
-	        int count=1, maxCount=1;
-
-	        for(int i=1; i<list.size(); i++) {
-	            if(list.get(i-1)!= list.get(i)) {
-	                if(count>maxCount) {
-	                    maxCount=count;
-	                    result.clear();
-	                    result.add(list.get(i-1));
-	                }else if(count==maxCount) {
-	                    result.add(list.get(i-1));
-	                }
-
-	                count = 1;
-	            }else {
-	                count++;
-	            }
-	        }
-
-	        if(count==maxCount) {
-	            result.add(list.get(list.size()-1));
-	        }
-
-	        // 빈도수에 따라 결과값 출력
-	        if(maxCount!=1) {
-	            out.println("최빈값:"+result+"\n"); 
-	            out.println("빈도수는 %d입니다." + maxCount); 
-	        }else {
-	            out.println("최빈값 없다.");
-	        }
-
-			%>
-			<!-- 고객이 가장 많이 주문한 카테고리 숫자를 구한다. -->
 		</thead>
 </table>
+			<%
+	   	
+			List<Integer> list = Session.selectList("getCatenumFromHistory", "test");
+			//out.print(list);
+			
+			int[] arr = new int[list.size()];
+			
+			for(int i=0; i<arr.length; i++) {
+				arr[i] = list.get(i);
+			}
+			
+			
+			Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+			
+			int answer = 0, maxVal = -1, maxValCnt = 0;
+			for (int i = 0; i < arr.length; i++) {
+				int t = map.getOrDefault(arr[i], 0) + 1;
+				map.put(arr[i], t);
+				if(maxValCnt<t) {maxVal = arr[i]; maxValCnt = t;}
+			}
+			
+			for(Integer i: map.keySet()) {
+				if(map.get(i)==maxValCnt && i!=maxVal)
+					out.print(-1);
+			}
+			
+			//out.print(maxVal);
+			
+			List<itemVO> itemList1 = Session.selectList("getItemByCatenum", maxVal);
+			
+			
+			
+			
+			/*------------------------------------------------------------------  */
+			
+			
+			/* 
+			  private int seq;
+			  private String itemname;
+			  private int price;
+			  private int discount;
+			  private String sellerid;
+			  private String rdate;
+			  private int categorynum;
+			  private int qty;
+			  private String description;
+			  private int salerecord;
+			  
+			  사진, 상품이름, 할인율, 가격, 잔여수량
+			*/
+			%> 
+			<div class="recommend-item-box">
+			<% 
+			if(itemList1.size() >= 3) {
+				
+				for(int i=0; i<3; i++){ 
+					String itemName = itemList1.get(i).getItemname();
+					int discount = itemList1.get(i).getDiscount();
+					int price = itemList1.get(i).getPrice();
+					int qty = itemList1.get(i).getQty();
+				
+				 // 구매내역 3개 이상일 경우 
+					%>	
+					 <div class="product-box">
+						<div class="product-img-box">
+							<img src="./resources/item/<%=itemList1.get(i).getSeq() %>(1).jpg"/>
+						</div>
+							
+						<div class="product-detail-box" style="line-height: 40px;">
+							<p> 상품명 : <%=itemName %></p>
+							<p> 할인율 : <%=discount %></p>
+							<p> 가격 : <%=price %></p>
+							<p> 잔여 수량 : <%=qty %></p>
+							
+						</div>
+					</div>
+			<% }
+			} else if(itemList1.size() < 3){ 
+				for(int i=0; i<itemList1.size(); i++){ 
+					String itemName = itemList1.get(i).getItemname();
+					int discount = itemList1.get(i).getDiscount();
+					int price = itemList1.get(i).getPrice();
+					int qty = itemList1.get(i).getQty();
+				
+				 // 구매내역 3개 미만일 경우 
+			%>	
+			 <div class="product-box">
+				<div class="product-img-box">
+					<img src="./resources/item/<%=orderedItemList.get(i).getItemNumber() %>(1).jpg"/>
+				</div>
+					
+				<div class="product-detail-box" style="line-height: 30px;">
+					<p> 상품명 : <%=itemName %></p>
+							<p> 할인율 : <%=discount %>"%"</p>
+							<p> 가격 : <%=price %></p>
+							<p> 잔여 수량 : <%=qty %></p>
+					
+				</div>
+			</div>
+			<% }
+			 } else { %>
+			 <h4>구매 내역이 존재하지 않습니다.</h4>
+			 <% } %> 
+			</div>
+		
 	
 	
 </body>
