@@ -83,7 +83,7 @@ public class ReTouchServlet extends HttpServlet {
 			writer.println("multipart가 아님");
 		}
 		
-		writer.println("<script> location.href='mypage_master.jsp'</script>");
+		writer.println("<script> location.href='mypage_master.jsp?right=pdRetouchPage.jsp'</script>");
 		writer.println("</body></html>");
 	}
 
