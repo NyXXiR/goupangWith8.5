@@ -83,11 +83,19 @@
 	</select>
 	
 	
+	<!-- body2 관련 구문 -->
+	<select id="itemByName" parameterType="string" resultType="model.itemVO">
+		select * from itemDB order by itemname
+	</select>
 	
+	<select id="itemByPrice" parameterType="int" resultType="model.itemVO">
+		select * from itemDB order by price desc
+	</select>
 	
+	<select id="itemByRdate" parameterType="int" resultType="model.itemVO">
+		select * from itemDB order by rdate desc
+	</select>
 	
-
-
 
 	<!-- 아이템 수정 -->
 	<select id="ItemRetouchOne" parameterType="int" resultType="model.itemVO">
