@@ -39,7 +39,7 @@ String sellerLoginStatus = (String) session.getAttribute("sellerId");
         
           <div class="header-left-box">
             <img src="./resources/header/menu1.png" class="left-slide-btn" onclick="openNav()" />
-            <a href="header.jsp"><img src="./resources/header/goupang.jpg" class="logo" alt="	" /></a>
+            <a href="view.jsp"><img src="./resources/header/goupang.jpg" class="logo" alt="	" /></a>
           </div>
           
           <div class="header-middle-box">

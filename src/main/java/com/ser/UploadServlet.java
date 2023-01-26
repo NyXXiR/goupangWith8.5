@@ -40,7 +40,7 @@ public class UploadServlet extends HttpServlet {
 		SqlSession sess;
 	 	sess = sqlSessionFactory.openSession(true);
 		int inttemNum = sess.selectOne("itemNextval");
-			++inttemNum;
+			
 
 		PrintWriter writer = resp.getWriter();
 		String contentType = req.getContentType();

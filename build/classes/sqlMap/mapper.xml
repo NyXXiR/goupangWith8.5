@@ -30,11 +30,15 @@
 
 	<insert id="ItemUpload" parameterType="model.itemVO">
 		insert into itemDB values(item_seq.nextval,
-		#{itemname},#{price},#{discount},#{sellerid}, sysdate,#{categorynum},#{qty},#{description},0,#{imgsrc})
+		#{itemname},#{price},#{discount},#{sellerid}, sysdate,#{categorynum},#{qty},#{description},0)
 	</insert>
 
 	<select id="ItemAll" resultType="model.itemVO">
 		select * from itemDB
+	</select>
+	
+	<select id="getVOBySeq" resultType="model.itemVO">
+		select * from itemDB where seq=#{item_seq}
 	</select>
 	
 	<select id="getNameBySeq" parameterType="int" resultType="String">
@@ -204,7 +208,7 @@ update cartitemDB set "qty" = "qty"-#{qty} where "item_seq" =#{seq} and buyer_id
 <!--  buyerDB 관련 구문 -->
 
 <insert id="signUpBuyer" parameterType="model.buyerVO">
-	insert into buyerDB values(buyer_seq.nextval, #{buyerId}, #{buyerPw} ,#{buyerName})
+	insert into buyerDB values(buyer_seq.nextval, #{buyerId}, #{buyerPw} ,#{buyerName}, #{buyerAddress})
 </insert>
 
 
@@ -264,6 +268,13 @@ select count(*) from guestbook_message
  
  
   <!-- ORDERHISTORY 관련 구문 -->
+<select id="orderAllSelect" parameterType="String" resultType="model.historyVO">
+ select * from orderhistory order by orderseq desc
+</select>
+
+<select id="orderOneSelectBySeq" parameterType="int" resultType="model.historyVO">
+ select * from orderhistory where orderSeq = #{orderSeq}
+</select>
 
 <select id="getItems" parameterType="String" resultType="model.historyVO">
  select orderseq, itemnumber, itemcount, status, orderdate from orderhistory WHERE buyer_id = #{buyer_id}
@@ -277,16 +288,24 @@ select count(*) from guestbook_message
 	select status from orderhistory where orderSeq = #{orderSeq}
 </select>
 
-<select id="getImgsrc" parameterType="int" resultType="String">
-	select imgsrc from itemdb where seq = #{seq}
-</select>
-
 <select id="getItemname" parameterType="int" resultType="String">
 	select itemname from itemdb where seq = #{seq}
 </select>
 
 <select id="getItemByCatenum" parameterType="int" resultType="model.itemVO">
 	select * from itemdb where category_num = #{category_num}
+</select>
+
+<select id="getCatenumFromHistory" parameterType="String" resultType="int">
+	select category_num from itemdb i, orderhistory o where i.seq = o.itemnumber and buyer_id = #{buyer_id}
+</select>
+
+<insert id="insertOrderHistory" parameterType="model.historyVO">
+	insert into orderHistory values (orderhistory_seq.nextval, #{itemNumber}, #{itemCount}, #{buyerid}, default, sysdate, #{orderAddress})
+</insert>
+
+<select id="getBuyerAddress" parameterType="String" resultType="String">
+	select buyer_address from buyerdb where buyer_id = #{buyer_id}
 </select>
 
 </mapper>

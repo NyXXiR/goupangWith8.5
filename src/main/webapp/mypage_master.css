@@ -281,18 +281,16 @@ h2 {
     height: 20px;
     left: 50%;
     position: absolute;
-    background: red;
     transform: translateX(-50%);
     overflow : hidden;
 }
 #itemCount{
-	left: 0px;
-    position: absolute;
-    tranform : translateX(0);
+	text-align: center;
 	}
 #itemCount a{
 	margin-left : 15px;
 	margin-right : 15px;
+	text-decoration : none;
 }
 
 #pageNumdiv{
@@ -312,3 +310,26 @@ h2 {
 	position : absolute;
 	right : 0;
 }
+
+
+
+/* orderPage영역 */
+#orderList{
+	margin : 0 auto;
+	width : 900px;
+	text-align : center;
+	position: relative;
+	
+}
+#orderListTable{
+	width : 100%;
+	margin-top : 50px;
+	font-size : 20px;
+	border-top: 1px solid #444444;
+    border-collapse: collapse;
+    font-size : 18px;
+}
+#orderListTable th, td {
+    border-bottom: 1px solid #a0a0a0;
+    padding: 10px;
+  }

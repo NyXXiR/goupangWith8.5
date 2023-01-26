@@ -39,7 +39,7 @@
 				  <script>
 				  <% session.setAttribute("buyerId", enteredID);%>
 						alert("구매자 로그인 성공");
-						window.location.href = 'header.jsp';
+						window.location.href = 'view.jsp';
 				  </script>
 				  <%
 				  //구매자 로그인 성공
@@ -71,7 +71,7 @@
 				  <script>
 				  <% session.setAttribute("sellerId", enteredID);%>
 						alert("판매자 로그인 성공");
-						window.location.href = 'header.jsp';
+						window.location.href = 'view.jsp';
 				  </script>
 				  <%
 				  //판매자 로그인 성공

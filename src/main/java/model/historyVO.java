@@ -5,23 +5,28 @@ public class historyVO {
 	private String orderSeq;
 	private int itemNumber;
 	private int itemCount;
-	private String buyer_id;
+	private String buyerid;
 	private String status;
 	private String orderDate;
-	
+	private String buyerAddress;
 	
 	public historyVO() {
 		super();
 	}
-
 	
-	
-	public historyVO(String buyer_Id, String orderSeq) {
+	public historyVO(String buyerId, String orderSeq) {
 		super();
 		this.orderSeq = orderSeq;
-		this.buyer_id = buyer_Id;
+		this.buyerid = buyerId;
 	}
 
+
+	@Override
+	public String toString() {
+		return "historyVO [orderSeq=" + orderSeq + ", itemNumber=" + itemNumber + ", itemCount=" + itemCount
+				+ ", buyerid=" + buyerid + ", status=" + status + ", orderDate=" + orderDate + ", buyerAddress="
+				+ buyerAddress + "]";
+	}
 
 	public historyVO(String orderSeq, int itemNumber, String status, String orderDate) {
 		super();
@@ -30,36 +35,21 @@ public class historyVO {
 		this.status = status;
 		this.orderDate = orderDate;
 	}
-	
+
 	public String getOrderSeq() {
 		return orderSeq;
 	}
+
 	public void setOrderSeq(String orderSeq) {
 		this.orderSeq = orderSeq;
 	}
+
 	public int getItemNumber() {
 		return itemNumber;
 	}
+
 	public void setItemNumber(int itemNumber) {
 		this.itemNumber = itemNumber;
-	}
-	public String getBuyerId() {
-		return buyer_id;
-	}
-	public void setBuyerId(String buyerId) {
-		this.buyer_id = buyerId;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public String getOrderDate() {
-		return orderDate;
-	}
-	public void setOrderDate(String orderDate) {
-		this.orderDate = orderDate;
 	}
 
 	public int getItemCount() {
@@ -69,6 +59,37 @@ public class historyVO {
 	public void setItemCount(int itemCount) {
 		this.itemCount = itemCount;
 	}
-	
+
+	public String getBuyerid() {
+		return buyerid;
+	}
+
+	public void setBuyer_id(String buyerid) {
+		this.buyerid = buyerid;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(String orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	public String getBuyerAddress() {
+		return buyerAddress;
+	}
+
+	public void setBuyerAddress(String buyerAddress) {
+		this.buyerAddress = buyerAddress;
+	}
 	
 }

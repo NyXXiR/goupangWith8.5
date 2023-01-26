@@ -9,12 +9,12 @@ SqlSession sess;
 sess=sqlSessionFactory.openSession(true); %>
 
 <%
-	String right = request.getParameter("right");
+	String right1 = request.getParameter("right1");
 	String buyerId = (String) request.getAttribute("buyerId");
 	
 	
-	if(right == null){
-		right = "myPage.jsp";
+	if(right1 == null){
+		right1 = "myPage.jsp";
 	}
 %>
 <!DOCTYPE html>
@@ -28,12 +28,12 @@ sess=sqlSessionFactory.openSession(true); %>
 	<link rel="stylesheet" href="./mypage_master.css">
 	
 	<style>
-		body {
-			
-		font-family: "Lato", sans-serif;  
-		margin: 0;
-		  
-		}
+body {
+	
+font-family: "Lato", sans-serif;  
+margin: 0;
+  
+}
 	</style>
 </head>
 
@@ -47,14 +47,14 @@ sess=sqlSessionFactory.openSession(true); %>
 				<!-- 목록 -->
 				<ul id="category">
 					<li>
-						<h4 id="pdPage" onclick="location.href='mypage_consumer.jsp?right=myPage.jsp'">마이페이지</h4>			
+						<h4 id="pdPage" onclick="location.href='mypage_consumer.jsp?right1=myPage.jsp'">마이페이지</h4>			
 								<!-- carousel 통해서 보여주기-->
 								
 						
 					</li>
 					<br/>
 					<li>
-						<h4 id="pdPage" onclick="location.href='mypage_consumer.jsp?right=pdPage.jsp'">주문 내역</h4>
+						<h4 id="pdPage" onclick="location.href='mypage_consumer.jsp?right1=pdPage.jsp'">주문 내역</h4>
 						<!-- orderstatus db랑 연계 -->
 					</li>
 					<br/>
@@ -74,7 +74,7 @@ sess=sqlSessionFactory.openSession(true); %>
 			<div id="center">
 				<!-- 내용 -->
 				<div id="changePage">
-						<jsp:include page="<%=right %>"></jsp:include>
+						<jsp:include page="<%=right1 %>"></jsp:include>
 				</div>
 			</div>
 		</section>
