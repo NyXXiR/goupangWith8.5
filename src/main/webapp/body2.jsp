@@ -13,14 +13,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Body</title>
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
 	crossorigin="anonymous">
+<link rel="stylesheet" href="searchCss.css" />
 
+<script>
+.search-list-box {
+	display: flex;
+	justify-content: start;
+	flex-flow: wrap;
+	margin: 30px auto;
+}
+
+</script>
 </head>
 <body>
 
@@ -60,77 +70,70 @@
 	</script>
 
 	<div>
-		<img class="slide1" src="./resources/body/slide01.jpg"> <img
-			class="slide1" src="./resources/body/slide02.jpg"> <img
-			class="slide1" src="./resources/body/slide03.jpg">
+		<img class="slide1" src="./resources/body/slide01.jpg">
+		<img class="slide1" src="./resources/body/slide02.jpg">
+		<img class="slide1" src="./resources/body/slide03.jpg">
 	</div>
+	
+<div class="wrapper"></div>
 
 	<h2>상품 리스트</h2>
 
-	<div class="show-all" onclick="selectAllProduct()">
-		<a href="#a" class="btn btn-primary">전체상품</a>
-	</div>
-	<div class="price" onclick="itemByPrice()">
-		<a href="#a" class="btn btn-primary">높은가격순</a>
-	</div>
-
-	<div class="flex-container"></div>
-
-	<div id="product_total">
-		<br /> <br />
-		<p>
-			Total&nbsp:&nbsp&nbsp<span><%=listByItemName.size()%></span>
-		</p>
-	</div>
-
-	<%
-	for (int i = 0; i < listByItemName.size(); i++) {
-		int discounted = listByItemName.get(i).getPrice() / 100 * (100 - listByItemName.get(i).getDiscount());
-		int itemSeq = listByItemName.get(i).getSeq();
-	%>
-	<%=listByItemName.get(i).getImgsrc()%>
-
-	<div class="row">
-		<div class="col"></div>
-		<div class="card" style="width: 18rem;">
-			<div class="card-img-box">
-				<img src="./resources/item/<%=listByItemName.get(i).getImgsrc()%>"
-					style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-					class="card-img-top" alt="...">
-			</div>
-			<div class="card-body">
-				<h5 class="card-title">
-					<div id="itemName" class="text-large"><%=listByItemName.get(i).getItemname()%></div>
-				</h5>
-				<p class="card-text"></p>
-
-				<%
-				if (listByItemName.get(i).getDiscount() == 0) {
-				%>
-				<div id="itemPrice" class="text-small"><%=decFormat.format(listByItemName.get(i).getPrice())%>원
-				</div>
-				<%
-				} else {
-				%>
-				<div id="itemPrice" class="text-small"
-					style="text-decoration: line-through; color: #9E9E9E; font-size: 13px;"><%=decFormat.format(listByItemName.get(i).getPrice())%>원
-				</div>
-				<div id="itemDiscountPrice" class="text-large"><%=decFormat.format(discounted)%>원
-				</div>
-				<%
-				}
-				%>
-				<div>
-					<a href="./itemDetail.jsp?a=<%=itemSeq%>" class="btn btn-primary"
-						style="margin-bottom: 0">구매하기</a>
-				</div>
-			</div>
+		<div id="product_total">
+			<br/><br/>
+			<p>
+				Total&nbsp:&nbsp&nbsp<span><%=listByRdate.size()%></span>
+			</p>
 		</div>
-	</div>
-	</div>
-	<%
-	}
-	%>
+
+	<div class="search-list-box">
+	
+		<% for(int i=0; i<listByRdate.size(); i++) { 
+			int discounted = listByRdate.get(i).getPrice() / 100 * (100 - listByRdate.get(i).getDiscount());
+			int itemSeq = listByRdate.get(i).getSeq();
+				%>
+				<%=listByRdate.get(i).getImgsrc() %>
+
+			<div class="card" style="width: 24%; height: 400px;">
+				<div class="card-img-box">
+					<img
+						src="./resources/item/<%=listByRdate.get(i).getSeq()%>(1).jpg"
+						style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+						class="card-img-top" alt="...">
+				</div>
+				<div class="card-body">
+					<h5 class="card-title">
+						<div id="itemName" class="text-large"><%=listByRdate.get(i).getItemname()%></div>
+					</h5>
+					<p class="card-text"></p>
+
+					<%
+					if (listByRdate.get(i).getDiscount() == 0) {
+					%>
+					<div id="itemPrice" class="text-small"><%=decFormat.format(listByRdate.get(i).getPrice())%>원
+					</div>
+					<%
+					} else {
+					%>
+					<div id="itemPrice" class="text-small"
+						style="text-decoration: line-through; color: #9E9E9E; font-size: 13px;"><%=decFormat.format(listByRdate.get(i).getPrice())%>원
+					</div>
+					<div id="itemDiscountPrice" class="text-large"><%=decFormat.format(discounted)%>원
+					</div>
+					<%
+					}
+					%>
+					<div>
+						<a href="./buyProcess/voShuttle.jsp?item_seq=<%=itemSeq%>"
+							class="btn btn-primary" style="margin-bottom: 0">구매하기</a>
+					</div>
+				</div>
+			</div>
+			<%
+			}
+			%>
+
+		</div>
 
 
 	<script
