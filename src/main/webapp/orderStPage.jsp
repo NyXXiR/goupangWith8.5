@@ -23,7 +23,7 @@
 
 <!-- 변경 가능한 목록은 상품수량, 주소지, 주문상태만 변경 가능하여, itemCount, address, status를 제외한 모든 input에 readonly를 부여 -->
 <!-- 저장을 누르면 form 전체를 orderStChange로 보내고 혹시 모를 다른 input들의 값을 사용할 수도 있다고 판단하여 disabled 대신 readonly사용 -->
-<form action="mypage_master.jsp" name="orderUpdate">
+<form action="mypage_master.jsp" method="post" name="orderUpdate">
 	<input type="hidden" name="right" value="orderStChange.jsp" readonly>
 	<table class="OdTable">
 		<tr>
