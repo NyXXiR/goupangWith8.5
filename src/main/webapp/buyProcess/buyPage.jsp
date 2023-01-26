@@ -12,6 +12,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
 <%
 SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
@@ -19,7 +20,7 @@ SqlSession sqlSession;
 sqlSession = sqlSessionFactory.openSession(true);
 
 //로그인한 id가 등록한 장바구니 목록을 가져옴
-List<cartItemVO> cartList = sqlSession.selectList("cartListById", session.getAttribute("buyer_id"));
+List<cartItemVO> cartList = sqlSession.selectList("cartListById", session.getAttribute("buyerId"));
 
 int itemSeq=cartList.get(0).getItem_seq();
 int finalPrice=0;
@@ -77,9 +78,9 @@ display:none;
 </head>
 <body>
 
-
+<form action="buyAction.jsp">
 <div class="addressContainer">
-주소입력 <input type="text" class="addressInput" placeholder="주소입력"/>
+주소입력 <input type="text" class="addressInput" name="addressInput" placeholder="주소입력"/>
 </div>
 <div id="cartItem-container">
 <%for(int i=0;i<cartList.size();i++){
@@ -135,8 +136,9 @@ display:none;
 <input id="final-price" name="final-price" value="">
 <button type="button" value="구매하기" onclick="buyAction()">구매하기</button>
 </div>
+<div id="tb"></div>
 
-
+</form>
 
 ===
 
@@ -155,6 +157,7 @@ soldItemDB에 수량만큼의 quantity를 추가
 
 =======
 
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <script>
 
@@ -225,21 +228,42 @@ function valueMinus(vm){
 <script>
 function buyAction(){
 
-var itemInfo= [];
+var seqs=[];
+var qtys=[];
 	
 var arr = document.querySelectorAll(".item-seq");
 for(var i=0; i<arr.length;i++){
 
 var item_seq=document.querySelectorAll(".item-seq")[i].value;
-var qty = document.querySelectorAll(".quantity-count")[2*i].value;
+var quantity = document.querySelectorAll(".quantity-count")[2*i].value;
 
-itemInfo[i]=[item_seq, qty];
+seqs.push(item_seq);
+qtys.push(quantity);
 
 }
+console.log(seqs);
+console.log(qtys);
+$.ajax({
+    method      : 'POST',
+    url         : './buyAction.jsp',
+    traditional : true,
+    data        : {
+        'item_seq' : seqs,
+        'qty': qtys
+    },
+    datatype:"JSON",
+    success     : function(data) {
+      
+        $('#tb').html(data);     
+    },
+    error:function(request,status,error){
+       $('#tb').html("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+       }
+    });
 
-sessionStorage.setItem("itemInfo",itemInfo);
-location.href("buyAction.jsp");	>>여기 오류남 여기부터 ㄱㄱ
-	
+
+
+
 }
 
 </script>

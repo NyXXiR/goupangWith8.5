@@ -12,7 +12,7 @@
 
 // 필요한 변수 입력받음
 int item_seq = Integer.parseInt(request.getParameter("item_seq"));
-String buyer_id= request.getParameter("buyer_id");
+String buyer_id= request.getParameter("buyerId");
 int qty =Integer.parseInt(request.getParameter("qty"));
 int cnt= 0;
 

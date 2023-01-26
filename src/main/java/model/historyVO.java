@@ -2,113 +2,114 @@ package model;
 
 public class historyVO {
 
-	private String orderSeq;
-	private int itemNumber;
-	private int itemCount;
-	private String buyerid;
-	private String status;
-	private String orderDate;
-	private String buyerAddress;
-	
-	public historyVO() {
-		super();
-	}
-	
-	public historyVO(String buyerId, String orderSeq) {
-		super();
-		this.orderSeq = orderSeq;
-		this.buyerid = buyerId;
-	}
+  private String orderSeq;
+  private int itemNumber;
+  private int itemCount;
+  private String buyerId;
+  private String status;
+  private String orderDate;
+  private String buyerAddress;
+
+  public historyVO() {
+    super();
+  }
+
+  public historyVO(String buyerId, String orderSeq) {
+    super();
+    this.orderSeq = orderSeq;
+    this.buyerId = buyerId;
+  }
 
 
-	@Override
-	public String toString() {
-		return "historyVO [orderSeq=" + orderSeq + ", itemNumber=" + itemNumber + ", itemCount=" + itemCount
-				+ ", buyerid=" + buyerid + ", status=" + status + ", orderDate=" + orderDate + ", buyerAddress="
-				+ buyerAddress + "]";
-	}
+  @Override
+  public String toString() {
+    return "historyVO [orderSeq=" + orderSeq + ", itemNumber=" + itemNumber + ", itemCount="
+        + itemCount + ", buyerId=" + buyerId + ", status=" + status + ", orderDate=" + orderDate
+        + ", buyerAddress=" + buyerAddress + "]";
+  }
 
-	public historyVO(int itemNumber, int itemCount, String buyerid, String buyerAddress) {
-			super();
-			this.itemNumber = itemNumber;
-			this.itemCount = itemCount;
-			this.buyerid = buyerid;
-			this.buyerAddress = buyerAddress;
-	}
-	
-	public historyVO(String orderSeq, int itemNumber, String status, String orderDate) {
-		super();
-		this.orderSeq = orderSeq;
-		this.itemNumber = itemNumber;
-		this.status = status;
-		this.orderDate = orderDate;
-	}
+  public historyVO(int itemNumber, int itemCount, String buyerId, String buyerAddress) {
+    super();
+    this.itemNumber = itemNumber;
+    this.itemCount = itemCount;
+    this.buyerId = buyerId;
+    this.buyerAddress = buyerAddress;
+  }
 
-	
-	
-	public historyVO(String orderSeq, int itemNumber, int itemCount, String buyerAddress, String status) {
-		super();
-		this.orderSeq = orderSeq;
-		this.itemNumber = itemNumber;
-		this.itemCount = itemCount;
-		this.buyerAddress = buyerAddress;
-		this.status = status;
-	}
+  public historyVO(String orderSeq, int itemNumber, String status, String orderDate) {
+    super();
+    this.orderSeq = orderSeq;
+    this.itemNumber = itemNumber;
+    this.status = status;
+    this.orderDate = orderDate;
+  }
 
-	public String getOrderSeq() {
-		return orderSeq;
-	}
 
-	public void setOrderSeq(String orderSeq) {
-		this.orderSeq = orderSeq;
-	}
 
-	public int getItemNumber() {
-		return itemNumber;
-	}
+  public historyVO(String orderSeq, int itemNumber, int itemCount, String buyerAddress,
+      String status) {
+    super();
+    this.orderSeq = orderSeq;
+    this.itemNumber = itemNumber;
+    this.itemCount = itemCount;
+    this.buyerAddress = buyerAddress;
+    this.status = status;
+  }
 
-	public void setItemNumber(int itemNumber) {
-		this.itemNumber = itemNumber;
-	}
+  public String getOrderSeq() {
+    return orderSeq;
+  }
 
-	public int getItemCount() {
-		return itemCount;
-	}
+  public void setOrderSeq(String orderSeq) {
+    this.orderSeq = orderSeq;
+  }
 
-	public void setItemCount(int itemCount) {
-		this.itemCount = itemCount;
-	}
+  public int getItemNumber() {
+    return itemNumber;
+  }
 
-	public String getBuyerid() {
-		return buyerid;
-	}
+  public void setItemNumber(int itemNumber) {
+    this.itemNumber = itemNumber;
+  }
 
-	public void setBuyer_id(String buyerid) {
-		this.buyerid = buyerid;
-	}
+  public int getItemCount() {
+    return itemCount;
+  }
 
-	public String getStatus() {
-		return status;
-	}
+  public void setItemCount(int itemCount) {
+    this.itemCount = itemCount;
+  }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+  public String getbuyerId() {
+    return buyerId;
+  }
 
-	public String getOrderDate() {
-		return orderDate;
-	}
+  public void setbuyerId(String buyerId) {
+    this.buyerId = buyerId;
+  }
 
-	public void setOrderDate(String orderDate) {
-		this.orderDate = orderDate;
-	}
+  public String getStatus() {
+    return status;
+  }
 
-	public String getBuyerAddress() {
-		return buyerAddress;
-	}
+  public void setStatus(String status) {
+    this.status = status;
+  }
 
-	public void setBuyerAddress(String buyerAddress) {
-		this.buyerAddress = buyerAddress;
-	}
-	
+  public String getOrderDate() {
+    return orderDate;
+  }
+
+  public void setOrderDate(String orderDate) {
+    this.orderDate = orderDate;
+  }
+
+  public String getBuyerAddress() {
+    return buyerAddress;
+  }
+
+  public void setBuyerAddress(String buyerAddress) {
+    this.buyerAddress = buyerAddress;
+  }
+
 }

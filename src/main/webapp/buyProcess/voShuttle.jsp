@@ -33,7 +33,7 @@ itemMap.put("description", vo.getDescription());
 session.setAttribute("itemMap", itemMap);
 
 //userName은 임시로 설정
-session.setAttribute("buyer_id", "lgh0334");
+session.setAttribute("buyerId", "lgh0334");
 
 //quantity 1로 설정해둠
 session.setAttribute("quantity",1);

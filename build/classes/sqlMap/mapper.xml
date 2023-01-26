@@ -11,12 +11,12 @@
 <mapper namespace="Mapper">
 
 <!-- map에 seq와 qty 를 넣어서 하자. -->
-	<insert id="itemquantityPlus" parameterType="int">
-	update itemDB set qty= qty+#{qty} where 'item_seq'=#{seq}
+	<insert id="itemquantityPlus" parameterType="map">
+	update itemDB set qty= qty+#{qty} where seq=#{seq}
 	</insert>
 	
-	<insert id="itemquantityMinus" parameterType="int">
-	update itemDB set qty= qty-#{qty} where 'item_seq'=#{seq}
+	<insert id="itemquantityMinus" parameterType="map">
+	update itemDB set qty= qty-#{qty} where seq=#{seq}
 	</insert>
 
 	<insert id="deleteItemBySeq" parameterType="int">
@@ -197,6 +197,10 @@ select * from cartItemDB
 delete from cartItemDB where "item_seq"=#{item_seq} and buyer_id=#{buyer_id}
 </insert>
 
+<insert id="deleteFromCartById" parameterType="String">
+delete from cartItemDB where buyer_id=#{buyer_id}
+</insert>
+
 <insert id="cartQtyPlus" parameterType="map"> 
 update cartitemDB set "qty" = "qty"+#{qty} where "item_seq"=#{item_seq} and buyer_id=#{buyer_id}
 </insert>
@@ -301,7 +305,7 @@ select count(*) from guestbook_message
 </select>
 
 <insert id="insertOrderHistory" parameterType="model.historyVO">
-	insert into orderHistory values (orderhistory_seq.nextval, #{itemNumber}, #{itemCount}, #{buyerid}, default, sysdate, #{orderAddress})
+	insert into orderHistory values (orderhistory_seq.nextval, #{itemNumber}, #{itemCount}, #{buyerId}, default, sysdate, default)
 </insert>
 
 <select id="getBuyerAddress" parameterType="String" resultType="String">

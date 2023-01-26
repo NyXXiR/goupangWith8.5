@@ -113,7 +113,7 @@ HashMap<String, String> itemMap = (HashMap<String, String>) session.getAttribute
 					<form action="aaa.jsp" method="post">
 						<div class="prod-quantity__form">
 						<input type="hidden" name="item_seq" value=<%=itemMap.get("seq")%>>
-						<input type="hidden" name="buyer_id" value=<%=session.getAttribute("buyer_id") %>>
+						<input type="hidden" name="buyer_id" value=<%=session.getAttribute("buyerId") %>>
 							<input type="text" value="1" name="quantity"
 								class="quantity-count" readonly="true" />
 							<button class="quantity-minus" type="button"
@@ -198,7 +198,7 @@ $('#addToCart').click(function() {
 		type:'post',
 		data:{
 			"item_seq": `<%=itemMap.get("seq")%>`,
-			"buyer_id": `<%= session.getAttribute("buyer_id")%>`,
+			"buyer_id": `<%= session.getAttribute("buyerId")%>`,
 			"qty": document.querySelector(".quantity-count").value,
 
 		},
@@ -213,7 +213,7 @@ $('#addToCart').click(function() {
 	var cnt =document.querySelector(".quantity-count");
 	const data = {
 			item_seq: <%=itemMap.get("seq")%>,
-			buyer_id: <%= session.getAttribute("buyer_id")%>,
+			buyer_id: <%= session.getAttribute("buyerId")%>,
 			qty: cnt,
 			
 			}	
