@@ -29,7 +29,6 @@ sess=sqlSessionFactory.openSession(true);
 	
 	String numstr = request.getParameter("pageNum");
 	int pageNum;
-	/* System.out.println(numstr); */
 	if(request.getParameter("pageNum") == null){
 		pageNum = 1;
 	}else{
@@ -76,7 +75,6 @@ sess=sqlSessionFactory.openSession(true);
 <body>
 	<div id="wrap">
 		<jsp:include page="header.jsp" flush="false" />
-		<%-- <jsp:params name="상균" value="header" /> --%>
 		<section id="main">
 			<div id="left">
 
@@ -95,7 +93,7 @@ sess=sqlSessionFactory.openSession(true);
 						<h2 id="dvPage" onclick="location.href='mypage_master.jsp?right=orderCarePage.jsp'">주문/배송 관리</h2>
 					</li>
 					<li>
-						<h2 id="psPage" onclick="getPage(this.id)">게시글 관리 <%=sellerID %></h2>
+						<h2 id="psPage" onclick="getPage(this.id)">게시글 관리</h2>
 					</li>
 				</ul>
 			</div>
@@ -145,12 +143,7 @@ for (int i = 0; i < salListH.size(); i++) {
 <%
 int sumMaxSale = sess.selectOne("Itemprice*recordSum");
 List<itemVO3> MaxSalList = sess.selectList("Itemprice*recordSearch");
-
-double[] dobSalList = new double[MaxSalList.size()];
-for (int i=0; i<dobSalList.length; i++) {
-dobSalList[i] = MaxSalList.get(i).getMulti();
-dobSalList[i] =  Math.round((dobSalList[i] / sumMaxSale * 100.0)*100.0)/100.0;
-}%>
+%>
 
 
 
@@ -170,7 +163,16 @@ if(dougnut == null || bar == null){
  new Chart(dougnut, {
    type: 'doughnut',
    data: {
-     labels: ['상품번호 : <%=salListH.get(0).getSeq()%>, 상품 이름 : <%=salListH.get(0).getItemname()%>','상품번호 : <%=salListH.get(1).getSeq()%>, 상품 이름 : <%=salListH.get(1).getItemname()%>','상품번호 : <%=salListH.get(2).getSeq()%>, 상품 이름 : <%=salListH.get(2).getItemname()%>','상품번호 : <%=salListH.get(3).getSeq()%>, 상품 이름 : <%=salListH.get(3).getItemname()%>','상품번호 : <%=salListH.get(4).getSeq()%>, 상품 이름 : <%=salListH.get(4).getItemname()%>','상품번호 : <%=salListH.get(5).getSeq()%>, 상품 이름 : <%=salListH.get(5).getItemname()%>','상품번호 : <%=salListH.get(6).getSeq()%>, 상품 이름 : <%=salListH.get(6).getItemname()%>','상품번호 : <%=salListH.get(7).getSeq()%>, 상품 이름 : <%=salListH.get(7).getItemname()%>','상품번호 : <%=salListH.get(8).getSeq()%>, 상품 이름 : <%=salListH.get(8).getItemname()%>','상품번호 : <%=salListH.get(9).getSeq()%>, 상품 이름 : <%=salListH.get(9).getItemname()%>'],
+     labels: ['상품번호 : <%=salListH.get(0).getSeq()%>, 상품 이름 : <%=salListH.get(0).getItemname()%>',
+    	 '상품번호 : <%=salListH.get(1).getSeq()%>, 상품 이름 : <%=salListH.get(1).getItemname()%>',
+    	 '상품번호 : <%=salListH.get(2).getSeq()%>, 상품 이름 : <%=salListH.get(2).getItemname()%>',
+    	 '상품번호 : <%=salListH.get(3).getSeq()%>, 상품 이름 : <%=salListH.get(3).getItemname()%>',
+    	 '상품번호 : <%=salListH.get(4).getSeq()%>, 상품 이름 : <%=salListH.get(4).getItemname()%>',
+    	 '상품번호 : <%=salListH.get(5).getSeq()%>, 상품 이름 : <%=salListH.get(5).getItemname()%>',
+    	 '상품번호 : <%=salListH.get(6).getSeq()%>, 상품 이름 : <%=salListH.get(6).getItemname()%>',
+    	 '상품번호 : <%=salListH.get(7).getSeq()%>, 상품 이름 : <%=salListH.get(7).getItemname()%>',
+    	 '상품번호 : <%=salListH.get(8).getSeq()%>, 상품 이름 : <%=salListH.get(8).getItemname()%>',
+    	 '상품번호 : <%=salListH.get(9).getSeq()%>, 상품 이름 : <%=salListH.get(9).getItemname()%>'],
    datasets: [{
      label: '# of Votes',
      data: ['<%=salarrH[0]%>','<%=salarrH[1]%>','<%=salarrH[2]%>','<%=salarrH[3]%>','<%=salarrH[4]%>','<%=salarrH[5]%>','<%=salarrH[6]%>','<%=salarrH[7]%>','<%=salarrH[8]%>','<%=salarrH[9]%>'],
@@ -194,10 +196,21 @@ if(dougnut == null || bar == null){
 new Chart(bar, {
   type: 'bar',
   data: {
-    labels: ['상품번호 : <%=MaxSalList.get(0).getSeq()%>, 상품 이름 : <%=MaxSalList.get(0).getItemname()%>','상품번호 : <%=MaxSalList.get(1).getSeq()%>, 상품 이름 : <%=MaxSalList.get(1).getItemname()%>','상품번호 : <%=MaxSalList.get(2).getSeq()%>, 상품 이름 : <%=MaxSalList.get(2).getItemname()%>','상품번호 : <%=MaxSalList.get(3).getSeq()%>, 상품 이름 : <%=MaxSalList.get(3).getItemname()%>','상품번호 : <%=MaxSalList.get(4).getSeq()%>, 상품 이름 : <%=MaxSalList.get(4).getItemname()%>','상품번호 : <%=MaxSalList.get(5).getSeq()%>, 상품 이름 : <%=MaxSalList.get(5).getItemname()%>','상품번호 : <%=MaxSalList.get(6).getSeq()%>, 상품 이름 : <%=MaxSalList.get(6).getItemname()%>','상품번호 : <%=MaxSalList.get(7).getSeq()%>, 상품 이름 : <%=MaxSalList.get(7).getItemname()%>','상품번호 : <%=MaxSalList.get(8).getSeq()%>, 상품 이름 : <%=MaxSalList.get(8).getItemname()%>','상품번호 : <%=MaxSalList.get(9).getSeq()%>, 상품 이름 : <%=MaxSalList.get(9).getItemname()%>'],
+    labels: ['상품번호 : <%=MaxSalList.get(0).getSeq()%>, 상품 이름 : <%=MaxSalList.get(0).getItemname()%>',
+    	'상품번호 : <%=MaxSalList.get(1).getSeq()%>, 상품 이름 : <%=MaxSalList.get(1).getItemname()%>',
+    	'상품번호 : <%=MaxSalList.get(2).getSeq()%>, 상품 이름 : <%=MaxSalList.get(2).getItemname()%>',
+    	'상품번호 : <%=MaxSalList.get(3).getSeq()%>, 상품 이름 : <%=MaxSalList.get(3).getItemname()%>',
+    	'상품번호 : <%=MaxSalList.get(4).getSeq()%>, 상품 이름 : <%=MaxSalList.get(4).getItemname()%>',
+    	'상품번호 : <%=MaxSalList.get(5).getSeq()%>, 상품 이름 : <%=MaxSalList.get(5).getItemname()%>',
+    	'상품번호 : <%=MaxSalList.get(6).getSeq()%>, 상품 이름 : <%=MaxSalList.get(6).getItemname()%>',
+    	'상품번호 : <%=MaxSalList.get(7).getSeq()%>, 상품 이름 : <%=MaxSalList.get(7).getItemname()%>',
+    	'상품번호 : <%=MaxSalList.get(8).getSeq()%>, 상품 이름 : <%=MaxSalList.get(8).getItemname()%>',
+    	'상품번호 : <%=MaxSalList.get(9).getSeq()%>, 상품 이름 : <%=MaxSalList.get(9).getItemname()%>'],
    datasets: [{
      label: '최대 매출 상품',
-     data: ['<%=MaxSalList.get(0).getMulti()%>','<%=MaxSalList.get(1).getMulti()%>','<%=MaxSalList.get(2).getMulti()%>','<%=MaxSalList.get(3).getMulti()%>','<%=MaxSalList.get(4).getMulti()%>','<%=MaxSalList.get(5).getMulti()%>','<%=MaxSalList.get(6).getMulti()%>','<%=MaxSalList.get(7).getMulti()%>','<%=MaxSalList.get(8).getMulti()%>','<%=MaxSalList.get(9).getMulti()%>'],
+     data: ['<%=MaxSalList.get(0).getMulti()%>','<%=MaxSalList.get(1).getMulti()%>','<%=MaxSalList.get(2).getMulti()%>',
+    	 '<%=MaxSalList.get(3).getMulti()%>','<%=MaxSalList.get(4).getMulti()%>','<%=MaxSalList.get(5).getMulti()%>',
+    	 '<%=MaxSalList.get(6).getMulti()%>','<%=MaxSalList.get(7).getMulti()%>','<%=MaxSalList.get(8).getMulti()%>','<%=MaxSalList.get(9).getMulti()%>'],
         backgroundColor: [
 	        'rgb(255, 000, 000)','rgb(255, 001, 204)','rgb(255, 153, 000)','rgb(255, 204, 102)','rgb(152, 255, 153)',
 	        'rgb(000, 204, 000)','rgb(000, 255, 204)','rgb(000, 051, 204)','rgb(102, 000, 204)','rgb(153, 153, 153)'
@@ -345,7 +358,7 @@ $('#itemListadd').html("<%=itemTableEl%>");
 
 
 
-//수정영역인 pdRetouchitempage로 이동하면서 파라미터값으로 seq를 보낸다.
+/* //수정영역인 pdRetouchitempage로 이동하면서 파라미터값으로 seq를 보낸다. */
 function callRetouchItem(num){
 	location.href="mypage_master.jsp?right=pdRetouchItemPage.jsp&reItemNum="+num;
 }

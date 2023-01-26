@@ -82,6 +82,7 @@
 	<select id="Itemprice*recordSearch" resultType="model.itemVO3">
 		<![CDATA[select * from (select seq,itemname,price,description,salerecord,price*salerecord as multi from itemdb order by multi desc) where rownum<=10 ]]>
 	</select>
+	
 	<select id="Itemprice*recordSum" resultType="int">
 		<![CDATA[select sum(multi) from (select price*salerecord as multi from itemdb order by multi desc) where rownum<=10 ]]>
 	</select>
@@ -128,8 +129,8 @@
 		select * from itemdb where price = #{val}
 	</select>
 	
-	<select id="itemSearchcategory" parameterType="string" resultType="model.itemVO">
-		select * from itemdb where category = #{value}
+	<select id="itemSearchcategory" parameterType="int" resultType="model.itemVO">
+		select * from itemdb where category_num = #{val}
 	</select>
 	
 

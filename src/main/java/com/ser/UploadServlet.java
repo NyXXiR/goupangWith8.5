@@ -39,7 +39,7 @@ public class UploadServlet extends HttpServlet {
 		SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
 		SqlSession sess;
 	 	sess = sqlSessionFactory.openSession(true);
-		int inttemNum = sess.selectOne("itemNextval");
+		
 			
 
 		PrintWriter writer = resp.getWriter();
@@ -70,11 +70,11 @@ public class UploadServlet extends HttpServlet {
 			int productSelect = Integer.valueOf(req.getParameter("pdCategory"));
 			String productDesc = req.getParameter("pdDesc");
 
+			int inttemNum = sess.selectOne("itemNextval");
 			printPartInfo(req, writer,inttemNum);
 			
 			
 			itemVO item = new itemVO(productName, productPrice, productDiscount, sellerID, productSelect, productQTY,productDesc);
-			System.out.println(item);
 			sess.selectOne("ItemUpload", item);
 			writer.println("<script> alert('상품등록의 성공하였습니다.')</script>");
 			}
@@ -93,10 +93,8 @@ public class UploadServlet extends HttpServlet {
 		Collection<Part> parts = req.getParts();
 		for (Part part : parts) {
 			String itemNum = String.valueOf(inttemNum);
-			String contentType = part.getContentType();
 			
 			if (part.getHeader("Content-Disposition").contains("filename=")) {
-				String fileName = part.getSubmittedFileName();
 				if (part.getSize() > 0) {
 					part.write("C:\\goupangWith8.5\\src\\main\\webapp\\resources\\item\\" + itemNum+"("+i+").jpg");
 					part.delete();

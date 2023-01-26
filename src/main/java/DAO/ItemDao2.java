@@ -99,7 +99,15 @@ public class ItemDao2 {
 			int val = Integer.valueOf(value);
 			result = sess.selectList("itemSearchprice", val);
 		}else if(key.equals("category")) {
-			result = sess.selectList("itemSearchcategory", value);
+			int var = 70;
+			if(value.equals("Fashion")){var = 10;}
+			else if(value.equals("Beauty")){var = 20;}
+			else if(value.equals("Electronic")){var = 30;}
+			else if(value.equals("Pantry")){var =40;}
+			else if(value.equals("Car")){var = 50;}
+			else if(value.equals("Toy")){var = 60;}
+			else{var = 70;}
+			result = sess.selectList("itemSearchcategory", var);
 		}else {
 			System.out.println("실패");
 		}
