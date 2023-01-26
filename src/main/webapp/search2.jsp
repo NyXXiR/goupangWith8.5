@@ -139,7 +139,7 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 						int discounted = listByAll.get(i).getPrice() / 100 * (100 - listByAll.get(i).getDiscount());
 						int itemSeq = listByAll.get(i).getSeq();
 							%>
-							<!-- <img src="./resources/item/<%=listByAll.get(i).getImgsrc() %>" style="object-fit: cover; width: 100%; height: 100%;" class="card-img-top" alt="..."> -->
+							
 							
 						<div class="card" style="width: 24%; height: 400px;">
 							<div class="card-img-box">
