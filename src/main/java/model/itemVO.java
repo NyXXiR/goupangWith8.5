@@ -66,7 +66,6 @@ public class itemVO {
   }
 
 
-
   public int getSeq() {
     return seq;
   }

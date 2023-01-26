@@ -72,7 +72,7 @@
 	   </form>
 	   
 	   
-	   <%
+	   <%-- <%
 	   			//String buyerId = (String) session.getAttribute("buyerId");
 			List<Integer> list = Session.selectList("getCatenumFromHistory", "test");
 			out.print(list);
@@ -101,7 +101,7 @@
 			out.print(maxVal);
 			
 			List<itemVO> itemList1 = Session.selectList("getItemByCatenum", maxVal);
-		%>
+		%> --%>
 	   
 	  </body>
 </html>

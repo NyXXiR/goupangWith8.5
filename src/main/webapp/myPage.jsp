@@ -19,8 +19,8 @@ SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
 SqlSession Session;
 Session = sqlSessionFactory.openSession(true); 
 
-String buyerId = (String) session.getAttribute("buyerId");
-List<historyVO> orderedItemList = Session.selectList("getItems", buyerId);
+//String buyerId = (String) session.getAttribute("buyerId");
+List<historyVO> orderedItemList = Session.selectList("getItems", "test");
 
 
 %>
@@ -35,7 +35,11 @@ display: flex;
 height: 200px;
 width: 100%;
 }
-
+.recommend-item-box {
+display: flex;
+height: 200px;
+width: 100%;
+}
 .product-box {
 display: flex;
 height: 100%;
@@ -130,12 +134,12 @@ height: 100%;
 			<tr>
 				<th colspan="5" style="background-color: #fafafa; text-align: center;"><h3>추천 상품</h3></th>
 			</tr>
-			
-			
+		</thead>
+</table>
 			<%
 	   	
-			List<Integer> list = Session.selectList("getCatenumFromHistory", buyerId);
-			out.print(list);
+			List<Integer> list = Session.selectList("getCatenumFromHistory", "test");
+			//out.print(list);
 			
 			int[] arr = new int[list.size()];
 			
@@ -158,7 +162,7 @@ height: 100%;
 					out.print(-1);
 			}
 			
-			out.print(maxVal);
+			//out.print(maxVal);
 			
 			List<itemVO> itemList1 = Session.selectList("getItemByCatenum", maxVal);
 			
@@ -167,38 +171,54 @@ height: 100%;
 			
 			/*------------------------------------------------------------------  */
 			
-			if(itemList1.size() > 3) {
+			
+			/* 
+			  private int seq;
+			  private String itemname;
+			  private int price;
+			  private int discount;
+			  private String sellerid;
+			  private String rdate;
+			  private int categorynum;
+			  private int qty;
+			  private String description;
+			  private int salerecord;
+			  
+			  사진, 상품이름, 할인율, 가격, 잔여수량
+			*/
+			%> 
+			<div class="recommend-item-box">
+			<% 
+			if(itemList1.size() >= 3) {
 				
 				for(int i=0; i<3; i++){ 
 					String itemName = itemList1.get(i).getItemname();
-					String status = itemList1.get(i).getStatus();
-					int itemCount = itemList1.get(i).getItemCount();
-					String orderDate = itemList1.get(i).getOrderDate();
-					String itemname = Session.selectOne("getItemname", itemNumber); 
+					int discount = itemList1.get(i).getDiscount();
+					int price = itemList1.get(i).getPrice();
+					int qty = itemList1.get(i).getQty();
 				
 				 // 구매내역 3개 이상일 경우 
 					%>	
 					 <div class="product-box">
 						<div class="product-img-box">
-							<img src="./resources/item/<%=orderedItemList.get(i).getItemNumber() %>(1).jpg"/>
+							<img src="./resources/item/<%=itemList1.get(i).getSeq() %>(1).jpg"/>
 						</div>
 							
 						<div class="product-detail-box" style="line-height: 40px;">
-							<p> 상품명 : <%=itemname %></p>
-							<p> 주문 수량 : <%=itemCount %></p>
-							<p> 주문 상태 : <%=status %></p>
-							<p> 주문 일시 : <%=orderDate.substring(0, 10) %></p>
+							<p> 상품명 : <%=itemName %></p>
+							<p> 할인율 : <%=discount %></p>
+							<p> 가격 : <%=price %></p>
+							<p> 잔여 수량 : <%=qty %></p>
 							
 						</div>
 					</div>
 			<% }
-			} else if(orderedItemList.size() < 3){ 
-				for(int i=0; i<orderedItemList.size(); i++){ 
-					int itemNumber = orderedItemList.get(i).getItemNumber();
-					String status = orderedItemList.get(i).getStatus();
-					int itemCount = orderedItemList.get(i).getItemCount();
-					String orderDate = orderedItemList.get(i).getOrderDate();
-					String itemname = Session.selectOne("getItemname", itemNumber); 
+			} else if(itemList1.size() < 3){ 
+				for(int i=0; i<itemList1.size(); i++){ 
+					String itemName = itemList1.get(i).getItemname();
+					int discount = itemList1.get(i).getDiscount();
+					int price = itemList1.get(i).getPrice();
+					int qty = itemList1.get(i).getQty();
 				
 				 // 구매내역 3개 미만일 경우 
 			%>	
@@ -208,10 +228,10 @@ height: 100%;
 				</div>
 					
 				<div class="product-detail-box" style="line-height: 30px;">
-					<p> 상품명 : <%=itemname %></p>
-					<p> 주문 수량 : <%=itemCount %></p>
-					<p> 주문 상태 : <%=status %></p>
-					<p> 주문 일시 : <%=orderDate.substring(0, 10) %></p>
+					<p> 상품명 : <%=itemName %></p>
+							<p> 할인율 : <%=discount %>"%"</p>
+							<p> 가격 : <%=price %></p>
+							<p> 잔여 수량 : <%=qty %></p>
 					
 				</div>
 			</div>
@@ -219,11 +239,8 @@ height: 100%;
 			 } else { %>
 			 <h4>구매 내역이 존재하지 않습니다.</h4>
 			 <% } %> 
-			
-			out.print(itemList1);
-			%>
-		</thead>
-</table>
+			</div>
+		
 	
 	
 </body>
