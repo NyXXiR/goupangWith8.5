@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%
+		String sellerID = (String) session.getAttribute("sellerId");
+	%>
 <form action="Upload" name="upload1" method="post" enctype="multipart/form-data">
 	<table class="pdTable">
 		<tr>
@@ -95,5 +98,6 @@
 			<td class="pdInput"><input type="text" name="pdDesc" id="pdInput2"></td>
 		</tr>
 	</table>
+	<input type="hidden" name="sellerid" value="<%=sellerID %>"/>
 	<button id="button" type="submit">상  품  저  장</button>
 </form>

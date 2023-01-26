@@ -63,6 +63,7 @@ public class UploadServlet extends HttpServlet {
 			
 			
 			String productName = req.getParameter("pdName");
+			String sellerID = req.getParameter("sellerID");
 			int productPrice = Integer.valueOf(req.getParameter("pdPrice"));
 			int productDiscount = Integer.valueOf(req.getParameter("pdDiscount"));
 			int productQTY = Integer.valueOf(req.getParameter("pdQTY"));
@@ -72,7 +73,7 @@ public class UploadServlet extends HttpServlet {
 			printPartInfo(req, writer,inttemNum);
 			
 			
-			itemVO item = new itemVO(productName, productPrice, productDiscount, "ninja", productSelect, productQTY,productDesc);
+			itemVO item = new itemVO(productName, productPrice, productDiscount, sellerID, productSelect, productQTY,productDesc);
 			System.out.println(item);
 			sess.selectOne("ItemUpload", item);
 			writer.println("<script> alert('상품등록의 성공하였습니다.')</script>");

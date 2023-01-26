@@ -12,6 +12,8 @@
 <% SqlSessionFactory sqlSessionFactory=Mybatis.getSqlSessionFactory(); SqlSession sess;
 sess=sqlSessionFactory.openSession(true); 
 
+	String sellerID = (String) session.getAttribute("sellerId");
+
 	ItemDao2 itemdao = ItemDao2.getInstance();
 	historyDAO hisDao = historyDAO.getInstance();
 
@@ -93,7 +95,7 @@ sess=sqlSessionFactory.openSession(true);
 						<h2 id="dvPage" onclick="location.href='mypage_master.jsp?right=orderCarePage.jsp'">주문/배송 관리</h2>
 					</li>
 					<li>
-						<h2 id="psPage" onclick="getPage(this.id)">게시글 관리</h2>
+						<h2 id="psPage" onclick="getPage(this.id)">게시글 관리 <%=sellerID %></h2>
 					</li>
 				</ul>
 			</div>
