@@ -24,7 +24,7 @@ public class historyDAO {
 			result += "<tr onclick='orderStChange("+list.get(i).getOrderSeq()+")'><td>"+list.get(i).getOrderSeq()+"</td>";
 			result += "<td>"+list.get(i).getItemNumber()+"</td>";
 			result += "<td>"+list.get(i).getItemCount()+"</td>";
-			result += "<td>"+list.get(i).getBuyerid()+"</td>";
+			result += "<td>"+list.get(i).getbuyerId()+"</td>";
 			result += "<td>"+list.get(i).getStatus()+"</td>";
 			result += "<td>"+list.get(i).getBuyerAddress()+"</td>";
 			result += "<td>"+list.get(i).getOrderDate()+"</td></td>";

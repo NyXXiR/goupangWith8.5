@@ -89,7 +89,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="pdInput"><input type="text" name="buyerId" id="pdInput2" value="<%=order.getBuyerid()%>" readonly></td>
+			<td class="pdInput"><input type="text" name="buyerId" id="pdInput2" value="<%=order.getbuyerId()%>" readonly></td>
 			<td class="pdInput"><input type="text" name="buyerAddress" id="pdInput2" value="<%=order.getBuyerAddress()%>" ></td>
 		</tr>
 	</table>
