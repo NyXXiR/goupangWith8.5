@@ -77,6 +77,7 @@ display:none;
 
 </head>
 <body>
+<jsp:include page="../header.jsp" flush="false"/>
 
 <form action="buyAction.jsp">
 <div class="addressContainer">
