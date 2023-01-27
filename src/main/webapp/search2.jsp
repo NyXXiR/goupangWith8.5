@@ -26,7 +26,8 @@ List<itemVO> listByItemName = Session.selectList("searchItemByItemName", entered
 
 
 DecimalFormat decFormat = new DecimalFormat("###,###");
-List<itemVO> testSort = Session.selectList("sortBySalesRecord");
+// 상품 금액 3자리마다 , 삽입하는 기능 위해
+//List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 %>
 
 <!DOCTYPE html>
@@ -139,7 +140,10 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 						int discounted = listByAll.get(i).getPrice() / 100 * (100 - listByAll.get(i).getDiscount());
 						int itemSeq = listByAll.get(i).getSeq();
 							%>
+<<<<<<< Updated upstream
 							
+=======
+>>>>>>> Stashed changes
 							
 						<div class="card" style="width: 24%; height: 400px;">
 							<div class="card-img-box">

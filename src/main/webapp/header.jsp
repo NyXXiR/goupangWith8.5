@@ -56,13 +56,18 @@ String sellerLoginStatus = (String) session.getAttribute("sellerId");
            	<% if(loginStatus == null && sellerLoginStatus == null) {
            		// 판매자, 구매자 어느쪽도 로그인이 되어있지 않으면 아래 실행 x
            	} else { %>
+           	<!-- 관리자, 구매자 어느쪽이라도 세션에 값이 저장되어 있다면 이하 실행 -->
             	 <li>
             	  <a href="#"><img src="./resources/header/account.png" alt="" class="account-img"/></a>
                 	<div class="detail-box">
                   		<ul class="drop-menu-1">
                   		<% 
                   		if(sellerLoginStatus != null) {%>
+<<<<<<< Updated upstream
                   		<!-- 판매자 로그인이 되어있으면 -->
+=======
+                  		<!-- 판매자 로그인 세션에 값이 NULL이 아닌 경우 아래 실행 -->
+>>>>>>> Stashed changes
                   			<li><a href="mypage_master.jsp?seller_id=">관리자 페이지</a></li>
                   		<% 	} else { %> 
                   		<!-- 구매자 로그인이 되어있으면 -->
@@ -89,9 +94,14 @@ String sellerLoginStatus = (String) session.getAttribute("sellerId");
 	                  <ul class="drop-menu-2">
 		                  <%
 		                  if(loginStatus == null && sellerLoginStatus == null) {%>
+<<<<<<< Updated upstream
 		                  <!-- 판매자, 구매자 어느쪽이라도 로그인이 안되어있다면 -->
+=======
+		                  <!-- 구매자, 판매자 세션 모두 null일 경우에 메뉴가 출력되게끔 -->
+>>>>>>> Stashed changes
 		                  	<li><a href="login.jsp">로그인</a></li>
 		                  <% } else{
+		                	  //로그인 세션에 값이 저장되어있다면(로그인 상태라면)
 		                	  %> 
 		                	  <li><a href="logout.jsp">로그아웃</a></li>
 		                	  <% 

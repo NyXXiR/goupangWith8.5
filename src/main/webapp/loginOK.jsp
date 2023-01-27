@@ -24,15 +24,24 @@
 	  
 	  String isBuyerIdValid = Session.selectOne("buyerIdCheck", enteredID);
 	  String isBuyerPwValid = Session.selectOne("buyerPwCheck", enteredID);
+<<<<<<< Updated upstream
 		// 구매자 로그인 확인
 	  String isSellerIdValid = Session.selectOne("sellerIdCheck", enteredID); 
 	  String isSellerPwValid = Session.selectOne("sellerPwCheck", enteredID);
 		// 판매자 로그인 확인
+=======
+	  // 구매자 로그인 정보 확인
+	  String isSellerIdValid = Session.selectOne("sellerIdCheck", enteredID); 
+	  String isSellerPwValid = Session.selectOne("sellerPwCheck", enteredID);
+	  // 판매자 로그인 정보 확인
+>>>>>>> Stashed changes
 	  String isSellerLogin = request.getParameter("sellerLogin");
 	  //로그인 페이지 체크박스 값 리턴
 	  
+	  
+	  // 구매자 로그인 모드
 	  if(isSellerLogin == null) {
-		  // 구매자 로그인 모드
+		  // 관리자 로그인 체크박스 값이 null이라면 아래 실행
 		  if(isBuyerIdValid != null) {
 			  if(isBuyerPwValid.equals(enteredPassword)) {
 				  %>
@@ -66,10 +75,11 @@
 	  } else {
 		  // 판매자 로그인 모드
 		  if(isSellerIdValid != null) {
+			// 관리자 로그인 체크박스가 선택되었다면 아래 실행
 			  if(isSellerPwValid.equals(enteredPassword)) {
 				  %>
 				  <script>
-				  <% session.setAttribute("sellerId", enteredID);%>
+				  <% session.setAttribute("sellerID", enteredID);%>
 						alert("판매자 로그인 성공");
 						window.location.href = 'view.jsp';
 				  </script>

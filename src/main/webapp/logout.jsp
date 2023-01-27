@@ -10,10 +10,10 @@
 
 <%
 session.removeAttribute("buyerId");
-session.removeAttribute("sellerId");
+session.removeAttribute("sellerID");
 // 로그인 시 setAttribute 설정되었던 OK 상태를 삭제.
 response.sendRedirect("view.jsp");
-// 삭제 후 header.jsp로 복귀
+// 삭제 후 view.jsp로 복귀
 %>
 </body>
 </html>

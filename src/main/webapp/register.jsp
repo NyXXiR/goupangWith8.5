@@ -50,6 +50,7 @@
       </div>
     </div>
     
+<<<<<<< Updated upstream
     
     <%
       SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
@@ -70,5 +71,7 @@
 	   
 	   
 	   
+=======
+>>>>>>> Stashed changes
 	  </body>
 </html>
