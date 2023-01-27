@@ -30,7 +30,8 @@ for(int i=0; i<seqs.length;i++){
   int itemCount= Integer.parseInt(qtys[i]);
   
 vo= new historyVO(itemNumber,itemCount,buyerId,buyerAddress);
-  
+ 
+//구매 완료시 DB 3개 동시 수정
 n=sqlSession.insert("itemquantityMinus", map);
 if (n > 0) {
   sqlSession.commit();

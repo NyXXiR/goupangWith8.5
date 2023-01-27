@@ -9,6 +9,12 @@
 <!DOCTYPE html>
 <html>
 <% 
+
+//로그인 정보가 없을 경우 메인화면으로 돌려보냄
+if(session.getAttribute("buyerId")==null){
+response.sendRedirect("view.jsp");
+}
+
 SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
 SqlSession sqlSession;
 sqlSession = sqlSessionFactory.openSession(true);
@@ -32,8 +38,10 @@ itemMap.put("description", vo.getDescription());
 // 수량(qty)은 detail.jsp에서 추가될 예정임
 session.setAttribute("itemMap", itemMap);
 
-//userName은 임시로 설정
-session.setAttribute("buyerId", "lgh0334");
+//userName은 임시로 설정, 로그인하지 않았을 경우 돌려보냄
+//session.setAttribute("buyerId", "lgh0334");
+
+
 
 //quantity 1로 설정해둠
 session.setAttribute("quantity",1);

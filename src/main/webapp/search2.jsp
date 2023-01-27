@@ -140,10 +140,7 @@ DecimalFormat decFormat = new DecimalFormat("###,###");
 						int discounted = listByAll.get(i).getPrice() / 100 * (100 - listByAll.get(i).getDiscount());
 						int itemSeq = listByAll.get(i).getSeq();
 							%>
-<<<<<<< Updated upstream
-							
-=======
->>>>>>> Stashed changes
+
 							
 						<div class="card" style="width: 24%; height: 400px;">
 							<div class="card-img-box">
