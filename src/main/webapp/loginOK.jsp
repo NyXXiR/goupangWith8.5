@@ -24,17 +24,12 @@
 	  
 	  String isBuyerIdValid = Session.selectOne("buyerIdCheck", enteredID);
 	  String isBuyerPwValid = Session.selectOne("buyerPwCheck", enteredID);
-<<<<<<< Updated upstream
-		// 구매자 로그인 확인
-	  String isSellerIdValid = Session.selectOne("sellerIdCheck", enteredID); 
-	  String isSellerPwValid = Session.selectOne("sellerPwCheck", enteredID);
-		// 판매자 로그인 확인
-=======
+
 	  // 구매자 로그인 정보 확인
 	  String isSellerIdValid = Session.selectOne("sellerIdCheck", enteredID); 
 	  String isSellerPwValid = Session.selectOne("sellerPwCheck", enteredID);
 	  // 판매자 로그인 정보 확인
->>>>>>> Stashed changes
+
 	  String isSellerLogin = request.getParameter("sellerLogin");
 	  //로그인 페이지 체크박스 값 리턴
 	  
