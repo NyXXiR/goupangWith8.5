@@ -94,11 +94,10 @@ String sellerLoginStatus = (String) session.getAttribute("sellerId");
 	                  <ul class="drop-menu-2">
 		                  <%
 		                  if(loginStatus == null && sellerLoginStatus == null) {%>
-<<<<<<< Updated upstream
 		                  <!-- 판매자, 구매자 어느쪽이라도 로그인이 안되어있다면 -->
-=======
+
 		                  <!-- 구매자, 판매자 세션 모두 null일 경우에 메뉴가 출력되게끔 -->
->>>>>>> Stashed changes
+
 		                  	<li><a href="login.jsp">로그인</a></li>
 		                  <% } else{
 		                	  //로그인 세션에 값이 저장되어있다면(로그인 상태라면)
