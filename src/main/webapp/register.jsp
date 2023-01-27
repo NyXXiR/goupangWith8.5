@@ -67,41 +67,8 @@
 	
 	  
 	   %>
-	   <form action="insertOrderOK.jsp">
-	   	<input type="submit" value="주문내역 업데이트"/>
-	   </form>
 	   
 	   
-	   <%-- <%
-	   			//String buyerId = (String) session.getAttribute("buyerId");
-			List<Integer> list = Session.selectList("getCatenumFromHistory", "test");
-			out.print(list);
-			
-			int[] arr = new int[list.size()];
-			
-			for(int i=0; i<arr.length; i++) {
-				arr[i] = list.get(i);
-			}
-			
-			
-			Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-			
-			int answer = 0, maxVal = -1, maxValCnt = 0;
-			for (int i = 0; i < arr.length; i++) {
-				int t = map.getOrDefault(arr[i], 0) + 1;
-				map.put(arr[i], t);
-				if(maxValCnt<t) {maxVal = arr[i]; maxValCnt = t;}
-			}
-			
-			for(Integer i: map.keySet()) {
-				if(map.get(i)==maxValCnt && i!=maxVal)
-					out.print(-1);
-			}
-			
-			out.print(maxVal);
-			
-			List<itemVO> itemList1 = Session.selectList("getItemByCatenum", maxVal);
-		%> --%>
 	   
 	  </body>
 </html>

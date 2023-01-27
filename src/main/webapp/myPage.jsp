@@ -19,8 +19,8 @@ SqlSessionFactory sqlSessionFactory = Mybatis.getSqlSessionFactory();
 SqlSession Session;
 Session = sqlSessionFactory.openSession(true); 
 
-//String buyerId = (String) session.getAttribute("buyerId");
-List<historyVO> orderedItemList = Session.selectList("getItems", "test");
+String buyerId = (String) session.getAttribute("buyerId");
+List<historyVO> orderedItemList = Session.selectList("getItems", buyerId);
 
 
 %>
@@ -138,28 +138,34 @@ height: 100%;
 </table>
 			<%
 	   	
-			List<Integer> list = Session.selectList("getCatenumFromHistory", "test");
-			//out.print(list);
-			
+			List<Integer> list = Session.selectList("getCatenumFromHistory", buyerId);
+			// 고객의 주문내역에서 카테고리 번호를 가져와서 ArrayList에 담는다.
 			int[] arr = new int[list.size()];
-			
 			for(int i=0; i<arr.length; i++) {
 				arr[i] = list.get(i);
 			}
-			
+			// 최빈값 로직을 돌리기 위해 ArrayList 데이터를 일반 1차원 배열 형식으로 변환
 			
 			Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 			
-			int answer = 0, maxVal = -1, maxValCnt = 0;
+				int maxVal = -1, maxValCnt = 0;
 			for (int i = 0; i < arr.length; i++) {
+			// 카테고리 값이 담긴 arr 배열의 길이만큼 반복문을 돌린다.
 				int t = map.getOrDefault(arr[i], 0) + 1;
+				// 반복문 안에서 arr[i]가 몇번 반복되었는지 반복값이 변수 t에 담긴다.
+				// getOrDefault 메소드는 arr[i]와 매칭되는 키 값이 map에 존재할시 
+				// 해당 arr[i] 키값의 value값을 반환함. 없으면 0을 반환함.
 				map.put(arr[i], t);
+				// 반복문 속에서 arr[i]가 처음 나왔다면 1이 value값으로 담기고
+				// arr[i]가 처음 나왔다면 반복 횟수가 t에 담겨 value값으로 담긴다.
 				if(maxValCnt<t) {maxVal = arr[i]; maxValCnt = t;}
+				// 최종적으로 maxVal에 최빈값이 담기고, maxValcnt에 최빈값의 반복횟수가 담긴다.
 			}
 			
 			for(Integer i: map.keySet()) {
 				if(map.get(i)==maxValCnt && i!=maxVal)
 					out.print(-1);
+				// 중복된 최빈값이 존재하는지 검사하는 로직
 			}
 			
 			//out.print(maxVal);

@@ -63,7 +63,7 @@ List<itemVO> testSort = Session.selectList("sortBySalesRecord");
 		$.ajax({
 			type: "GET",
 			//method: "sortItemsByRanking",  
-			url: "./sortProcess/selectAllProcuct.jsp",
+			url: "./sortProcess/selectAllProduct.jsp",
 			success: function(data) {
 				$(".search-list-box").html(data);
 			},

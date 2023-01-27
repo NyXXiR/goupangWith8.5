@@ -54,6 +54,7 @@ String sellerLoginStatus = (String) session.getAttribute("sellerId");
           <div class="header-right-box">
             <ul class="menu-bar">
            	<% if(loginStatus == null && sellerLoginStatus == null) {
+           		// 판매자, 구매자 어느쪽도 로그인이 되어있지 않으면 아래 실행 x
            	} else { %>
             	 <li>
             	  <a href="#"><img src="./resources/header/account.png" alt="" class="account-img"/></a>
@@ -61,8 +62,10 @@ String sellerLoginStatus = (String) session.getAttribute("sellerId");
                   		<ul class="drop-menu-1">
                   		<% 
                   		if(sellerLoginStatus != null) {%>
+                  		<!-- 판매자 로그인이 되어있으면 -->
                   			<li><a href="mypage_master.jsp?seller_id=">관리자 페이지</a></li>
                   		<% 	} else { %> 
+                  		<!-- 구매자 로그인이 되어있으면 -->
 		                    <li><a href="mypage_consumer.jsp?buyer_id=<%=loginStatus %>">회원 정보</a></li>
 		                    <li><a href="mypage.jsp">메뉴 1</a></li>
 		                    <li><a href="mypage.jsp">메뉴 2</a></li>
@@ -86,6 +89,7 @@ String sellerLoginStatus = (String) session.getAttribute("sellerId");
 	                  <ul class="drop-menu-2">
 		                  <%
 		                  if(loginStatus == null && sellerLoginStatus == null) {%>
+		                  <!-- 판매자, 구매자 어느쪽이라도 로그인이 안되어있다면 -->
 		                  	<li><a href="login.jsp">로그인</a></li>
 		                  <% } else{
 		                	  %> 
